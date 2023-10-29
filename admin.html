@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="style.css"> 
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Admin-dashboard</title>
+</head>
+<body> 
+            <nav class="navbar" >
+
+                <a  href="#">
+                    <img src="./Images/white.png" alt="railboost Logo" class="header-logo" />
+                    <label class="logo-text">RAILBOOST</label>
+                </a>
+                
+                <ul>
+                    <li><a  href="#">Home</a></li>
+                    <li><a  href="#">Admin Services</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Add a new train</a></li>
+                            <li><a href="#">Add a new train schedule  </a></li>
+                            <li><a href="#">Add a new station master</a></li>
+                            <li><a href="#">Make a special announcement</a></li>
+                            <li><a href="#">Update ticket rates</a></li>
+                            <li><a href="#">Update parcel delevery rates</a></li>
+                        </ul>
+                    </li>
+                    <li ><a  href="signin.html" class="no-hover"><button class="nav-button">Login</button></a></li>
+                    <li class="bell-notification" current-count="8"><a href="#" class="no-hover"><i class="fas fa-bell"></i></a></li>
+                </ul>
+      
+            </nav>
+        
+            <div class="box-container">
+                <a href="staff.html" class="box">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <h2>Staff Management</h2>
+                    <p>Add remove or edit staff details here</p>
+                </a>
+        
+                <a href="train.html" class="box">
+                    <i class="fa-solid fa-train"></i>
+                    <h2>Train Management</h2>
+                    <p>Add or remove trains here</p>
+                </a>
+        
+                <a href="train-schedule.html" class="box">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <h2>Train schedule management</h2>
+                    <p>Add remove or edit train schedules here</p>
+                </a>
+        
+                <a href="announcements.html" class="box">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <h2>Announcements</h2>
+                    <p>Make special announcements here</p>
+                </a>
+        
+                <a href="ticket-rate.html" class="box">
+                    <i class="fa-solid fa-table-list"></i>
+                    <h2>Ticket Rate Table</h2>
+                    <p>Update ticket rates here.</p>
+                </a>
+
+                <a href="parcel-rate.html" class="box">
+                    <i class="fa-solid fa-boxes-packing"></i> 
+                    <h2>Parcel delivery rate table</h2>
+                    <p>Update parcel delivery rates here</p>
+                </a>
+     
+            </div>
+</body>
+</html>

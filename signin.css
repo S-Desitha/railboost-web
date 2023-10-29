@@ -5,9 +5,6 @@
     justify-content:center;
   }
   
-  .login-text {
-    color: #7c7c7c;
-  }
   
   
   input {
@@ -46,7 +43,8 @@
   flex: 3;
   text-align: center;
 }
-  .form-button {
+
+.form-button {
     color: var(--text-color);
     background-color: var(--theme-color);
     border-radius: 6px;
@@ -59,18 +57,21 @@
     font-size: 20px;
   }
   
-  .form-button:hover{
+.form-button:hover{
     background-color: var(--secondary-color); 
   }
-  .form-links a {
+  
+.form-links a {
     text-decoration: none;
     color: var(--secondary-text-color); 
   }
-  .username::placeholder,
-  .password::placeholder {
+
+.username::placeholder,
+.password::placeholder {
     font-size: 16px; 
     color: var(--secondary-text-color); 
-  }
-  .logo {
+}
+
+.logo {
     width: 32%; 
   }
