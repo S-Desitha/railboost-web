@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignUp</title>
+
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./signup.css">
+  </head>
+
+  <body>
+    <div class="signup-container">
+
+      <div class="signup-left">
+        <img src="./Images/train3.png" alt="signup photo" class="signup-image" />
+      </div>
+
+    <div class="signup-right">
+      
+        <div class="signup-content">
+           <img src="./Images/RailBoost Logo.png" alt="railboost Logo" class="logo" />
+            <div class="signup-form">
+              <form>
+                    <label for="Full Name"></label>
+                    <input class="Full Name" type="text" id="Full Name" name="Full Name" placeholder="Full Name" required/>
+
+            
+                
+                    <label for="email"></label>
+                    <input type="email" id="email" name="email" placeholder="Email" required><br /> 
+
+                    <label for="username"></label>
+                    <input type="text" id="username" name="username" placeholder="Username"required><br /> 
+
+                    <label for="dob"></label>
+                    <input type="date" id="dob" name="dob" placeholder="Date of Birth:"required><br />   
+
+                    <label for="gender"></label>
+                        <select id="gender" name="gender">
+                            <option value="" disabled selected>Gender</option>
+                            <option value="male" style="color: #484848">Male</option>
+                            <option value="female" style="color: #484848">Female</option>
+                            <option value="other" style="color: #484848">Other</option>
+                        </select>
+            
+                    <label for="password"></label>
+                    <input class="input-field" type="password" id="password" name="password" placeholder="Password" required />
+                
+                    <label for="confirm-password"></label>
+                    <input class="input-field" type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required />
+                </form>
+        </div>
+             
+            </div>
+                <button class="signup-button form-button">Signup</button>
+            </div>
+    </div>
+    </div>  
+         
+  </body>
+</html>
