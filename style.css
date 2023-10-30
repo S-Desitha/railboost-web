@@ -16,3 +16,8 @@
   --secondary-text-color: #7c7c7c;
   --text-color: #ffffff;
 }
+
+a:hover {
+  text-decoration: none;
+  cursor: pointer;
+} 

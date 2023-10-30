@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="train.css">  
+    <script src="script.js"></script>
+	<script src="train.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Train Management</title>
+</head>
+<body> 
+            <nav class="navbar" >
+
+                <a  href="#">
+                    <img src="./Images/white.png" alt="railboost Logo" class="header-logo" />
+                    <label class="logo-text">RAILBOOST</label>
+                </a>
+                
+                <ul>
+                    <li><a  href="admin.html">Home</a></li>
+                    <li><a  href="#">Admin Services</a>
+                        <ul class="dropdown">
+							<li><a href="train.html">Add a new train</a></li>
+                            <li><a href="#">Add a new train schedule  </a></li>
+                            <li><a href="staff.html">Add a new station master</a></li>
+                            <li><a href="#">Make a special announcement</a></li>
+                            <li><a href="#">Update ticket rates</a></li>
+                            <li><a href="#">Update parcel delevery rates</a></li>
+                        </ul>
+                    </li>
+                    <li ><a  href="signin.html" class="no-hover"><button class="nav-button">Login</button></a></li>
+                    <li class="bell-notification" current-count="8"><a href="#" class="no-hover"><i class="fas fa-bell"></i></a></li>
+                </ul>
+      
+            </nav>
+
+			<main class="table">
+
+				<div class="train-container">
+            		<div class="train-left">
+
+						<section class="table_header">
+							<h1>Train Details</h1>
+                            <div class="input-group">
+                                <input type="search" placeholder="Search Trains...">
+                                <img src="Images/search.png" alt="">
+                            </div>
+						</section>
+
+						<section class="table_body">
+
+							<table>
+							<thead>
+								<tr>
+									<th>Train ID</th>
+									<th>Train type</th>
+                                    <th>Number of compartments</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>8097</td>
+									<td>Class M11</td>
+                                    <td>20</td>
+									<td>
+										<a href=""><button class="edit-button">
+											<i class="fas fa-edit"></i> 
+										</button></a>
+										<a href=""><button class="delete-button">
+											<i class="fas fa-trash"></i>
+										</button></a>
+									</td>
+								</tr>
+								<tr>
+									<td>8097</td>
+									<td>Class M11</td>
+                                    <td>20</td>
+									<td>
+										<a href=""><button class="edit-button">
+											<i class="fas fa-edit"></i> <!-- Font Awesome edit icon -->
+										</button></a>
+										<a href=""><button class="delete-button">
+											<i class="fas fa-trash"></i> <!-- Font Awesome delete icon -->
+										</button></a>
+									</td>
+								</tr>
+								<tr>
+									<td>8097</td>
+									<td>Class M11</td>
+                                    <td>20</td>
+									<td>
+										<a href=""><button class="edit-button">
+											<i class="fas fa-edit"></i> <!-- Font Awesome edit icon -->
+										</button></a>
+										<a href=""><button class="delete-button">
+											<i class="fas fa-trash"></i> <!-- Font Awesome delete icon -->
+										</button></a>
+									</td>
+								</tr>
+								<tr>
+									<td>8097</td>
+									<td>Class M11</td>
+                                    <td>20</td>
+									<td>
+										<a href=""><button class="edit-button">
+											<i class="fas fa-edit"></i> <!-- Font Awesome edit icon -->
+										</button></a>
+										<a href=""><button class="delete-button">
+											<i class="fas fa-trash"></i> <!-- Font Awesome delete icon -->
+										</button></a>
+									</td>
+								</tr>
+								<tr>
+									<td>8097</td>
+									<td>Class M11</td>
+                                    <td>20</td>
+									<td>
+										<a href=""><button class="edit-button">
+											<i class="fas fa-edit"></i> 
+										</button></a>
+										<a href=""><button class="delete-button">
+											<i class="fas fa-trash"></i> 
+										</button></a>
+									</td>
+								</tr>
+								
+								
+							</tbody>
+						</section>
+						</table>
+					</div>
+				
+					<div class="train-right">
+						<div class="train-form">
+							
+							<form>
+								<h2 class="add-train-heading">Add a new train </h2>
+								<label for="trainId"></label>
+								<input type="text" id="trainId" placeholder="Train ID:" name="trainId" required><br>
+
+								<label for="train-type"></label>
+								<input type="text" id="name" name="name" placeholder="Train Type:" required><br>
+						
+
+						
+								<label for="no-of compartments"></label>
+								<input type="text" id="compartments" placeholder="Number of Compartements" name="compartments" required><br>
+						
+								<button class="form-button">Add a new train </button>
+							</form>
+						</div>
+				
+					</div>
+				</div>
+			</main>	
+</body>

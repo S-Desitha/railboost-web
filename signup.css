@@ -1,4 +1,4 @@
- .login-content {
+.signup-content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,39 +7,69 @@
   
   
   
-  input {
+input {
     border: none;
     border-bottom: 1px solid #a9a9a9;
     color: #484848;
-    padding: 7px 0;
-    margin: 20px 0;
+    padding: 5px 0;
+    margin: 15px 0;
   }
   
-  input::placeholder {
+input::placeholder {
     color: #a9a9a9;
   }
-  
-  .login-form input {
+
+#gender {
+	width: 25rem;
+	height: 2.5rem;
+	border: none;
+	border-bottom: 1px solid #a9a9a9;
+	color: #a9a9a9;
+	padding: 7px 0;
+	margin: 20px 0;}
+
+#dob{
+    color: #a9a9a9; 
+    }
+
+#dob::before {
+    content: "Date of Birth:  "; 
+    color: #a9a9a9;
+    
+  }
+ .signup-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    flex-wrap: wrap;
+ } 
+.signup-form input {
     width: 25rem;
   }
 
-  .login-container {
+.signup-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    gap: 500px;
+    gap: 510px;
 }
-  .login-left {
+
+  
+  
+.signup-left {
     flex: 1;
     text-align: left;
 }
-.login-image {
+.signup-image {
   width: 300%;
   overflow: hidden;
 }
 
-.login-right {
+.signup-right {
+margin-top: 10px;
   flex: 3;
   text-align: center;
 }
@@ -53,7 +83,7 @@
     margin-bottom: 15px;
     cursor: pointer;
     width: 25rem;
-    margin-top: 50px;
+    margin-top: 30px;
     font-size: 20px;
   }
   
@@ -66,12 +96,8 @@
     color: var(--secondary-text-color); 
   }
 
-.username::placeholder,
-.password::placeholder {
-    font-size: 16px; 
-    color: var(--secondary-text-color); 
-}
-
 .logo {
-    width: 32%; 
+    width: 15%; 
+    margin-top: 0px;
+    margin-bottom: 20px;
   }

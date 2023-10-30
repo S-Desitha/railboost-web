@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="anns.css">  
+    <script src="script.js"></script>
+	<!-- <script src="anns.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Announcement Management</title>
+</head>
+<body> 
+            <nav class="navbar" >
+
+                <a  href="#">
+                    <img src="./Images/white.png" alt="railboost Logo" class="header-logo" />
+                    <label class="logo-text">RAILBOOST</label>
+                </a>
+                
+                <ul>
+                    <li><a  href="admin.html">Home</a></li>
+                    <li><a  href="#">Admin Services</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Add a new train</a></li>
+                            <li><a href="#">Add a new train schedule  </a></li>
+                            <li><a href="#">Add a new station master</a></li>
+                            <li><a href="#">Make a special announcement</a></li>
+                            <li><a href="#">Update ticket rates</a></li>
+                            <li><a href="#">Update parcel delevery rates</a></li>
+                        </ul>
+                    </li>
+                    <li ><a  href="signin.html" class="no-hover"><button class="nav-button">Login</button></a></li>
+                    <li class="bell-notification" current-count="8"><a href="#" class="no-hover"><i class="fas fa-bell"></i></a></li>
+                </ul>
+      
+            </nav>
+
+			<div class="anns-container">	
+                <div class="anns-left">
+                    <h1>Announcements</h1>
+                    <div class="announcement">
+                        <h3>Important Schedule Change</h3>
+                        <p>Due to maintenance work, there will be a schedule change on April 5, 2023. Please check the new schedule.</p>
+                        <div class="buttons">
+                            <a href=""><button class="edit-button">
+                                <i class="fas fa-edit"></i> 
+                            </button></a>
+                            <a href=""><button class="delete-button">
+                                <i class="fas fa-trash"></i> 
+                            </button></a>
+                        </div>
+                    </div>
+                    <div class="announcement">
+                        <h3>Safety First</h3>
+                        <p>Passengers are reminded to follow all safety guidelines while on railway premises. Your safety is our priority.</p>
+                        <div class="buttons">
+                            <a href=""><button class="edit-button">
+                                <i class="fas fa-edit"></i> <!-- Font Awesome edit icon -->
+                            </button></a>
+                            <a href=""><button class="delete-button">
+                                <i class="fas fa-trash"></i> <!-- Font Awesome delete icon -->
+                            </button></a>
+                        </div>
+                    </div>
+                    <div class="announcement">
+                        <h3>New Train Added</h3>
+                        <p>Exciting news! We've added a new express train for a faster commute. Check out the schedule.</p>
+                        <div class="buttons">
+                            <a href=""><button class="edit-button">
+                                <i class="fas fa-edit"></i> <!-- Font Awesome edit icon -->
+                            </button></a>
+                            <a href=""><button class="delete-button">
+                                <i class="fas fa-trash"></i> <!-- Font Awesome delete icon -->
+                            </button></a>
+                        </div>
+                    </div>
+                </div>
+					<div class="anns-right">
+						<div class="anns-form">
+							
+							<form>
+								<h2 class="add-anns-heading">Make New Announncement</h2>
+								<label for="annsId"></label>
+								<input type="text" id="annsId" placeholder="Announcement ID:" name="annsId" required><br>
+
+								<label for="Announcement-title"></label>
+								<input type="text" id="Announcement-title" name="Announcement-title" placeholder="Announcement Title" required><br>
+
+                                <label for="Announcement-body"></label>
+								<input type="text" id="Announcement-body" name="Announcement-body" placeholder="Announcement Body" required><br>
+						
+								<button class="form-button" onclick="addAnns()">Add New Announcement</button>
+							</form>
+						</div>
+					</div>
+            </div>
+</body>
