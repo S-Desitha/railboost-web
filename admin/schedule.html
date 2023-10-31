@@ -63,7 +63,7 @@
 								</tr>
 							</thead>
 							<tbody id="schedule_table">
-								<!-- <tr>
+								<tr>
 									<td>1234</td>
 									<td>8245</td>
                                     <td>Panadura</td>
@@ -144,7 +144,7 @@
 											<i class="fas fa-trash"></i>
 										</button></a>
 									</td>
-								</tr> -->
+								</tr>
 								
 								
 							</tbody>
@@ -155,8 +155,8 @@
 					<div class="train-right">
 						<div class="train-form">
 							
-							<form>
-								<h2 class="add-train-heading">Add a new train schedule </h2>
+							<form onsubmit="return false">
+								<h2 class="add-train-heading" id="add_update-schedule-header">Add a new train schedule </h2>
 
                                 <label for="scheduleId"></label>
 								<input type="text" id="scheduleId" placeholder="Schedule ID:" name="scheduleId" required><br>
@@ -170,10 +170,7 @@
                                 <label for="end-station"></label>
 								<input type="text" id="end-station" name="end-station" placeholder="End station:" required><br>
 
-								<label for="train-type"></label>
-								<input type="text" id="name" name="name" placeholder="Train Type:" required><br>
-						
-								<button class="form-button">Add a new train </button>
+								<button class="form-button" id="add_update-schedule-button" onclick="addNewSchedule()">Add a new train </button>
 							</form>
 						</div>
 				
