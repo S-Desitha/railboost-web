@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="train.css">  
     <script src="script.js"></script>
 	<script src="train.js"></script>
+	<script src="train.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <title>Train Management</title>
 </head>
@@ -81,7 +82,9 @@
                                     <td>20</td>
 									<td>
 										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i>
+
+											<i class="fas fa-edit"></i> 
+
 										</button></a>
 										<a href=""><button class="delete-button">
 											<i class="fas fa-trash"></i> 
@@ -94,7 +97,9 @@
                                     <td>20</td>
 									<td>
 										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i>
+
+											<i class="fas fa-edit"></i> 
+
 										</button></a>
 										<a href=""><button class="delete-button">
 											<i class="fas fa-trash"></i> 
@@ -107,7 +112,9 @@
                                     <td>20</td>
 									<td>
 										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i>
+
+											<i class="fas fa-edit"></i> 
+
 										</button></a>
 										<a href=""><button class="delete-button">
 											<i class="fas fa-trash"></i> 
@@ -148,9 +155,12 @@
 
 						
 								<label for="no-of compartments"></label>
+
 								<input type="text" id="nCompartments" placeholder="Number of Compartements" name="compartments" required><br>
 						
+                <span id="compartments-error"></span>
 								<button class="form-button" id="add-new-train-button" onclick="addNewTrain()">Add a new train </button>
+
 							</form>
 						</div>
 				

@@ -1,3 +1,6 @@
+
+
+
 .signup-content {
     display: flex;
     flex-direction: column;
@@ -5,8 +8,33 @@
     justify-content:center;
   }
   
-  
-  
+#email-error{
+  text-align: left;
+  top: 100%;
+  left: 2px;
+  font-size: 14px;
+  font-weight: 400;
+  color: red;
+}
+
+#password-error{
+  text-align: left;
+  top: 100%;
+  left: 2px;
+  font-size: 14px;
+  font-weight: 400;
+  color: red;
+} 
+#spassword-error{
+  ;
+  text-align: left;
+  justify-content: center;
+  top: 50%;
+  left: 2px;
+  font-size: 14px;
+  font-weight: 400;
+  color: red;
+} 
 input {
     border: none;
     border-bottom: 1px solid #a9a9a9;
@@ -27,6 +55,9 @@ input::placeholder {
 	color: #a9a9a9;
 	padding: 7px 0;
 	margin: 20px 0;}
+  .input-control.success input {
+    border-color: #09c372;
+}
 
 #dob{
     color: #a9a9a9; 
@@ -101,3 +132,4 @@ margin-top: 10px;
     margin-top: 0px;
     margin-bottom: 20px;
   }
+

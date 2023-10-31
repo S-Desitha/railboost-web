@@ -166,20 +166,12 @@
 								<label for="staffId"></label>
 								<input type="text" id="staffId" placeholder="Staff ID:" name="staffId" required><br>
 
-								<!-- <label for="name"></label>
-								<input type="text" id="name" name="name" placeholder="Full Name:" oninput="updateUsername()" required><br> -->
-								<!-- <label for="fname"></label>
-								<input type="text" id="fname" name="name" placeholder="First Name:" oninput="updateUsername()" required><br>
-						
-								<label for="lname"></label>
-								<input type="text" id="lname" name="name" placeholder="Last Name:" oninput="updateUsername()" required><br> -->
-
 								<label for="fName"></label>
 								<input type="text" id="fName" name="name" placeholder="First Name:" required><br>
 						
 								<label for="lName"></label>
 								<input type="text" id="lName" name="name" placeholder="Last Name:" required><br>
-						
+
 								<label for="role"></label>
 								<!-- <select id="role" name="role"  onchange="updateUsername()" required> -->
 									<select id="role" name="role" required>	
@@ -191,19 +183,22 @@
 								<label for="railwayStation"></label>
 								<input type="text" id="railwayStation" placeholder="Railway Station:" name="railwayStation" required><br>
 						
-								<label for="email"></label>
-								<input type="email" id="email" name="email" placeholder="Email:" required><br>
-						
+								
+									<label id="email-label"></label>
+									<input type="email" spellcheck="false" id="email-field" onkeyup="validateEmail()" name="email" placeholder="Email" required><br />
+									<span id="email-error"></span> 
+								 
+								 
 								<label for="telephone"></label>
-								<input type="tel" id="telephone" name="telephone" placeholder="Telephone Number:" required><br>
-						
+								<input type="tel" name="telephone" id="phone-field" onkeyup="validatePhone()"placeholder="Telephone Number:" required><br>
+								<span id="phone-error"></span>
+								
 								<label for="username"></label>
 								<input type="text" id="username" name="username" placeholder="Username:"readonly><br>
 						
-								<button class="form-button" onclick="addStaff()">Add Staff Member</button>
+								<button type="submit" class="form-button" onclick="addStaff()">Add Staff Member</button>
 							</form>
 						</div>
-						<!-- <div id="message" style="display:block;"></div> -->
 					</div>
 				</div>
 			</main>	

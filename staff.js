@@ -2,18 +2,17 @@ const url = "http://localhost:8080/railboost_backend_war_exploded/staff";
 
 function updateUsername() {
     const staffId = document.getElementById('staffId').value;
-    const name = document.getElementById('name').value;
+    const firstname = document.getElementById('fName').value;
+    const lastname = document.getElementById('lName').value;
     const role = document.getElementById('role').value;
     const railwayStation = document.getElementById('railwayStation').value;
 
-    const nameParts = name.split(' ');
-    const firstName = nameParts[0];
-    const lastName = nameParts.slice(1).join('');
-    const lastInitial = lastName.charAt(0).toUpperCase();
+   
+    const lastInitial = lastname.charAt(0).toUpperCase();
 
     const usernamePrefix = role; // Use the selected role as the username prefix
 
-    const username = usernamePrefix + staffId + firstName + lastInitial + railwayStation;
+    const username = usernamePrefix + staffId + firstname + lastInitial + railwayStation;
     document.getElementById('username').value = username;
 }
 
@@ -57,14 +56,15 @@ function addStaff() {
 
     alert(`Link to create a password for the Username :${username} has been sent to the email: ${email} and phone number: ${telephone}.`);
     // Clear the form
-    // document.getElementById('staffId').value = '';
-    // document.getElementById('name').value = '';
-    // document.getElementById('role').value = ''; // Reset role to the default value
-    // document.getElementById('railwayStation').value = '';
-    // document.getElementById('email').value = '';
-    // document.getElementById('telephone').value = '';
-    // document.getElementById('username').value = '';
+}
+    document.getElementById('staffId').value = '';
+    document.getElementById('name').value = '';
+    document.getElementById('role').value = ''; 
+    document.getElementById('railwayStation').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('telephone').value = '';
+    document.getElementById('username').value = '';
 
     // Hide the message
-    // document.getElementById('message').style.display = 'none';
+    document.getElementById('message').style.display = 'none';
 }
