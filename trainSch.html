@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="trainSch.css"> 
     <script src="script.js"></script>
-	<script src="train.js"></script>
+	<script src="trainSch.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <title>Train Schedule Management</title>
 </head>
@@ -37,11 +37,11 @@
       
             </nav>
 
-            <div class="trainsc-header">
-                <i class="fas fa-train"></i>
+            <div class="trainsc-header" id="scheduleTitle">
+                <!-- <i class="fas fa-train"></i>
                 <h3>Panadura- Colombo Fort</h>
                 <p>Train Number: 1234</p>
-                <p>Train Type: Express</p>
+                <p>Train Type: Express</p> -->
             </div>
 				<div class="train-container">
             		<div class="train-left">
@@ -66,7 +66,7 @@
 									<th>Actions</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="schedule_stations">
 								<tr>
 									<td>Panadura</td>
 									<td>08:25</td>
@@ -119,23 +119,24 @@
 					<div class="train-right">
 						<div class="train-form">
 							
-							<form>
+							<form onsubmit="return false">
 								<h2 class="add-train-heading">Add a new stopping </h2>
 
-                                <label for="gender"></label>
-                            <select id="Station" name="Station">
-                                <option value="" disabled selected>Station</option>
-                                <option value="Panadura" style="color: #484848">Panadura</option>
-                                <option value="Bambalapitiya" style="color: #484848">Bambalapitiya</option>
-                                <option value="Colombo Fort" style="color: #484848">Colombo Fort</option>
-                            </select>
+                                <label for="Station"></label>
+								<input type="text" id="sch-station" placeholder="Station" required>
+                            	<!-- <select id="Station" name="Station">
+									<option value="" disabled selected>Station</option>
+									<option value="Panadura" style="color: #484848">Panadura</option>
+									<option value="Bambalapitiya" style="color: #484848">Bambalapitiya</option>
+									<option value="Colombo Fort" style="color: #484848">Colombo Fort</option>
+								</select> -->
                                 <label for="Scheduled Arrival Time"></label>
 								<input type="text" id="Scheduled Arrival Time" placeholder="Scheduled Arrival Time" name="Scheduled Arrival Time" required><br>
 
 								<label for="Scheduled Departure Time"></label>
 								<input type="text" id="Scheduled Departure Time" placeholder="Scheduled Departure Time" name="Scheduled Departure Time" required><br>
 						
-								<button class="form-button">Add a new stopping </button>
+								<button class="form-button" id="add_update-sch_station" onclick="addSchStation()">Add a new stopping </button>
 							</form>
 						</div>
 				
