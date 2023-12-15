@@ -7,9 +7,6 @@ function manageAccess(resp, resource) {
         alert("Unauthorized Access");
         window.location.replace("/html/forbidden.html");
     }
-    else {
-        window.CSSContainerRule
-    }
 }
 
 
