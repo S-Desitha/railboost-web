@@ -10,6 +10,10 @@ function createNavBar(context) {
         else if (context == "sm") {
             $("#admin-nav").remove();
             $("#passenger-nav").remove();
+
+            $("#nav-about").remove();
+            $("#nav-contact").remove();
+            $("#nav-services").html("SM Services");
         }
         else if (context == "passenger") {
             $("#admin-nav").remove();
