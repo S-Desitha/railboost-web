@@ -1,18 +1,23 @@
-// $(".navbar").on("load", function() {
-//     console.log("Hello JQuery");
-//     $.get("/html/navbar.html", function(data) {
-//         console.log(data);
-//         $("#navbar").html(data);
-//     });
-// });
 
-
-$(".navbar").ready(function() {
+function createNavBar(context) {
     $.get("/html/navbar.html", function(data) {
         $(".navbar").html(data);
-    });
-});
 
+        if (context == "admin") {
+            $("#sm-nav").remove();
+            $("#passenger-nav").remove();
+        }
+        else if (context == "sm") {
+            $("#admin-nav").remove();
+            $("#passenger-nav").remove();
+        }
+        else if (context == "passenger") {
+            $("#admin-nav").remove();
+            $("#sm-nav").remove();
+        }
+    });
+    
+}
 
 
 
@@ -97,11 +102,3 @@ document.addEventListener("DOMContentLoaded", function(){
         
     }
 });
-
-
-
-// function includeNavbar() {
-//     $.get("/html/navbar.html", function(data) {
-//         $("#navbar").html(data);
-//     });
-// }
