@@ -1,4 +1,4 @@
-window.stop()
+// window.stop()
 
 authorize(window.location.pathname);
 
@@ -6,6 +6,9 @@ function manageAccess(resp, resource) {
     if (resource!=resp["role"]) {
         alert("Unauthorized Access");
         window.location.replace("/html/forbidden.html");
+    }
+    else {
+        window.CSSContainerRule
     }
 }
 
