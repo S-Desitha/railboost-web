@@ -51,9 +51,9 @@ function validatePassword() {
   
     passwordError.innerHTML = "";
     return true;
-  }
+}
 
-  function validateStrPassword() {
+function validateStrPassword() {
     var passwordField = document.getElementById("password");
     var passwordError = document.getElementById("spassword-error");
   
@@ -67,7 +67,13 @@ function validatePassword() {
   
     passwordError.innerHTML = "";
     return true;
-  }
+}
   
   
-  
+document.addEventListener("DOMContentLoaded", function(){
+    let username = localStorage.getItem("username");
+    if (username!=null) {
+        let letter = username[0];
+        
+    }
+});
