@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/auth.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/traintimes.css"> 
@@ -56,7 +57,7 @@
 
 						<section class="table_body">
 
-							<table>
+							<table id="journey_table">
 							<thead>
 								<tr>
                                     <th>Station Name</th>
@@ -67,59 +68,6 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>Panadura</td>
-									<td>08:25</td>
-                                    <td>08:30</td> 
-                                    <td>
-                                        <a href="#" onclick="updateTime(this, 'arrivedTime')"><button class="view-button">
-                                            Arrived <i class="fa-solid fa-arrow-down"></i></button>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="#" onclick="updateTime(this, 'departuredTime')"><button class="view-button">
-                                            Departured <i class="fa-solid fa-arrow-up"></i></button>
-                                        </a>
-                                    </td>                                 
-									
-								</tr>
-								<tr>
-									<td>Moratuwa</td>
-									<td>08:25</td>
-                                    <td>08:30</td>
-                                    <td>
-                                        <a href="#" onclick="updateTime(this, 'arrivedTime')"><button class="view-button">
-                                            Arrived <i class="fa-solid fa-arrow-down"></i></button>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="#" onclick="updateTime(this, 'departuredTime')"><button class="view-button">
-                                            Departured <i class="fa-solid fa-arrow-up"></i></button>
-                                        </a>
-                                    </td>                                        
-								
-								
-									
-								
-								<tr>
-									<td>Bambalapitiya</td>
-									<td>08:25</td>
-                                    <td>08:30</td>
-                                    <td>
-                                        <a href="#" onclick="updateTime(this, 'arrivedTime')"><button class="view-button">
-                                            Arrived <i class="fa-solid fa-arrow-down"></i></button>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="#" onclick="updateTime(this, 'departuredTime')"><button class="view-button">
-                                            Departured <i class="fa-solid fa-arrow-up"></i></button>
-                                        </a>
-                                    </td>     
-                            
-									
-								</tr>
-								
-								
 							</tbody>
 						</section>
 						</table>

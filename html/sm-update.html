@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/traintimes.css"> 
+    <script src="/js/script.js"></script>
+	<script src="/js/train.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Train Schedule Management</title>
+</head>
+<body> 
+    <nav class="navbar" >
+
+        <a  href="#">
+            <img src="/Images/white.png" alt="railboost Logo" class="header-logo" />
+            <label class="logo-text">RAILBOOST</label>
+        </a>
+        
+        <ul>
+            <li><a  href="/html/sm.html">Home</a></li>
+            <li><a  href="#">SM Services</a>
+                <ul class="dropdown">
+                    <li><a href="">Update Train Arrival</a></li>
+                    <li><a href="#">Update Train Departure </a></li>
+                    <li><a href="">Validate Season Tickets</a></li>
+                    <li><a href="#">Make an announcement</a></li>
+                    <li><a href="#">Approve Parcels</a></li>
+                </ul>
+            </li>
+            <li ><a  href="/html/signin.html" class="no-hover"><button class="nav-button">Login</button></a></li>
+            <li class="bell-notification" current-count="8"><a href="#" class="no-hover"><i class="fas fa-bell"></i></a></li>
+        </ul>
+
+    </nav>
+
+            <div class="trainsc-header">
+                <i class="fas fa-train"></i>
+                <h3>Panadura- Colombo Fort</h>
+                <p>Train Number: 1234</p>
+                <p>Train Type: Express</p>
+            </div>
+				<div class="train-container">
+            		<div class="train-left">
+
+						<section class="table_header">
+							<h1>Train stopping stations</h1>
+                            <div class="input-group">
+                                <input type="search" placeholder="Search Station...">
+                                <img src="/Images/search.png" alt="">
+                            </div>
+                            
+						</section>
+
+						<section class="table_body">
+
+							<table>
+							<thead>
+								<tr>
+                                    <th>Station Name</th>
+									<th>Scheduled Arrival Time</th>
+									<th>Scheduled Departure Time</th>
+									<th>Actual Arrival Time</th>
+                                    <th>Actual Departure Time</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Panadura</td>
+									<td>08:25</td>
+                                    <td>08:30</td> 
+                                    <td>
+                                        <a href="#" onclick="updateTime(this, 'arrivedTime')"><button class="view-button">
+                                            Arrived <i class="fa-solid fa-arrow-down"></i></button>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="updateTime(this, 'departuredTime')"><button class="view-button">
+                                            Departured <i class="fa-solid fa-arrow-up"></i></button>
+                                        </a>
+                                    </td>                                 
+									
+								</tr>
+								<tr>
+									<td>Moratuwa</td>
+									<td>08:25</td>
+                                    <td>08:30</td>
+                                    <td>
+                                        <a href="#" onclick="updateTime(this, 'arrivedTime')"><button class="view-button">
+                                            Arrived <i class="fa-solid fa-arrow-down"></i></button>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="updateTime(this, 'departuredTime')"><button class="view-button">
+                                            Departured <i class="fa-solid fa-arrow-up"></i></button>
+                                        </a>
+                                    </td>                                        
+								
+								
+									
+								
+								<tr>
+									<td>Bambalapitiya</td>
+									<td>08:25</td>
+                                    <td>08:30</td>
+                                    <td>
+                                        <a href="#" onclick="updateTime(this, 'arrivedTime')"><button class="view-button">
+                                            Arrived <i class="fa-solid fa-arrow-down"></i></button>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="updateTime(this, 'departuredTime')"><button class="view-button">
+                                            Departured <i class="fa-solid fa-arrow-up"></i></button>
+                                        </a>
+                                    </td>     
+                            
+									
+								</tr>
+								
+								
+							</tbody>
+						</section>
+						</table>
+					</div>
+				
+					
+				</div>
+				
+</body>

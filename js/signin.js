@@ -11,7 +11,7 @@ function login(formData) {
 
     const params = {
         headers : {
-            "Content-type": "application/json; charset=UTF-8"
+            "Content-Type": "application/json; charset=UTF-8"
         },
         body : JSON.stringify(body),
         method : "POST",
@@ -29,17 +29,26 @@ async function processResp(res) {
             .then(response => {
                 console.log(response)
                 if (response["isSuccessful"]==true){
-                    const role = response["role"]
+                    const role = response["role"];
+                    const username = response["username"];
+
+                    localStorage.setItem("username", username);
+                    localStorage.setItem("role", role);
+
                     if (role=="admin"){
-                        window.location.replace("../admin/admin.html");
+                        window.location.replace("/html/admin/admin.html");
+                    }
+                    else if (role=="sm"){
+                        window.location.replace("/html/sm/sm.html")
                     }
                     else if (role=="passenger"){
                         // load passenger home page
-                        window.location.replace("home.html");
+                        window.location.replace("/html/home.html");
                     }
+
                 }
                 else {
-                    window.alert("Username or password incorrect. Please try again!")
+                    window.alert("Username or password incorrect. Please try again!");
                 }
             })
     }

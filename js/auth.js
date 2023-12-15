@@ -1,31 +1,33 @@
-// window.stop()
-const url = "http://localhost:8080/railboost_backend_war_exploded/auth";
+window.stop()
 
-fetch(url, {
-    credentials : "include"
-})
-    .then(response => {
-        if (response.ok) {
-            response.json()
-                .then(json => {
-                    console.log(json)
-                    manageAccess(json, document.URL);
-                })
-        }
-    })
+authorize(window.location.pathname);
 
-function manageAccess(rep, url) {
-    const arr = url.split('/');
-    const endpoint = arr[arr.length-2]
-    console.log(endpoint)
+function manageAccess(resp, resource) {
+    if (resource!=resp["role"]) {
+        alert("Unauthorized Access");
+        window.location.replace("/html/forbidden.html");
+    }
+}
 
-    if (endpoint=="admin") {
-        if (rep["role"]=="admin") {
-            // window.location.replace(url)
-        }
-        else {
-            window.stop()
-            window.alert("You don't have permission to access thie page!")
-        }
+
+
+function authorize(pageUrl){
+    const url = "http://localhost:8080/railboost_backend_war_exploded/auth";
+    console.log("Authorizing User");
+    resource = pageUrl.split("/")[2]
+    console.log(resource);
+    if (resource=="admin" || resource=="sm" || resource=="tco") {
+        fetch(url, {
+            credentials : "include"
+        })
+            .then(response => {
+                if (response.ok) {
+                    response.json()
+                        .then(json => {
+                            console.log(json)
+                            manageAccess(json, resource);
+                        })
+                }
+            })
     }
 }
