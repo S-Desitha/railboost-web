@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/staff.css">  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="/js/script.js"></script>
 	<script src="/js/staff.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
@@ -13,28 +14,7 @@
 </head>
 <body> 
 	<nav class="navbar" >
-
-		<a  href="#">
-			<img src="/Images/white.png" alt="railboost Logo" class="header-logo" />
-			<label class="logo-text">RAILBOOST</label>
-		</a>
-		
-		<ul>
-			<li><a  href="/admin/html/admin.html">Home</a></li>
-			<li><a  href="#">Admin Services</a>
-				<ul class="dropdown">
-					<li><a href="/admin/html/train.html">Add a new train</a></li>
-					<li><a href="#">Add a new train schedule  </a></li>
-					<li><a href="/admin/html/staff.html">Add a new station master</a></li>
-					<li><a href="#">Make a special announcement</a></li>
-					<li><a href="#">Update ticket rates</a></li>
-					<li><a href="#">Update parcel delevery rates</a></li>
-				</ul>
-			</li>
-			<li ><a  href="/html/signin.html" class="no-hover"><button class="nav-button">Login</button></a></li>
-			<li class="bell-notification" current-count="8"><a href="#" class="no-hover"><i class="fas fa-bell"></i></a></li>
-		</ul>
-
+		<script>createNavBar("admin")</script>
 	</nav>
             </nav>
 

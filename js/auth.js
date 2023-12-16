@@ -1,4 +1,4 @@
-window.stop()
+// window.stop()
 
 authorize(window.location.pathname);
 
