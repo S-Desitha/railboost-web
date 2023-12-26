@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<script src="/js/auth.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/schedule.css"> 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
     <script src="/js/script.js"></script>
-	<script src="/js/train.js"></script>
+	<script src="/js/schedule.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <title>Train Schedule Management</title>
 </head>
@@ -22,11 +22,11 @@
             		<div class="train-left">
 
 						<section class="table_header">
-							<h1>Train Schedule Details</h1>
-                            <div class="input-group">
+							<h1>Train Schedules</h1>
+                            <!-- <div class="input-group">
                                 <input type="search" placeholder="Search Train Schedule...">
                                 <img src="/Images/search.png" alt="">
-                            </div>
+                            </div> -->
 						</section>
 
 						<section class="table_body">
@@ -44,88 +44,15 @@
 								</tr>
 							</thead>
 							<tbody id="schedule_table">
-								<tr>
-									<td>1234</td>
-									<td>8245</td>
-                                    <td>Panadura</td>
-                                    <td>Colombo fort</td>
-                                    <td>Express</td>
-                                    <td>
-                                        <a href="trainSch.html"><button class="view-button">
-                                         View <i class="fa-regular fa-eye"></i></button>
-                                        </a>
-                                    </td>
-									<td>
+									<!-- <td>
 										<a href=""><button class="edit-button">
 											<i class="fas fa-edit"></i> 
 										</button></a>
 										<a href=""><button class="delete-button">
 											<i class="fas fa-trash"></i>
 										</button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>1234</td>
-									<td>8245</td>
-                                    <td>Panadura</td>
-                                    <td>Colombo fort</td>
-                                    <td>Express</td>
-                                    <td>
-                                        <a href="trainSch.html"><button class="view-button">
-                                         View <i class="fa-regular fa-eye"></i></button>
-                                        </a>
-                                    </td>
-									<td>
-										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i> 
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i>
-										</button></a>
-									</td>
-								<tr>
-									<td>1234</td>
-									<td>8245</td>
-                                    <td>Panadura</td>
-                                    <td>Colombo fort</td>
-                                    <td>Express</td>
-                                    <td>
-                                        <a href="trainSch.html"><button class="view-button">
-                                         View <i class="fa-regular fa-eye"></i></button>
-                                        </a>
-                                    </td>
-									<td>
-										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i> 
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i>
-										</button></a>
-									</td>
-								</tr>
-								
-									
-								
-								<tr>
-									<td>1234</td>
-									<td>8245</td>
-                                    <td>Panadura</td>
-                                    <td>Colombo fort</td>
-                                    <td>Express</td>
-                                    <td>
-                                        <a href="trainSch.html"><button class="view-button">
-                                         View <i class="fa-regular fa-eye"></i></button>
-                                        </a>
-                                    </td>
-									<td>
-										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i> 
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i>
-										</button></a>
-									</td>
-								</tr>
+									</td> -->
+								<!-- </tr> -->
 								
 								
 							</tbody>
@@ -134,7 +61,68 @@
 					</div>
 				
 					<div class="train-right">
+						<button class="form-button" id="add_update-schedule-button" onclick="addNewSchedule()">Add a new train </button>
+
 						<div class="train-form">
+							<form onsubmit="return false">
+								<div class="filter-group">
+									<label for="scheduleId">Schedule ID:</label>
+									<input type="text" name="scheduleId" id="scheduleId" placeholder="Enter Schedule ID (optional)">
+								</div>
+								<div class="filter-group">
+									<label for="start_station">Start Station:</label>
+									<select name="start_station" id="start_station">
+									  <option value="">-- Select Station --</option>
+									  <option value="MDA">MARADANA</option>
+									  <option value="BAM">Bambalapitiya</option>
+									  <option value="FOT">Colombo Fort</option>
+									  <option value="KOT">Kotahena</option>
+									  <option value="MTL">Mutwal</option>
+									  <option value="MOR">Moratuwa</option>
+									  <option value="PAN">Panadura</option>
+									  <option value="RAG">Ragama</option>
+									  <option value="RAT">Ratmalana</option>
+									  <option value="WEL">Wellawatta</option>
+									</select>
+								</div>
+								<div class="filter-group">
+									<label for="end_station">End Station:</label>
+									<select name="end_station" id="end_station">
+									  <option value="">-- Select Station --</option>
+									  <option value="KLP">KOLLUPITIYA</option>
+									  <option value="BAM">Bambalapitiya</option>
+									  <option value="FOT">Colombo Fort</option>
+									  <option value="KOT">Kotahena</option>
+									  <option value="MTL">Mutwal</option>
+									  <option value="MOR">Moratuwa</option>
+									  <option value="PAN">Panadura</option>
+									  <option value="RAG">Ragama</option>
+									  <option value="RAT">Ratmalana</option>
+									  <option value="WEL">Wellawatta</option>
+									</select>
+								</div>
+								<!-- <div class="filter-group">
+									<label>Days of the Week:</label>
+									<div class="checkbox-group">
+										<label for="day-mon"><input type="checkbox" name="days[]" id="day-mon" value="monday"> Monday</label>
+										<label for="day-tue"><input type="checkbox" name="days[]" id="day-tue" value="tuesday"> Tuesday</label>
+										<label for="day-wed"><input type="checkbox" name="days[]" id="day-wed" value="wednesday"> Wednesday</label>
+										<label for="day-thu"><input type="checkbox" name="days[]" id="day-thu" value="thursday"> Thursday</label>
+										<label for="day-fri"><input type="checkbox" name="days[]" id="day-fri" value="friday"> Friday</label>
+										<label for="day-sat"><input type="checkbox" name="days[]" id="day-sat" value="saturday"> Saturday</label>
+										<label for="day-sun"><input type="checkbox" name="days[]" id="day-sun" value="sunday"> Sunday</label>
+									</div>
+								</div> -->
+								<div class="filter-group">
+									<label for="dates">Dates:</label>
+									<input type="date" name="date" id="date">
+								</div>
+								
+								<button class="form-button" id="schedule_filet_btn" onclick="getSchedules()">Search</button>
+							</form>
+						</div>
+
+						<!-- <div class="train-form">
 							
 							<form onsubmit="return false">
 								<h2 class="add-train-heading" id="add_update-schedule-header">Add a new train schedule </h2>
@@ -153,7 +141,7 @@
 
 								<button class="form-button" id="add_update-schedule-button" onclick="addNewSchedule()">Add a new train </button>
 							</form>
-						</div>
+						</div> -->
 				
 					</div>
 				</div>
