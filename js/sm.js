@@ -1,29 +1,28 @@
 const url = "http://localhost:8080/railboost_backend_war_exploded/journey";
 
 
-function getJourneys() {
+
+function createJourneys() {
     let param = {
-        date: "2023-12-09"
+        date: new Date().toLocaleDateString()
     }
     // Get the journeys from the backend
     let urlQuery = url+`?json=${encodeURIComponent(JSON.stringify(param))}`;
     fetch(urlQuery, {credentials:"include"})
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             // Create a table row for each journey
-            if (!Object.keys(data)){
+            if (Object.keys(data)){
                 data.forEach(journey => {
-                    let row = document.createElement("tr");
-                    row.innerHTML = `<td>${journey.scheduleId}</td>
-                                     <td>${journey.schedule.trainId}</td>
-                                     <td>${journey.schedule.startStation}</td>
-                                     <td>${journey.schedule.endStation}</td>
-                                     <td>${journey.schedule.trainType}</td>
-                                     <td><a href="/html/sm/sm-update.html?scheduleId=${journey.scheduleId}"><button class="view-button">
-                                     Update <i class="fa-solid fa-pen-to-square"></i></button>
-                                    </a></td>`;
-                    document.getElementById("schedule_table").appendChild(row);
+                    let row = document.getElementById("schedule_table").insertRow(-1);
+                    row.insertCell(0).innerHTML = journey.scheduleId;
+                    row.insertCell(1).innerHTML = journey.schedule.trainId;
+                    row.insertCell(2).innerHTML = journey.schedule.startStation;
+                    row.insertCell(3).innerHTML = journey.schedule.endStation;
+                    row.insertCell(4).innerHTML = journey.schedule.trainType;
+                    row.insertCell(5).innerHTML = `<a href="/html/sm/sm-update.html?scheduleId=${journey.scheduleId}"><button class="view-button">
+                                                        Update <i class="fa-solid fa-pen-to-square"></i></button>
+                                                    </a>`;
                 });
             }
         });   
@@ -31,56 +30,93 @@ function getJourneys() {
 
 
 
-function getJourney() {
+function createJourney() {
     let param = {
-        date: "2023-12-09",
+        date: new Date().toLocaleDateString(),
         scheduleId: new URLSearchParams(window.location.search).get("scheduleId")
+        // scheduleId: 8710
     }
-    
-    console.log(param);
-
 
     let urlQuery = url+`?json=${encodeURIComponent(JSON.stringify(param))}`;
     fetch(urlQuery, {credentials:"include"})
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             // Create a table row for each journey
-            if (!Object.keys(data)){
-                let n_stations = data.stations.length;
-                let stations = [];
-                for (let i = 0; i <n; i++) {
-                    if (data.stations[i].stIndex==i){
-                        stations.push(data.stations[i]);
+            if (Object.keys(data)){
+                data.stations.forEach(js => {
 
-                        for (let j=0; j<n_stations; j++) {
-                            if (data.schedule.stations[j].stIndex==i) {
-                                stations[i].scheduledArrivalTime = data.schedule.stations[j].scheduledArrivalTime;
-                                stations[i].scheduledDepartureTime = data.schedule.stations[j].scheduledDepartureTime;
-                            }
-                        }
-                    }
-                }
-                stations.forEach(journey_station => {
-                    let row = document.createElement("tr");
-                    row.innerHTML = `<td>${journey_station.station}</td>
-                                     <td>${journey_station.scheduledArrivalTime}</td>
-                                     <td>${journey_station.scheduledDepartureTime}</td>
-                                     <td>${journey_station.arrivalTime}</td>
-                                     <td>${journey_station.departureTime}</td>
-                                     <td>
-                                        <a href="#" onclick="updateTime(this, 'arrivedTime')"><button class="view-button">
-                                            Arrived <i class="fa-solid fa-arrow-down"></i></button>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="#" onclick="updateTime(this, 'departuredTime')"><button class="view-button">
-                                            Departured <i class="fa-solid fa-arrow-up"></i></button>
-                                        </a>
-                                    </td>`;
-                    document.getElementById("journey_table").appendChild(row);
+                    let arrivalButton = document.createElement("button");
+                    arrivalButton.classList.add("view-button");
+                    arrivalButton.innerHTML = "Arrived <i class='fa-solid fa-arrow-down'></i>";
+                    arrivalButton.onclick = function() {updateTime(js.scheduleId, js.station, "arrival");}
+
+                    let departureButton = document.createElement("button");
+                    departureButton.classList.add("view-button");
+                    departureButton.innerHTML = "Departured <i class='fa-solid fa-arrow-up'></i>";
+                    departureButton.onclick = function() {updateTime(js.scheduleId, js.station, "departure");}
+
+                    let row = document.getElementById("journey_table").insertRow(-1);
+                    row.setAttribute("id", js.station);
+
+                    row.insertCell(0).innerHTML = js.station;
+                    row.insertCell(1).innerHTML = new Date('', '', '', js.scheduledArrivalTime.hour, js.scheduledArrivalTime.minute, js.scheduledArrivalTime.second).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+                    row.insertCell(2).innerHTML = new Date('', '', '', js.scheduledDepartureTime.hour, js.scheduledDepartureTime.minute, js.scheduledDepartureTime.second).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+                    if (js.arrivalTime==null)
+                        row.insertCell(3).appendChild(arrivalButton);
+                    else
+                        row.insertCell(3).innerHTML = new Date('', '', '', js.arrivalTime.hour, js.arrivalTime.minute, js.arrivalTime.second).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+                    if (js.departureTime==null)
+                        row.insertCell(4).appendChild(departureButton);
+                    else
+                        row.insertCell(4).innerHTML = new Date('', '', '', js.departureTime.hour, js.departureTime.minute, js.departureTime.second).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+
                 });
             }
 
         });   
 }
+
+
+
+function updateTime(scheduleId, station, timeType) {
+    let body = {
+        scheduleId: scheduleId,
+        station: station
+    }
+
+    let time = new Date().toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+    if(timeType == "arrival")
+        body.arrivalTime = time;
+    else
+        body.departureTime = time;
+
+    const params = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body),
+        method: "PUT",
+        credentials: "include"
+    };
+
+    console.log(params);
+
+    fetch(url, params)
+        .then(res => {
+            console.log(res.status);
+            if (res.status==200) {
+                if (timeType=="arrival")
+                    document.getElementById(station).cells[3].innerHTML = time;
+                else if (timeType=="departure")
+                    document.getElementById(station).cells[4].innerHTML = time;
+            }
+            else if (res.status==403) {
+                alert(`You don't have permission to update station: ${station}`);
+            }
+        });
+
+}
+
+
+
