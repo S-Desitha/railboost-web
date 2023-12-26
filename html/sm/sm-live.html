@@ -6,8 +6,7 @@
     <script src="/js/auth.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/passSch.css"> 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+    <link rel="stylesheet" href="/css/passSch.css">
     <script src="/js/script.js"></script>
     <script src="/js/sm.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
@@ -31,7 +30,7 @@
 
 						<section class="table_body">
 
-							<table id="schedule_table">
+							<table>
 							<thead>
 								<tr>
                                     <th>Schedule ID</th>
@@ -42,8 +41,8 @@
                                     <th>Arrival and Departure Times</th>
 								</tr>
 							</thead>
-							<tbody>	
-                                <script>getJourneys()</script>						
+							<tbody id="schedule_table">		
+                                <script>createJourneys()</script>				
 							</tbody>
 						</section>
 						</table>

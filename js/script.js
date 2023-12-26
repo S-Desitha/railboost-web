@@ -1,30 +1,30 @@
 
 function createNavBar(context) {
-    $.get("/html/navbar.html", function(data) {
-        $(".navbar").html(data);
+    fetch("/html/navbar.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementsByClassName("navbar")[0].innerHTML = data;
+            if (context == "admin") {
+                document.getElementById("sm-nav").remove();
+                document.getElementById("passenger-nav").remove();
 
-        if (context == "admin") {
-            $("#sm-nav").remove();
-            $("#passenger-nav").remove();
+                document.getElementById("nav-about").remove();
+                document.getElementById("nav-contact").remove();
+                document.getElementById("nav-services").innerHTML = "Admin Services";
+            }
+            else if (context == "sm") {
+                document.getElementById("admin-nav").remove();
+                document.getElementById("passenger-nav").remove();
 
-            $("#nav-about").remove();
-            $("#nav-contact").remove();
-            $("#nav-services").html("Admin Services");
-        }
-        else if (context == "sm") {
-            $("#admin-nav").remove();
-            $("#passenger-nav").remove();
-
-            $("#nav-about").remove();
-            $("#nav-contact").remove();
-            $("#nav-services").html("SM Services");
-        }
-        else if (context == "passenger") {
-            $("#admin-nav").remove();
-            $("#sm-nav").remove();
-        }
-    });
-    
+                document.getElementById("nav-about").remove();
+                document.getElementById("nav-contact").remove();
+                document.getElementById("nav-services").innerHTML = "SM Services";
+            }
+            else if (context == "passenger") {
+                document.getElementById("admin-nav").remove();
+                document.getElementById("sm-nav").remove();
+            }
+        });
 }
 
 
