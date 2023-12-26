@@ -1,3 +1,6 @@
+const url = "http://localhost:8080/railboost_backend_war_exploded/train";
+
+
 function validateCompartments() {
   var compartmentsField = document.getElementById("compartments");
   var compartmentsError = document.getElementById("compartments-error");
@@ -14,28 +17,6 @@ function validateCompartments() {
   return true;
 }
 
-function updateTime(button, action) {
-  // Get the current time
-  var currentTime = new Date();
-  var hours = currentTime.getHours();
-  var minutes = currentTime.getMinutes();
-
-  // Format the time as HH:mm
-  var formattedTime = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
-
-  // Get the corresponding row of the clicked button
-  var row = button.closest('tr');
-
-  // Update the relevant <td> based on the action
-  if (action === 'arrivedTime') {
-    row.querySelector('td:nth-child(4)').innerText = formattedTime;
-  } else if (action === 'departuredTime') {
-    row.querySelector('td:nth-child(5)').innerText = formattedTime;
-  }
-}
-
-
-const url = "http://localhost:8080/railboost_backend_war_exploded/train";
 
 
 createTrainsPage();
