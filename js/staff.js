@@ -9,11 +9,12 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
         .then(staff => {
-            let output = '';
             staff.forEach(staffMember => {
                 let editButton = document.createElement("button");
                 editButton.classList.add("edit-button");
                 editButton.innerHTML = "<i class='fas fa-edit'></i>";
+                editButton.setAttribute("staffMember", JSON.stringify(staffMember));
+                editButton.onclick = editStaff;
 
                 let deleteButton = document.createElement("button");
                 deleteButton.classList.add("delete-button");
@@ -21,17 +22,86 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 let row = document.getElementById("staff_table").insertRow(-1);
                 row.insertCell(0).innerHTML = staffMember.staffId;
-                row.insertCell(1).innerHTML = staffMember.fName + " " + staffMember.lName;
-                row.insertCell(2).innerHTML = staffMember.username;
-                row.insertCell(3).innerHTML = staffMember.email;
-                row.insertCell(4).innerHTML = staffMember.telNo;
-                row.insertCell(5).innerHTML = staffMember.role;
+                row.insertCell(1).innerHTML = staffMember.user.fName + " " + staffMember.user.lName;
+                row.insertCell(2).innerHTML = staffMember.user.username;
+                row.insertCell(3).innerHTML = staffMember.user.email;
+                row.insertCell(4).innerHTML = staffMember.user.telNo;
+                row.insertCell(5).innerHTML = staffMember.user.role;
                 row.insertCell(6).innerHTML = staffMember.station;
-                row.insertCell(7).innerHTML = editButton.outerHTML + deleteButton.outerHTML;
+                row.insertCell(7).append(editButton, deleteButton);
 
             });
         });
 });
+
+
+
+function editStaff() {
+    let member = JSON.parse(this.getAttribute("staffMember"));
+
+    const button = document.getElementById("add-staff-button");
+
+    document.getElementById("add-staff-heading").innerHTML = "Update Staff Details";
+    button.innerHTML = "Update";
+
+    document.getElementById('staffId').value = member["staffId"];
+    document.getElementById('staffId').disabled = true;
+    // document.getElementById('fName').value = member.user["fName"];
+    // document.getElementById('lName').value = member.user["lName"];
+    document.getElementById('role').value = member.user["role"];
+    document.getElementById('railwayStation').value = member["station"];
+    // document.getElementById('email-field').value = member.user["email"];
+    // document.getElementById('phone-field').value = member.user["telNo"]
+    // document.getElementById('username').value = member.user["username"];
+    document.getElementById('fName').style.display = "none";
+    document.getElementById('lName').style.display = "none";
+    // document.getElementById('role').display = "none";
+    // document.getElementById('railwayStation').display = "none";
+    document.getElementById('email-field').style.display = "none";
+    document.getElementById('phone-field').style.display = "none";
+    document.getElementById('username').style.display = "none";
+
+    button.setAttribute("member", JSON.stringify(member));
+    button.onclick = updateStaff;
+}
+
+
+
+function updateStaff() {
+    staffMember = {user: {}};
+
+    staffMember["staffId"] = document.getElementById('staffId').value;
+    staffMember["station"] = document.getElementById('railwayStation').value;
+    // staffMember.user["fName"] = document.getElementById("fName").value;
+    // staffMember.user["lName"] = document.getElementById("lName").value;
+    // staffMember.user["role"] = document.getElementById("role").value;
+    // staffMember.user["email"] = document.getElementById('email-field').value;
+    // staffMember.user["telNo"] = document.getElementById('phone-field').value;
+    // staffMember.user["username"] = document.getElementById('username').value;
+
+
+    const body = staffMember;
+    const params = {
+        headers : {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body : JSON.stringify(body),
+        method : "PUT",
+        credentials : "include"
+    };
+
+    fetch(url, params)
+    .then(res => {
+        if(res.ok) {
+            window.location.reload();
+        }
+    });
+
+    console.log(staffMember);
+}
+
+
+
 
 
 function updateUsername() {

@@ -55,7 +55,7 @@
 						<div class="staff-form">
 							
 							<form onsubmit="return false">
-								<h2 class="add-staff-heading">Add a new staff member</h2>
+								<h2 class="add-staff-heading" id="add-staff-heading">Add a new staff member</h2>
 								<label for="staffId"></label>
 								<input type="text" id="staffId" placeholder="Staff ID:" name="staffId" required><br>
 
@@ -89,7 +89,7 @@
 								<label for="username"></label>
 								<input type="text" id="username" name="username" placeholder="Username:"readonly><br>
 						
-								<button type="submit" class="form-button" onclick="addStaff()">Add Staff Member</button>
+								<button type="submit" class="form-button" id="add-staff-button" onclick="addStaff()">Add Staff Member</button>
 							</form>
 						</div>
 					</div>
