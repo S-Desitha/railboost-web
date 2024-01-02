@@ -1,5 +1,39 @@
 const url = "http://localhost:8080/railboost_backend_war_exploded/staff";
 
+
+document.addEventListener("DOMContentLoaded", function() {
+    fetch(url, {credentials : "include"})
+        .then(res => {
+            if(res.ok) {
+                return res.json();
+            }
+        })
+        .then(staff => {
+            let output = '';
+            staff.forEach(staffMember => {
+                let editButton = document.createElement("button");
+                editButton.classList.add("edit-button");
+                editButton.innerHTML = "<i class='fas fa-edit'></i>";
+
+                let deleteButton = document.createElement("button");
+                deleteButton.classList.add("delete-button");
+                deleteButton.innerHTML = "<i class='fas fa-trash-alt'></i>";
+
+                let row = document.getElementById("staff_table").insertRow(-1);
+                row.insertCell(0).innerHTML = staffMember.staffId;
+                row.insertCell(1).innerHTML = staffMember.fName + " " + staffMember.lName;
+                row.insertCell(2).innerHTML = staffMember.username;
+                row.insertCell(3).innerHTML = staffMember.email;
+                row.insertCell(4).innerHTML = staffMember.telNo;
+                row.insertCell(5).innerHTML = staffMember.role;
+                row.insertCell(6).innerHTML = staffMember.station;
+                row.insertCell(7).innerHTML = editButton.outerHTML + deleteButton.outerHTML;
+
+            });
+        });
+});
+
+
 function updateUsername() {
     const staffId = document.getElementById('staffId').value;
     const firstname = document.getElementById('fName').value;
@@ -15,6 +49,8 @@ function updateUsername() {
     const username = usernamePrefix + staffId + firstname + lastInitial + railwayStation;
     document.getElementById('username').value = username;
 }
+
+
 
 function addStaff() {
     staffMember = {};
@@ -56,7 +92,7 @@ function addStaff() {
 
     alert(`Link to create a password for the Username :${username} has been sent to the email: ${email} and phone number: ${telephone}.`);
     // Clear the form
-}
+
     document.getElementById('staffId').value = '';
     document.getElementById('name').value = '';
     document.getElementById('role').value = ''; 
