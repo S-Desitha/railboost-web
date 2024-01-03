@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/traintimes.css">
     <script src="/js/script.js"></script>
-	<script src="/js/train.js"></script>
+	<script src="/js/passenger.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <title>Train Schedule Management</title>
 </head>
@@ -46,36 +46,8 @@
                                     <th>Actual Departure Time</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>Panadura</td>
-									<td>08:25</td>
-                                    <td>08:30</td> 
-                                    <td>08:25</td>
-                                    <td>08:30</td>                                   
-									
-								</tr>
-								<tr>
-									<td>Moratuwa</td>
-									<td>08:25</td>
-                                    <td>08:30</td>
-                                    <td>08:25</td>
-                                    <td>08:30</td>                                    
-								
-								
-									
-								
-								<tr>
-									<td>Bambalapitiya</td>
-									<td>08:25</td>
-                                    <td>08:30</td>
-                                    <td>08:25</td>
-                                    <td>08:30</td> 
-                            
-									
-								</tr>
-								
-								
+							<tbody id="schedule_stops">
+								<script>getSchedule()</script>
 							</tbody>
 						</section>
 						</table>
