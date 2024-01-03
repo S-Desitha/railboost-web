@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/test.css">  
+    <script src="/js/script.js"></script>
+	<!-- <script src="anns.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Train Schedule Management</title>
+</head>
+<body> 
+    <nav class="navbar" >
+
+        <a  href="#">
+            <img src="/Images/white.png" alt="railboost Logo" class="header-logo" />
+            <label class="logo-text">RAILBOOST</label>
+        </a>
+        
+        <ul>
+            <li><a  href="/html/passenger/home.html">Home</a></li>
+            <li><a  href="#">About</a></li>
+            <li><a  href="#">Our Services</a>
+                <ul class="dropdown">
+                    <li><a href="#">Search for a train</a></li>
+                    <li><a href="#">Check Train Live Location</a></li>
+                    <li><a href="#">Buy normal E-Ticket</a></li>
+                    <li><a href="#">Buy season E-Ticket</a></li>
+                    <li><a href="#">Register Parcels</a></li>
+                    <li><a href="#">Contact a railway station</a></li>
+                    <li><a href="#" onclick="seatReserve()">Reserve seats in intercity trains</a></li>
+                    <li><a href="#" onclick="confirmCall()">Call Railway Security Officers</a></li>
+                </ul>
+            </li>
+            <li><a  href="#">Contact</a></li>
+            <li ><a  href="/html/signin.html" class="no-hover"><button class="nav-button">Login</button></a></li>
+            <li class="bell-notification" current-count="8"><a href="#" class="no-hover"><i class="fas fa-bell"></i></a></li>
+        </ul>
+
+    </nav>
+			<div class="train-container">	
+                
+                    
+                    <div class="train">
+                        
+                        <div class="train-heading">
+                            <i class="fas fa-train"></i>
+                            <div class="train-info">
+                                
+                                <div class="SnE-stations">
+                                    <div class="sstation">
+                                        <p> <b>Panadura </b> <i class="fa-solid fa-play"></i> </p>
+                                    </div>
+                            
+                                    <div class="dstation">
+                                        <p> <b>Colombo Fort </b> </p> 
+                                    </div>
+                                </div>
+                                <div class="tnum-speed">
+                                    <div class="train-number">
+                                        <p> <b>8316</b> </p>
+                                    </div>
+                                    <div class="speed">
+                                        <p> <b>Express</b> </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="selected-info">
+                            <div class="start">
+                                <div class="stime">
+                                    <p> <b>10:00 AM </b> </p>
+                                </div>
+                                <div class="selected-sstation">
+                                    <p> <b>Moratuwa </b> </p>
+                                </div>
+                            </div>
+
+
+                            <div class="duration">
+                                <div class="dots">
+                                    <p> 
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                     </p>
+                                </div>
+                                <div class="mins">
+                                    <p> <b>120 min </b> </p>
+                                </div>
+                            </div>
+
+                            <div class="end">
+                                <div class="etime">
+                                    <p> <b>12:00 PM </b> </p>
+                                </div>
+                                <div class="selected-estation">
+                                    <p> <b>Dehiwala </b> </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+
+                    <div class="train">
+                        
+                        <div class="train-heading">
+                            <i class="fas fa-train"></i>
+                            <div class="train-info">
+                                
+                                <div class="SnE-stations">
+                                    <div class="sstation">
+                                        <p> <b>Panadura </b> <i class="fa-solid fa-play"></i> </p>
+                                    </div>
+                            
+                                    <div class="dstation">
+                                        <p> <b>Colombo Fort </b> </p> 
+                                    </div>
+                                </div>
+                                <div class="tnum-speed">
+                                    <div class="train-number">
+                                        <p> <b>8316</b> </p>
+                                    </div>
+                                    <div class="speed">
+                                        <p> <b>Express</b> </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="selected-info">
+                            <div class="start">
+                                <div class="stime">
+                                    <p> <b>10:00 AM </b> </p>
+                                </div>
+                                <div class="selected-sstation">
+                                    <p> <b>Moratuwa </b> </p>
+                                </div>
+                            </div>
+
+
+                            <div class="duration">
+                                <div class="dots">
+                                    <p> 
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                     </p>
+                                </div>
+                                <div class="mins">
+                                    <p> <b>120 min </b> </p>
+                                </div>
+                            </div>
+
+                            <div class="end">
+                                <div class="etime">
+                                    <p> <b>12:00 PM </b> </p>
+                                </div>
+                                <div class="selected-estation">
+                                    <p> <b>Dehiwala </b> </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+
+                    <div class="train">
+                        
+                        <div class="train-heading">
+                            <i class="fas fa-train"></i>
+
+                            <div class="stations">
+                                
+                            </div>
+                            <div class="train-info">
+                                
+                                <div class="SnE-stations">
+                                    <div class="sstation">
+                                        <p> <b>Panadura </b> <i class="fa-solid fa-play"></i> </p>
+                                    </div>
+                            
+                                    <div class="dstation">
+                                        <p> <b>Colombo Fort </b> </p> 
+                                    </div>
+                                </div>
+                                <div class="tnum-speed">
+                                    <div class="train-number">
+                                        <p> <b>8316</b> </p>
+                                    </div>
+                                    <div class="speed">
+                                        <p> <b>Express</b> </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="selected-info">
+                            <div class="start">
+                                <div class="stime">
+                                    <p> <b>10:00 AM </b> </p>
+                                </div>
+                                <div class="selected-sstation">
+                                    <p> <b>Moratuwa </b> </p>
+                                </div>
+                            </div>
+
+
+                            <div class="duration">
+                                <div class="dots">
+                                    <p> 
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                        <i class="fa-solid fa-circle"></i>
+                                     </p>
+                                </div>
+                                <div class="mins">
+                                    <p> <b>120 min </b> </p>
+                                </div>
+                            </div>
+
+                            <div class="end">
+                                <div class="etime">
+                                    <p> <b>12:00 PM </b> </p>
+                                </div>
+                                <div class="selected-estation">
+                                    <p> <b>Dehiwala </b> </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+                
+					
+            </div>
+</body>
