@@ -33,7 +33,7 @@
 
 						<section class="table_body">
 
-							<table>
+							<table id="staff_table">
 							<thead>
 								<tr>
 									<th>Staff ID</th>
@@ -46,95 +46,7 @@
 									<th>Actions</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Sathira Desitha</td>
-									<td>SM1SathiraD</td>
-									<td>sathiradesitha@gmail.com</td>
-									<td>0715651049</td>
-									<td>Station Master</td>
-									<td>Dehiwala</td>
-									<td>
-										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i> <!-- Font Awesome edit icon -->
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i> <!-- Font Awesome delete icon -->
-										</button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Sathira Desitha</td>
-									<td>SM1SathiraD</td>
-									<td>sathiradesitha@gmail.com</td>
-									<td>0715651049</td>
-									<td>Station Master</td>
-									<td>Dehiwala</td>
-									<td>
-										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i> <!-- Font Awesome edit icon -->
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i> <!-- Font Awesome delete icon -->
-										</button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Sathira Desitha</td>
-									<td>SM1SathiraD</td>
-									<td>sathiradesitha@gmail.com</td>
-									<td>0715651049</td>
-									<td>Station Master</td>
-									<td>Dehiwala</td>
-									<td>
-										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i> <!-- Font Awesome edit icon -->
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i> <!-- Font Awesome delete icon -->
-										</button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Sathira Desitha</td>
-									<td>SM1SathiraD</td>
-									<td>sathiradesitha@gmail.com</td>
-									<td>0715651049</td>
-									<td>Station Master</td>
-									<td>Dehiwala</td>
-									<td>
-										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i> <!-- Font Awesome edit icon -->
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i> <!-- Font Awesome delete icon -->
-										</button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Sathira Desitha</td>
-									<td>SM1SathiraD</td>
-									<td>sathiradesitha@gmail.com</td>
-									<td>0715651049</td>
-									<td>Station Master</td>
-									<td>Dehiwala</td>
-									<td>
-										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i> <!-- Font Awesome edit icon -->
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i> <!-- Font Awesome delete icon -->
-										</button></a>
-									</td>
-								</tr>
-								
-								
-							</tbody>
+							<tbody></tbody>
 						</section>
 						</table>
 					</div>
@@ -142,8 +54,8 @@
 					<div class="staff-right">
 						<div class="staff-form">
 							
-							<form onsubmit="return false">
-								<h2 class="add-staff-heading">Add a new staff member</h2>
+							<form onsubmit="return false" id="staff_form">
+								<h2 class="add-staff-heading" id="add-staff-heading">Add a new staff member</h2>
 								<label for="staffId"></label>
 								<input type="text" id="staffId" placeholder="Staff ID:" name="staffId" required><br>
 
@@ -177,7 +89,7 @@
 								<label for="username"></label>
 								<input type="text" id="username" name="username" placeholder="Username:"readonly><br>
 						
-								<button type="submit" class="form-button" onclick="addStaff()">Add Staff Member</button>
+								<button type="submit" class="form-button" id="add-staff-button" onclick="addStaff()">Add Staff Member</button>
 							</form>
 						</div>
 					</div>
