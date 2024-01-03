@@ -13,30 +13,11 @@
   color: #fff;
   background: #4285f4;
 }
-
-input {
-  border: none;
-  /* border: 1px solid #a9a9a9; */
-  color: #000000;
-  width: 19.8vw;
-  margin: 20px 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  font-size: 17px;
-  border-radius: 7px;
-  padding: 20px 20px;
-  margin: 15px 0; 
-}
 .header{
   font-size: 15px;
   margin-top: 20px;
 }
-/* style that .date div to fit the container */
 
-#date::before {
-  content: "Date :  "; 
-  
-  
-}
 .wrapper{
   
   width: 20vw;
