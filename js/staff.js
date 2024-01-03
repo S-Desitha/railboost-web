@@ -2,6 +2,7 @@ const url = "http://localhost:8080/railboost_backend_war_exploded/staff";
 
 
 document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("staff_form").reset();
 
     fetch(url, {credentials : "include"})
         .then(res => {
