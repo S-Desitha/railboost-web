@@ -2,6 +2,7 @@ const url = "http://localhost:8080/railboost_backend_war_exploded/staff";
 
 
 document.addEventListener("DOMContentLoaded", function() {
+
     fetch(url, {credentials : "include"})
         .then(res => {
             if(res.ok) {
@@ -39,6 +40,8 @@ document.addEventListener("DOMContentLoaded", function() {
 function editStaff() {
     let member = JSON.parse(this.getAttribute("staffMember"));
 
+    console.log(member);
+
     const button = document.getElementById("add-staff-button");
 
     document.getElementById("add-staff-heading").innerHTML = "Update Staff Details";
@@ -46,20 +49,18 @@ function editStaff() {
 
     document.getElementById('staffId').value = member["staffId"];
     document.getElementById('staffId').disabled = true;
-    // document.getElementById('fName').value = member.user["fName"];
-    // document.getElementById('lName').value = member.user["lName"];
-    document.getElementById('role').value = member.user["role"];
+    document.getElementById('fName').value = member.user["fName"];
+    document.getElementById('lName').value = member.user["lName"];
+    document.getElementById('role').value = member.user["role"]=="sm"? "SM" : "TCO";
     document.getElementById('railwayStation').value = member["station"];
-    // document.getElementById('email-field').value = member.user["email"];
-    // document.getElementById('phone-field').value = member.user["telNo"]
-    // document.getElementById('username').value = member.user["username"];
-    document.getElementById('fName').style.display = "none";
-    document.getElementById('lName').style.display = "none";
-    // document.getElementById('role').display = "none";
-    // document.getElementById('railwayStation').display = "none";
-    document.getElementById('email-field').style.display = "none";
-    document.getElementById('phone-field').style.display = "none";
-    document.getElementById('username').style.display = "none";
+    document.getElementById('email-field').value = member.user["email"];
+    document.getElementById('phone-field').value = member.user["telNo"]
+    document.getElementById('username').value = member.user["username"];
+    document.getElementById('fName').disabled = true;
+    document.getElementById('lName').disabled = true;
+    document.getElementById('email-field').disabled = true;
+    document.getElementById('phone-field').disabled = true;
+    document.getElementById('username').disabled = true;
 
     button.setAttribute("member", JSON.stringify(member));
     button.onclick = updateStaff;
