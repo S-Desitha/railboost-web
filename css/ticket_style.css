@@ -1,0 +1,94 @@
+h1 {
+    font-size: 250%;
+    text-align: center;
+}
+
+.form_ticker {
+    align-content: center;
+    display: flex;
+    gap: 2%;
+    width: 600px;
+    height: 25%;
+    box-shadow: 0 .4rem .8rem #0005;
+    border-bottom-right-radius: .8rem;
+    margin-top: 5%;
+    margin-left: 10%;
+}
+
+.ticket_header {
+    background-color: var(--theme-color);
+    justify-content: center;
+    height: 22%;
+    width: 600px;
+    border-top-right-radius: .8rem;
+}
+
+.ticket_logo {
+    position: absolute;
+    width: 7%;
+    height: 8%;
+    margin-top: 5px;
+}
+
+.ticket_logo-text {
+    color: white;
+    font-size: 20px;
+    line-height: 80px;
+    padding-left: 100px;
+    font-weight: bold;
+    font-family: 'COCOGOOSE', sans-serif;
+    text-align: center;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.ticket_number {
+    color: rgb(12, 12, 12);
+    font-size: 12px;
+    font-weight: bolder;
+    font-family: 'COCOGOOSE', sans-serif;
+    margin-left: 75%;
+    margin-top: 0%;
+    letter-spacing: 2px;
+}
+
+table {
+    margin: 4%;
+    font-size: 10px;
+}
+
+tr {
+    margin: 10%;
+}
+
+td {
+    max-width: 100px;
+    padding-right: 150px;
+}
+
+.row1 {
+    color: black;
+    font-size: 10px;
+}
+
+.row2 {
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+@media screen and (max-width: 600px) {
+    .form_ticker {
+        width: 90%;
+        gap: 5%;
+    }
+
+    .ticket_header {
+        height: 30%;
+    }
+
+    table {
+        font-size: 8px;
+    }
+}
