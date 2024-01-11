@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SignIn</title>
+    <script src="/js/script.js"></script>
     <script src="/js/signin.js"></script>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/signin.css">
@@ -21,7 +22,7 @@
         <div class="login-content">
            <img src="/Images/RailBoost Logo.png" alt="railboost Logo" class="logo" />
             <div class="login-form">
-              <form onsubmit="return false" method="post">
+              <form onsubmit="return false" method="post" id="signin-form">
                 <label for="username"></label>
                 <input class="username" type="text" id="username" name="username" placeholder="Username" /><br />
                 <label for="password"></label>
