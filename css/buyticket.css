@@ -1,0 +1,197 @@
+
+.train-container {
+    display: flex;
+    align-items: center;
+    gap: 22%;
+    width: 49%;
+    height: 80vh;
+	margin-top: 40px;
+    margin-left: 10%;
+    margin-right: 10%;
+	
+}
+.train-image {
+    width: 600px; 
+    height: auto;
+    border-radius: 8px; 
+}
+
+.train-left {
+    flex: 1;
+    text-align: left;
+	align-items: center;
+	margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+.train-right {
+  flex: 1; 
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+  margin-right: 10%;
+}
+
+#start-station {
+	width: 20rem;
+	height: 2.5rem;
+	border: none;
+	border-bottom: 1px solid #a9a9a9;
+	color: #484848;
+	padding: 7px 0;
+	margin: 15px 0;}
+  .input-control.success input {
+    border-color: #09c372;
+}
+
+#end-station {
+	width: 20rem;
+	height: 2.5rem;
+	border: none;
+	border-bottom: 1px solid #a9a9a9;
+	color: #484848;
+	padding: 7px 0;
+	margin: 15px 0;}
+  .input-control.success input {
+    border-color: #09c372;
+}
+#class {
+	width: 20rem;
+	height: 2.5rem;
+	border: none;
+	border-bottom: 1px solid #a9a9a9;
+	color: #484848;
+	padding: 7px 0;
+	margin: 15px 0;}
+  .input-control.success input {
+    border-color: #09c372;
+}
+#date{
+    width: 20rem;
+	height: 2.5rem;
+	border: none;
+	border-bottom: 1px solid #a9a9a9;
+	color: #484848;
+	padding: 7px 0;
+	margin: 15px 0;}
+  .input-control.success input {
+    border-color: #09c372;
+}
+#no-of-tickets{
+    width: 20rem;
+	height: 2.5rem;
+	border: none;
+	border-bottom: 1px solid #a9a9a9;
+	color: #484848;
+	padding: 7px 0;
+	margin: 15px 0;}
+  .input-control.success input {
+    border-color: #09c372;
+}
+#error, #station-error{
+    text-align: left;
+    top: 100%;
+    left: 2px;
+    font-size: 14px;
+    font-weight: 400;
+    color: red;
+  }
+/* #price-of-one{
+    text-align: left;
+    padding-right:200px ;
+    top: 100%;
+    left: 2px; 
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(24, 80, 211);
+  } */
+
+  .price-of-1{
+    text-align: left;
+    top: 100%;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(24, 80, 211);
+  }
+#total-price{
+    width: 20rem;
+	height: 2.5rem;
+	border: none;
+	border-bottom: 1px solid #a9a9a9;
+	color: #484848;
+	padding: 7px 0;
+	margin: 15px 0;}
+  .input-control.success input {
+    border-color: #09c372;
+}
+
+input {
+    border: none;
+    border-bottom: 1px solid #a9a9a9;
+    color: #484848;
+    padding: 7px 0;
+    margin: 15px 0;
+  }
+  
+  input::placeholder {
+    color: #6e6b6b;
+  }
+  
+  .train-form input {
+    width: 20rem;
+  }
+
+
+.form-button {
+    color: var(--text-color);
+    background-color: var(--theme-color);
+    border-radius: 6px;
+    border: none;
+    padding: 10px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    width: 20rem;
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+.form-button:hover{
+    background-color: var(--secondary-color); 
+}
+
+@media (max-width: 768px) {
+    .train-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 80%;
+        margin-left: 5%;
+        margin-right: 5%;
+        background-color:none;
+    }
+
+    .train-left, .train-right {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+
+    .train-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .train-form input, select {
+        width: 100%;
+    }
+
+    .form-button {
+        width: 20rem;
+    }
+    .style{
+        background-color: white;
+    }
+}
