@@ -11,21 +11,17 @@ function manageAccess(resp, resource) {
 
 
 
-function authorize(pageUrl){
-    const url = "http://localhost:8080/railboost_backend_war_exploded/auth";
+async function authorize(pageUrl){
+    const endpoint = "userCredentials";
     resource = pageUrl.split("/")[2]
     if (resource=="admin" || resource=="sm" || resource=="tco") {
-        fetch(url, {
-            credentials : "include"
-        })
-            .then(response => {
-                if (response.ok) {
-                    response.json()
-                        .then(json => {
-                            console.log(json)
-                            manageAccess(json, resource);
-                        })
-                }
-            })
+        try {
+            let data = await customFetch(endpoint, {credentials : "include"})
+            console.log(data);
+            manageAccess(data, resource);
+        } catch(error) {
+            if (error=="login-redirected"){}
+                localStorage.setItem("last_url", window.location.pathname);
+        }
     }
 }
