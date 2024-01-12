@@ -17,11 +17,17 @@ async function customFetch(endpoint, options, sendJWT) {
     else{
         console.log("Invalid response");
         console.log(resp);
-        if (resp.status!=200) {
-            return {
-                isSuccessful: false,
-                status: resp.status
+        if (resp.status==401) {
+            let msg = await resp.text();
+            if (msg=="expired") {
+                window.alert("Session expired. Please login again.");
+                window.location.href="/html/signin.html";
+                return Promise.reject("login-redirected");
             }
+        }
+        return {
+            isSuccessful: false,
+            status: resp.status
         }
     }
 }
