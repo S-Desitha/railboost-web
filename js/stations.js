@@ -104,8 +104,13 @@ function createList() {
 
 
 async function getStations() {
-    stations = await customFetch(endpoint, {}, false);
-    createList();
+    try {
+        stations = await customFetch(endpoint, {}, false);
+        createList();
+    } catch(error) {
+        if (error=="login-redirected")
+            localStorage.setItem("last_url", window.location.pathname);
+    }
 }
 
 

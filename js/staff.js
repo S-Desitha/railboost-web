@@ -5,30 +5,36 @@ const endpoint = "staff";
 document.addEventListener("DOMContentLoaded", async function() {
     document.getElementById("staff_form").reset();
 
-    let data = await customFetch(endpoint, {credentials: "include"});
+    try {
 
-    data.forEach(staffMember => {
-        let editButton = document.createElement("button");
-        editButton.classList.add("edit-button");
-        editButton.innerHTML = "<i class='fas fa-edit'></i>";
-        editButton.setAttribute("staffMember", JSON.stringify(staffMember));
-        editButton.onclick = editStaff;
-
-        let deleteButton = document.createElement("button");
-        deleteButton.classList.add("delete-button");
-        deleteButton.innerHTML = "<i class='fas fa-trash-alt'></i>";
-
-        let row = document.getElementById("staff_table").insertRow(-1);
-        row.insertCell(0).innerHTML = staffMember.staffId;
-        row.insertCell(1).innerHTML = staffMember.user.fName + " " + staffMember.user.lName;
-        row.insertCell(2).innerHTML = staffMember.user.username;
-        row.insertCell(3).innerHTML = staffMember.user.email;
-        row.insertCell(4).innerHTML = staffMember.user.telNo;
-        row.insertCell(5).innerHTML = staffMember.user.role;
-        row.insertCell(6).innerHTML = staffMember.station;
-        row.insertCell(7).append(editButton, deleteButton);
-
-    });
+        let data = await customFetch(endpoint, {credentials: "include"});
+    
+        data.forEach(staffMember => {
+            let editButton = document.createElement("button");
+            editButton.classList.add("edit-button");
+            editButton.innerHTML = "<i class='fas fa-edit'></i>";
+            editButton.setAttribute("staffMember", JSON.stringify(staffMember));
+            editButton.onclick = editStaff;
+    
+            let deleteButton = document.createElement("button");
+            deleteButton.classList.add("delete-button");
+            deleteButton.innerHTML = "<i class='fas fa-trash-alt'></i>";
+    
+            let row = document.getElementById("staff_table").insertRow(-1);
+            row.insertCell(0).innerHTML = staffMember.staffId;
+            row.insertCell(1).innerHTML = staffMember.user.fName + " " + staffMember.user.lName;
+            row.insertCell(2).innerHTML = staffMember.user.username;
+            row.insertCell(3).innerHTML = staffMember.user.email;
+            row.insertCell(4).innerHTML = staffMember.user.telNo;
+            row.insertCell(5).innerHTML = staffMember.user.role;
+            row.insertCell(6).innerHTML = staffMember.station;
+            row.insertCell(7).append(editButton, deleteButton);
+    
+        });
+    } catch(error) {
+        if (error=="login-redirected")
+            localStorage.setItem("last_url", window.location.pathname);
+    }
 });
 
 
@@ -89,7 +95,11 @@ function updateStaff() {
 
 
     customFetch(endpoint, params)
-        .then(() => window.location.reload());
+        .then(() => window.location.reload())
+        .catch ((error) => {
+            if (error=="login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
+        });
 
 
     console.log(staffMember);
@@ -146,7 +156,11 @@ function addStaff() {
     };
 
     customFetch(endpoint, params)
-        .then(()=> window.location.reload());
+        .then(()=> window.location.reload())
+        .catch((error) => {
+            if (error=="login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
+        });
 
     console.log(train);
 

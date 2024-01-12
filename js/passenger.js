@@ -9,22 +9,29 @@ async function getSchedules() {
     console.log(schParams);
 
     let urlQuery = endpoint+`?json=${encodeURIComponent(JSON.stringify(schParams))}`;
-    let schedules = await customFetch(urlQuery, {credentials : "include"}, false);
 
-    schedules.forEach(sch => {
-        let viewButton = document.createElement("button");
-        viewButton.classList.add("view-button");
-        viewButton.innerHTML = "View <i class='fa-regular fa-eye'>";
-        viewButton.onclick = function() {window.location.href = `/html/passenger/traintimes.html?scheduleId=${sch.scheduleId}&date=${schParams.date}`};
+    try {
 
-        let row = document.getElementById("schedule_table").insertRow(-1);
-        row.insertCell(0).innerHTML = sch.scheduleId;
-        row.insertCell(1).innerHTML = sch.trainId;
-        row.insertCell(2).innerHTML = sch.startStation;
-        row.insertCell(3).innerHTML = sch.endStation;
-        row.insertCell(4).innerHTML = sch.trainType;
-        row.insertCell(5).appendChild(viewButton);
-    });
+        let schedules = await customFetch(urlQuery, {}, false);
+        
+        schedules.forEach(sch => {
+            let viewButton = document.createElement("button");
+            viewButton.classList.add("view-button");
+            viewButton.innerHTML = "View <i class='fa-regular fa-eye'>";
+            viewButton.onclick = function() {window.location.href = `/html/passenger/traintimes.html?scheduleId=${sch.scheduleId}&date=${schParams.date}`};
+            
+            let row = document.getElementById("schedule_table").insertRow(-1);
+            row.insertCell(0).innerHTML = sch.scheduleId;
+            row.insertCell(1).innerHTML = sch.trainId;
+            row.insertCell(2).innerHTML = sch.startStation;
+            row.insertCell(3).innerHTML = sch.endStation;
+            row.insertCell(4).innerHTML = sch.trainType;
+            row.insertCell(5).appendChild(viewButton);
+        });
+    } catch(error) {
+        if (error=="login-redirected")
+            localStorage.setItem("last_url", window.location.pathname);
+    }
 }
 
 
@@ -42,8 +49,14 @@ async function getSchedule() {
         params.date = date;
 
         let urlQuery = endpoint+`?json=${encodeURIComponent(JSON.stringify(params))}`;
-        let data = await customFetch(urlQuery, {credentials:"include"}, false);
-        createStoppingStations(data, "journey");
+
+        try {
+            let data = await customFetch(urlQuery, {credentials:"include"}, false);
+            createStoppingStations(data, "journey");
+        } catch(error) {
+            if (error=="login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
+        }
     }
 
     else {
@@ -51,8 +64,14 @@ async function getSchedule() {
         params.date = date;
 
         let urlQuery = endpoint+`?json=${encodeURIComponent(JSON.stringify(params))}`;
-        let data = await customFetch(urlQuery, {credentials:"include"}, false);
-        createStoppingStations(data, "");
+
+        try {
+            let data = await customFetch(urlQuery, {credentials:"include"}, false);
+            createStoppingStations(data, "");
+        } catch(error) {
+            if (error=="login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
+        }
     }
 
 }
