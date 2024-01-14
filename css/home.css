@@ -207,10 +207,7 @@ nav ul li:hover ul.dropdown{
   }
 /* mobile */
   @media only screen and (max-width: 1250px) {
-    body {
-      background-color: lightblue;
-
-    }
+   
     /* menu button instead of navbar elements */
     
     nav ul{
@@ -218,4 +215,9 @@ nav ul li:hover ul.dropdown{
         margin-right: 20px;
         display: none;
     }
+  }
+
+  input:focus {
+    outline: none;
+    border-bottom: 1.5px solid var(--secondary-color);
   }

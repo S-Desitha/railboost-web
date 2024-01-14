@@ -43,7 +43,10 @@
     padding: 7px 0;
     margin: 15px 0;
   }
-  
+  input:focus {
+    outline: none;
+    border-bottom: 1.5px solid var(--secondary-color);
+  }
   input::placeholder {
     color: #6e6b6b;
   }

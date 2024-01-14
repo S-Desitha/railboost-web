@@ -20,7 +20,8 @@
 
 .train-container.train-table{
     width: 50vw;
-    overflow: overlay;
+    overflow-x: hidden;
+    overflow-y: overlay;
 }
 
 .add-train-heading {
@@ -105,7 +106,13 @@
     width: 20vw;
     font-size: 20px;
   }
-
+.form-button.table{
+    
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+  
+}
 .form-button:hover{
     background-color: var(--secondary-color); 
   }
@@ -215,7 +222,11 @@ thead th:hover {
     color:var(--secondary-color);
 }
 
-
+/* change a href color to none */
+a {
+    text-decoration: none;
+    color: white;
+}
 thead th.active,tbody td.active {
     color: var(--secondary-color);
 }
