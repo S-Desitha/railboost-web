@@ -1,0 +1,223 @@
+
+@import url('https://fonts.cdnfonts.com/css/cocogoose');
+
+.header-logo {
+    position: fixed;
+    width: 55px;
+    height: auto;
+    margin-left: 10px;
+    margin-top: 10px;
+    position: absolute;
+    
+}
+
+.admin-header {
+    padding: 20px; /* Padding around the text */
+    text-align: center; /* Center the text */
+}
+
+
+label.logo-text{
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    padding-left: 70px;
+    font-weight: bold;
+    font-family: 'COCOGOOSE', sans-serif;
+    text-align: center;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: .3s;
+    cursor: pointer;
+ }
+
+ a{
+    text-decoration: none;
+    cursor: pointer;
+ }
+
+.navbar{
+    background-color: var(--theme-color);
+    justify-content: center;
+    height: 80px;
+    width: 100%;
+    
+}
+nav ul{
+    float: right;
+    margin-right: 20px;
+}
+
+nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 20px;
+}
+nav ul li a {
+    color: #fff;
+    font-size: 20px;
+    padding: 7px 13px;  
+    border: radius 3px;
+    text-decoration: none; 
+
+}
+nav ul li a:hover{
+    background-color: var(--secondary-color);
+    transition: .1s;
+}
+
+nav ul li ul.dropdown {
+    width: 280px;
+    background: var(--theme-color);
+    border: 1px solid #fff;
+    position: absolute;
+    display: none;
+}
+
+nav ul li ul.dropdown li a {
+    font-size: 14px; 
+    display: block;
+    text-align: center;
+    justify-content: center;
+    border-bottom: 1px #fff;
+    background-color: var(--theme-color);
+    border-radius: 10px;
+    height: 40px; 
+    line-height: 40px;
+    padding: 1px 10px; 
+}
+
+nav ul li ul.dropdown li a:hover {
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
+nav ul li:hover ul.dropdown{
+    display: block;
+    
+}
+.navbar ul li a.no-hover:hover {
+    background-color: transparent !important;
+}
+.nav-button{
+    font-size: 20px;
+    padding: 6px 25px;
+    background-color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all .3s ease 0s;
+}
+
+.nav-button:hover{
+    background-color: var(--secondary-color);
+    color: white;
+    transition: all .3s ease 0s;
+    border-radius: 100px;
+}
+
+.box-container {
+
+    display: flex; 
+    min-height: 80vh;
+    margin-top: 2%;
+    margin-left: 150px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 20px;
+    grid-column-gap: 0px;
+    padding: 50px 50px;
+
+}
+
+.box {
+    width: 250px; 
+    height: 200px;
+    color:black; ;
+    border: 1px solid #ccc;
+    padding: 25px;
+    grid-column-gap: 10px;
+    text-align: center;
+    flex: 1; 
+    cursor: pointer;
+    text-decoration: none; 
+}
+.box:hover {
+    
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    background-color: var(--theme-color);
+    color: white;
+    transition: 0.3s;
+}
+
+.box i {
+    color: black;
+    font-size: 48px; 
+    margin-bottom: 10px; 
+}
+
+
+.bell-notification {
+    color: #fff;
+    position: relative;
+
+    transform-origin: top;
+  }
+  
+  
+  .fa-bell {
+    align-self: center;
+    justify-self: center;
+    top: 200px;
+    font-size: 30px;
+  }
+  .fa-bell:hover  {
+    animation: swing 0.5s ease infinite;  
+  }
+  @keyframes swing {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+    100% {
+        transform: rotate(-10deg);
+    }
+}
+  .bell-notification::after {
+    content: attr(current-count);
+    position: absolute;
+    top: 21%;
+    right: 20%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color:red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    border: 3px solid var(--theme-color);
+    transition: transform 0.3s;
+  }
+/* mobile */
+  @media only screen and (max-width: 1250px) {
+   
+    /* menu button instead of navbar elements */
+    
+    nav ul{
+        float: right;
+        margin-right: 20px;
+        display: none;
+    }
+  }
+
+  input:focus {
+    outline: none;
+    border-bottom: 1.5px solid var(--secondary-color);
+  }

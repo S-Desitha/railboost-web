@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/passSch.css">
+    <script src="/js/script.js"></script>
+    <script src="/js/passenger.js"></script>
+	<!-- <script src="/js/train.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Train Schedule Management</title>
+</head>
+<body> 
+    <nav class="navbar" >
+        <script>createNavBar("passenger")</script>
+    </nav>
+
+				<div class="train-container train-table">
+            		<div class="train-left">
+
+						<section class="table_header">
+							<h1>Train Schedule Details</h1>
+                            <div class="input-group">
+                                <input type="search" placeholder="Search Train Schedule...">
+                                <img src="/Images/search.png" alt="">
+                            </div>
+						</section>
+
+						<section class="table_body">
+
+							<table>
+							<thead>
+								<tr>
+                                    <th>Schedule ID</th>
+									<th>Train ID</th>
+									<th>Start Station</th>
+                                    <th>End Station</th>
+                                    <th>Train Type</th>
+                                    <th>Stopping Stations</th>
+
+								</tr>
+							</thead>
+							<tbody id="schedule_table">
+                                <script>getSchedules()</script>
+                            </tbody>
+						</section>
+						</table>
+					</div>
+				</div>
+				
+</body>

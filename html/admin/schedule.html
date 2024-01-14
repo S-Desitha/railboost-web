@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<script src="/js/auth.js"></script>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/passSch.css"> 
+    <script src="/js/script.js"></script>
+	<script src="/js/schedule.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Train Schedule Management</title>
+</head>
+<body> 
+	<nav class="navbar" >
+		<script>createNavBar("admin")</script>
+	</nav>
+
+	<div class="train-container train-table">
+		<div class="train-left">
+
+			<section class="table_header">
+				<h1>Train Schedule Details</h1>
+				<button type="submit" class="form-button table" > <a href="/html/admin/trainSch.html"> Add a New Train Schedule </a></button>
+			</section>
+
+			<section class="table_body">
+
+				<table>
+				<thead>
+					<tr>
+									<th>Schedule ID</th>
+									<th>Train ID</th>
+									<th>Start Station</th>
+                                    <th>End Station</th>
+                                    <th>Train Type</th>
+                                    <th>Stopping Stations</th>
+									<th>Actions</th>
+
+					</tr>
+				</thead>
+				
+				<tbody id="schedule_table">
+						<!-- <td>
+							<a href=""><button class="edit-button">
+								<i class="fas fa-edit"></i> 
+							</button></a>
+							<a href=""><button class="delete-button">
+								<i class="fas fa-trash"></i>
+							</button></a>
+						</td> -->
+					<!-- </tr> -->
+					
+					
+				</tbody>
+					
+				</tbody>
+			</section>
+			</table>
+		</div>
+	</div>
+				
+				
+</body>

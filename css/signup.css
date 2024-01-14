@@ -1,0 +1,143 @@
+
+
+
+.signup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+  }
+  
+#email-error{
+  text-align: left;
+  top: 100%;
+  left: 2px;
+  font-size: 14px;
+  font-weight: 400;
+  color: red;
+}
+
+#password-error{
+  text-align: left;
+  top: 100%;
+  left: 2px;
+  font-size: 14px;
+  font-weight: 400;
+  color: red;
+} 
+#spassword-error{
+  
+  text-align: left;
+  justify-content: center;
+  top: 50%;
+  left: 2px;
+  font-size: 14px;
+  font-weight: 400;
+  color: red;
+} 
+input {
+    border: none;
+    border-bottom: 1px solid #a9a9a9;
+    color: #484848;
+    padding: 5px 0;
+    margin: 15px 0;
+  }
+/*highlight only the border bottom of the input filed by stying the focus*/
+input:focus {
+  outline: none;
+  border-bottom: 1.5px solid var(--secondary-color);
+}
+
+
+
+  
+input::placeholder {
+    color: #a9a9a9;
+  }
+
+#gender {
+	width: 25rem;
+	height: 2.5rem;
+	border: none;
+	border-bottom: 1px solid #a9a9a9;
+	color: #a9a9a9;
+	padding: 7px 0;
+	margin: 20px 0;}
+  .input-control.success input {
+    border-color: #09c372;
+}
+
+#dob{
+    color: #a9a9a9; 
+    }
+
+#dob::before {
+    content: "Date of Birth:  "; 
+    color: #a9a9a9;
+    
+  }
+ .signup-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    flex-wrap: wrap;
+ } 
+.signup-form input {
+    width: 25rem;
+  }
+
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 510px;
+}
+
+  
+  
+.signup-left {
+    flex: 1;
+    text-align: left;
+}
+.signup-image {
+  width: 300%;
+  overflow: hidden;
+}
+
+.signup-right {
+margin-top: 10px;
+  flex: 3;
+  text-align: center;
+}
+
+.form-button {
+    color: var(--text-color);
+    background-color: var(--theme-color);
+    border-radius: 6px;
+    border: none;
+    padding: 10px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    width: 25rem;
+    margin-top: 30px;
+    font-size: 20px;
+  }
+  
+.form-button:hover{
+    background-color: var(--secondary-color); 
+  }
+  
+.form-links a {
+    text-decoration: none;
+    color: var(--secondary-text-color); 
+  }
+
+.logo {
+    width: 15%; 
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+

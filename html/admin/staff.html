@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/script.js"></script>
+	<script src="/js/auth.js"></script>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/staff.css">
+	<script src="/js/staff.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Staff Management</title>
+</head>
+<body> 
+	<nav class="navbar" >
+		<script>createNavBar("admin")</script>
+	</nav>
+            </nav>
+
+			<main class="table">
+
+				<div class="staff-container">
+            		<div class="staff-left">
+
+						<section class="table_header">
+							<h1>Staff Details</h1>
+							<div class="input-group">
+                                <input type="search" placeholder="Search Staff...">
+                                <img src="/Images/search.png" alt="">
+                            </div>
+						</section>
+
+						<section class="table_body">
+
+							<table id="staff_table">
+							<thead>
+								<tr>
+									<th>Staff ID</th>
+									<th>Name</th>
+									<th>Username</th>
+									<th>Email</th>
+									<th>Telephone Number</th>
+									<th>Role</th>
+									<th>Railway Station</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</section>
+						</table>
+					</div>
+				
+					<div class="staff-right">
+						<div class="staff-form">
+							
+							<form onsubmit="return false" id="staff_form">
+								<h2 class="add-staff-heading" id="add-staff-heading">Add a new staff member</h2>
+								<label for="staffId"></label>
+								<input type="text" id="staffId" placeholder="Staff ID:" name="staffId" required><br>
+
+								<label for="fName"></label>
+								<input type="text" id="fName" name="name" placeholder="First Name:" required><br>
+						
+								<label for="lName"></label>
+								<input type="text" id="lName" name="name" placeholder="Last Name:" required><br>
+
+								<label for="role"></label>
+								<!-- <select id="role" name="role"  onchange="updateUsername()" required> -->
+									<select id="role" name="role" required>	
+									<option value="" disabled selected>Role</option>
+									<option value="SM">Station Master</option>
+									<option value="TCO">Ticket Checking Officer</option>
+								</select><br>
+						
+								<label for="railwayStation"></label>
+								<input type="text" id="railwayStation" placeholder="Railway Station:" name="railwayStation" required><br>
+						
+								
+									<label id="email-label"></label>
+									<input type="email" spellcheck="false" id="email-field" onkeyup="validateEmail()" name="email" placeholder="Email" required><br />
+									<span id="email-error"></span> 
+								 
+								 
+								<label for="telephone"></label>
+								<input type="tel" name="telephone" id="phone-field" onkeyup="validatePhone()"placeholder="Telephone Number:" required><br>
+								<span id="phone-error"></span>
+								
+								<label for="username"></label>
+								<input type="text" id="username" name="username" placeholder="Username:"readonly><br>
+						
+								<button type="submit" class="form-button" id="add-staff-button" onclick="addStaff()">Add Staff Member</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</main>	
+</body>

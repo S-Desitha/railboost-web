@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment method</title>
+    <link rel="stylesheet" href="/css/style_payment_method.css">
+</head>
+<body>
+    <div class="payment_method">
+        <div class="tital">
+            <h4>select a <span id="payment">Payment</span> method </h4>
+        </div>
+
+        <form action="#">
+            <div class="category">
+                <input type="radio" name="payment" id="visa">
+                <label for="visa">
+                    <div class="imgName">
+                        <div class="imgContainer">
+                            <img src="Images/visa.png" alt="">
+                        </div>
+                        <span>VISA</span>
+                    </div>
+                    <span class="radio" style="color: var(--theme-color);"></span>
+                </label>
+
+                <input type="radio" name="payment" id="master">
+                <label for="master">
+                    <div class="imgName">
+                        <div class="imgContainer">
+                            <img src="Images/mcCard.png" alt="">
+                        </div>
+                        <span>Master Card</span>
+                    </div>
+                    <span class="radio" style="color: var(--theme-color);"></span>
+                </label>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

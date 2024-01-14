@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/js/auth.js"></script>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/train.css">
+    <script src="/js/script.js"></script>
+	<script src="/js/train.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Train Management</title>
+</head>
+<body> 
+	<nav class="navbar" >
+		<script>createNavBar("admin")</script>
+	</nav>	
+
+			<main class="table">
+
+				<div class="train-container">
+            		<div class="train-left">
+
+						<section class="table_header">
+							<h1>Train Details</h1>
+                            <div class="input-group">
+                                <input type="search" placeholder="Search Trains...">
+                                <img src="/Images/search.png" alt="">
+                            </div>
+						</section>
+
+						<section class="table_body">
+
+							<table>
+							<thead>
+								<tr>
+									<th>Train ID</th>
+									<th>Train type</th>
+                                    <th>Number of compartments</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody id="train_table">
+								<!-- <tr>
+									<td>8097</td>
+									<td>Class M11</td>
+                                    <td>20</td>
+									<td>
+										<a href=""><button class="edit-button">
+											<i class="fas fa-edit"></i> 
+										</button></a>
+										<a href=""><button class="delete-button">
+											<i class="fas fa-trash"></i>
+										</button></a>
+									</td>
+								</tr>
+								<tr>
+									<td>8097</td>
+									<td>Class M11</td>
+                                    <td>20</td>
+									<td>
+										<a href=""><button class="edit-button">
+
+											<i class="fas fa-edit"></i> 
+
+										</button></a>
+										<a href=""><button class="delete-button">
+											<i class="fas fa-trash"></i> 
+										</button></a>
+									</td>
+								</tr>
+								<tr>
+									<td>8097</td>
+									<td>Class M11</td>
+                                    <td>20</td>
+									<td>
+										<a href=""><button class="edit-button">
+
+											<i class="fas fa-edit"></i> 
+
+										</button></a>
+										<a href=""><button class="delete-button">
+											<i class="fas fa-trash"></i> 
+										</button></a>
+									</td>
+								</tr>
+								<tr>
+									<td>8097</td>
+									<td>Class M11</td>
+                                    <td>20</td>
+									<td>
+										<a href=""><button class="edit-button">
+
+											<i class="fas fa-edit"></i> 
+
+										</button></a>
+										<a href=""><button class="delete-button">
+											<i class="fas fa-trash"></i> 
+										</button></a>
+									</td>
+								</tr>
+								<tr>
+									<td>8097</td>
+									<td>Class M11</td>
+                                    <td>20</td>
+									<td>
+										<a href=""><button class="edit-button">
+											<i class="fas fa-edit"></i> 
+										</button></a>
+										<a href=""><button class="delete-button">
+											<i class="fas fa-trash"></i> 
+										</button></a>
+									</td>
+								</tr> -->
+								
+								
+							</tbody>
+						</section>
+						</table>
+					</div>
+				
+					<div class="train-right">
+						<div class="train-form">
+							
+							<form onsubmit="return false">
+								<h2 class="add-train-heading" id="add-new-train-header">Add a new train </h2>
+								<label for="trainId"></label>
+								<input type="text" id="trainId" placeholder="Train ID:" name="trainId" required><br>
+
+								<label for="train-type"></label>
+								<input type="text" id="trainType" name="name" placeholder="Train Type:" required><br>
+						
+
+						
+								<label for="no-of compartments"></label>
+
+								<input type="text" id="nCompartments" placeholder="Number of Compartements" name="compartments" required><br>
+						
+                <span id="compartments-error"></span>
+								<button class="form-button" id="add-new-train-button" onclick="addNewTrain()">Add a new train </button>
+
+							</form>
+						</div>
+				
+					</div>
+				</div>
+			</main>	
+</body>

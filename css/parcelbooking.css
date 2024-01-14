@@ -1,0 +1,110 @@
+input {
+    border: none;
+    border-bottom: 1px solid #a9a9a9;
+    color: #484848;
+    padding: 7px 0;
+    margin: 15px 0;
+  }
+
+  input::placeholder {
+    color: #6e6b6b;
+  }
+.form_header{
+    width: 100%;
+    height: 10%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.booking_form{
+    flex: 1; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+}
+
+.form{
+    margin-top: 5%;
+    width: 100%; 
+   
+}
+.form_left{
+    width: 50%;
+    float:left;
+    
+    
+    
+  
+}
+
+.form_right{
+    width: 50%;
+    float:right;
+    border-left: 2px solid #484848;
+    height: 500px;
+}
+h2{
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+	margin-bottom: 15px;
+	text-align: left;
+	margin-top: 20px;
+}
+
+.addressbox{
+  height: 10em;
+
+}
+
+.form_button{
+    color: var(--text-color);
+    background-color: var(--theme-color);
+    border-radius: 6px;
+    border: none;
+    padding: 10px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    width: 20rem;
+    margin-top: 20%;
+    font-size: 20px;
+}
+input, label {
+    margin: 5px 5px;
+  }
+  
+  .form-group {
+    margin: 30px auto;
+    width: 450px;
+  }
+  
+  .form-control {
+    float: left;
+  }
+  
+  #inputStreet {
+    width: 100%;
+  }
+  
+  #inputCity {
+    width: 50%;
+  }
+  
+  #inputState {
+    width: 15%;
+  }
+  
+  #inputZip {
+    width: 28%;
+  }
+  
+  #inputCounty {
+    width: 45%;
+  }
+  
+  #inputCountry {
+    width: 50%;
+  }
