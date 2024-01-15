@@ -126,7 +126,7 @@ function updateUsername() {
     document.getElementById('username').value = username;
     
 }
-updateUsername();
+
 
 
 function addStaff() {

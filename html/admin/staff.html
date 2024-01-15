@@ -57,17 +57,17 @@
 							<form onsubmit="return false" id="staff_form">
 								<h2 class="add-staff-heading" id="add-staff-heading">Add a new staff member</h2>
 								<label for="staffId"></label>
-								<input type="text" id="staffId" placeholder="Staff ID:" name="staffId" required><br>
+								<input type="text" id="staffId" placeholder="Staff ID:" name="staffId" onchange="updateUsername()" required><br>
 
 								<label for="fName"></label>
-								<input type="text" id="fName" name="name" placeholder="First Name:" required><br>
+								<input type="text" id="fName" name="name" placeholder="First Name:" onchange="updateUsername()"required><br>
 						
 								<label for="lName"></label>
-								<input type="text" id="lName" name="name" placeholder="Last Name:" required><br>
+								<input type="text" id="lName" name="name" placeholder="Last Name:" onchange="updateUsername()"required><br>
 
 								<label for="role"></label>
 								<!-- <select id="role" name="role"  onchange="updateUsername()" required> -->
-									<select id="role" name="role" required>	
+									<select id="role" name="role" onchange="updateUsername()" required>	
 									<option value="" disabled selected>Role</option>
 									<option value="SM">Station Master</option>
 									<option value="TCO">Ticket Checking Officer</option>
