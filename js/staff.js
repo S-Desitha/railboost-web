@@ -1,7 +1,7 @@
 // const url = "http://localhost:8080/railboost_backend_war_exploded/staff";
 const endpoint = "staff";
 
-
+console.log("Hello from staff.js");
 document.addEventListener("DOMContentLoaded", async function() {
     document.getElementById("staff_form").reset();
 
@@ -110,21 +110,23 @@ function updateStaff() {
 
 
 function updateUsername() {
+    
     const staffId = document.getElementById('staffId').value;
     const firstname = document.getElementById('fName').value;
     const lastname = document.getElementById('lName').value;
     const role = document.getElementById('role').value;
-    const railwayStation = document.getElementById('railwayStation').value;
+    // const railwayStation = document.getElementById('railwayStation').value;
 
-   
+    
     const lastInitial = lastname.charAt(0).toUpperCase();
 
     const usernamePrefix = role; // Use the selected role as the username prefix
 
-    const username = usernamePrefix + staffId + firstname + lastInitial + railwayStation;
+    const username = usernamePrefix + staffId + firstname + lastInitial ;
     document.getElementById('username').value = username;
+    
 }
-
+updateUsername();
 
 
 function addStaff() {
