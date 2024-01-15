@@ -219,3 +219,8 @@ nav ul li:hover ul.dropdown{
         display: none;
     }
   }
+
+  input:focus {
+    outline: none;
+    border-bottom: 1.5px solid var(--secondary-color);
+  }

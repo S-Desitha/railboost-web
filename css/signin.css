@@ -14,7 +14,12 @@
     padding: 7px 0;
     margin: 20px 0;
   }
-  
+  /*highlight only the border bottom of the input filed by stying the focus*/
+input:focus {
+  outline: none;
+  border-bottom: 1.5px solid var(--theme-color);
+}
+
   input::placeholder {
     color: #a9a9a9;
   }
