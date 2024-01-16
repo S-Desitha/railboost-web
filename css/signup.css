@@ -26,7 +26,7 @@
   color: red;
 } 
 #spassword-error{
-  ;
+  
   text-align: left;
   justify-content: center;
   top: 50%;
@@ -42,6 +42,14 @@ input {
     padding: 5px 0;
     margin: 15px 0;
   }
+/*highlight only the border bottom of the input filed by stying the focus*/
+input:focus {
+  outline: none;
+  border-bottom: 1.5px solid var(--secondary-color);
+}
+
+
+
   
 input::placeholder {
     color: #a9a9a9;

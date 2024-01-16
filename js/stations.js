@@ -1,17 +1,12 @@
+console.log("Hello");
 const url = "http://localhost:8080/railboost_backend_war_exploded/stations";
 const endpoint = "stations";
 
 const wrappers = document.querySelectorAll(".wrapper");
 
 //update date with current date as default
-function getCurrentDate() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = (now.getMonth() + 1).toString().padStart(2, '0');
-    const day = now.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
-}
-document.getElementById('date').value = getCurrentDate();
+
+
 
 // let stations = ["Colombo Fort", "Maradana", "Dematagoda", "Kelaniya", "Wanawasala", "Hunupitiya", "Ederamulla", "Horape", "Ragama Junction", "Walpola", "Batuwaththa", "Bulugahagoda", "Ganemulla", "Yagoda", "Gampaha", "Daraluwa", "Bemmulla", "Magalegoda", "Heendeniya Pattiyagoda",
 //  "Veyangoda", "Wadurawa", "Keenawala", "Pallewela", "Ganegoda", "Wijaya Rajadahana", "Meerigama", "Wilwatta", "Botale", "Ambepussa", "Yaththalgoda", "Bujjomuwa", "Alawwa", "Walakumbura", "Polgahawela Junction", "Panaliya", "Tismalpola", "Korossa", "Yatagama", "Rambukkana", "Kadigamuwa",
@@ -26,6 +21,7 @@ document.getElementById('date').value = getCurrentDate();
 
 let stations;
 getStations();
+console.log("Hi");
 
 
 
@@ -98,12 +94,15 @@ function createList() {
 
     selectBtn.addEventListener("click", () => wrapper.classList.toggle("active"));
     });
+    
+    
 }
 
 
 
 
 async function getStations() {
+    console.log("Hellow");
     try {
         stations = await customFetch(endpoint, {}, false);
         createList();
