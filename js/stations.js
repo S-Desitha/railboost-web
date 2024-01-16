@@ -1,4 +1,4 @@
-console.log("Hello");
+console.log("Hello from station.js");
 const url = "http://localhost:8080/railboost_backend_war_exploded/stations";
 const endpoint = "stations";
 
@@ -21,7 +21,7 @@ const wrappers = document.querySelectorAll(".wrapper");
 
 let stations;
 getStations();
-console.log("Hi");
+
 
 
 

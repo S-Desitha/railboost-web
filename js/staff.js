@@ -1,5 +1,5 @@
 // const url = "http://localhost:8080/railboost_backend_war_exploded/staff";
-const endpoint = "staff";
+const endpoint2 = "staff";
 
 console.log("Hello from staff.js");
 document.addEventListener("DOMContentLoaded", async function() {
@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     try {
 
-        let data = await customFetch(endpoint, {credentials: "include"});
+        let data = await customFetch(endpoint2, {credentials: "include"});
     
         data.forEach(staffMember => {
             let editButton = document.createElement("button");
@@ -94,7 +94,7 @@ function updateStaff() {
     };
 
 
-    customFetch(endpoint, params)
+    customFetch(endpoint2, params)
         .then(() => window.location.reload())
         .catch ((error) => {
             if (error=="login-redirected")
@@ -157,7 +157,7 @@ function addStaff() {
         credentials : "include"
     };
 
-    customFetch(endpoint, params)
+    customFetch(endpoint2, params)
         .then(()=> window.location.reload())
         .catch((error) => {
             if (error=="login-redirected")
