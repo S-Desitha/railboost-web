@@ -25,6 +25,15 @@ async function customFetch(endpoint, options, sendJWT) {
                 return Promise.reject("login-redirected");
             }
         }
+        else if (resp.status==400) {
+            let data = await resp.json();
+            let error_msg = data.detailMessage;
+            if (error_msg=="signup-expired"){
+                window.alert("You signup session has expired. Please contact administrator and signup again.");
+            }
+            window.location.href="/index.html";
+            return Promise.reject(data.detailMessage);
+        }
         return {
             isSuccessful: false,
             status: resp.status
