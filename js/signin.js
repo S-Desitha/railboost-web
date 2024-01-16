@@ -18,12 +18,12 @@ async function login(formData) {
     };
 
     let response = await customFetch(endpoint, params);
-    processResp(response);
+    processLoginResp(response);
     
 }
 
 
-async function processResp(response) {
+async function processLoginResp(response) {
     console.log(response)
     if (response["isSuccessful"]==true){
         localStorage.setItem("access_token", response.jwt);
