@@ -51,7 +51,7 @@ async function getSchedule() {
         let urlQuery = endpoint+`?json=${encodeURIComponent(JSON.stringify(params))}`;
 
         try {
-            let data = await customFetch(urlQuery, {credentials:"include"}, false);
+            let data = await customFetch(urlQuery, {}, false);
             createStoppingStations(data, "journey");
         } catch(error) {
             if (error=="login-redirected")
@@ -66,7 +66,7 @@ async function getSchedule() {
         let urlQuery = endpoint+`?json=${encodeURIComponent(JSON.stringify(params))}`;
 
         try {
-            let data = await customFetch(urlQuery, {credentials:"include"}, false);
+            let data = await customFetch(urlQuery, {}, false);
             createStoppingStations(data, "");
         } catch(error) {
             if (error=="login-redirected")

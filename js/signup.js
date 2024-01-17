@@ -83,8 +83,7 @@ function signUp() {
             "Content-type": "application/json; charset=UTF-8"
         },
         body : JSON.stringify(body),
-        method : "POST",
-        credentials : "include"
+        method : "POST"
     };
 
     // fetch(url, params)

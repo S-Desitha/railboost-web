@@ -137,8 +137,7 @@ function deleteTrain() {
         "Content-type": "application/json; charset=UTF-8"
       },
       body: JSON.stringify(body),
-      method: "DELETE",
-      credentials: "include"
+      method: "DELETE"
     };
 
     fetch(url, params)
@@ -165,8 +164,7 @@ function addNewTrain() {
       "Content-type": "application/json; charset=UTF-8"
     },
     body: JSON.stringify(body),
-    method: "POST",
-    credentials: "include"
+    method: "POST"
   };
 
   fetch(url, params)
@@ -194,8 +192,7 @@ function updateTrain() {
       "Content-type": "application/json; charset=UTF-8"
     },
     body: JSON.stringify(body),
-    method: "PUT",
-    credentials: "include"
+    method: "PUT"
   };
 
   fetch(url, params)

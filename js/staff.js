@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     try {
 
-        let data = await customFetch(endpoint, {credentials: "include"});
+        let data = await customFetch(endpoint, {});
     
         data.forEach(staffMember => {
             let editButton = document.createElement("button");
@@ -89,8 +89,7 @@ function updateStaff() {
             "Content-type": "application/json; charset=UTF-8"
         },
         body : JSON.stringify(body),
-        method : "PUT",
-        credentials : "include"
+        method : "PUT"
     };
 
 
@@ -153,8 +152,7 @@ function addStaff() {
             "Content-type": "application/json; charset=UTF-8"
         },
         body : JSON.stringify(body),
-        method : "POST",
-        credentials : "include"
+        method : "POST"
     };
 
     customFetch(endpoint, params)

@@ -16,7 +16,7 @@ async function authorize(pageUrl){
     resource = pageUrl.split("/")[2]
     if (resource=="admin" || resource=="sm" || resource=="tco") {
         try {
-            let data = await customFetch(endpoint, {credentials : "include"})
+            let data = await customFetch(endpoint, {})
             console.log(data);
             manageAccess(data, resource);
         } catch(error) {
