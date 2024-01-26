@@ -29,7 +29,7 @@
 							<h1>Staff Details</h1>
 							<div class="input-group">
                                 <input type="search" placeholder="Search Staff...">
-                                <img src="/Images/filter.png" class="filter" alt="" onclick="openFilterBox()">
+                                <img src="/Images/filter.png" class="filter" alt="" onclick="toggleFilterBox()">
 								<img src="/Images/search.png" alt="">
 								
                             </div>
@@ -53,14 +53,20 @@
 							</div>
 						
 							<!-- Filter by Role Dropdown -->
-							<div class="wrapper">
-								<label for="role2"></label>
-								<select id="role2" name="role">
-									<option value="">Role</option>
-									<option value="role1">Station Master</option>
-									<option value="role2">Ticket Checking Officer</option>
-									<!-- Add more options as needed -->
-								</select>
+							<div class="wrapper" id="roles">
+								<div class="select-btn">
+									<span>Role</span>
+									<i class="uil uil-angle-down"></i>
+								</div>
+								<div class="content">
+									<div class="search">
+										<i class="uil uil-search"></i>
+										<input spellcheck="false" type="text" placeholder="Search">
+									</div>
+									<ul class="role-options">
+										<!-- Add options dynamically, if needed -->
+									</ul>
+								</div>
 							</div>
 						
 							<button onclick="applyFilters()">Filter</button>

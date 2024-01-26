@@ -271,7 +271,7 @@ thead th.active,tbody td.active {
     display: flex;
     /* font-size: 18px; */
     cursor: pointer;
-    background: #fff;
+    /* background: #fff; */
     border-radius: 7px;
     align-items: center;
     justify-content: space-between;
@@ -364,6 +364,7 @@ thead th.active,tbody td.active {
     width: 20px;
     height: 20px;
     margin-right: 10px;
+    cursor: pointer;
   }
 
   .filter-box {
@@ -376,14 +377,16 @@ thead th.active,tbody td.active {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.filter-box label {
+.filter-box label{
     display: block;
     margin-bottom: 5px;
 }
 
 .filter-box button {
-    background-color: #4CAF50;
+    background-color: var(--theme-color);
     color: white;
+    margin-left: 20px;
+    margin-bottom: 12px;
     padding: 8px 10px;
     border: none;
     cursor: pointer;

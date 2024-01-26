@@ -181,24 +181,33 @@ function addStaff() {
     // Hide the message
     document.getElementById('message').style.display = 'none';
 }
-// Add this script to your existing JS file or create a new one (e.g., staff.js)
+function toggleFilterBox() {
+    var filterBox = document.getElementById('filter-box');
+    var filterIcon = document.querySelector('.filter');
+    
+    // Calculate the position of the filter icon
+    var rect = filterIcon.getBoundingClientRect();
+    var top = rect.bottom + window.scrollY;
+    console.log('Apply Filters');
+    
+    // Set the left position to be to the left of the filter icon
+    var right = window.innerWidth - rect.left - window.scrollX;
 
-// Function to open the filter box
-function openFilterBox() {
-    document.getElementById('filterBox').style.display = 'block';
+    filterBox.style.top = top + 12 + 'px';
+    filterBox.style.right = right - 20+  'px';
+    filterBox.style.display = (filterBox.style.display === 'block') ? 'none' : 'block';
 }
 
-// Function to close the filter box
-function closeFilterBox() {
-    document.getElementById('filterBox').style.display = 'none';
-}
-
-// Function to apply filters
 function applyFilters() {
-    // Implement logic to apply filters based on user input
-    // You can retrieve filter values using document.getElementById and perform filtering actions
-    // For example, get values from input fields and update the staff table accordingly
-    // Once filters are applied, you can close the filter box if needed
-    closeFilterBox();
-}
+    // Implement the logic to filter by role and railway station
+    // var selectedRole = document.getElementById('filter-role').value;
+    // var selectedStation = document.getElementById('filter-station').value;
 
+    // Perform filtering logic using selectedRole and selectedStation
+    // Update the staff table accordingly
+
+    // After applying filters, hide the filter box
+    
+    var filterBox = document.getElementById('filter-box');
+        filterBox.style.display = 'none';
+}

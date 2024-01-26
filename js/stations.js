@@ -53,19 +53,6 @@ function addStation(selectedStation,  wrapper) {
 
 
 
-function swap() {
-    // Swap station names between "from" and "to" wrappers
-    const fromWrapper = document.getElementById("from");
-    const toWrapper = document.getElementById("to");
-
-    const temp = fromWrapper.value;
-    fromWrapper.value = toWrapper.value;
-    toWrapper.value = temp;
-
-    // Update the station names in the wrappers
-    updateNames();
-}
-
 
 
 
