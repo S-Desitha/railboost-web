@@ -1,4 +1,4 @@
-console.log("Hello");
+console.log("Hello from station.js");
 const url = "http://localhost:8080/railboost_backend_war_exploded/stations";
 const endpoint = "stations";
 
@@ -21,7 +21,7 @@ const wrappers = document.querySelectorAll(".wrapper");
 
 let stations;
 getStations();
-console.log("Hi");
+
 
 
 
@@ -52,19 +52,6 @@ function addStation(selectedStation,  wrapper) {
 }
 
 
-
-function swap() {
-    // Swap station names between "from" and "to" wrappers
-    const fromWrapper = document.getElementById("from");
-    const toWrapper = document.getElementById("to");
-
-    const temp = fromWrapper.value;
-    fromWrapper.value = toWrapper.value;
-    toWrapper.value = temp;
-
-    // Update the station names in the wrappers
-    updateNames();
-}
 
 
 

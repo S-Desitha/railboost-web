@@ -1,5 +1,5 @@
 // const url = "http://localhost:8080/railboost_backend_war_exploded/staff";
-const endpoint = "staff";
+const endpoint2 = "staff";
 
 
 document.addEventListener("DOMContentLoaded", async function() {
@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     try {
 
-        let data = await customFetch(endpoint, {});
+
+        let data = await customFetch(endpoint2, {credentials: "include"});
+
     
         data.forEach(staffMember => {
             let editButton = document.createElement("button");
@@ -93,7 +95,7 @@ function updateStaff() {
     };
 
 
-    customFetch(endpoint, params)
+    customFetch(endpoint2, params)
         .then(() => window.location.reload())
         .catch ((error) => {
             if (error=="login-redirected")
@@ -125,7 +127,7 @@ function updateUsername() {
     document.getElementById('username').value = username;
     
 }
-updateUsername();
+
 
 
 function addStaff() {
@@ -159,7 +161,7 @@ function addStaff() {
         method : "POST"
     };
 
-    customFetch(endpoint, params)
+    customFetch(endpoint2, params)
         .then(()=> window.location.reload())
         .catch((error) => {
             if (error=="login-redirected")
@@ -182,4 +184,34 @@ function addStaff() {
 
     // Hide the message
     document.getElementById('message').style.display = 'none';
+}
+function toggleFilterBox() {
+    var filterBox = document.getElementById('filter-box');
+    var filterIcon = document.querySelector('.filter');
+    
+    // Calculate the position of the filter icon
+    var rect = filterIcon.getBoundingClientRect();
+    var top = rect.bottom + window.scrollY;
+    console.log('Apply Filters');
+    
+    // Set the left position to be to the left of the filter icon
+    var right = window.innerWidth - rect.left - window.scrollX;
+
+    filterBox.style.top = top + 12 + 'px';
+    filterBox.style.right = right - 20+  'px';
+    filterBox.style.display = (filterBox.style.display === 'block') ? 'none' : 'block';
+}
+
+function applyFilters() {
+    // Implement the logic to filter by role and railway station
+    // var selectedRole = document.getElementById('filter-role').value;
+    // var selectedStation = document.getElementById('filter-station').value;
+
+    // Perform filtering logic using selectedRole and selectedStation
+    // Update the staff table accordingly
+
+    // After applying filters, hide the filter box
+    
+    var filterBox = document.getElementById('filter-box');
+        filterBox.style.display = 'none';
 }
