@@ -365,3 +365,26 @@ thead th.active,tbody td.active {
     height: 20px;
     margin-right: 10px;
   }
+
+  .filter-box {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    z-index: 1;
+    padding: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.filter-box label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.filter-box button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 10px;
+    border: none;
+    cursor: pointer;
+}

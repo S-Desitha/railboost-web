@@ -34,47 +34,38 @@
 								
                             </div>
 						</section>
-								<!-- Inside the <body> tag, before the closing </body> tag -->
-						<div class="filter-box" id="filterBox">
-							<div class="filter-header">
-								<h3>Filter Options</h3>
-								<button onclick="closeFilterBox()">Close</button>
-							</div>
-							<div class="filter-content">
-								<!-- Filter by Railway Station -->
-								<p>Filter By: </p>
-								<div class="wrapper" id="from">
-									<div class="select-btn">
-										<span>Railway Station</span>
-										<i class="uil uil-angle-down"></i>
-									</div>
-									<div class="content">
-										<div class="search">
-											<i class="uil uil-search"></i>
-											<input spellcheck="false" type="text" placeholder="Search">
-										</div>
-										<ul class="options">
-											<!-- Add options dynamically, if needed -->
-										</ul>
-									</div>
+								
+						<div class="filter-box" id="filter-box">
+							<div class="wrapper" id="from">
+								<div class="select-btn">
+									<span>Railway Station</span>
+									<i class="uil uil-angle-down"></i>
 								</div>
-
-								<!-- Filter by Role Dropdown -->
-								<div class="wrapper"> 
-									<label for="role2"></label>
-									<select id="role2" name="role">
-										<option value="">Role</option>
-										<option value="role1">Station Master</option>
-										<option value="role2">Ticket Checking Officer</option>
-										<!-- Add more options as needed -->
-									</select>
+								<div class="content">
+									<div class="search">
+										<i class="uil uil-search"></i>
+										<input spellcheck="false" type="text" placeholder="Search">
+									</div>
+									<ul class="options">
+										<!-- Add options dynamically, if needed -->
+									</ul>
 								</div>
-
-								<!-- Add more filter options as needed -->
-
-								<button onclick="applyFilters()">Apply Filters</button>
 							</div>
+						
+							<!-- Filter by Role Dropdown -->
+							<div class="wrapper">
+								<label for="role2"></label>
+								<select id="role2" name="role">
+									<option value="">Role</option>
+									<option value="role1">Station Master</option>
+									<option value="role2">Ticket Checking Officer</option>
+									<!-- Add more options as needed -->
+								</select>
+							</div>
+						
+							<button onclick="applyFilters()">Filter</button>
 						</div>
+						
 
 
 
