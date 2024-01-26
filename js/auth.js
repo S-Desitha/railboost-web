@@ -17,7 +17,6 @@ async function authorize(pageUrl){
     if (resource=="admin" || resource=="sm" || resource=="tco") {
         try {
             let data = await customFetch(endpoint, {})
-            console.log(data);
             manageAccess(data, resource);
         } catch(error) {
             if (error=="login-redirected"){}

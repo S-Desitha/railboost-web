@@ -1,7 +1,7 @@
 // const url = "http://localhost:8080/railboost_backend_war_exploded/staff";
 const endpoint = "staff";
 
-console.log("Hello from staff.js");
+
 document.addEventListener("DOMContentLoaded", async function() {
     document.getElementById("staff_form").reset();
 
@@ -129,19 +129,23 @@ updateUsername();
 
 
 function addStaff() {
-    staffMember = {};
+    staffMember = {
+        user: {}
+    };
 
-    const email = document.getElementById('email').value;
-    const telephone = document.getElementById('telephone').value;
+    const email = document.getElementById('email-field').value;
+    const telephone = document.getElementById('phone-field').value;
     const username = document.getElementById('username').value;
 
     staffMember["staffId"] = document.getElementById('staffId').value;
     staffMember["station"] = document.getElementById('railwayStation').value;
-    staffMember["fName"] = document.getElementById("fName").value;
-    staffMember["lName"] = document.getElementById("lName").value;
-    staffMember["role"] = document.getElementById("role").value;
-    staffMember["email"] = email;
-    staffMember["telNo"] = telephone;
+    staffMember.user["fName"] = document.getElementById("fName").value;
+    staffMember.user["lName"] = document.getElementById("lName").value;
+    staffMember.user["role"] = document.getElementById("role").value;
+    staffMember.user["email"] = email;
+    staffMember.user["telNo"] = telephone;
+    staffMember.user["isStaff"] = true;
+    staffMember.user["username"] = document.getElementById("username").value;
 
     console.log(staffMember);
 
@@ -165,7 +169,7 @@ function addStaff() {
     console.log(train);
 
 
-    alert(`Link to create a password for the Username :${username} has been sent to the email: ${email} and phone number: ${telephone}.`);
+    alert(`Link to create a password for the Username :${username} has been sent to the email: ${email}.`);
     // Clear the form
 
     document.getElementById('staffId').value = '';
