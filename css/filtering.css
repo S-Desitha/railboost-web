@@ -14,7 +14,7 @@
   background: #4285f4;
 }
 
-input {
+input-filter {
   border: none;
   /* border: 1px solid #a9a9a9; */
   color: #000000;
@@ -26,7 +26,6 @@ input {
   padding: 20px 20px;
   margin: 15px 0; 
 }
-
 .header{
   font-size: 15px;
   margin-top: 20px;

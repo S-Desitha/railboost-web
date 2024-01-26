@@ -1,39 +1,40 @@
-const url = "http://localhost:8080/railboost_backend_war_exploded/staff";
+// const url = "http://localhost:8080/railboost_backend_war_exploded/staff";
+const endpoint = "staff";
 
-
-document.addEventListener("DOMContentLoaded", function() {
+console.log("Hello from staff.js");
+document.addEventListener("DOMContentLoaded", async function() {
     document.getElementById("staff_form").reset();
 
-    fetch(url, {credentials : "include"})
-        .then(res => {
-            if(res.ok) {
-                return res.json();
-            }
-        })
-        .then(staff => {
-            staff.forEach(staffMember => {
-                let editButton = document.createElement("button");
-                editButton.classList.add("edit-button");
-                editButton.innerHTML = "<i class='fas fa-edit'></i>";
-                editButton.setAttribute("staffMember", JSON.stringify(staffMember));
-                editButton.onclick = editStaff;
+    try {
 
-                let deleteButton = document.createElement("button");
-                deleteButton.classList.add("delete-button");
-                deleteButton.innerHTML = "<i class='fas fa-trash-alt'></i>";
-
-                let row = document.getElementById("staff_table").insertRow(-1);
-                row.insertCell(0).innerHTML = staffMember.staffId;
-                row.insertCell(1).innerHTML = staffMember.user.fName + " " + staffMember.user.lName;
-                row.insertCell(2).innerHTML = staffMember.user.username;
-                row.insertCell(3).innerHTML = staffMember.user.email;
-                row.insertCell(4).innerHTML = staffMember.user.telNo;
-                row.insertCell(5).innerHTML = staffMember.user.role;
-                row.insertCell(6).innerHTML = staffMember.station;
-                row.insertCell(7).append(editButton, deleteButton);
-
-            });
+        let data = await customFetch(endpoint, {credentials: "include"});
+    
+        data.forEach(staffMember => {
+            let editButton = document.createElement("button");
+            editButton.classList.add("edit-button");
+            editButton.innerHTML = "<i class='fas fa-edit'></i>";
+            editButton.setAttribute("staffMember", JSON.stringify(staffMember));
+            editButton.onclick = editStaff;
+    
+            let deleteButton = document.createElement("button");
+            deleteButton.classList.add("delete-button");
+            deleteButton.innerHTML = "<i class='fas fa-trash-alt'></i>";
+    
+            let row = document.getElementById("staff_table").insertRow(-1);
+            row.insertCell(0).innerHTML = staffMember.staffId;
+            row.insertCell(1).innerHTML = staffMember.user.fName + " " + staffMember.user.lName;
+            row.insertCell(2).innerHTML = staffMember.user.username;
+            row.insertCell(3).innerHTML = staffMember.user.email;
+            row.insertCell(4).innerHTML = staffMember.user.telNo;
+            row.insertCell(5).innerHTML = staffMember.user.role;
+            row.insertCell(6).innerHTML = staffMember.station;
+            row.insertCell(7).append(editButton, deleteButton);
+    
         });
+    } catch(error) {
+        if (error=="login-redirected")
+            localStorage.setItem("last_url", window.location.pathname);
+    }
 });
 
 
@@ -92,12 +93,14 @@ function updateStaff() {
         credentials : "include"
     };
 
-    fetch(url, params)
-    .then(res => {
-        if(res.ok) {
-            window.location.reload();
-        }
-    });
+
+    customFetch(endpoint, params)
+        .then(() => window.location.reload())
+        .catch ((error) => {
+            if (error=="login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
+        });
+
 
     console.log(staffMember);
 }
@@ -107,21 +110,23 @@ function updateStaff() {
 
 
 function updateUsername() {
+    
     const staffId = document.getElementById('staffId').value;
     const firstname = document.getElementById('fName').value;
     const lastname = document.getElementById('lName').value;
     const role = document.getElementById('role').value;
-    const railwayStation = document.getElementById('railwayStation').value;
+    // const railwayStation = document.getElementById('railwayStation').value;
 
-   
+    
     const lastInitial = lastname.charAt(0).toUpperCase();
 
     const usernamePrefix = role; // Use the selected role as the username prefix
 
-    const username = usernamePrefix + staffId + firstname + lastInitial + railwayStation;
+    const username = usernamePrefix + staffId + firstname + lastInitial ;
     document.getElementById('username').value = username;
+    
 }
-
+updateUsername();
 
 
 function addStaff() {
@@ -152,12 +157,12 @@ function addStaff() {
         credentials : "include"
     };
 
-    fetch(url, params)
-    .then(res => {
-        if(res.ok) {
-            window.location.reload();
-        }
-    });
+    customFetch(endpoint, params)
+        .then(()=> window.location.reload())
+        .catch((error) => {
+            if (error=="login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
+        });
 
     console.log(train);
 
