@@ -181,3 +181,24 @@ function addStaff() {
     // Hide the message
     document.getElementById('message').style.display = 'none';
 }
+// Add this script to your existing JS file or create a new one (e.g., staff.js)
+
+// Function to open the filter box
+function openFilterBox() {
+    document.getElementById('filterBox').style.display = 'block';
+}
+
+// Function to close the filter box
+function closeFilterBox() {
+    document.getElementById('filterBox').style.display = 'none';
+}
+
+// Function to apply filters
+function applyFilters() {
+    // Implement logic to apply filters based on user input
+    // You can retrieve filter values using document.getElementById and perform filtering actions
+    // For example, get values from input fields and update the staff table accordingly
+    // Once filters are applied, you can close the filter box if needed
+    closeFilterBox();
+}
+

@@ -103,6 +103,7 @@
     text-align: left;
 	align-items: left;
 	margin-left: 40px;
+	width: calc(100% - 80px);
 }
 
 #SAT::before {

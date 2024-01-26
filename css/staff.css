@@ -3,7 +3,7 @@
     align-items: center;
 	margin-left: 30px;
     gap: 140px;
-    width: 65vw;
+    width: 63vw;
     height: 80vh;
     box-shadow: 0 .4rem .8rem #0005;
     border-radius: .8rem;
@@ -60,6 +60,7 @@
     text-align: left;
 	align-items: center;
 	margin-left: 40px;
+  width: calc(100% - 80px);
 }
 #email-error {
     text-align: left;
@@ -115,7 +116,7 @@
 
 
 .table_body {
-    width: 100%;
+    /* width: 100%; */
     max-height: calc(89% - 1.6rem);
     background-color: #fffb;
     margin: .8rem auto;
@@ -139,15 +140,16 @@
     visibility: visible;
 } */
 
-table {
+/* table {
     width: 100%;
-}
+} */
 
 
 table, th, td {
     border-collapse: collapse;
     padding: 1rem;
     text-align: left;
+    /* width: 200vw; */
 }
 
 thead th {
@@ -250,9 +252,9 @@ thead th.active,tbody td.active {
     /* box radius */
     /* border-radius: 7px; */
     /* make a black border at the bottom */
-    padding-bottom: 7px ;
+    padding: 5px ;
     
-    border-bottom: 1px solid #a9a9a9;
+    border: 1px solid #a9a9a9;
   }
   
   .select-btn, .options li{
@@ -291,6 +293,7 @@ thead th.active,tbody td.active {
     margin-top:10px;
     background: #fff;
     border-radius: 7px;
+    border-color: #000000;
     /* box-shadow: 0 10px 25px rgba(0,0,0,0.1); */
   }
   .wrapper.active .content{
@@ -354,4 +357,11 @@ thead th.active,tbody td.active {
   .options li:hover{
     /* border-radius: 5px; */
     background: #f2f2f2;
+  }
+
+  /* style filter.png */
+  .filter{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
   }
