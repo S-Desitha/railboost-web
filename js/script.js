@@ -1,6 +1,5 @@
 async function customFetch(endpoint, options, sendJWT) {
     let url = "http://localhost:8080/railboost_backend_war_exploded/";
-    console.log("Fetch Intercepted");
     
     if (endpoint!="login" && sendJWT!=false){
         options.headers = {
@@ -11,7 +10,6 @@ async function customFetch(endpoint, options, sendJWT) {
     url = url+endpoint;
 
     let resp = await fetch(url, options);
-    console.log(resp);
     if (resp.ok)
         return await resp.json();
     else{

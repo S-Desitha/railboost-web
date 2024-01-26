@@ -11,7 +11,7 @@ function getSchedules() {
     }
     
     let urlQuery = url+`?json=${encodeURIComponent(JSON.stringify(param))}`;
-    fetch(urlQuery, {credentials:"include"})
+    fetch(urlQuery, {})
         .then(response => response.json())
         .then(data => {
             data.forEach(sch => {
@@ -39,7 +39,7 @@ function getSchedule() {
     const scheduleId = 3;
     let urlQuery = url+"?scheduleId="+scheduleId;
 
-    fetch(urlQuery, {credentials:"include"})
+    fetch(urlQuery, {})
         .then(raw => raw.json())
         .then(response => createHTML(response))
 }
