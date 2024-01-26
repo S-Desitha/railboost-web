@@ -7,7 +7,10 @@
 
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/signup.css">
+
     <script src="/js/script.js"></script>
+    <script src="/js/signup.js"></script>
+    <script src="/js/signin.js"></script>
 </head>
  
 <body>
@@ -20,49 +23,65 @@
             <img src="/Images/RailBoost Logo.png" alt="railboost Logo" class="logo" />
             <div class="signup-form">
 
-                <form id="form">
-                  <label for="fName"></label>
-                  <input class="Full Name" type="text" id="fName" name="fName" placeholder="First Name" required/>
-
-                  <label for="lName"></label>
-                  <input class="Full Name" type="text" id="lName" name="lName" placeholder="Last Name" required/>
+                <form id="form" onsubmit="signUp()">
+                  <div style="width: 100%;">
+                    <!-- <label for="fName"></label> -->
+                    <input class="Full Name" type="text" id="fName" name="fName" style="display: inline-block; width: 48%; margin-right: 2%;" placeholder="First Name" required/>
+  
+                    <!-- <label for="lName"></label> -->
+                    <input class="Full Name" type="text" id="lName" name="lName" style="display: inline-block; width: 48%;" placeholder="Last Name" required/>
+                  </div>
 
                     <div class="input-group"> 
-                    <label id="email-label"></label>
+                    <!-- <label id="email-label"></label> -->
                     <input type="email" spellcheck="false" id="email-field" onkeyup="validateEmail()" name="email" placeholder="Email" required><br />
                     <span id="email-error"></span> 
                   </div>
 
                 
-                    <label for="username"></label>
+                    <!-- <label for="username"></label> -->
                     <input type="text" id="username" name="username" placeholder="Username" required><br /> 
 
-                    <label for="dob"></label>
-                    <input type="date" id="dob" name="dob" placeholder="Date of Birth:" required><br />   
+                    <!-- <label for="dob"></label> -->
+                    <input type="text" id="dob" name="dob" placeholder="Date of Birth:" onmouseenter="(this.type='date')" onmouseleave="(this.type='text')" required><br />   
 
-                    <label for="gender"></label>
-
+                    <!-- <label for="gender"></label> -->
                     <select id="gender" name="gender">
-                        <option value="" disabled selected>Gender</option>
+                        <option value="" readonly selected>Gender</option>
                         <option value="male" style="color: #484848">Male</option>
                         <option value="female" style="color: #484848">Female</option>
                         <option value="other" style="color: #484848">Other</option>
                     </select>
+
+                  <div class="input-group">
+                    <input type="text" id="phone-field" name="phone" placeholder="Phone Number" onkeyup="validatePhone()" required><br />
+                    <span id="phone-error"></span>
+                  </div>
+
+                    <!-- <label for="role"></label> -->
+                    <input type="text" id="role" name="role" placeholder="Role:" style="display: none;"><br />
+
+                    <!-- <label for="staffId"></label> -->
+                    <input type="text" id="staffId" name="staffId" placeholder="StaffId:" style="display: none;"><br />
+
+                    <!-- <label for="station"></label> -->
+                    <input type="text" id="station" name="station" placeholder="Station:" style="display: none;"><br />
+
                     <div class="input-group">
-                    <label for="password"></label>
+                    <!-- <label for="password"></label> -->
                     <input class="input-field" type="password" id="password" name="password"onkeyup="validateStrPassword()" placeholder="Password" required /><br />  
                     <span id="spassword-error"></span> 
                   </div>
 
                     <div class="input-group">
 
-                    <label for="confirm-password"></label>
+                    <!-- <label for="confirm-password"></label> -->
                     <input class="input-field" type="password" id="cpassword" name="confirm-password" onkeyup="validatePassword()" placeholder="Confirm Password" required /><br /> 
                     <span id="password-error"></span> 
                   </div>
+                  <button type="submit" class="signup-button form-button">Signup</button>
                 </form>
             </div>
-            <button type="submit" class="signup-button form-button">Signup</button>
         </div>
     </div>
 </div>

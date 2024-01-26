@@ -1,6 +1,5 @@
 async function customFetch(endpoint, options, sendJWT) {
     let url = "http://localhost:8080/railboost_backend_war_exploded/";
-    console.log("Fetch Intercepted");
     
     if (endpoint!="login" && sendJWT!=false){
         options.headers = {
@@ -11,7 +10,6 @@ async function customFetch(endpoint, options, sendJWT) {
     url = url+endpoint;
 
     let resp = await fetch(url, options);
-    console.log(resp);
     if (resp.ok)
         return await resp.json();
     else{
@@ -24,6 +22,15 @@ async function customFetch(endpoint, options, sendJWT) {
                 window.location.href="/html/signin.html";
                 return Promise.reject("login-redirected");
             }
+        }
+        else if (resp.status==400) {
+            let data = await resp.json();
+            let error_msg = data.detailMessage;
+            if (error_msg=="signup-expired"){
+                window.alert("You signup session has expired. Please contact administrator and signup again.");
+            }
+            window.location.href="/index.html";
+            return Promise.reject(data.detailMessage);
         }
         return {
             isSuccessful: false,

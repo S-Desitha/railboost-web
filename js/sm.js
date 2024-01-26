@@ -10,7 +10,7 @@ async function createJourneys() {
     let urlQuery = endpoint+`?json=${encodeURIComponent(JSON.stringify(param))}`;
 
     try {
-        let data = await customFetch(urlQuery, {credentials:"include"});
+        let data = await customFetch(urlQuery, {});
         
         console.log(data);
         // Create a table row for each journey
@@ -45,7 +45,7 @@ async function createJourney() {
     let urlQuery = endpoint+`?json=${encodeURIComponent(JSON.stringify(param))}`;
     
     try {
-        let data = await customFetch(urlQuery, {credentials:"include"})
+        let data = await customFetch(urlQuery, {})
         
         // Create a table row for each journey
         if (Object.keys(data)){
@@ -104,8 +104,7 @@ async function updateTime(scheduleId, station, timeType) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(body),
-        method: "PUT",
-        credentials: "include"
+        method: "PUT"
     };
 
     console.log(params);
