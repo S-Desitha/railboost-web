@@ -207,7 +207,10 @@ nav ul li:hover ul.dropdown{
   }
 /* mobile */
   @media only screen and (max-width: 1250px) {
-   
+    body {
+      /* background-color: lightblue; */
+
+    }
     /* menu button instead of navbar elements */
     
     nav ul{

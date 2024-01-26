@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/staff.css">
 	<script src="/js/staff.js"></script>
+	
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <title>Staff Management</title>
 </head>
 <body> 
@@ -27,9 +29,51 @@
 							<h1>Staff Details</h1>
 							<div class="input-group">
                                 <input type="search" placeholder="Search Staff...">
-                                <img src="/Images/search.png" alt="">
+                                <img src="/Images/filter.png" class="filter" alt="" onclick="toggleFilterBox()">
+								<img src="/Images/search.png" alt="">
+								
                             </div>
 						</section>
+								
+						<div class="filter-box" id="filter-box">
+							<div class="wrapper" id="from">
+								<div class="select-btn">
+									<span>Railway Station</span>
+									<i class="uil uil-angle-down"></i>
+								</div>
+								<div class="content">
+									<div class="search">
+										<i class="uil uil-search"></i>
+										<input spellcheck="false" type="text" placeholder="Search">
+									</div>
+									<ul class="options">
+										<!-- Add options dynamically, if needed -->
+									</ul>
+								</div>
+							</div>
+						
+							<!-- Filter by Role Dropdown -->
+							<div class="wrapper" id="roles">
+								<div class="select-btn">
+									<span>Role</span>
+									<i class="uil uil-angle-down"></i>
+								</div>
+								<div class="content">
+									<div class="search">
+										<i class="uil uil-search"></i>
+										<input spellcheck="false" type="text" placeholder="Search">
+									</div>
+									<ul class="role-options">
+										<!-- Add options dynamically, if needed -->
+									</ul>
+								</div>
+							</div>
+						
+							<button onclick="applyFilters()">Filter</button>
+						</div>
+						
+
+
 
 						<section class="table_body">
 
@@ -57,17 +101,17 @@
 							<form onsubmit="return false" id="staff_form">
 								<h2 class="add-staff-heading" id="add-staff-heading">Add a new staff member</h2>
 								<label for="staffId"></label>
-								<input type="text" id="staffId" placeholder="Staff ID:" name="staffId" required><br>
+								<input type="text" id="staffId" placeholder="Staff ID:" name="staffId" onchange="updateUsername()" required><br>
 
 								<label for="fName"></label>
-								<input type="text" id="fName" name="name" placeholder="First Name:" required><br>
+								<input type="text" id="fName" name="name" placeholder="First Name:" onchange="updateUsername()"required><br>
 						
 								<label for="lName"></label>
-								<input type="text" id="lName" name="name" placeholder="Last Name:" required><br>
+								<input type="text" id="lName" name="name" placeholder="Last Name:" onchange="updateUsername()"required><br>
 
 								<label for="role"></label>
 								<!-- <select id="role" name="role"  onchange="updateUsername()" required> -->
-									<select id="role" name="role" required>	
+									<select id="role" name="role" onchange="updateUsername()" required>	
 									<option value="" disabled selected>Role</option>
 									<option value="SM">Station Master</option>
 									<option value="TCO">Ticket Checking Officer</option>
@@ -94,5 +138,7 @@
 						</div>
 					</div>
 				</div>
+				
 			</main>	
+			<script src="/js/stations.js"></script>
 </body>

@@ -1,0 +1,44 @@
+import fitz  # PyMuPDF
+import requests
+import os
+from bs4 import BeautifulSoup
+
+# Function to download a PDF file
+def download_pdf(url, folder_path):
+    response = requests.get(url)
+    filename = os.path.join(folder_path, url.split("/")[-1])
+    with open(filename, 'wb') as pdf_file:
+        pdf_file.write(response.content)
+    print(f"Downloaded: {filename}")
+
+# Function to extract hyperlinks from a PDF
+def extract_links_from_pdf(pdf_path):
+    links = []
+    with fitz.open(pdf_path) as pdf_document:
+        for page_number in range(pdf_document.page_count):
+            page = pdf_document[page_number]
+            annotations = page.get_links()
+            for annotation in annotations:
+                links.append(annotation.get('uri'))
+    return links
+
+# Function to download PDFs from extracted hyperlinks
+def download_pdfs_from_links(links, folder_path):
+    for link in links:
+        if link and link.endswith('.pdf'):
+            download_pdf(link, folder_path)
+
+# Specify the path to the PDF file you want to process
+pdf_path = r"F:\UCSC\Second Year\First Sem\Group Project\Data Bases\Ticket Fare\main_line.pdf"
+
+# Specify the folder where you want to save the downloaded PDFs
+download_folder = r"F:\UCSC\Second Year\First Sem\Group Project\Data Bases\Ticket Fare\Main Line\All PDFs"
+
+# Create the download folder if it doesn't exist
+os.makedirs(download_folder, exist_ok=True)
+
+# Extract hyperlinks from the PDF
+pdf_links = extract_links_from_pdf(pdf_path)
+
+# Download PDFs from the extracted hyperlinks
+download_pdfs_from_links(pdf_links, download_folder)
