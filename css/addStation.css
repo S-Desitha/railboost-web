@@ -29,6 +29,77 @@
     overflow: overlay;
 }
 
+/* Styles for the right side form */
+.table-right {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  
+  .station-form {
+    width: 250px;
+  }
+  
+  .add-station-heading {
+    /* Add styles for the heading "Add a new Station" */
+    font-size: 24px;
+    margin-bottom: 20px;
+    padding: 7px 0;
+    margin: 15px 0;
+    width: 100%;
+  }
+  
+  #select-line {
+    /* Add styles for the "Select Line" label */
+    display: block;
+    margin-bottom: 8px;
+    padding: 7px 0;
+    margin: 15px 0;
+    width: 100%;
+  }
+  
+  select {
+    /* Add styles for the select box */
+    width: 100%;
+    padding: 8px;
+    color: #484848;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+ 
+  }
+  
+  input {
+    /* Add styles for the input fields */
+    border: none;
+    border-bottom: 1px solid #a9a9a9;
+    color: #484848;
+    padding: 7px 0;
+    margin: 15px 0;
+    width: 100%;
+  }
+
+  
+  .form-button {
+    /* Add styles for the form button */
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 250px;
+  }
+  
+  .form-button:hover {
+    background-color: #0056b3;
+  }
+  
+
 .table_header {
     width: 100%;
     height: 10%;
@@ -42,26 +113,7 @@
     width: 1.2rem;
     height: 1.2rem;
 }
-select{
-    border: none;
-    border-bottom: 1px solid #a9a9a9;
-    color: #484848;
-    padding: 7px 0;
-    margin-left: 0px;
-    width: 100px
-    
-}
 
-.hidden {
-    display: none;
-}
-
-#select-line{
-    color: #484848;
-    font-size: 15px;
-   
-
-}
 
 table {
     width: 100%;
@@ -114,16 +166,16 @@ tbody tr.hide td p {
     transition: .2s ease-in-out .5s;
 }
 
-.table-right {
+/* .table-right {
     flex: 1; 
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content:center;
-  }
+  } */
 
-  .form-button {
+  /* .form-button {
     color: var(--text-color);
     background-color: var(--theme-color);
     border-radius: 6px;
@@ -134,11 +186,11 @@ tbody tr.hide td p {
     width: 20rem;
     margin-top: 30px;
     font-size: 20px;
-  }
-
+  } */
+/* 
 .form-button:hover{
     background-color: var(--secondary-color); 
-  }
+  } */
 
 
   #role {
@@ -157,13 +209,13 @@ tbody tr.hide td p {
 		margin-right: 10px;
 		margin-left: 5px;
 	  } 
-  input {
+  /* input {
     border: none;
     border-bottom: 1px solid #a9a9a9;
     color: #484848;
     padding: 7px 0;
     margin: 15px 0;
-  }
+  } */
   
   input::placeholder {
     color: #6e6b6b;
@@ -197,8 +249,8 @@ thead th.active,tbody td.active {
     box-shadow: 0 .005rem .1rem #0002;
 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items: left;
 
     transition: .2s;
 }

@@ -1,21 +1,6 @@
 const url = "http://localhost:8080/railboost_backend_war_exploded/staff";
 
-        // Get the select element
-        var selectOption = document.getElementById("selectOption");
 
-        // Get the elements to be displayed
-        var option1Elements = document.getElementById("option1Elements");
-
-        // Add an event listener to the select element
-        selectOption.addEventListener("change", function() {
-            // Hide the element first
-            option1Elements.classList.add("hidden");
-
-            // Show the element if the selected option is "option1"
-            if (selectOption.value === "option1") {
-                option1Elements.classList.remove("hidden");
-            }
-        });
 
 
 
@@ -66,3 +51,4 @@ function updateStation() {
     element["stationName"] = document.getElementById('stationName').value;
     element["stationName"] = document.getElementById('stationName').value;
 }
+
