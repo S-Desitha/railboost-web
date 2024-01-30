@@ -31,13 +31,13 @@ async function processLoginResp(response) {
         const role = response["role"];
         const username = response["username"];
 
-        if (role=="admin"){
+        if (role==1){
             window.location.replace("/html/admin/admin.html");
         }
-        else if (role=="sm"){
+        else if (role==3){
             window.location.replace("/html/sm/sm.html")
         }
-        else if (role=="passenger"){
+        else if (role==5){
             // load passenger home page
             window.location.replace("/html/passenger/home.html");
         }
