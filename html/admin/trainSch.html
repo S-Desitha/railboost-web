@@ -16,164 +16,137 @@
     <title>Train Schedule Management</title>
 </head>
 <body> 
-            <nav class="navbar" >
-				<script>createNavBar("admin")</script>
-            </nav>
+	<nav class="navbar" >
+		<script>createNavBar("admin")</script>
+	</nav>
 
-            
-				<div class="train-container">
-            		<div class="train-left">
 
-						<div class="trainsc-header" id="scheduleTitle">
-							<i class="fas fa-train"></i>
-							<h3>Panadura- Colombo Fort</h>
-							<p>Train Number: 1234</p>
-							<p>Train Type: Express</p>
-						</div>
+	<div class="train-container">
+		<div class="train-left">
 
-						<section class="table_header">
-							<h1>Train stopping stations</h1>
-                            <div class="input-group">
-                                <input type="search" placeholder="Search Station...">
-                                <img src="/Images/search.png" alt="">
-                            </div>
-                            
-						</section>
+			<div class="trainsc-header" id="scheduleTitle">
+				<i class="fas fa-train"></i>
+				<h3>Panadura- Colombo Fort</h>
+				<p>Train Number: 1234</p>
+				<p>Train Type: Express</p>
+			</div>
 
-						<section class="table_body">
-
-							<table>
-							<thead>
-								<tr>
-                                    <th>Station Name</th>
-									<th>Scheduled Arrival Time</th>
-									<th>Scheduled Departure Time</th>
-									<th>Actions</th>
-								</tr>
-							</thead>
-							<tbody id="schedule_stations">
-								<tr>
-									<td>Panadura</td>
-									<td>08:25</td>
-                                    <td>08:30</td>                                   
-									<td>
-										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i> 
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i>
-										</button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>Moratuwa</td>
-									<td>08:25</td>
-                                    <td>08:30</td>                                   
-									<td>
-										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i> 
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i>
-										</button></a>
-									</td>
-								
-									
-								
-								<tr>
-									<td>Bambalapitiya</td>
-									<td>08:25</td>
-                                    <td>08:30</td>
-                            
-									<td>
-										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i> 
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i>
-										</button></a>
-									</td>
-								</tr>
-								
-								
-							</tbody>
-						</section>
-						</table>
-					</div>
-				
-					<div class="train-right">
-						<div class="train-form">
-							
-							
-								<h2 class="add-train-heading">Add a new train schedule </h2>
-
-								<label for="Schedule-ID"></label>
-								<input type="text" id="sch-id" placeholder="Schedule ID" required>
-
-								<label for="Train-ID"></label>
-								<input type="text" id="tr-id" placeholder="Train ID" required>
-								
-
-								<div class="wrapper" id="from">
-									<div class="select-btn">
-										<span>Select Starting Station</span>
-										<i class="uil uil-angle-down"></i>
-									</div>
-									<div class="content">
-										<div class="search">
-											<i class="uil uil-search"></i>
-											<input spellcheck="false" type="text" placeholder="Search">
-										</div>
-										<ul class="options">
-										</ul>
-									</div>
-								</div>
-
-								<div class="wrapper" id="to">
-									<div class="select-btn">
-										<span>Select Ending Station</span>
-										<i class="uil uil-angle-down"></i>
-									</div>
-									<div class="content">
-										<div class="search">
-											<i class="uil uil-search"></i>
-											<input spellcheck="false" type="text" placeholder="Search">
-										</div>
-										<ul class="options"></ul>
-									</div>
-								</div>
-								<div>
-									<fieldset>
-									  <legend>Stopping Stations: </legend>
-									  <div class="wrapper" id="from">
-										<div class="select-btn">
-											<span>Station</span>
-											<i class="uil uil-angle-down"></i>
-										</div>
-										<div class="content">
-											<div class="search">
-												<i class="uil uil-search"></i>
-												<input spellcheck="false" type="text" placeholder="Search">
-											</div>
-											<ul class="options">
-											</ul>
-										</div>
-									</div>
-										<label for="SAT"></label>
-										<input type="time" id="SAT" placeholder="Scheduled Arrival Time" name="Scheduled Arrival Time" required><br>
-
-										<label for="SDT"></label>
-										<input type="time" id="SDT" placeholder="Scheduled Departure Time" name="Scheduled Departure Time" required><br>
-									<div class="buttons">
-										<button class="form-button" id="add_update-sch_station" onclick="addSchStation()">Add a new stopping </button>
-										<button class="form-button" id="done" onclick="">Done </button>
-									</div>
-									</fieldset>
-								</div>
-						</div>
-				
-					</div>
+			<section class="table_header">
+				<h1>Train stopping stations</h1>
+				<div class="input-group">
+					<input type="search" placeholder="Search Station...">
+					<img src="/Images/search.png" alt="">
 				</div>
-				<script src="/js/stations.js"></script>				
+				
+			</section>
+
+			<section class="table_body">
+
+				<table>
+				<thead>
+					<tr>
+						<th>Station Name</th>
+						<th>Scheduled Arrival Time</th>
+						<th>Scheduled Departure Time</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody id="schedule_stations">
+					
+					<tr>
+						<td>Bambalapitiya</td>
+						<td>08:25</td>
+						<td>08:30</td>
+				
+						<td>
+							<a href=""><button class="edit-button">
+								<i class="fas fa-edit"></i> 
+							</button></a>
+							<a href=""><button class="delete-button">
+								<i class="fas fa-trash"></i>
+							</button></a>
+						</td>
+					</tr>
+					
+					
+				</tbody>
+			</section>
+			</table>
+		</div>
+	
+		<div class="train-right">
+			<div class="train-form">
+				
+				
+					<h2 class="add-train-heading">Add a new train schedule </h2>
+
+					<label for="Schedule-ID"></label>
+					<input type="text" id="sch-id" placeholder="Schedule ID" required>
+
+					<label for="Train-ID"></label>
+					<input type="text" id="tr-id" placeholder="Train ID" required>
+					
+
+					<div class="wrapper" id="from">
+						<div class="select-btn">
+							<span>Select Starting Station</span>
+							<i class="uil uil-angle-down"></i>
+						</div>
+						<div class="content">
+							<div class="search">
+								<i class="uil uil-search"></i>
+								<input spellcheck="false" type="text" placeholder="Search">
+							</div>
+							<ul class="options">
+							</ul>
+						</div>
+					</div>
+
+					<div class="wrapper" id="to">
+						<div class="select-btn">
+							<span>Select Ending Station</span>
+							<i class="uil uil-angle-down"></i>
+						</div>
+						<div class="content">
+							<div class="search">
+								<i class="uil uil-search"></i>
+								<input spellcheck="false" type="text" placeholder="Search">
+							</div>
+							<ul class="options"></ul>
+						</div>
+					</div>
+					<div>
+						<fieldset>
+							<legend>Stopping Stations: </legend>
+							<div class="wrapper" id="from">
+							<div class="select-btn">
+								<span>Station</span>
+								<i class="uil uil-angle-down"></i>
+							</div>
+							<div class="content">
+								<div class="search">
+									<i class="uil uil-search"></i>
+									<input spellcheck="false" type="text" placeholder="Search">
+								</div>
+								<ul class="options">
+								</ul>
+							</div>
+						</div>
+							<label for="SAT"></label>
+							<input type="time" id="SAT" placeholder="Scheduled Arrival Time" name="Scheduled Arrival Time" required><br>
+
+							<label for="SDT"></label>
+							<input type="time" id="SDT" placeholder="Scheduled Departure Time" name="Scheduled Departure Time" required><br>
+						<div class="buttons">
+							<button class="form-button" id="add_update-sch_station" onclick="addSchStation()">Add a new stopping </button>
+							<button class="form-button" id="done" onclick="">Done </button>
+						</div>
+						</fieldset>
+					</div>
+			</div>
+	
+		</div>
+	</div>
+	<script src="/js/stations.js"></script>				
 </body>
 </html>
