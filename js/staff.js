@@ -4,6 +4,8 @@ const endpoint2 = "staff";
 
 document.addEventListener("DOMContentLoaded", async function() {
     document.getElementById("staff_form").reset();
+    
+    setRoles();
 
     try {
 
@@ -28,7 +30,9 @@ document.addEventListener("DOMContentLoaded", async function() {
             row.insertCell(2).innerHTML = staffMember.user.username;
             row.insertCell(3).innerHTML = staffMember.user.email;
             row.insertCell(4).innerHTML = staffMember.user.telNo;
-            row.insertCell(5).innerHTML = staffMember.user.role;
+            let roleCell = row.insertCell(5);
+            roleCell.innerHTML = staffMember.user.role.role;
+            roleCell.setAttribute("roleId", staffMember.user.role.roleId);
             row.insertCell(6).innerHTML = staffMember.station;
             row.insertCell(7).append(editButton, deleteButton);
     
@@ -38,6 +42,10 @@ document.addEventListener("DOMContentLoaded", async function() {
             localStorage.setItem("last_url", window.location.pathname);
     }
 });
+
+
+
+
 
 
 
@@ -55,7 +63,9 @@ function editStaff() {
     document.getElementById('staffId').disabled = true;
     document.getElementById('fName').value = member.user["fName"];
     document.getElementById('lName').value = member.user["lName"];
-    document.getElementById('role').value = member.user["role"]=="sm"? "SM" : "TCO";
+    // document.getElementById('role').value = member.user["role"]=="sm"? "SM" : "TCO";
+    document.getElementById('role').value = member.user.role.roleId;
+    document.getElementById('role').dispatchEvent(new Event("change"));
     document.getElementById('railwayStation').value = member["station"];
     document.getElementById('email-field').value = member.user["email"];
     document.getElementById('phone-field').value = member.user["telNo"]
@@ -132,7 +142,9 @@ function updateUsername() {
 
 function addStaff() {
     staffMember = {
-        user: {}
+        user: {
+            role: {}
+        }
     };
 
     const email = document.getElementById('email-field').value;
@@ -143,7 +155,7 @@ function addStaff() {
     staffMember["station"] = document.getElementById('railwayStation').value;
     staffMember.user["fName"] = document.getElementById("fName").value;
     staffMember.user["lName"] = document.getElementById("lName").value;
-    staffMember.user["role"] = document.getElementById("role").value;
+    staffMember.user.role["roleId"] = document.getElementById("role").value;
     staffMember.user["email"] = email;
     staffMember.user["telNo"] = telephone;
     staffMember.user["isStaff"] = true;
@@ -168,7 +180,6 @@ function addStaff() {
                 localStorage.setItem("last_url", window.location.pathname);
         });
 
-    console.log(train);
 
 
     alert(`Link to create a password for the Username :${username} has been sent to the email: ${email}.`);
@@ -185,6 +196,44 @@ function addStaff() {
     // Hide the message
     document.getElementById('message').style.display = 'none';
 }
+
+
+
+
+async function setRoles() {
+    let rolesEndpoint = "roles";
+
+    document.getElementById("role")
+        .addEventListener("change", (e) => {
+            if (e.target.value == 4) {
+                document.getElementById("railwayStation").style.display = "none";
+            }
+            else
+            document.getElementById("railwayStation").style.display = "block";
+        });
+
+
+    try {
+        
+        let data = await customFetch(rolesEndpoint, {});
+        let roleParent = document.getElementById("role");
+        
+        for (role of data) {
+            let option = document.createElement("option");
+            option.innerHTML = role.role;
+            option.value = role.roleId;
+            
+            roleParent.appendChild(option);
+        }
+    }
+    catch(error) {
+        if (error=="login-redirected")
+            localStorage.setItem("last_url", window.location.pathname);
+    }
+
+}
+
+
 function toggleFilterBox() {
     var filterBox = document.getElementById('filter-box');
     var filterIcon = document.querySelector('.filter');
@@ -201,6 +250,7 @@ function toggleFilterBox() {
     filterBox.style.right = right - 20+  'px';
     filterBox.style.display = (filterBox.style.display === 'block') ? 'none' : 'block';
 }
+
 
 function applyFilters() {
     // Implement the logic to filter by role and railway station
