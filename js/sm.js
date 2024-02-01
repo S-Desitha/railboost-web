@@ -74,7 +74,7 @@ async function createJourney() {
                 if (js.departureTime==null)
                     row.insertCell(4).appendChild(departureButton);
                 else
-                    row.insertCell(4).innerHTML = new Date('', '', '', js.departureTime.split(":")[0], js.departureTime.split(":")[1], js.departureTime.split(":")[3]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+                    row.insertCell(4).innerHTML = new Date('', '', '', js.departureTime.split(":")[0], js.departureTime.split(":")[1], js.departureTime.split(":")[2]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
 
             });
         }
