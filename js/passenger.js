@@ -52,6 +52,7 @@ async function getSchedule() {
 
         try {
             let data = await customFetch(urlQuery, {}, false);
+            console.log(data);
             createStoppingStations(data, "journey");
         } catch(error) {
             if (error=="login-redirected")
@@ -83,15 +84,16 @@ function createStoppingStations(data, context) {
         data.stations.forEach(station => {
             let row = document.getElementById("schedule_stops").insertRow(-1);
             row.insertCell(0).innerHTML = station.station;
-            row.insertCell(1).innerHTML = new Date('', '', '', station.scheduledArrivalTime.hour, station.scheduledArrivalTime.minute, station.scheduledArrivalTime.second).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
-            row.insertCell(2).innerHTML = new Date('', '', '', station.scheduledDepartureTime.hour, station.scheduledDepartureTime.minute, station.scheduledDepartureTime.second).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+            row.insertCell(1).innerHTML = new Date('', '', '', station.scheduledArrivalTime.split(":")[0], station.scheduledArrivalTime.split(":")[1], station.scheduledArrivalTime.split(":")[2]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+            row.insertCell(2).innerHTML = new Date('', '', '', station.scheduledDepartureTime.split(":")[0], station.scheduledDepartureTime.split(":")[1], station.scheduledDepartureTime.split(":")[2]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
             if (context=="journey"){
                 if (station.arrivalTime!=null)
-                    row.insertCell(3).innerHTML = new Date('', '', '', station.arrivalTime.hour, station.arrivalTime.minute, station.arrivalTime.second).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+                    // row.insertCell(3).innerHTML = new Date(station.arrivalTime).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+                    row.insertCell(3).innerHTML = new Date('', '', '', station.arrivalTime.split(":")[0], station.arrivalTime.split(":")[1], station.arrivalTime.split(":")[2]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
                 else 
                     row.insertCell(3).innerHTML = '--';
                 if (station.departureTime!=null)
-                    row.insertCell(4).innerHTML = new Date('', '', '', station.departureTime.hour, station.departureTime.minute, station.departureTime.second).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+                    row.insertCell(4).innerHTML = new Date('', '', '', station.departureTime.split(":")[0], station.departureTime.split(":")[1], station.departureTime.split(":")[2]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
                 else
                     row.insertCell(4).innerHTML = '--';
                 }
