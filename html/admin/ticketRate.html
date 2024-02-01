@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/js/auth.js"></script>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/ticketRate.css">
+    <script src="/js/script.js"></script>
+	<script src="/js/ticketRate.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Ticket Price Management</title>
+</head>
+<body> 
+	<nav class="navbar" >
+		<script>createNavBar("admin")</script>
+	</nav>	
+
+			<main class="table">
+
+				<div class="container">
+            		<div class="left">
+
+						<section class="table_header">
+							<h1>Ticket Price Details</h1>
+                            <!-- <div class="input-group">
+                                <input type="search" placeholder="Search Trains...">
+                                <img src="/Images/search.png" alt="">
+                            </div> -->
+						</section>
+
+						<section class="table_body">
+
+							<table>
+							<thead>
+								<tr>
+									<th>Start Station</th>
+									<th>End Station</th>
+                                    <th>1st Class</th>
+									<th>2nd Class</th>
+                                    <th>3rd Class</th>
+                                    <th>Actions</th>
+								</tr>
+							</thead>
+							<tbody id="train_table">
+								
+								
+							</tbody>
+						</section>
+						</table>
+					</div>
+				
+					<div class="right">
+						<div class="form">
+							
+							<form onsubmit="return false">
+								<h2 class="add-price-heading" id="add-new-price-header">Add A New Price Rate </h2>
+								<label for="start_station"></label>
+								<input type="text" id="start_station" placeholder="Start Station:" name="start_station" required><br>
+
+                                <label for="end_station"></label>
+								<input type="text" id="end_station" placeholder="End Station:" name="end_station" required><br>
+
+								<label for="1class-price"></label>
+					            <input type="Double" id="1class-price" name="1class-pricee" placeholder="1st Class Price:" required><br>
+
+                                <label for="2class-price"></label>
+					            <input type="Double" id="2class-price" name="2class-pricee" placeholder="2nd Class Price:" required><br>
+
+                                <label for="3class-price"></label>
+					            <input type="Double" id="3class-price" name="3class-pricee" placeholder="3rd Class Price:" required><br>
+						
+								<button class="form-button" id="add-new-price-rate" onclick="addNewPriceRate()">Add A New Price Rate </button>
+
+							</form>
+						</div>
+				
+					</div>
+				</div>
+			</main>	
+</body>
