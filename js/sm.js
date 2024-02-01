@@ -65,16 +65,16 @@ async function createJourney() {
                 row.setAttribute("id", js.station);
                 
                 row.insertCell(0).innerHTML = js.station;
-                row.insertCell(1).innerHTML = new Date('', '', '', js.scheduledArrivalTime.hour, js.scheduledArrivalTime.minute, js.scheduledArrivalTime.second).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
-                row.insertCell(2).innerHTML = new Date('', '', '', js.scheduledDepartureTime.hour, js.scheduledDepartureTime.minute, js.scheduledDepartureTime.second).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+                row.insertCell(1).innerHTML = new Date('', '', '', js.scheduledArrivalTime.split(":")[0], js.scheduledArrivalTime.split(":")[1], js.scheduledArrivalTime.split(":")[2]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+                row.insertCell(2).innerHTML = new Date('', '', '', js.scheduledDepartureTime.split(":")[0], js.scheduledDepartureTime.split(":")[1], js.scheduledDepartureTime.split(":")[2]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
                 if (js.arrivalTime==null)
                     row.insertCell(3).appendChild(arrivalButton);
                 else
-                    row.insertCell(3).innerHTML = new Date('', '', '', js.arrivalTime.hour, js.arrivalTime.minute, js.arrivalTime.second).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+                    row.insertCell(3).innerHTML = new Date('', '', '', js.arrivalTime.split(":")[0], js.arrivalTime.split(":")[1], js.arrivalTime.split(":")[2]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
                 if (js.departureTime==null)
                     row.insertCell(4).appendChild(departureButton);
                 else
-                    row.insertCell(4).innerHTML = new Date('', '', '', js.departureTime.hour, js.departureTime.minute, js.departureTime.second).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
+                    row.insertCell(4).innerHTML = new Date('', '', '', js.departureTime.split(":")[0], js.departureTime.split(":")[1], js.departureTime.split(":")[3]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
 
             });
         }
