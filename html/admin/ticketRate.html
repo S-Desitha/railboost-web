@@ -56,11 +56,35 @@
 							
 							<form onsubmit="return false">
 								<h2 class="add-price-heading" id="add-new-price-header">Add A New Price Rate </h2>
-								<label for="start_station"></label>
-								<input type="text" id="start_station" placeholder="Start Station:" name="start_station" required><br>
+								<div class="wrapper" font-size="1px" id="from">
+									<div class="select-btn">
+										<span>Sart Station:</span> 
+										<i font-size="3px" class="fa fa-angle-down"></i>
+									</div>
+									<div class="content">
+										<div class="search">
+											<i class="fas fa-search"></i>
+											<input spellcheck="false" type="text" placeholder="Search">
+										</div>
+										<ul onclick="validateStation();" class="options"></ul>
+									</div>
+								</div>
 
-                                <label for="end_station"></label>
-								<input type="text" id="end_station" placeholder="End Station:" name="end_station" required><br>
+                                <div class="wrapper" font-size="1px" id="to">
+									<div class="select-btn">
+										<span>End Station:</span> 
+										<i font-size="3px" class="fa fa-angle-down"></i>
+									</div>
+									<div class="content">
+										<div class="search">
+											<i class="fas fa-search"></i>
+											<input spellcheck="false" type="text" placeholder="Search">
+										</div>
+										<ul onclick="validateStation();" class="options"></ul>
+									</div>
+								</div>
+								<span id="station-error"></span>
+								
 
 								<label for="1class-price"></label>
 					            <input type="Double" id="1class-price" name="1class-pricee" placeholder="1st Class Price:" required><br>
@@ -80,3 +104,7 @@
 				</div>
 			</main>	
 </body>
+
+<script src="/js/stations.js">
+</script>
+</html>
