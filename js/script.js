@@ -10,15 +10,8 @@ async function customFetch(endpoint, options, sendJWT) {
     url = url+endpoint;
 
     let resp = await fetch(url, options);
-    if (resp.ok){
-        try {
-            return await resp.json();
-        } catch(error) {
-            console.log("Error in parsing response");
-            console.log(error);
-            return {status: resp.status};
-        }
-    }
+    if (resp.ok)
+        return await resp.json();
     else{
         console.log("Invalid response");
         console.log(resp);
@@ -150,3 +143,20 @@ function validateStrPassword() {
     passwordError.innerHTML = "";
     return true;
 }
+function toggleDropdown() {
+    var dropdown = document.getElementById("drop");
+    if (dropdown.style.display === "none") {
+      dropdown.style.display = "block";
+    } else {
+      dropdown.style.display = "none";
+    }
+    
+  }
+  
+  window.onclick = function(event){
+    if (!event.target.matches('.dropbtn')){
+        var dropdown = document.getElementById("drop");
+        dropdown.style.display = "none";
+    }
+  }
+  

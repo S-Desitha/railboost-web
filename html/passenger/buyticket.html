@@ -29,20 +29,48 @@
 					<h2 class="add-train-heading" id="add_update-schedule-header">Buy E-Ticket </h2>
 
                     <label for="start-station"></label>
-                    <select id="start-station" onchange="validateStation(); getPrice();" name="start-station" required>
+                    <!-- <select id="start-station" onchange="validateStation(); getPrice();" name="start-station" required>
                         <option value="" disabled selected>Start Station:</option>
                         <option value="Beliaththa" style="color: #484848">Beliaththa</option>
                         <option value="Colombo Fort" style="color: #484848">Colombo Fort</option>
                         <option value="Panadura" style="color: #484848">Panadura</option>
-                    </select>
-					
-                    <label for="end-station"></label>
+                    </select> -->
+                  
+					            <div class="wrapper" font-size="1px" id="from">
+                        <div class="select-btn">
+                            <span>Sart Station:</span> 
+                            <i font-size="3px" class="fa fa-angle-down"></i>
+                        </div>
+                        <div class="content">
+                            <div class="search">
+                                <i class="fas fa-search"></i>
+                                <input spellcheck="false" type="text" placeholder="Search">
+                            </div>
+                            <ul onclick="getPrice(); validateStation();" class="options"></ul>
+                        </div>
+                    </div>
+                
+                    <!-- <label for="end-station"></label>
+
                     <select id="end-station" onchange="validateStation(); getPrice();" name="end-station" required>
                         <option value="" disabled selected>End Station:</option>
                         <option value="Beliaththa" style="color: #484848">Beliaththa</option>
                         <option value="Colombo Fort" style="color: #484848">Colombo Fort</option>
                         <option value="Panadura" style="color: #484848">Panadura</option>
-                    </select><br />
+                    </select><br /> -->
+                    <div class="wrapper" font-size="1px" id="to">
+                      <div class="select-btn">
+                          <span>End Station:</span> 
+                          <i font-size="3px" class="fa fa-angle-down"></i>
+                      </div>
+                      <div class="content">
+                          <div class="search">
+                              <i class="fas fa-search"></i>
+                              <input spellcheck="false" type="text" placeholder="Search">
+                          </div>
+                          <ul onclick="getPrice(); validateStation();" class="options"></ul>
+                      </div>
+                  </div>
                     <span id="station-error"></span>
 								
                     <label for="date"></label>
@@ -50,6 +78,8 @@
                                 
                     <script>
                         var currentDate = new Date();
+                        var formattedDate = currentDate.toISOString().split('T')[0];
+                        document.getElementById('date').value = formattedDate;
                         var minDate = currentDate.toLocaleDateString('en-CA',{timeZone:'Asia/Colombo'});
                         document.getElementById('date').min = minDate;
                         currentDate.setMonth(currentDate.getMonth() + 3);
@@ -80,5 +110,8 @@
 				
 		</div>
 	</div>
+
+<script src="/js/stations.js">
+</script>
 				
 </body>
