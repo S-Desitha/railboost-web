@@ -96,6 +96,7 @@ nav ul li ul.dropdown li a:hover {
 
 nav ul li:hover ul.dropdown{
     display: block;
+    z-index: 2;
     
 }
 .navbar ul li a.no-hover:hover {
