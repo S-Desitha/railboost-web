@@ -3,7 +3,7 @@
 authorize(window.location.pathname);
 
 function manageAccess(resp, resource) {
-    if (resource!=resp["role"]) {
+    if (resp.isSuccessful==false || !((resource=="admin" && resp.role["roleId"]==1) || (resource=="sm" && resp.role["roleId"]==3) || (resource=="passenger" && resp.role["roleId"]==5))) {
         alert("Unauthorized Access");
         window.location.replace("/html/forbidden.html");
     }
