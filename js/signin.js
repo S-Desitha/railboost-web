@@ -1,4 +1,5 @@
 async function login(formData) {
+    console.log("login function called");
     const endpoint = "login";
     
     let username = document.getElementById("username").value;
@@ -24,6 +25,7 @@ async function login(formData) {
 
 
 async function processLoginResp(response) {
+    console.log("processLoginResp function called");
     console.log(response)
     if (response["isSuccessful"]==true){
         localStorage.setItem("access_token", response.jwt);
