@@ -222,5 +222,5 @@ nav ul li:hover ul.dropdown{
 
   input:focus {
     outline: none;
-    border-bottom: 1.5px solid var(--secondary-color);
+    border-bottom: 5.5px solid var(--secondary-color);
   }
