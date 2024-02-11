@@ -96,6 +96,7 @@ nav ul li ul.dropdown li a:hover {
 
 nav ul li:hover ul.dropdown{
     display: block;
+    z-index: 2;
     
 }
 .navbar ul li a.no-hover:hover {
@@ -205,6 +206,73 @@ nav ul li:hover ul.dropdown{
     border: 3px solid var(--theme-color);
     transition: transform 0.3s;
   }
+  
+
+.dropbtn {
+    background-color: #4caf4f00;
+    color: white;
+    padding: 16px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    height: 80px;
+    width: 80px;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    
+  }
+  
+  .dropdown-content {
+    font-size: 14px; 
+    width: 150px;
+    display: none;
+    text-align: center;
+    justify-content: center;
+    position: absolute;
+    border-bottom: 1px #fff;
+    margin-top: 3px;
+    background-color: #5271FF;
+    border-radius: 10px;
+    padding: 1px 10px; 
+    line-height: 20px;
+  }
+  
+  .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    row-gap: 10px;
+    margin-block: 10px;
+      
+  }
+  
+  .dropdown-content a:hover:not(.logout) {
+    background-color: var(--secondary-color);
+    background: border 5px;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+    
+  }
+  
+  .dropdown-content a.logout {
+    background-color: rgb(207, 94, 94);
+    background: border 5px;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
 /* mobile */
   @media only screen and (max-width: 1250px) {
     body {
@@ -222,5 +290,5 @@ nav ul li:hover ul.dropdown{
 
   input:focus {
     outline: none;
-    border-bottom: 5.5px solid var(--secondary-color);
+    border-bottom: 1.5px solid var(--secondary-color);
   }
