@@ -22,7 +22,7 @@
   width: 100%;
   /* overflow-y: auto; */
   max-height: 80vh;
-  overflow: scroll;
+  overflow: hidden;
 }
 /* add overflow scroll to staff_table class */
 
@@ -51,14 +51,14 @@
 	margin-top: 20px;
 }
 
-/* #role {
+#role {
 	width: 20rem;
 	height: 2.5rem;
 	border: none;
 	border-bottom: 1px solid #a9a9a9;
 	color: #6e6b6b;
 	padding: 7px 0;
-	margin: 20px 0;} */
+	margin: 20px 0;}
 
 .edit-button, .delete-button {
 		background: none;

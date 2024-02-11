@@ -20,7 +20,7 @@ function getSchedules() {
                 row.insertCell(1).innerHTML = sch.trainId;
                 row.insertCell(2).innerHTML = sch.startStation;
                 row.insertCell(3).innerHTML = sch.endStation;
-                row.insertCell(4).innerHTML = sch.trainType;
+                row.insertCell(4).innerHTML = sch.speed;
                 row.insertCell(5).innerHTML = `<a href="/html/admin/trainSch.html?scheduleId=${sch.scheduleId}"><button class="view-button">
                                                     View <i class="fa-regular fa-eye"></i></button>
                                                 </a>`;
@@ -75,7 +75,7 @@ function createRow(schedule) {
     tableRow.appendChild(td4);
 
     var td5 = document.createElement('td');
-    td5.textContent = schedule["trainType"];
+    td5.textContent = schedule["speed"];
     tableRow.appendChild(td5);
 
     var td6 = document.createElement('td');
