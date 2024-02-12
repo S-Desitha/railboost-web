@@ -1,5 +1,9 @@
 async function customFetch(endpoint, options, sendJWT) {
     let url = "http://localhost:8080/railboost_backend_war_exploded/";
+    const frontendPort = window.location.port;
+
+// Log the detected frontend port
+console.log("Frontend Port:", frontendPort);
     
     if (endpoint!="login" && sendJWT!=false){
         options.headers = {
@@ -114,7 +118,7 @@ function validatePhone(){
     var phoneField=document.getElementById("phone-field");
 var phoneError=document.getElementById("phone-error");
     if(!phoneField.value.match(/^\d{10}$/)){
-        phoneError.innerHTML = "Please enter a valid phone number";
+        phoneError.innerHTML = "<div>Please enter a valid phone number</div>";
         return false;
     }
         phoneError.innerHTML = "";
@@ -142,7 +146,7 @@ function validateStrPassword() {
     var passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
   
     if (!passwordRegex.test(passwordField.value)) {
-      passwordError.innerHTML = "Password must be at least 8 characters long and include at least one uppercase \nletter, one lowercase letter, one digit, and one special character (!@#$%^&*).";
+      passwordError.innerHTML = "<div>Password must be at least 8 characters long and include at least one </br> uppercase letter, one lowercase letter, one digit, and one special </br> character (!@#$%^&*).</div>";
 
       return false;
     }
