@@ -30,7 +30,7 @@ async function processLoginResp(response) {
     if (response["isSuccessful"]==true){
         localStorage.setItem("access_token", response.jwt);
 
-        const role = response["role"];
+        const role = response["role"].roleId;
         const username = response["username"];
 
         if (role==1){
