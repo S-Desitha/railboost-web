@@ -23,7 +23,7 @@
             <img src="/Images/RailBoost Logo.png" alt="railboost Logo" class="logo" />
             <div class="signup-form">
 
-                <form id="form" onsubmit="signUp()">
+                <form id="form" onsubmit="return false">
                   <div style="width: 100%;">
                     <!-- <label for="fName"></label> -->
                     <input class="Full Name" type="text" id="fName" name="fName" style="display: inline-block; width: 48%; margin-right: 2%;" placeholder="First Name" required/>
@@ -79,7 +79,7 @@
                     <input class="input-field" type="password" id="cpassword" name="confirm-password" onkeyup="validatePassword()" placeholder="Confirm Password" required /><br /> 
                     <span id="password-error"></span> 
                   </div>
-                  <button type="submit" class="signup-button form-button">Signup</button>
+                  <button type="submit" class="signup-button form-button" onclick="signUp()">Signup</button>
                 </form>
             </div>
         </div>
