@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             let lName = document.getElementById("lName");
             let dob = document.getElementById("dob");
             let gender = document.getElementById("gender");
+            let telNo = document.getElementById("phone-field");
             let email = document.getElementById("email-field");
             let role = document.getElementById("role");
             let staffId = document.getElementById("staffId");
@@ -32,7 +33,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             fName.value = user.fName;
             lName.value = user.lName;
             email.value = user.email;
-            role.value = user.role;
+            telNo.value = user.telNo;
+            role.value = user.role.role;
             staffId.value = staff.staffId;
             if (staff.station)
                 station.value = staff.station;
@@ -63,28 +65,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 
-function signUp() {
+async function signUp() {
     user = {};
 
     user["username"] = document.getElementById("username").value;
     user["password"] = document.getElementById("password").value;
     user["fName"] = document.getElementById("fName").value;
     user["lName"] = document.getElementById("lName").value;
-    user["dob"] = document.getElementById("dob").value;
+    user["dob"] = new Date(document.getElementById("dob").value).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
     user["gender"] = document.getElementById("gender").value;
-    user["email"] = document.getElementById("email").value;
-    user["role"] = "passenger";
+    user["email"] = document.getElementById("email-field").value;
+    user["role"] = {roleId: 5};
 
     console.log(user);
 
-    const body = user;
+    const body = {user: user};
     const params = {
-        headers : {
-            "Content-type": "application/json; charset=UTF-8"
+        headers: {
+            "Content-Type": "application/json; charset=UTF-8",
         },
         body : JSON.stringify(body),
         method : "POST"
     };
+
+    let data = await customFetch(endpoint, params, false);
+    if (data.role.roleId==5)
+        window.location.replace("/html/passenger/home.html");
 
     // fetch(url, params)
     // .then(res => {

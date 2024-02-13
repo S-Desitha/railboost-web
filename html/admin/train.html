@@ -37,84 +37,10 @@
 								<tr>
 									<th>Train ID</th>
 									<th>Train type</th>
-                                    <th>Number of compartments</th>
 									<th>Actions</th>
 								</tr>
 							</thead>
 							<tbody id="train_table">
-								<!-- <tr>
-									<td>8097</td>
-									<td>Class M11</td>
-                                    <td>20</td>
-									<td>
-										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i> 
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i>
-										</button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>8097</td>
-									<td>Class M11</td>
-                                    <td>20</td>
-									<td>
-										<a href=""><button class="edit-button">
-
-											<i class="fas fa-edit"></i> 
-
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i> 
-										</button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>8097</td>
-									<td>Class M11</td>
-                                    <td>20</td>
-									<td>
-										<a href=""><button class="edit-button">
-
-											<i class="fas fa-edit"></i> 
-
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i> 
-										</button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>8097</td>
-									<td>Class M11</td>
-                                    <td>20</td>
-									<td>
-										<a href=""><button class="edit-button">
-
-											<i class="fas fa-edit"></i> 
-
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i> 
-										</button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>8097</td>
-									<td>Class M11</td>
-                                    <td>20</td>
-									<td>
-										<a href=""><button class="edit-button">
-											<i class="fas fa-edit"></i> 
-										</button></a>
-										<a href=""><button class="delete-button">
-											<i class="fas fa-trash"></i> 
-										</button></a>
-									</td>
-								</tr> -->
-								
-								
 							</tbody>
 						</section>
 						</table>
@@ -123,7 +49,7 @@
 					<div class="train-right">
 						<div class="train-form">
 							
-							<form onsubmit="return false">
+							<form onsubmit="return false" id="train-form">
 								<h2 class="add-train-heading" id="add-new-train-header">Add a new train </h2>
 								<label for="trainId"></label>
 								<input type="text" id="trainId" placeholder="Train ID:" name="trainId" required><br>
@@ -131,13 +57,6 @@
 								<label for="train-type"></label>
 								<input type="text" id="trainType" name="name" placeholder="Train Type:" required><br>
 						
-
-						
-								<label for="no-of compartments"></label>
-
-								<input type="text" id="nCompartments" placeholder="Number of Compartements" name="compartments" required><br>
-						
-                <span id="compartments-error"></span>
 								<button class="form-button" id="add-new-train-button" onclick="addNewTrain()">Add a new train </button>
 
 							</form>

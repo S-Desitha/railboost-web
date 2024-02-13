@@ -1,4 +1,6 @@
-
+body{
+    overflow: hidden;
+}
 .train-container {
 
     display: flex;
@@ -15,10 +17,17 @@
     margin: 80px auto;
     /* overflow-y: auto; */
     flex-direction: column;
+    /* overflow: hidden; */
 
 }
 
 .train-container.train-table{
+    width: 55vw;
+    overflow-x: hidden;
+    overflow-y: overlay;
+}
+
+.train-container.train-table2{
     width: 50vw;
     overflow-x: hidden;
     overflow-y: overlay;
@@ -78,12 +87,12 @@
   }
 
   .train-left {
-    flex: 1;
+    
     /* text-align: left; */
 	align-items: center;
-    margin: 0 5px;
-	/* margin-left: 40px;
-    margin-right: 40px; */
+    margin: 15px;
+	 margin-left: 100px; 
+    margin-right: 100px; 
 }
 
 

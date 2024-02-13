@@ -1,5 +1,6 @@
 // const url = "http://localhost:8080/railboost_backend_war_exploded/staff";
 const endpoint2 = "staff";
+console.log("staff.js");
 
 
 document.addEventListener("DOMContentLoaded", async function() {

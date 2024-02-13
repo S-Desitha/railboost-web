@@ -17,23 +17,35 @@
   color: red;
 }
 
-#password-error{
-  text-align: left;
+#phone-error{
+  text-align: center;
   top: 100%;
   left: 2px;
   font-size: 14px;
   font-weight: 400;
   color: red;
+}
+
+#password-error{
+  text-align: left;
+  top: 100%;
+  left: 2px;
+  font-size: 14px;
+  font-weight: 200;
+  color: red;
+  
 } 
 #spassword-error{
   
-  text-align: left;
+  text-align: center;
   justify-content: center;
   top: 50%;
   left: 2px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   color: red;
+  max-width: 25rem;
+  word-wrap: break-word;
 } 
 input {
     border: none;
@@ -137,7 +149,7 @@ margin-top: 10px;
 
 .logo {
     width: 15%; 
-    margin-top: 0px;
+    margin-top: 20px;
     margin-bottom: 20px;
   }
 
