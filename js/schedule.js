@@ -1,7 +1,45 @@
-const url = "http://localhost:8080/railboost_backend_war_exploded/trainSchedule";
+// const url = "http://localhost:8080/railboost_backend_war_exploded/trainSchedule";
+const scheduleEndpoint = "trainSchedule";
 
+document.addEventListener("DOMContentLoaded", async function() {
 
+    if (window.location.pathname.includes("schedule.html"))
+        createSchedulesPage();
+    else if (window.location.pathname.includes("trainSch.html"))
+        createSpecificSchPage();
+    
+});
 
+function addNewSchedule() {
+    let schedule = localStorage.getItem("schedule");
+    schedule = JSON.parse(schedule);
+
+    schedule.startStation = document.getElementById("from").getAttribute("stationCode");
+    schedule.endStation = document.getElementById("to").getAttribute("stationCode");
+    schedule.scheduleId = document.getElementById("sch-id").value;
+    schedule.trainId = document.getElementById("tr-id").value;
+    schedule.speed = document.getElementById("speed").value;
+
+    schedule.stations.forEach(st => {
+        st.scheduleId = schedule.scheduleId;
+    });
+
+    const params = {
+        headers : {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body : JSON.stringify(schedule),
+        method : "POST"
+    };
+
+    customFetch(scheduleEndpoint, params)
+        .then(()=> {
+            localStorage.removeItem("schedule");
+            window.location.replace("/html/admin/schedule.html");
+        })
+        .catch((error) => {
+            if (error=="login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
 
 function getSchedules() {
     let param = {
@@ -26,117 +64,102 @@ function getSchedules() {
                                                 </a>`;
                 row.insertCell(6).innerHTML = `<a href=""><button class="edit-button"><i class="fas fa-edit"></i> </button></a><a href=""><button class="delete-button"><i class="fas fa-trash"></i> </button></a>`;
             });
+
         });
 
 }
 
 
 
+function addStoppingStation(form) {
+    let schedule = localStorage.getItem("schedule");
+    schedule = schedule==null ? schedule = {stations: [], days: [], nStations:0} : JSON.parse(schedule);
+    
+    let button = document.getElementById("add_update-sch_station");
+    
+    station = {
+        "scheduleId" : document.getElementById("sch-id").value,
+        "station" : document.getElementById("stopping").getAttribute("stationCode"),
+        "stationName" : document.getElementById("stopping").getElementsByTagName("div")[0].getElementsByTagName("span")[0].innerHTML,
+        "scheduledArrivalTime" : document.getElementById("SAT").value,
+        "scheduledDepartureTime" : document.getElementById("SDT").value
+    };
+    
+    if (button.getAttribute("context") == "edit") {
+        button.setAttribute("context", "");
+        button.value = "Add a new Stopping";
+        schedule.stations = schedule.stations.map(st => {
+            if (st.stIndex==button.getAttribute("stIndex")) {
+                station.stIndex = st.stIndex;        
+                return station;
+            }
+            else 
+                return st;
+        });
 
+        let row = document.getElementById("schedule_stations").rows[station.stIndex-1];
+        row.setAttribute("stationCode", station.station);
+        row.cells[0].innerHTML = station.stationName;
+        row.cells[1].innerHTML = station.scheduledArrivalTime;
+        row.cells[2].innerHTML = station.scheduledDepartureTime;
+    }
 
+    else {
+        station.stIndex = schedule.nStations+1;
+        schedule.stations.push(station);
+        insertStationToPage(station);
+        schedule.nStations++;
+    }
 
-function getSchedule() {
-    const scheduleId = 3;
-    let urlQuery = url+"?scheduleId="+scheduleId;
+    document.getElementById("station-form").reset();
+    localStorage.setItem("schedule", JSON.stringify(schedule));
 
-    fetch(urlQuery, {})
-        .then(raw => raw.json())
-        .then(response => createHTML(response))
 }
 
-function createHTML(schedule) {
-    console.log(schedule)
-    const parent = document.getElementById("schedule_table");
 
-    let row = createRow(schedule);
-    parent.append(row);
+
+function insertStationToPage(station) {
+    let row = document.getElementById("schedule_stations").insertRow(-1);
+    row.setAttribute("stationCode", station.station);
+
+    let editButton = document.createElement("button");
+    editButton.classList.add("edit-button");
+    editButton.innerHTML = "<i class='fas fa-edit'></i>";
+    editButton.onclick = editStation;
+
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-button");
+    deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
+
+    row.insertCell(0).innerHTML = station.stationName;
+    row.insertCell(1).innerHTML = station.scheduledArrivalTime;
+    row.insertCell(2).innerHTML = station.scheduledDepartureTime;
+    row.insertCell(3).append(editButton, deleteButton);
 }
 
 
-function createRow(schedule) {
-    // Create the <tr> element
-    var tableRow = document.createElement('tr');
 
-    // Create and append <td> elements
-    var td1 = document.createElement('td');
-    td1.textContent = schedule["scheduleId"];
-    tableRow.appendChild(td1);
+/**
+ * Summary. 
+ */
+function editStation() {
+    let stationCode = this.parentNode.parentNode.getAttribute("stationCode");
 
-    var td2 = document.createElement('td');
-    td2.textContent = schedule["trainId"];
-    tableRow.appendChild(td2);
+    let button = document.getElementById("add_update-sch_station")
+    button.value = "Update Station";
+    button.setAttribute("context", "edit");
+    
+    let station = JSON.parse(localStorage.getItem("schedule")).stations
+    .find((elmnt) => elmnt.station==stationCode);
+    
+    button.setAttribute("stIndex", station.stIndex);
 
-    var td3 = document.createElement('td');
-    td3.textContent = schedule["startStation"];
-    tableRow.appendChild(td3);
+    document.getElementById("stopping").getElementsByTagName("span")[0].innerHTML = station.stationName;
+    document.getElementById("stopping").setAttribute("stationCode", station.station);
 
-    var td4 = document.createElement('td');
-    td4.textContent = schedule["endStation"]
-    tableRow.appendChild(td4);
+    document.getElementById("SAT").value = station.scheduledArrivalTime;
+    document.getElementById("SDT").value = station.scheduledDepartureTime; 
 
-    var td5 = document.createElement('td');
-    td5.textContent = schedule["speed"];
-    tableRow.appendChild(td5);
-
-    var td6 = document.createElement('td');
-
-    // Create the anchor (<a>) element
-    // var anchor1 = document.createElement('a');
-    // anchor1.setAttribute('href', 'trainSch.html');
-    var button1 = document.createElement('button');
-    button1.className = 'view-button';
-    button1.setAttribute("schedule", JSON.stringify(schedule));
-    button1.onclick = viewStations;
-    var icon1 = document.createElement('i');
-    icon1.className = 'fa-regular fa-eye';
-    button1.appendChild(icon1);
-    button1.appendChild(document.createTextNode(' View '));
-    // anchor1.appendChild(button1);
-    // td6.appendChild(anchor1);
-    td6.appendChild(button1);
-
-    var td7 = document.createElement('td');
-
-    // Create the anchor and button for "Edit"
-    // var anchor2 = document.createElement('a');
-    // anchor2.setAttribute('href', ''); // Add your URL
-    var editButton = document.createElement('button');
-    editButton.className = 'edit-button';
-    editButton.onclick = editSchedule;
-    editButton.setAttribute("schedule", JSON.stringify(schedule));
-    var editIcon = document.createElement('i');
-    editIcon.className = 'fas fa-edit';
-    editButton.appendChild(editIcon);
-    // anchor2.appendChild(editButton);
-
-    // Create the anchor and button for "Delete"
-    var anchor3 = document.createElement('a');
-    anchor3.setAttribute('href', ''); // Add your URL
-    var deleteButton = document.createElement('button');
-    deleteButton.className = 'delete-button';
-    deleteButton.onclick = deleteSchedule;
-    deleteButton.setAttribute("schedule", JSON.stringify(schedule));
-    var deleteIcon = document.createElement('i');
-    deleteIcon.className = 'fas fa-trash';
-    deleteButton.appendChild(deleteIcon);
-    anchor3.appendChild(deleteButton);
-
-    // Append the "Edit" and "Delete" buttons to the <td>
-    // td7.appendChild(anchor2);
-    // td7.appendChild(anchor3);
-    td7.appendChild(editButton);
-    td7.appendChild(deleteButton);
-
-    // Append all <td> elements to the <tr> element
-    tableRow.appendChild(td1);
-    tableRow.appendChild(td2);
-    tableRow.appendChild(td3);
-    tableRow.appendChild(td4);
-    tableRow.appendChild(td5);
-    tableRow.appendChild(td6);
-    tableRow.appendChild(td7);
-
-    return tableRow;
 }
 
 
@@ -144,11 +167,62 @@ function createRow(schedule) {
 function viewStations() {
     const url = "trainSch.html";
     const schedule = this.getAttribute("schedule");
+    localStorage.setItem("schedule", schedule);
     // const schedule = JSON.parse(this.getAttribute("schedule"));
 
     window.location.href = url+"?addNew=false&schedule="+encodeURIComponent(schedule);
 }
 
+
+
+async function createSchedulesPage() {
+    let param = {
+        date: new Date().toLocaleDateString(
+            'en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }
+        )
+    }
+    
+    let urlQuery = scheduleEndpoint+`?json=${encodeURIComponent(JSON.stringify(param))}`;
+
+    try {
+        let data = await customFetch(urlQuery, param);
+        console.log(data);
+        data.forEach(sch => {
+            let viewButton = document.createElement("button");
+            viewButton.classList.add("view-button");
+            viewButton.innerHTML = "<i class='fa-regular fa-eye'></i>";
+            viewButton.setAttribute("schedule", JSON.stringify(sch));
+            viewButton.onclick = viewStations;
+
+            let row = document.getElementById("schedule_table").insertRow(-1);
+            row.insertCell(0).innerHTML = sch.scheduleId;
+            row.insertCell(1).innerHTML = sch.trainId;
+            row.insertCell(2).innerHTML = sch.startStation;
+            row.insertCell(3).innerHTML = sch.endStation;
+            row.insertCell(4).innerHTML = sch.trainType;
+            row.insertCell(5).innerHTML = `<a href="/html/admin/trainSch.html?scheduleId=${sch.scheduleId}"><button class="view-button">
+                                                View <i class="fa-regular fa-eye"></i></button>
+                                            </a>`;
+            row.insertCell(6).innerHTML = `<a href=""><button class="edit-button"><i class="fas fa-edit"></i> </button></a><a href=""><button class="delete-button"><i class="fas fa-trash"></i> </button></a>`;
+        })
+    }
+    catch(error) {
+        if (error=="login-redirected")
+            localStorage.setItem("last_url", window.location.pathname);
+    }
+}
+
+
+
+function createSpecificSchPage() {
+    let schedule = localStorage.getItem("schedule");
+
+    if (schedule!=null) {
+        schedule = JSON.parse(schedule);
+
+        schedule.stations.forEach(station => insertStationToPage(station));
+    }
+}
 
 
 
@@ -224,38 +298,35 @@ function updateSchedule() {
 
 
 
-function addNewSchedule() {
-    console.log("Add new train schedule");
-    schedule = {
-        stations: []
-    };
-    schedule["scheduleId"] = document.getElementById("scheduleId").value;
-    schedule["trainId"] = document.getElementById("trainId").value;
-    schedule["startStation"] = document.getElementById("start-station").value;
-    schedule["endStation"] = document.getElementById("end-station").value;
+// function addNewSchedule() {
+//     console.log("Add new train schedule");
+//     schedule = {
+//         stations: []
+//     };
+//     schedule["scheduleId"] = document.getElementById("scheduleId").value;
+//     schedule["trainId"] = document.getElementById("trainId").value;
+//     schedule["startStation"] = document.getElementById("start-station").value;
+//     schedule["endStation"] = document.getElementById("end-station").value;
 
-    window.location.href = "trainSch.html?addNew=true&schedule="+encodeURIComponent(JSON.stringify(schedule));
+//     window.location.href = "trainSch.html?addNew=true&schedule="+encodeURIComponent(JSON.stringify(schedule));
 
-    // console.log(schedule);
+//     // console.log(schedule);
 
-    // const body = schedule;
-    // const params = {
-    //     headers : {
-    //         "Content-type": "application/json; charset=UTF-8"
-    //     },
-    //     body : JSON.stringify(body),
-    //     method : "POST",
-    //     credentials : "include"
-    // };
+//     // const body = schedule;
+//     // const params = {
+//     //     headers : {
+//     //         "Content-type": "application/json; charset=UTF-8"
+//     //     },
+//     //     body : JSON.stringify(body),
+//     //     method : "POST",
+//     //     credentials : "include"
+//     // };
 
-    // fetch(url, params)
-    // .then(res => {
-    //     if(res.ok) {
-    //         window.location.reload();
-    //     }
-    // });
-}
+//     // fetch(url, params)
+//     // .then(res => {
+//     //     if(res.ok) {
+//     //         window.location.reload();
+//     //     }
+//     // });
+// }
 
-
-
-// getSchedule();

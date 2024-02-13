@@ -13,15 +13,23 @@ async function customFetch(endpoint, options, sendJWT) {
 
     url = url+endpoint;
 
-    try {
-        let resp = await fetch(url, options);
-        if (resp.ok){
-            try {
-                return await resp.json();
-            } catch(error) {
-                console.log("Error in parsing response");
-                console.log(error);
-                return {status: resp.status};
+    let resp = await fetch(url, options);
+    if (resp.ok){
+        try {
+            return await resp.json();
+        } catch (e) {
+            return {status: resp.status};
+        }
+    }
+    else{
+        console.log("Invalid response");
+        console.log(resp);
+        if (resp.status==401) {
+            let msg = await resp.text();
+            if (msg=="expired") {
+                window.alert("Session expired. Please login again.");
+                window.location.href="/html/signin.html";
+                return Promise.reject("login-redirected");
             }
         }
         else{
