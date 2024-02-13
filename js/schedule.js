@@ -40,6 +40,8 @@ function addNewSchedule() {
         .catch((error) => {
             if (error=="login-redirected")
                 localStorage.setItem("last_url", window.location.pathname);
+        });
+}
 
 function getSchedules() {
     let param = {
