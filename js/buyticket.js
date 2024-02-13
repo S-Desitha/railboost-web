@@ -68,6 +68,10 @@ function buyETicket() {
   //   });
 
   console.log(booking);
+  alert("Check your email for E-Ticket.");
+  // window.onbeforeunload = function{
+  //   return true;
+  // }
 }
 
 function getPrice(){
