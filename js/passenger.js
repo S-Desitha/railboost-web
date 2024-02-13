@@ -25,7 +25,7 @@ async function getSchedules() {
             row.insertCell(1).innerHTML = sch.trainId;
             row.insertCell(2).innerHTML = sch.startStation;
             row.insertCell(3).innerHTML = sch.endStation;
-            row.insertCell(4).innerHTML = sch.trainType;
+            row.insertCell(4).innerHTML = sch.speed;
             row.insertCell(5).appendChild(viewButton);
         });
     } catch(error) {
