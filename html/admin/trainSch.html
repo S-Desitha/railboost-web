@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/trainSch.css">
 	<!-- <link rel="stylesheet" href="/css/passSearch.css"> -->
     <script src="/js/script.js"></script>
+	<script src="/js/schedule.js"></script>
 	<!-- <script src="/js/train.js"></script> -->
 	
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
@@ -52,30 +53,13 @@
 					</tr>
 				</thead>
 				<tbody id="schedule_stations">
-					
-					<tr>
-						<td>Bambalapitiya</td>
-						<td>08:25</td>
-						<td>08:30</td>
-				
-						<td>
-							<a href=""><button class="edit-button">
-								<i class="fas fa-edit"></i> 
-							</button></a>
-							<a href=""><button class="delete-button">
-								<i class="fas fa-trash"></i>
-							</button></a>
-						</td>
-					</tr>
-					
-					
 				</tbody>
 			</section>
 			</table>
 		</div>
 	
 		<div class="train-right">
-			<div class="train-form">
+			<form class="train-form" id="schedule-form">
 				
 				
 					<h2 class="add-train-heading">Add a new train schedule </h2>
@@ -118,7 +102,7 @@
 					<div>
 						<fieldset>
 							<legend>Stopping Stations: </legend>
-							<div class="wrapper" id="from">
+							<div class="wrapper" id="stopping">
 							<div class="select-btn">
 								<span>Station</span>
 								<i class="uil uil-angle-down"></i>
@@ -138,12 +122,13 @@
 							<label for="SDT"></label>
 							<input type="time" id="SDT" placeholder="Scheduled Departure Time" name="Scheduled Departure Time" required><br>
 						<div class="buttons">
-							<button class="form-button" id="add_update-sch_station" onclick="addSchStation()">Add a new stopping </button>
-							<button class="form-button" id="done" onclick="">Done </button>
+							<button class="form-button" id="add_update-sch_station" onclick="addStoppingStation(this)">Add a new stopping </button>
+							
 						</div>
 						</fieldset>
+						<button class="form-button" id="done" onclick="">Done </button>
 					</div>
-			</div>
+			</form>
 	
 		</div>
 	</div>
