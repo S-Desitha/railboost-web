@@ -154,3 +154,20 @@ function validateStrPassword() {
     passwordError.innerHTML = "";
     return true;
 }
+function toggleDropdown() {
+    var dropdown = document.getElementById("drop");
+    if (dropdown.style.display === "none") {
+      dropdown.style.display = "block";
+    } else {
+      dropdown.style.display = "none";
+    }
+    
+  }
+  
+  window.onclick = function(event){
+    if (!event.target.matches('.dropbtn')){
+        var dropdown = document.getElementById("drop");
+        dropdown.style.display = "none";
+    }
+  }
+  
