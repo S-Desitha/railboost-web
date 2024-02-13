@@ -13,23 +13,13 @@ async function customFetch(endpoint, options, sendJWT) {
 
     url = url+endpoint;
 
-    let resp = await fetch(url, options);
-    if (resp.ok){
-        try {
-            return await resp.json();
-        } catch (e) {
-            return {status: resp.status};
-        }
-    }
-    else{
-        console.log("Invalid response");
-        console.log(resp);
-        if (resp.status==401) {
-            let msg = await resp.text();
-            if (msg=="expired") {
-                window.alert("Session expired. Please login again.");
-                window.location.href="/html/signin.html";
-                return Promise.reject("login-redirected");
+    try {
+        let resp = await fetch(url, options);
+        if (resp.ok){
+            try {
+                return await resp.json();
+            } catch (e) {
+                return {status: resp.status};
             }
         }
         else{
@@ -43,18 +33,30 @@ async function customFetch(endpoint, options, sendJWT) {
                     return Promise.reject("login-redirected");
                 }
             }
-            else if (resp.status==400) {
-                let data = await resp.json();
-                let error_msg = data.detailMessage;
-                if (error_msg=="signup-expired"){
-                    window.alert("You signup session has expired. Please contact administrator and signup again.");
+            else{
+                console.log("Invalid response");
+                console.log(resp);
+                if (resp.status==401) {
+                    let msg = await resp.text();
+                    if (msg=="expired") {
+                        window.alert("Session expired. Please login again.");
+                        window.location.href="/html/signin.html";
+                        return Promise.reject("login-redirected");
+                    }
                 }
-                window.location.href="/index.html";
-                return Promise.reject(data.detailMessage);
-            }
-            return {
-                isSuccessful: false,
-                status: resp.status
+                else if (resp.status==400) {
+                    let data = await resp.json();
+                    let error_msg = data.detailMessage;
+                    if (error_msg=="signup-expired"){
+                        window.alert("You signup session has expired. Please contact administrator and signup again.");
+                    }
+                    window.location.href="/index.html";
+                    return Promise.reject(data.detailMessage);
+                }
+                return {
+                    isSuccessful: false,
+                    status: resp.status
+                }
             }
         }
     } catch (error) {
