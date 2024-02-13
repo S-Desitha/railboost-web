@@ -10,8 +10,13 @@ async function customFetch(endpoint, options, sendJWT) {
     url = url+endpoint;
 
     let resp = await fetch(url, options);
-    if (resp.ok)
-        return await resp.json();
+    if (resp.ok){
+        try {
+            return await resp.json();
+        } catch (e) {
+            return {status: resp.status};
+        }
+    }
     else{
         console.log("Invalid response");
         console.log(resp);

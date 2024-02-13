@@ -59,17 +59,55 @@
 		</div>
 	
 		<div class="train-right">
-			<form class="train-form" id="schedule-form">
-				
-				
-					<h2 class="add-train-heading">Add a new train schedule </h2>
+			<h2 class="add-train-heading">Add a new train schedule </h2>
 
+			<form class="train-form" id="station-form" onsubmit="addStoppingStation(this); return false">
+				<!-- <fieldset> -->
+					<legend>Stopping Stations: </legend>
+					<div class="wrapper" id="stopping">
+					<div class="select-btn">
+						<span>Station</span>
+						<i class="uil uil-angle-down"></i>
+					</div>
+					<div class="content">
+						<div class="search">
+							<i class="uil uil-search"></i>
+							<input spellcheck="false" type="text" placeholder="Search">
+						</div>
+						<ul class="options">
+						</ul>
+					</div>
+					</div>
+						<label for="SAT"></label>
+						<input type="time" id="SAT" placeholder="Scheduled Arrival Time" name="Scheduled Arrival Time" required><br>
+
+						<label for="SDT"></label>
+						<input type="time" id="SDT" placeholder="Scheduled Departure Time" name="Scheduled Departure Time" required><br>
+					<!-- <div class="buttons">
+						<button class="form-button" id="add_update-sch_station" onclick="addStoppingStation(this)">Add a new stopping </button>
+						<button type="submit" class="form-button" id="done" onclick="addNewSchedule()">Done </button>
+					</div> -->
+					<input type="submit" class="form-button" id="add_update-sch_station" value="Add a new stopping">
+				<!-- </fieldset> -->
+			</form>
+
+
+			<form class="train-form" id="schedule-form" onsubmit="addNewSchedule(); return false">
+				<fieldset>
 					<label for="Schedule-ID"></label>
 					<input type="text" id="sch-id" placeholder="Schedule ID" required>
 
 					<label for="Train-ID"></label>
 					<input type="text" id="tr-id" placeholder="Train ID" required>
 					
+					<label for="speed"></label>
+					<select name="speed" id="speed">
+						<option value="">--Select Speed--</option>
+						<option value="Slow">Slow</option>
+						<option value="Semi-Empress">Semi-Express</option>
+						<option value="Express">Express</option>
+						<option value="Intercity">Intercity</option>
+					</select>
 
 					<div class="wrapper" id="from">
 						<div class="select-btn">
@@ -99,35 +137,8 @@
 							<ul class="options"></ul>
 						</div>
 					</div>
-					<div>
-						<fieldset>
-							<legend>Stopping Stations: </legend>
-							<div class="wrapper" id="stopping">
-							<div class="select-btn">
-								<span>Station</span>
-								<i class="uil uil-angle-down"></i>
-							</div>
-							<div class="content">
-								<div class="search">
-									<i class="uil uil-search"></i>
-									<input spellcheck="false" type="text" placeholder="Search">
-								</div>
-								<ul class="options">
-								</ul>
-							</div>
-						</div>
-							<label for="SAT"></label>
-							<input type="time" id="SAT" placeholder="Scheduled Arrival Time" name="Scheduled Arrival Time" required><br>
-
-							<label for="SDT"></label>
-							<input type="time" id="SDT" placeholder="Scheduled Departure Time" name="Scheduled Departure Time" required><br>
-						<div class="buttons">
-							<button class="form-button" id="add_update-sch_station" onclick="addStoppingStation(this)">Add a new stopping </button>
-							
-						</div>
-						</fieldset>
-						<button class="form-button" id="done" onclick="">Done </button>
-					</div>
+					<input type="submit" class="form-button" id="done" value="Done">
+				</fieldset>
 			</form>
 	
 		</div>

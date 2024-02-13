@@ -14,18 +14,46 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 
 function addNewSchedule() {
+    let schedule = localStorage.getItem("schedule");
+    schedule = JSON.parse(schedule);
 
+    schedule.startStation = document.getElementById("from").getAttribute("stationCode");
+    schedule.endStation = document.getElementById("to").getAttribute("stationCode");
+    schedule.scheduleId = document.getElementById("sch-id").value;
+    schedule.trainId = document.getElementById("tr-id").value;
+    schedule.speed = document.getElementById("speed").value;
 
-    schedule = {};
+    schedule.stations.forEach(st => {
+        st.scheduleId = schedule.scheduleId;
+    });
+
+    const params = {
+        headers : {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body : JSON.stringify(schedule),
+        method : "POST"
+    };
+
+    customFetch(scheduleEndpoint, params)
+        .then(()=> {
+            localStorage.removeItem("schedule");
+            window.location.replace("/html/admin/schedule.html");
+        })
+        .catch((error) => {
+            if (error=="login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
+        });
 
 }
 
 
 
-function addStoppingStation(button) {
+function addStoppingStation(form) {
     let schedule = localStorage.getItem("schedule");
     schedule = schedule==null ? schedule = {stations: [], days: [], nStations:0} : JSON.parse(schedule);
     
+    let button = document.getElementById("add_update-sch_station");
     
     station = {
         "scheduleId" : document.getElementById("sch-id").value,
@@ -36,6 +64,8 @@ function addStoppingStation(button) {
     };
     
     if (button.getAttribute("context") == "edit") {
+        button.setAttribute("context", "");
+        button.value = "Add a new Stopping";
         schedule.stations = schedule.stations.map(st => {
             if (st.stIndex==button.getAttribute("stIndex")) {
                 station.stIndex = st.stIndex;        
@@ -50,8 +80,6 @@ function addStoppingStation(button) {
         row.cells[0].innerHTML = station.stationName;
         row.cells[1].innerHTML = station.scheduledArrivalTime;
         row.cells[2].innerHTML = station.scheduledDepartureTime;
-
-        document.getElementById("schedule-form").reset();
     }
 
     else {
@@ -61,6 +89,7 @@ function addStoppingStation(button) {
         schedule.nStations++;
     }
 
+    document.getElementById("station-form").reset();
     localStorage.setItem("schedule", JSON.stringify(schedule));
 
 }
@@ -94,7 +123,7 @@ function editStation() {
     let stationCode = this.parentNode.parentNode.getAttribute("stationCode");
 
     let button = document.getElementById("add_update-sch_station")
-    button.innerHTML = "Update Station";
+    button.value = "Update Station";
     button.setAttribute("context", "edit");
     
     let station = JSON.parse(localStorage.getItem("schedule")).stations
