@@ -20,4 +20,46 @@
 a:hover {
   text-decoration: none;
   cursor: pointer;
-} 
+}
+
+
+.staff-service {
+
+  display: flex;
+  align-self: center;
+  align-items: center;
+  /* margin-left: 350px; */
+  /* gap: 180px; */
+  /* width: 30vw; */
+  
+  width: 100%;
+  max-width: 70%;
+  overflow-x: hidden;
+  overflow-y: overlay;
+  min-height: 50vh;
+  box-shadow: 0 0.4rem 0.8rem #0005;
+  border-radius: 0.8rem;
+  margin: 80px auto;
+  /* overflow-y: auto; */
+  flex-direction: column;
+  /* overflow: hidden; */
+
+}
+
+
+dialog {
+  padding: 0.5rem;
+  margin: auto;
+  /* top: 50%;
+  left: 50%;
+  translate: -50% -50%; */
+  z-index: 10;
+  background: #ffffff;
+  border: #ffffff;
+  border-radius: 0.5rem;
+}
+
+dialog::backdrop {
+  background-color: var(--theme-color);
+  opacity: 0.25;
+}
