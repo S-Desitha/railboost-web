@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/script.js"></script>
+    <script src="/js/auth.js"></script>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/season.css">  
+	<script src="/js/season.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Buy Season Ticket</title>
+</head>
+<body> 
+    <nav class="navbar" >
+        <script>createNavBar("passenger")</script>
+    </nav>
+
+	<div class="train-container">
+        <div class="train-left">
+            <h1 class="add-train-heading" id="add_update-schedule-header">Buy Season Ticket </h1>
+            <img src="../../Images/ETicket.png" alt="Train Image" class="train-image ">
+		</div>
+				
+		<div class="train-right">
+		    <div class="train-form">
+							
+				<form onsubmit="return false">
+					<!-- <h2 class="add-train-heading" id="add_update-schedule-header">Buy Season Ticket </h2> -->
+                    <label for="start-station"></label>
+                  
+					            <div class="wrapper" font-size="1px" id="from">
+                        <div class="select-btn">
+                            <span>Start Station:</span> 
+                            <i font-size="3px" class="fa fa-angle-down"></i>
+                        </div>
+                        <div class="content">
+                            <div class="search">
+                                <i class="fas fa-search"></i>
+                                <input spellcheck="false" type="text" placeholder="Search">
+                            </div>
+                            <ul onclick="getPrice(); validateStation();" class="options"></ul>
+                        </div>
+                    </div>
+                
+                    <div class="wrapper" font-size="1px" id="to">
+                      <div class="select-btn">
+                          <span>End Station:</span> 
+                          <i font-size="3px" class="fa fa-angle-down"></i>
+                      </div>
+                      <div class="content">
+                          <div class="search">
+                              <i class="fas fa-search"></i>
+                              <input spellcheck="false" type="text" placeholder="Search">
+                          </div>
+                          <ul onclick="getPrice(); validateStation();" class="options"></ul>
+                      </div>
+                  </div>
+                    <span id="station-error"></span>
+
+                    <label for="passenger-type"></label>
+                    <select id="passenger-type" name="passenger-type" onchange="getPrice(); updateEndDate();" required>
+                        <option value="" disabled selected>Passenger Type:</option>
+                        <option value="Normal Passenger" style="color: #484848">Normal Passenger</option>
+                        <option value="Government Servant" style="color: #484848">Government Servant</option>
+                        <option value="Student 1" style="color: #484848">Student (Younger than 12)</option>
+                        <option value="Student 2" style="color: #484848">Student (Older than 12)</option>
+                        <option value="Railway Servant" style="color: #484848">Railway Servant</option>
+                    </select>
+								
+                    <label for="Start-date"></label>
+                    <input type="date" id="Start-date" name="Start-date" placeholder=" Start Date: " onchange="getPrice(); updateEndDate();" max="" required><br />   
+                                
+                    <script>
+                        var currentDate = new Date();
+                        // var formattedDate = currentDate.toISOString().split('T')[0];
+                        // document.getElementById('Start-date').value = formattedDate;
+                        var minDate = currentDate.toLocaleDateString('en-CA',{timeZone:'Asia/Colombo'});
+                        document.getElementById('Start-date').min = minDate;
+                        currentDate.setMonth(currentDate.getMonth() + 3);
+                        currentDate.setHours(0, 0, 0, 0);
+                        var maxDate = currentDate.toISOString().split('T')[0];
+                        document.getElementById('Start-date').max = maxDate;
+                    </script>
+
+                    <label for="duration"></label>
+                    <select id="duration" name="duration" onchange="getPrice(); updateEndDate();" required>
+                        <option value="" disabled selected>Duration:</option>
+                        <option value="1 Week" style="color: #484848">1 Week</option>
+                        <option value="1 Month" style="color: #484848">1 Month</option>
+                        <option value="3 Month" style="color: #484848">3 Month</option>
+                        <option value="6 Month" style="color: #484848">6 Month</option>
+                    </select>
+
+                    <label for="End-date"></label>
+                    <input type="text" id="End-date" name="End-date" placeholder=" End Date:" disabled><br /> 
+                    
+
+                    <label for="class"></label>
+                    <select id="class" name="class" onchange="getPrice()" required>
+                        <option value="" disabled selected>Class:</option>
+                        <option value="1st Class" style="color: #484848">1st Class</option>
+                        <option value="2nd Class" style="color: #484848">2nd Class</option>
+                        <option value="3rd Class" style="color: #484848">3rd Class</option>
+                    </select> 
+
+                    <div class="price-of-1"> <span id="price-of-one"></span></div>
+                    <label for="total-price"></label>
+					<input disabled value="" type="Double" id="total-price" name="total-price" placeholder=" Total Price:" ><br>
+
+                    <label for="img" id="Application">
+                        <span class="app">Application</span>
+                        <input type="file" id="img" name="img" accept="image/*" required>
+                    </label>
+                    <style>
+                        .app{
+                            text-align: left;
+                            margin-left: 10px;
+                            color:#0d45a5;
+                            font-weight: 900;
+}
+                        }
+                        input[type=file] {
+                            display:grid
+                        }
+                        input[type=file]::file-selector-button {
+                            /* margin-right: 20px; */
+                            border: none;
+                            background: #084cdf;
+                            padding: 10px 20px;
+                            border-radius: 10px;
+                            color: #fff;
+                            cursor: pointer;
+                            transition: background .2s ease-in-out;
+                            }
+
+                            input[type=file]::file-selector-button:hover {
+                            background: #0d45a5;
+                            }
+                    </style>
+
+
+					<button class="form-button" id="buy-ticket-button" onclick="appplySeasonTicket()">Apply</button>
+				</form>
+	    	</div>
+				
+		</div>
+	</div>
+
+<script src="/js/stations.js">
+</script>
+				
+</body>
