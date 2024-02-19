@@ -115,9 +115,10 @@ function addNewTrain() {
 function updateTrain() {
   train = {};
 
+
   train["trainId"] = document.getElementById("trainId").value;
   train["trainType"] = document.getElementById("trainType").value;
-
+  console.log(train);
   const body = train;
   const params = {
     headers: {
