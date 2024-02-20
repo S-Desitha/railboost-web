@@ -2,8 +2,9 @@ input {
     border: none;
     border-bottom: 1px solid #a9a9a9;
     color: #484848;
-    padding: 7px 0;
-    margin: 15px 0;
+    padding:  0px;
+    margin-left:  200px;
+    
   }
 
   input::placeholder {
@@ -19,18 +20,12 @@ input {
 }
 .booking_form{
     flex: 1; 
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content:center;
+    
 }
 
-.form{
-    margin-top: 5%;
-    width: 100%; 
+
    
-}
+
 .form_left{
     width: 50%;
     float:left;
@@ -72,39 +67,38 @@ h2{
     margin-top: 20%;
     font-size: 20px;
 }
+#register_button{
+  align-items: center;
+  margin: 150px;
+}
 input, label {
-    margin: 5px 5px;
+    margin: 0px;
   }
   
-  .form-group {
-    margin: 30px auto;
-    width: 450px;
-  }
-  
-  .form-control {
-    float: left;
-  }
-  
-  #inputStreet {
+
+
+
+  .popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+/* Style for the overlay background */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-  }
-  
-  #inputCity {
-    width: 50%;
-  }
-  
-  #inputState {
-    width: 15%;
-  }
-  
-  #inputZip {
-    width: 28%;
-  }
-  
-  #inputCounty {
-    width: 45%;
-  }
-  
-  #inputCountry {
-    width: 50%;
-  }
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 900;
+}
