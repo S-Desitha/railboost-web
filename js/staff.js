@@ -149,12 +149,13 @@ function popupAddPage() {
     dialog.addEventListener("click", e => {
         const dialogDimensions = dialog.getBoundingClientRect()
         if (
-          e.clientX < dialogDimensions.left ||
-          e.clientX > dialogDimensions.right ||
-          e.clientY < dialogDimensions.top ||
-          e.clientY > dialogDimensions.bottom
+            (e.clientX !=0 && e.clientY !=0) &&
+            (e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom) 
         ) {
-          dialog.close()
+            dialog.close()
         }
     });
 }
