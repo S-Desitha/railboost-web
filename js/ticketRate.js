@@ -10,21 +10,21 @@ document.addEventListener("DOMContentLoaded", async function () {
       let data = await customFetch(endpoint3, {});
       
       data.forEach(rate => {
-        console.log(data);
-        console.log("Processing rate:", rate);
+        // console.log(data);
+        // console.log("Processing rate:", rate);
         let editButton = document.createElement("button");
         editButton.classList.add("edit-button");
         editButton.innerHTML = "<i class='fas fa-edit'></i>";
         editButton.setAttribute("rate", JSON.stringify(rate));
         editButton.onclick = editRate;
-        console.log(editButton);
+        // console.log(editButton);
   
         let deleteButton = document.createElement("button");
         deleteButton.classList.add("delete-button");
         deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
         deleteButton.setAttribute("rate", JSON.stringify(rate));
         deleteButton.onclick = deleteRate;
-        console.log(deleteButton);
+        // console.log(deleteButton);
 
 
         
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         row.insertCell(4).innerHTML = rate.thirdClass;
         row.insertCell(5).append(editButton, deleteButton);
 
-        console.log("Row added successfully.");
+        // console.log("Row added successfully.");
       });
   
     }
@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   function editRate() {
     rate = JSON.parse(this.getAttribute("rate"));
+    console.log("1=");
     console.log(rate);
   
     const button = document.getElementById("add-new-price-rate");
@@ -71,20 +72,53 @@ document.addEventListener("DOMContentLoaded", async function () {
     document.getElementById("1class-price").value = rate["firstClass"];
     document.getElementById("2class-price").value = rate["secondClass"];
     document.getElementById("3class-price").value = rate["thirdClass"];
-  
+    
+    console.log(rate);
     button.setAttribute("rate", JSON.stringify(rate));
     button.onclick = updateRate;
+  }
+
+  function updateRate() {
+    rate = {};
+    
+   
+
+    rate["startCode"] =document.getElementById("from").getAttribute("stationCode");
+    rate["endCode"] =document.getElementById("to").getAttribute("stationCode");
+    rate["firstClass"] = document.getElementById("1class-price").value;
+    rate["secondClass"] = document.getElementById("2class-price").value;
+    rate["thirdClass"] = document.getElementById("3class-price").value;
+    console.log(rate)
+    
+    const body = rate;
+    const params = {
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify(body),
+      method: "PUT"
+    };
+  
+    customFetch(endpoint3, params)
+        .then(()=> window.location.reload())
+        .catch((error) => {
+            if (error=="login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
+        });
+
+  
+    
   }
   
   
   
   function deleteRate() {
-    train = JSON.parse(this.getAttribute("train"));
-    console.log(train);
+    rate = JSON.parse(this.getAttribute("rate"));
+    console.log(rate);
   
-    let confirm = window.confirm("Are you sure you want to delete train with id " + train["trainId"]);
+    let confirm = window.confirm("Are you sure you want to delete rate from " + rate["startStation"] + " to " + rate["endStation"]);
     if (confirm) {
-      const body = train;
+      const body = rate;
       const params = {
         headers: {
           "Content-type": "application/json; charset=UTF-8"
@@ -93,12 +127,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         method: "DELETE"
       };
   
-      fetch(url, params)
-        .then(res => {
-          if (res.ok) {
-            window.location.reload();
-          }
-        });
+      customFetch(endpoint3, params)
+      .then(()=> window.location.reload())
+      .catch((error) => {
+          if (error=="login-redirected")
+              localStorage.setItem("last_url", window.location.pathname);
+      });
     }
   }
   
@@ -135,34 +169,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   
   
   
-  function updateRate() {
-    rate = {};
-  
-    
-    rate["firstClass"] = document.getElementById("1class-price").value;
-    rate["secondClass"] = document.getElementById("2class-price").value;
-    rate["thirdClass"] = document.getElementById("3class-price").value;
-    console.log(rate)
-    
-    const body = rate;
-    const params = {
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      },
-      body: JSON.stringify(body),
-      method: "PUT"
-    };
-  
-    customFetch(endpoint3, params)
-        .then(()=> window.location.reload())
-        .catch((error) => {
-            if (error=="login-redirected")
-                localStorage.setItem("last_url", window.location.pathname);
-        });
 
-  
-    
-  }
   
 
 function validateStation(){
@@ -177,3 +184,4 @@ function validateStation(){
         StationError.innerHTML = "";
         return true;
 }
+

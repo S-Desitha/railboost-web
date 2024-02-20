@@ -77,6 +77,8 @@ function buyETicket() {
 function getPrice(){
   var Start=document.getElementById("from").getAttribute("stationCode");
   var End=document.getElementById("to").getAttribute("stationCode");
+  console.log(Start);
+  console.log(End);
   var Class=document.getElementById("class").value;
   var Count=document.getElementById("no-of-tickets").value;
   if (Start && End && Class && Count) {
