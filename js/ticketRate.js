@@ -55,17 +55,22 @@ document.addEventListener("DOMContentLoaded", async function () {
     document.getElementById("add-new-price-header").innerHTML = "Update Rate";
     button.innerHTML = "Update";
   
-    let StartSField = document.getElementById("from");
-    StartSField.value = rate["startStation"]
-    StartSField.disabled = true;
+    let startWrapper = document.getElementById("from");
+    let endWrapper = document.getElementById("to");
 
-    let EndSField = document.getElementById("to");
-    EndSField.value = rate["endStation"]
-    EndSField.disabled = true;
+    startWrapper.querySelector(".select-btn span").innerText = rate["startStation"];
+    startWrapper.setAttribute("stationCode", rate["startCode"]);
+    startWrapper.setAttribute("stationName", rate["startStation"]);
+    startWrapper.style.pointerEvents = "none";
+
+    endWrapper.querySelector(".select-btn span").innerText = rate["endStation"];
+    endWrapper.setAttribute("stationCode", rate["endCode"]);
+    endWrapper.setAttribute("stationName", rate["endStation"]);
+    endWrapper.style.pointerEvents = "none";
   
-    document.getElementById("1class-price").value = train["1st Class"];
-    document.getElementById("2class-price").value = train["2nd Class"];
-    document.getElementById("3class-price").value = train["3rd Class"];
+    document.getElementById("1class-price").value = rate["firstClass"];
+    document.getElementById("2class-price").value = rate["secondClass"];
+    document.getElementById("3class-price").value = rate["thirdClass"];
   
     button.setAttribute("rate", JSON.stringify(rate));
     button.onclick = updateRate;
@@ -131,13 +136,15 @@ document.addEventListener("DOMContentLoaded", async function () {
   
   
   function updateRate() {
-    train = {};
+    rate = {};
   
-  
-    train["trainId"] = document.getElementById("trainId").value;
-    train["trainType"] = document.getElementById("trainType").value;
-    console.log(train);
-    const body = train;
+    
+    rate["firstClass"] = document.getElementById("1class-price").value;
+    rate["secondClass"] = document.getElementById("2class-price").value;
+    rate["thirdClass"] = document.getElementById("3class-price").value;
+    console.log(rate)
+    
+    const body = rate;
     const params = {
       headers: {
         "Content-type": "application/json; charset=UTF-8"
@@ -146,14 +153,15 @@ document.addEventListener("DOMContentLoaded", async function () {
       method: "PUT"
     };
   
-    fetch(url, params)
-      .then(res => {
-        if (res.ok) {
-          window.location.reload();
-        }
-      });
+    customFetch(endpoint3, params)
+        .then(()=> window.location.reload())
+        .catch((error) => {
+            if (error=="login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
+        });
+
   
-    console.log(train);
+    
   }
   
 
