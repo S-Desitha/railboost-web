@@ -7,7 +7,7 @@
 	<script src="/js/auth.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
-    <!-- <link rel="stylesheet" href="/css/staff.css"> -->
+    <link rel="stylesheet" href="/css/staff.css">
 	<link rel="stylesheet" href="/css/table.css">
 	<link rel="stylesheet" href="/css/buttons.css">
 	<link rel="stylesheet" href="/css/validations.css">
@@ -29,15 +29,15 @@
 
 			<section class="table_header">
 				<h1>Staff Details</h1>
-				<!-- <div class="input-group">
+				<div class="input-group">
 					<input type="search" placeholder="Search Staff...">
 					<img src="/Images/filter.png" class="filter" alt="" onclick="toggleFilterBox()">
 					<img src="/Images/search.png" alt="">
 					
-				</div> -->
+				</div>
 			</section>
 					
-			<!-- <div class="filter-box" id="filter-box">
+			<div class="filter-box" id="filter-box">
 				<div class="wrapper" id="from">
 					<div class="select-btn">
 						<span>Railway Station</span>
@@ -69,7 +69,7 @@
 				</div>
 			
 				<button onclick="applyFilters()">Filter</button>
-			</div> -->
+			</div>
 			
 			<section class="table_body">
 				<table>
@@ -93,12 +93,11 @@
 
 	<dialog class="staff-add-modal">
 		<div class="adding-form">
-			
+			<section class="table_header">
+				<h1 id="add-staff-heading">Add a New Staff Memeber</h1>
+			</section>
 			<form onsubmit="return false" id="staff_form">
 				<!-- <h2 class="adding-form-heading" id="add-staff-heading">Add a new staff member</h2> -->
-				<section class="table_header">
-					<h1 id="add-staff-heading">Add a New Staff Memeber</h1>
-				</section>
 				<label for="staffId"></label>
 				<input type="text" id="staffId" placeholder="Staff ID:" name="staffId" onchange="updateUsername()" required><br>
 

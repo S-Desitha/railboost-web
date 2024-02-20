@@ -130,3 +130,48 @@ a {
 thead th.active,tbody td.active {
     color: var(--secondary-color);
 }
+
+.table_header .input-group:hover {
+    width: 45%;
+    background-color: #fff8;
+    box-shadow: 0 .1rem .4rem #0002;
+}
+
+
+.table_header .input-group {
+    width: 45%;
+    height: 100%;
+    background-color: #fff5;
+    padding: 0 .8rem;
+    border-radius: 2rem;
+    box-shadow: 0 .005rem .1rem #0002;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    transition: .2s;
+}
+
+
+.table_header .input-group input {
+    width: 100%;
+    padding: 0 .5rem 0 .3rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+
+.table_header .input-group img {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+
+.filter{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+  }

@@ -43,6 +43,13 @@ a:hover {
   /* overflow-y: auto; */
   flex-direction: column;
   /* overflow: hidden; */
+}
+
+
+.adding-form {
+  padding: 0px;
+  padding-left: 2rem;
+  padding-right: 2rem;
 
 }
 
@@ -61,7 +68,7 @@ dialog {
 
 dialog::backdrop {
   background-color: var(--theme-color);
-  opacity: 0.25;
+  opacity: 0.45;
 }
 
 
