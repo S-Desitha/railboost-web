@@ -6,7 +6,6 @@
   padding: 0;
   box-sizing: border-box;
   list-style: style none;
-  box-sizing: border-box;
 }
 
 :root {
@@ -15,6 +14,7 @@
   --secondary-color: #29499c;
   --secondary-text-color: #7c7c7c;
   --text-color: #ffffff;
+  --error-color: rgb(241, 23, 23);
 }
 
 a:hover {
@@ -23,7 +23,7 @@ a:hover {
 }
 
 
-.staff-service {
+.service {
 
   display: flex;
   align-self: center;
@@ -32,8 +32,8 @@ a:hover {
   /* gap: 180px; */
   /* width: 30vw; */
   
-  width: 100%;
-  max-width: 70%;
+  width: fit-content;
+  max-width: 90%;
   overflow-x: hidden;
   overflow-y: overlay;
   min-height: 50vh;
@@ -62,4 +62,20 @@ dialog {
 dialog::backdrop {
   background-color: var(--theme-color);
   opacity: 0.25;
+}
+
+
+input {
+  border: none;
+  border-bottom: 1px solid #a9a9a9;
+  color: #484848;
+  padding: 7px 0;
+  margin: 15px 0;
+}
+input:focus {
+  outline: none;
+  border-bottom: 1.5px solid var(--secondary-color);
+}
+input::placeholder {
+  color: #6e6b6b;
 }

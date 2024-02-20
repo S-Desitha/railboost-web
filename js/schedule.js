@@ -189,7 +189,7 @@ function viewStations() {
         ) {
           dialog.close()
         }
-      })
+    });
 }
 
 

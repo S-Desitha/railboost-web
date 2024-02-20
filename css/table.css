@@ -1,6 +1,6 @@
 .table-container {
 	align-items: center;
-    margin: 3% auto;
+    margin: 1rem auto;
     width: 100%;
     overflow-x: scroll;
 	/* margin-left: 100px;  */
@@ -16,8 +16,8 @@
     /* display: flex; */
     justify-content: space-between;
     font-size: 20px;
-    margin: 40px 60px;;
-     
+    margin: 0.5rem 2rem 1rem;
+    width: inherit;
     /* justify-content: center; */
     align-items: left;
 }
@@ -34,16 +34,30 @@
 }
 
 
-.edit-button, .delete-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    margin-right: 10px;
-    margin-left: 5px;
+.adding-form form > input, select {
+    width: 100%;
 }
 
 
-table, th, td {
+#role {
+	height: 2.5rem;
+	border: none;
+	border-bottom: 1px solid #a9a9a9;
+	color: #6e6b6b;
+	padding: 7px 0;
+	margin: 20px 0;
+}
+
+
+table {
+    border-collapse: collapse;
+    padding: 1.5rem;
+    margin: 0.5rem 2rem 1rem;
+    text-align: center;
+}
+
+
+th, td {
     border-collapse: collapse;
     padding: 1.5rem;
     margin: 20px 60px;
