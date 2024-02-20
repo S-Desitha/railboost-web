@@ -108,7 +108,10 @@ margin-top: 30px;
     justify-content: space-between;
     align-items: center;
 }
-
+.highlight {
+  background-color: #FFFF00; /* Yellow background color for highlighting */
+  transition: background-color 1s; /* Transition effect for highlighting */
+}
 
 
 /* .table_body {

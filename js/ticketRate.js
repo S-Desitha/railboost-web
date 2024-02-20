@@ -78,37 +78,106 @@ document.addEventListener("DOMContentLoaded", async function () {
     button.onclick = updateRate;
   }
 
-  function updateRate() {
-    rate = {};
-    
-   
+// ticketRate.js
 
-    rate["startCode"] =document.getElementById("from").getAttribute("stationCode");
-    rate["endCode"] =document.getElementById("to").getAttribute("stationCode");
-    rate["firstClass"] = document.getElementById("1class-price").value;
-    rate["secondClass"] = document.getElementById("2class-price").value;
-    rate["thirdClass"] = document.getElementById("3class-price").value;
-    console.log(rate)
-    
-    const body = rate;
-    const params = {
+// ticketRate.js
+
+function updateRate() {
+  rate = {};
+  rate["startCode"] = document.getElementById("from").getAttribute("stationCode");
+  rate["endCode"] = document.getElementById("to").getAttribute("stationCode");
+  rate["startStation"] = document.getElementById("from").getAttribute("stationName");
+  rate["endStation"] = document.getElementById("to").getAttribute("stationName");
+  rate["firstClass"] = document.getElementById("1class-price").value;
+  rate["secondClass"] = document.getElementById("2class-price").value;
+  rate["thirdClass"] = document.getElementById("3class-price").value;
+
+  const body = rate;
+  const params = {
       headers: {
-        "Content-type": "application/json; charset=UTF-8"
+          "Content-type": "application/json; charset=UTF-8"
       },
       body: JSON.stringify(body),
       method: "PUT"
-    };
-  
-    customFetch(endpoint3, params)
-        .then(()=> window.location.reload())
-        .catch((error) => {
-            if (error=="login-redirected")
-                localStorage.setItem("last_url", window.location.pathname);
-        });
+  };
 
-  
-    
+  // Get the updated row index based on the startStation and endStation values
+  const rowIndex = getUpdatedRowIndex(rate);
+
+  // Scroll to the updated row
+  scrollToRow(rowIndex);
+
+  customFetch(endpoint3, params)
+      .then(() => {
+          // Reload the page after successful update
+          window.location.reload();
+          // Highlight the updated row
+          highlightRow(rowIndex);
+      })
+      .catch((error) => {
+          if (error == "login-redirected")
+              localStorage.setItem("last_url", window.location.pathname);
+      });
+}
+
+function getUpdatedRowIndex(updatedRate) {
+  const table = document.getElementById("rate_table");
+  const updatedStartStation = updatedRate["startStation"];
+  const updatedEndStation = updatedRate["endStation"];
+
+  console.log("Updated Rate:", updatedRate);
+
+  for (let i = 1; i < table.rows.length; i++) {
+      const row = table.rows[i];
+      const rowStartStation = row.cells[0].innerText;
+      const rowEndStation = row.cells[1].innerText;
+
+      console.log(`Checking Row ${i}: Start Station - ${rowStartStation}, End Station - ${rowEndStation}`);
+
+      if (updatedStartStation === rowStartStation && updatedEndStation === rowEndStation) {
+          console.log(`Match Found at Row ${i}`);
+          return i;
+      }
   }
+
+  console.log("No Match Found");
+  return -1;
+}
+
+
+function scrollToRow(rowIndex) {
+  const table = document.getElementById("rate_table");
+  const rows = table.getElementsByTagName("tr");
+
+  // Check if rowIndex is within valid range
+  if (rowIndex >= 0 && rowIndex < rows.length) {
+      const offsetTop = rows[rowIndex].offsetTop - table.offsetTop;
+      const scrollContainer = table.parentElement;
+
+      // Scroll smoothly to the row's position
+      scrollContainer.scrollTo({
+          top: offsetTop,
+          behavior: "smooth"
+      });
+
+      // Highlight the row
+      highlightRow(rows[rowIndex]);
+  }
+}
+
+function highlightRow(row) {
+  // Add a CSS class to style the highlighted row
+  row.classList.add("highlight");
+
+  // Remove the highlight class after a short delay (e.g., 2 seconds)
+  setTimeout(() => {
+      row.classList.remove("highlight");
+  }, 2000); // 2000 milliseconds = 2 seconds
+}
+
+
+
+
   
   
   
