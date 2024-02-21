@@ -115,8 +115,11 @@ document.addEventListener("DOMContentLoaded", async function () {
                         title: "Rate Updated",
                         text: "The rate has been successfully updated!",
                         icon: "success",
-                    });
-                    window.location.reload();
+                    }).then((result) => {
+                        if (result.isConfirmed) window.location.reload();
+                    
+                    })
+                    
                 })
                 .catch((error) => {
                     if (error == "login-redirected")
