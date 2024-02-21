@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+            body {
+            font-family: sans-serif; 
+            }
+    
+            div label input {margin-right: 100px;}
+    
+            .cat{
+            margin: 4px;
+            /* border-radius: 4px; */
+            border-radius: 50%;
+            border: 1px solid #000000;
+            overflow: hidden;
+            float: left;
+            
+            }
+    
+            .cat label {
+            float: left; 
+            line-height: 2.0em;
+            width: 2.0em; 
+            height: 2.0em;
+            }
+    
+            .cat label span {
+            text-align: center;
+            /* padding: 3px 0; */
+            display: block;
+            }
+    
+            .cat label input {
+            position: absolute;
+            display: none;
+            /* color: #fff !important; */
+            }
+            .cat label input + span{color: #000000;}
+    
+    
+            .cat input:checked + span {
+                color: #ffffff;
+            }
+    
+    
+            .day input:checked + span{
+                background-color: #425be9;
+            }
+            input[type="number"] {
+                width: 60px; 
+                height: 15px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px; 
+                font-size: 16px; 
+            }
+            input[type="number"]:focus{
+                outline: 2px solid blue;
+            }
+
+            select {
+                font-size: 16px;
+                padding: 8px 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                
+                &:focus {
+                    outline: 2px solid blue;
+                }
+            }
+            .ends-on, .ends-after {
+            display: none;
+            }
+            #ENDdate{
+                
+            /* cursor: pointer;  */
+            width: 18.5rem;
+            height: 2.3rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #484848;
+            font-size: 16px;
+            margin: 15px 0;
+
+            &:focus{
+                outline: 2px solid blue;
+            }
+            }
+            #STARTdate{
+            
+            /* cursor: pointer;  */
+              width: 18.5rem;
+            height: 2.3rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #484848;
+            font-size: 16px;
+            margin: 15px 0;
+            
+            &:focus{
+                outline: 2px solid blue;
+            }
+            }
+            .input-control.success input {
+            border-color: #09c372;
+            }
+            .y-container{
+                margin-left: 35px;
+            }
+            .m-container{
+                margin-left: 35px;
+            }
+            /*
+            .container{
+                margin-left: 35px;
+            } */
+            /* .ends-on{
+                margin-left: 35px;
+            }
+            .ends-after{
+                margin-left: 35px;
+            } */
+  
+
+        </style>
+    </head>
+    <body>
+    
+        <div class="recurrence-window">
+            <div class="header">
+                <h2>Custom Recurrence</h2>
+            </div>
+        <div class="body">
+            <div class="repeat-every">
+                <label for="repeat-every">Repeat every   </label>
+                <input type="number" id="repeat-every" min="1" value="1">
+
+                <select id="repeat-unit" name="repeat-unit">
+                    <option value="day" selected>day</option>
+                    <option value="week">week</option>
+                    <option value="month">month</option>
+                    <option value="year">year</option>
+                </select>
+            </div><br>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    var repeatUnit = document.getElementById("repeat-unit");
+                    var repeatOn = document.getElementById("repeat-on");
+                    var container = document.getElementById("container");
+                    var ycontainer = document.getElementById("y-container");
+                    var mcontainer = document.getElementById("m-container");
+        
+                    repeatUnit.addEventListener("change", function () {
+                        if (repeatUnit.value === "day") {
+                            repeatOn.style.display = "none";
+                            container.style.display = "none";
+                            ycontainer.style.display = "none";
+                            mcontainer.style.display = "none";
+                        } else if (repeatUnit.value === "month") {
+                            repeatOn.style.display = "block";
+                            container.style.display = "none";
+                            ycontainer.style.display = "none";
+                            mcontainer.style.display = "block";
+                        }else if (repeatUnit.value === "year") {
+                            repeatOn.style.display = "block";
+                            container.style.display = "none";
+                            ycontainer.style.display = "block";
+                            mcontainer.style.display = "none";
+                        }else{
+                            repeatOn.style.display = "block";
+                            container.style.display = "block";
+                            ycontainer.style.display = "none";
+                            mcontainer.style.display = "none";
+                        }
+                    });
+                    repeatUnit.dispatchEvent(new Event("change"));
+                });
+            </script>
+            <div id="start-from" class="start-from">
+                <label for="start-from">Start from</label>
+                <div class="start-from">
+                    <input id="STARTdate" type="date" id="start-from-date">
+                </div>
+            </div>
+            
+            <div id="repeat-on" class="repeat-on">
+                <label for="repeat-on">Repeat on</label>
+            </div>
+                <div id="m-container" class="m-container">
+                    <label>Date   </label>
+                    <input type="number" id="repeat-every" min="1" max="31" value="1">
+                    <br><br>
+                </div>
+                <div id="y-container" class="y-container">
+                    
+                    <label>Month   </label>
+                    <select id="repeat-unit" name="repeat-unit" onchange="setRU();">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select><br><br>
+                    <label>Date      </label>
+                    <input type="number" id="repeat-every" min="1" max="31" value="1">
+                    <br><br>
+                </div>
+                
+
+                <div id="container" class="container">
+                    <div class="cat day">
+                       <label>
+                          <input type="checkbox" value="1"><span>S</span>
+                       </label>
+                    </div>
+                    
+                    <div class="cat day">
+                       <label>
+                          <input type="checkbox" value="1"><span>M</span>
+                       </label>
+                    </div>
+                    
+                    <div class="cat day">
+                       <label>
+                          <input type="checkbox" value="1"><span>T</span>
+                       </label>
+                    </div>
+                    
+                    <div class="cat day">
+                       <label>
+                          <input type="checkbox" value="1"><span>W</span>
+                       </label>
+                    </div>
+                    
+                    <div class="cat day">
+                       <label>
+                          <input type="checkbox" value="1"><span>T</span>
+                       </label>
+                    </div>
+                    
+                    <div class="cat day">
+                       <label>
+                          <input type="checkbox" value="1"><span>F</span>
+                       </label>
+                    </div>
+                    
+                    <div class="cat day">
+                       <label>
+                          <input type="checkbox" value="1"><span>S</span>
+                       </label>
+                    </div><br><br><br>
+                </div>
+        <div class="ends">
+            <label for="ends">Ends</label>
+            <div>
+                <input type="radio" name="ends-option" id="never" value="never" checked>
+                <label for="never">Never</label>
+    
+                <input type="radio" name="ends-option" id="on-date" value="on-date">
+                <label for="on-date">On</label>
+                
+    
+                <input type="radio" name="ends-option" id="after-occurrences" value="after-occurrences">
+                <label for="after-occurrences">After</label>
+                <div class="ends-on">
+                    <input id="ENDdate" type="date" id="ends-on-date">
+                </div>
+                <div class="ends-after">
+                    <br>
+                    <input type="number" id="ends-after-occurrences" min="1" value="1">
+                    <label for="ends-after-occurrences">occurrences</label>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            var neverRadio = document.getElementById("never");
+            var onDateRadio = document.getElementById("on-date");
+            var afterOccurrencesRadio = document.getElementById("after-occurrences");
+            var endsOn = document.querySelector(".ends-on");
+            var endsAfter = document.querySelector(".ends-after");
+
+            function updateVisibility() {
+                endsOn.style.display = onDateRadio.checked ? "block" : "none";
+                endsAfter.style.display = afterOccurrencesRadio.checked ? "block" : "none";
+            }
+
+            neverRadio.addEventListener("change", updateVisibility);
+            onDateRadio.addEventListener("change", updateVisibility);
+            afterOccurrencesRadio.addEventListener("change", updateVisibility);
+
+            // Trigger the change event initially to handle the initial state
+            neverRadio.dispatchEvent(new Event("change"));
+        });
+        </script>
+</body>
+</html>
