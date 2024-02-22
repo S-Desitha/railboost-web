@@ -22,72 +22,74 @@
 		<script>createNavBar("admin")</script>
 	</nav>
 
-	<div class="service">
-		<button class="add-new-btn" onclick="popupAddPage()" >Add New</button>
+	<div class="service-view">
+		<div class="service-container">
+			<button class="add-new-btn" onclick="popupAddPage()" >Add New</button>
 
-		<div class="table-container">
+			<div class="table-container">
 
-			<section class="table_header">
-				<h1>Staff Details</h1>
-				<div class="input-group">
-					<input type="search" placeholder="Search Staff...">
-					<img src="/Images/filter.png" class="filter" alt="" onclick="toggleFilterBox()">
-					<img src="/Images/search.png" alt="">
-					
-				</div>
-			</section>
-					
-			<div class="filter-box" id="filter-box">
-				<div class="wrapper" id="from">
-					<div class="select-btn">
-						<span>Railway Station</span>
-						<i class="uil uil-angle-down"></i>
+				<section class="table_header">
+					<h1>Staff Details</h1>
+					<div class="input-group">
+						<input type="search" placeholder="Search Staff...">
+						<img src="/Images/filter.png" class="filter" alt="" onclick="toggleFilterBox()">
+						<img src="/Images/search.png" alt="">
+						
 					</div>
-					<div class="content">
-						<div class="search">
-							<i class="uil uil-search"></i>
-							<input spellcheck="false" type="text" placeholder="Search">
+				</section>
+						
+				<div class="filter-box" id="filter-box">
+					<div class="wrapper" id="from">
+						<div class="select-btn">
+							<span>Railway Station</span>
+							<i class="uil uil-angle-down"></i>
 						</div>
-						<ul class="options">
-						</ul>
-					</div>
-				</div>
-			
-				<div class="wrapper" id="roles">
-					<div class="select-btn">
-						<span>Role</span>
-						<i class="uil uil-angle-down"></i>
-					</div>
-					<div class="content">
-						<div class="search">
-							<i class="uil uil-search"></i>
-							<input spellcheck="false" type="text" placeholder="Search">
+						<div class="content">
+							<div class="search">
+								<i class="uil uil-search"></i>
+								<input spellcheck="false" type="text" placeholder="Search">
+							</div>
+							<ul class="options">
+							</ul>
 						</div>
-						<ul class="role-options">
-						</ul>
 					</div>
+				
+					<div class="wrapper" id="roles">
+						<div class="select-btn">
+							<span>Role</span>
+							<i class="uil uil-angle-down"></i>
+						</div>
+						<div class="content">
+							<div class="search">
+								<i class="uil uil-search"></i>
+								<input spellcheck="false" type="text" placeholder="Search">
+							</div>
+							<ul class="role-options">
+							</ul>
+						</div>
+					</div>
+				
+					<button onclick="applyFilters()">Filter</button>
 				</div>
-			
-				<button onclick="applyFilters()">Filter</button>
+				
+				<section class="table_body">
+					<table>
+						<thead>
+							<tr>
+								<th>Staff ID</th>
+								<th>Name</th>
+								<th>Username</th>
+								<th>Email</th>
+								<th>Telephone Number</th>
+								<th>Role</th>
+								<th>Railway Station</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody id="staff_table"></tbody>
+					</table>
+				</section>
 			</div>
-			
-			<section class="table_body">
-				<table>
-					<thead>
-						<tr>
-							<th>Staff ID</th>
-							<th>Name</th>
-							<th>Username</th>
-							<th>Email</th>
-							<th>Telephone Number</th>
-							<th>Role</th>
-							<th>Railway Station</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody id="staff_table"></tbody>
-				</table>
-			</section>
 		</div>
 	</div>
 
