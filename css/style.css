@@ -26,17 +26,13 @@ a:hover {
 .service {
 
   display: flex;
-  align-self: center;
   align-items: center;
-  /* margin-left: 350px; */
-  /* gap: 180px; */
-  /* width: 30vw; */
   
   width: fit-content;
   max-width: 90%;
-  overflow-x: hidden;
-  overflow-y: overlay;
-  min-height: 50vh;
+  /* overflow-x: hidden; */
+  /* overflow-y: overlay; */
+  /* min-height: 50vh; */
   box-shadow: 0 0.4rem 0.8rem #0005;
   border-radius: 0.8rem;
   margin: 80px auto;
