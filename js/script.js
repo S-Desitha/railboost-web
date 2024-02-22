@@ -96,6 +96,28 @@ function createNavBar(context) {
 
 
 
+function popupAddPage(classname) {
+    let dialog = document.querySelector(classname);
+
+    dialog.showModal();
+
+    dialog.addEventListener("click", e => {
+        const dialogDimensions = dialog.getBoundingClientRect()
+        if (
+            (e.clientX !=0 && e.clientY !=0) &&
+            (e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom) 
+        ) {
+            dialog.close()
+        }
+    });
+}
+
+
+
+
 function seatReserve() {
     var userResponse = confirm("Now you'll be redirected to the official website for seat reservations of Sri Lanka Railways.");
     if (userResponse) {

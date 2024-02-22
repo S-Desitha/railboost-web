@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/addStation.css">
+    <link rel="stylesheet" href="/css/table.css">
+	<link rel="stylesheet" href="/css/buttons.css">
     <script src="/js/script.js"></script>
     <script src="/js/addStation.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
@@ -22,9 +24,11 @@
         <script>createNavBar("admin")</script>
     </nav>
 
-    <main class="addStation">
-        <div class="addStation-container">
-            <div class="table-left">
+    <div class="service-view">
+        <div class="service-container">
+            <button class="add-new-btn" onclick="popupAddPage('.station-add-modal')" >Add New</button>
+
+            <div class="table-container">
                 <section class="table_header">
                     <h1>Station Details</h1>
                     <div class="input-group">
@@ -52,44 +56,48 @@
                 </section>
             </div>
 
-            <div class="table-right">
-                <div class="station-form">
-                    <form onsubmit="return false">
-                        <h2 class="add-station-heading" id="add-new-station-header">Add a new Station </h2>
-
-                        
-                        <select name="line" id="selectLine" placeholder="Line" required>
-                            <option value="Select Line" data-image="/Images/search.png">Select Line  </option>
-                            <option value="Line1">Line 1</option>
-                            <option value="Line2">Line 2</option>
-                            <option value="Line3">Line 3</option>
-                            <option value="addNewLine">Add new line</option>
-                        </select>
-                        <br>
-
-                        <label for="stationId"></label>
-                        <input type="text" id="trainId" placeholder="Station ID:" name="trainId" required><br>
-
-                        <label for="station-name"></label>
-                        <input type="text" id="stationName" name="stationName" placeholder="Station Name" required><br>
-
-                        <label for="Address"></label>
-                        <input type="text" id="address" placeholder="Address" name="address" required><br>
-
-                        <label for="contactNumber"></label>
-                        <input type="text" id="contactNumber" name="contactNumber" placeholder="Contact Number" required>
-
-                        <div id="option1Elements" class="hidden">
-                            <label for="addNewLine"></label>
-                            <input type="text" id="addNewLine" name="addNewLine" placeholder="Add New Line">
-                        </div>
-
-                        <button class="form-button" id="add-new-station-button">Add a new station </button>
-                    </form>
-                </div>
-            </div>
+            
         </div>
-    </main>
+    </div>
+
+    <dialog class="station-add-modal">
+        <div class="station-form">
+            <form onsubmit="return false">
+                <h2 class="add-station-heading" id="add-new-station-header">Add a new Station </h2>
+
+                
+                <select name="line" id="selectLine" placeholder="Line" required>
+                    <option value="Select Line" data-image="/Images/search.png">Select Line  </option>
+                    <option value="Line1">Line 1</option>
+                    <option value="Line2">Line 2</option>
+                    <option value="Line3">Line 3</option>
+                    <option value="addNewLine">Add new line</option>
+                </select>
+                <br>
+
+                <label for="stationId"></label>
+                <input type="text" id="trainId" placeholder="Station ID:" name="trainId" required><br>
+
+                <label for="station-name"></label>
+                <input type="text" id="stationName" name="stationName" placeholder="Station Name" required><br>
+
+                <label for="Address"></label>
+                <input type="text" id="address" placeholder="Address" name="address" required><br>
+
+                <label for="contactNumber"></label>
+                <input type="text" id="contactNumber" name="contactNumber" placeholder="Contact Number" required>
+
+                <div id="option1Elements" class="hidden">
+                    <label for="addNewLine"></label>
+                    <input type="text" id="addNewLine" name="addNewLine" placeholder="Add New Line">
+                </div>
+
+                <button class="form-button" id="add-new-station-button">Add a new station </button>
+            </form>
+        </div>
+    </dialog>
+
+
 
     <script>
         var selectLine = document.getElementById("selectLine");
