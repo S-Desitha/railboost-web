@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         text: `Are you sure you want to edit rate from ${rate["startStation"]} to ${rate["endStation"]}?`,
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#5271FF",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, edit it!",
     }).then((result) => {
@@ -127,6 +127,11 @@ document.addEventListener("DOMContentLoaded", async function () {
                 });
         } else {
             // Clear the form if cancel is clicked
+            Swal.fire("Cancelled", "Your operation has been cancelled", "error");
+            const button = document.getElementById("add-new-price-rate");
+  
+    document.getElementById("add-new-price-header").innerHTML = "Add a New Price Rate";
+    button.innerHTML = "Add a New Price Rate";
             clearForm();
         }
     });
@@ -171,12 +176,25 @@ function deleteRate() {
           };
 
           customFetch(endpoint3, params)
-              .then(() => window.location.reload())
+              .then(() => {
+              Swal.fire({
+                title: "Rate Deleted",
+                text: "The rate has been successfully deleted!",
+                icon: "success",
+            }).then((result) => {
+                if (result.isConfirmed) window.location.reload();
+            
+            })
+        })
               .catch((error) => {
                   if (error == "login-redirected")
                       localStorage.setItem("last_url", window.location.pathname);
               });
       }
+      else {
+    Swal.fire("Cancelled", "Your operation has been cancelled", "error");
+      }
+      
   });
 }
 
@@ -201,8 +219,19 @@ function deleteRate() {
       method: "POST"
     };
   
+    
     customFetch(endpoint3, params)
-        .then(()=> window.location.reload())
+        .then(()=> {
+            Swal.fire({
+                title: "New Rate Added",
+                text: "A  new rate has been successfully added!",
+                icon: "success",
+            }).then((result) => {
+                if (result.isConfirmed) window.location.reload();
+            
+            })
+            
+        })
         .catch((error) => {
             if (error=="login-redirected")
                 localStorage.setItem("last_url", window.location.pathname);
