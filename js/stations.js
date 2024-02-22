@@ -27,7 +27,7 @@ getStations();
 
 
 
-function updateName(selectedLi, stationCode) {
+function updateName(selectedLi, stationCode,stationName) {
     
     // get closest .wrapper element
     const wrapper = selectedLi.closest(".wrapper");
@@ -39,6 +39,7 @@ function updateName(selectedLi, stationCode) {
     selectBtn.firstElementChild.innerText = selectedLi.innerText;
 
     wrapper.setAttribute("stationCode", stationCode);
+    wrapper.setAttribute("stationName", stationName);
 }
 
 function addStation(selectedStation,  wrapper) {
@@ -46,7 +47,7 @@ function addStation(selectedStation,  wrapper) {
     options.innerHTML = "";
     stations.forEach(station => {
         let isSelected = station == selectedStation ? "selected" : "";
-        let li = `<li onclick="updateName(this, \' ${station.stationCode} \')" class="${isSelected}">${station.stationName}</li>`;
+        let li = `<li onclick="updateName(this, \'${station.stationCode}\',\'${station.stationName}\')" class="${isSelected}">${station.stationName}</li>`;
         options.insertAdjacentHTML("beforeend", li);
     });
 }

@@ -1,105 +1,40 @@
 const url = "http://localhost:8080/railboost_backend_war_exploded/train";
 
 
-function validateCompartments() {
-  var compartmentsField = document.getElementById("compartments");
-  var compartmentsError = document.getElementById("compartments-error");
-  var compartmentsValue = parseInt(compartmentsField.value, 10); // Parse as an integer
 
-  if (isNaN(compartmentsValue) || compartmentsValue < 0 || compartmentsValue > 100) {
-    compartmentsError.innerHTML = "Please enter a valid number of compartments (0-100).";
-    return false;
+document.addEventListener("DOMContentLoaded", async function () {
+  const endpoint = "train";
+
+  document.getElementById("train-form").reset();
+
+  try {
+    let data = await customFetch(endpoint, {});
+
+    data.forEach(train => {
+      let editButton = document.createElement("button");
+      editButton.classList.add("edit-button");
+      editButton.innerHTML = "<i class='fas fa-edit'></i>";
+      editButton.setAttribute("train", JSON.stringify(train));
+      editButton.onclick = editTrain;
+
+      let deleteButton = document.createElement("button");
+      deleteButton.classList.add("delete-button");
+      deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
+      deleteButton.setAttribute("train", JSON.stringify(train));
+      deleteButton.onclick = deleteTrain;
+
+      let row = document.getElementById("train_table").insertRow(-1);
+      row.insertCell(0).innerHTML = train.trainId;
+      row.insertCell(1).innerHTML = train.trainType;
+      row.insertCell(2).append(editButton, deleteButton);
+    });
+
   }
-
-  // Clear any previous error message
-  compartmentsError.innerHTML = "";
-
-  return true;
-}
-
-
-
-createTrainsPage();
-
-
-function createTrainsPage() {
-  const count = 5;
-
-  fetch(url + "?" + new URLSearchParams({
-    count: 5
-  }))
-    .then(resp => resp.json())
-    .then(trains => createHtmlTable(trains))
-}
-
-
-function createHtmlTable(trains) {
-  const parent = document.getElementById("train_table");
-
-  trains.forEach(train => {
-    let row = createRow(train);
-    parent.appendChild(row);
-  });
-
-}
-
-
-
-function createRow(train) {
-  // Create the <tr> element
-  var tableRow = document.createElement('tr');
-
-  // Create and append <td> elements
-  var td1 = document.createElement('td');
-  td1.textContent = train["trainId"];
-  tableRow.appendChild(td1);
-
-  var td2 = document.createElement('td');
-  td2.textContent = train["trainType"];
-  tableRow.appendChild(td2);
-
-  var td3 = document.createElement('td');
-  td3.textContent = train["nCompartments"];
-  tableRow.appendChild(td3);
-
-  var td4 = document.createElement('td');
-
-  // Create the anchor and button for "Edit"
-  // var anchor1 = document.createElement('a');
-  // anchor1.setAttribute('href', ''); // Add your URL
-  var editButton = document.createElement('button');
-  editButton.className = 'edit-button';
-  editButton.onclick = editTrain;
-  editButton.setAttribute("train", JSON.stringify(train));
-  var editIcon = document.createElement('i');
-  editIcon.className = 'fas fa-edit';
-  editButton.appendChild(editIcon);
-  // anchor1.appendChild(editButton);
-
-  // Create the anchor and button for "Delete"
-  // var anchor2 = document.createElement('a');
-  // anchor2.setAttribute('href', ''); // Add your URL
-  var deleteButton = document.createElement('button');
-  deleteButton.className = 'delete-button';
-  deleteButton.onclick = deleteTrain;
-  deleteButton.setAttribute("train", JSON.stringify(train));
-  var deleteIcon = document.createElement('i');
-  deleteIcon.className = 'fas fa-trash';
-  deleteButton.appendChild(deleteIcon);
-  // anchor2.appendChild(deleteButton);
-
-  // Append the "Edit" and "Delete" buttons to the <td>
-  td4.appendChild(editButton);
-  td4.appendChild(deleteButton);
-
-  // Append all <td> elements to the <tr> element
-  tableRow.appendChild(td1);
-  tableRow.appendChild(td2);
-  tableRow.appendChild(td3);
-  tableRow.appendChild(td4);
-
-  return tableRow;
-}
+  catch(error) {
+    if (error=="login-redirected")
+        localStorage.setItem("last_url", window.location.pathname);
+  }
+});
 
 
 
@@ -117,7 +52,6 @@ function editTrain() {
   trainIdField.disabled = true;
 
   document.getElementById("trainType").value = train["trainType"];
-  document.getElementById("nCompartments").value = train["nCompartments"];
 
   button.setAttribute("train", JSON.stringify(train));
   button.onclick = updateTrain;
@@ -156,7 +90,6 @@ function addNewTrain() {
 
   train["trainId"] = document.getElementById("trainId").value;
   train["trainType"] = document.getElementById("trainType").value;
-  train["nCompartments"] = document.getElementById("nCompartments").value;
 
   const body = train;
   const params = {
@@ -182,10 +115,10 @@ function addNewTrain() {
 function updateTrain() {
   train = {};
 
+
   train["trainId"] = document.getElementById("trainId").value;
   train["trainType"] = document.getElementById("trainType").value;
-  train["nCompartments"] = document.getElementById("nCompartments").value;
-
+  console.log(train);
   const body = train;
   const params = {
     headers: {

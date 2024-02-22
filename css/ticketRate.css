@@ -1,15 +1,14 @@
 
 .container {
-    display: flex;
-    align-items: center;
-	/* margin-left: 400px; */
-    gap: 200px;
-    width: 31vw;
-    height: 80vh;
-    /* box-shadow: 0 .4rem .8rem #0005; */
-    border-radius: .8rem;
-	margin-top: 40px;
-	/* overflow-y: auto; */
+  display: flex;
+  align-items: center;
+margin-left: 30px;
+  gap: 100px;
+
+  height: 80vh;
+  
+  
+margin-top: 30px;
 }
 
 /* #compartments-error{
@@ -52,6 +51,7 @@
     color: #484848;
     padding: 7px 0;
     margin: 15px 0;
+    width: 20rem;
   }
   
   input::placeholder {
@@ -63,22 +63,25 @@
   }
 
   .left {
-    flex: 1;
-    text-align: left;
+    box-shadow: 0 .4rem .8rem #0005;
+  border-radius: .8rem;
+  padding: 30px;
+  text-align: left;
 	align-items: center;
-    margin-left: 40%;
-    margin-right: 10%;
+	margin-left: 40px;
+  width: 100%;
+  /* overflow-y: auto; */
+  max-height: 80vh;
+  overflow:auto;
 }
 
 
 .right {
-  flex: 1; 
   text-align: center;
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
   align-items: center;
-  justify-content:center;
-  margin-right: 40%;
+  margin-right: 60px;
 }
 .form-button {
     color: var(--text-color);
@@ -105,10 +108,13 @@
     justify-content: space-between;
     align-items: center;
 }
+.highlight {
+  background-color: #FFFF00; /* Yellow background color for highlighting */
+  transition: background-color 1s; /* Transition effect for highlighting */
+}
 
 
-
-.table_body {
+/* .table_body {
     width: 100%;
     max-height: calc(89% - 1.6rem);
     background-color: #fffb;
@@ -116,7 +122,8 @@
     border-radius: .6rem;
     overflow: auto;
     overflow: overlay;
-}
+    overflow: scroll;
+} */
 
 /* .table__body::-webkit-scrollbar{
     width: 0.5rem;

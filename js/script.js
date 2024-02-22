@@ -1,5 +1,9 @@
 async function customFetch(endpoint, options, sendJWT) {
     let url = "http://localhost:8080/railboost_backend_war_exploded/";
+    // const frontendPort = window.location.port;
+
+// Log the detected frontend port
+// console.log("Frontend Port:", frontendPort);
     
     if (endpoint!="login" && sendJWT!=false){
         options.headers = {
@@ -9,40 +13,54 @@ async function customFetch(endpoint, options, sendJWT) {
 
     url = url+endpoint;
 
-    let resp = await fetch(url, options);
-    if (resp.ok){
-        try {
-            return await resp.json();
-        } catch(error) {
-            console.log("Error in parsing response");
-            console.log(error);
-            return {status: resp.status};
-        }
-    }
-    else{
-        console.log("Invalid response");
-        console.log(resp);
-        if (resp.status==401) {
-            let msg = await resp.text();
-            if (msg=="expired") {
-                window.alert("Session expired. Please login again.");
-                window.location.href="/html/signin.html";
-                return Promise.reject("login-redirected");
+    try {
+        let resp = await fetch(url, options);
+        if (resp.ok){
+            try {
+                return await resp.json();
+            } catch (e) {
+                return {status: resp.status};
             }
         }
-        else if (resp.status==400) {
-            let data = await resp.json();
-            let error_msg = data.detailMessage;
-            if (error_msg=="signup-expired"){
-                window.alert("You signup session has expired. Please contact administrator and signup again.");
+        else{
+            console.log("Invalid response");
+            console.log(resp);
+            if (resp.status==401) {
+                let msg = await resp.text();
+                if (msg=="expired") {
+                    window.alert("Session expired. Please login again.");
+                    window.location.href="/html/signin.html";
+                    return Promise.reject("login-redirected");
+                }
             }
-            window.location.href="/index.html";
-            return Promise.reject(data.detailMessage);
+            else{
+                console.log("Invalid response");
+                console.log(resp);
+                if (resp.status==401) {
+                    let msg = await resp.text();
+                    if (msg=="expired") {
+                        window.alert("Session expired. Please login again.");
+                        window.location.href="/html/signin.html";
+                        return Promise.reject("login-redirected");
+                    }
+                }
+                else if (resp.status==400) {
+                    let data = await resp.json();
+                    let error_msg = data.detailMessage;
+                    if (error_msg=="signup-expired"){
+                        window.alert("You signup session has expired. Please contact administrator and signup again.");
+                    }
+                    window.location.href="/index.html";
+                    return Promise.reject(data.detailMessage);
+                }
+                return {
+                    isSuccessful: false,
+                    status: resp.status
+                }
+            }
         }
-        return {
-            isSuccessful: false,
-            status: resp.status
-        }
+    } catch (error) {
+        console.log(error);
     }
 }
 
@@ -114,7 +132,7 @@ function validatePhone(){
     var phoneField=document.getElementById("phone-field");
 var phoneError=document.getElementById("phone-error");
     if(!phoneField.value.match(/^\d{10}$/)){
-        phoneError.innerHTML = "Please enter a valid phone number";
+        phoneError.innerHTML = "<div>Please enter a valid phone number</div>";
         return false;
     }
         phoneError.innerHTML = "";
@@ -142,7 +160,7 @@ function validateStrPassword() {
     var passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
   
     if (!passwordRegex.test(passwordField.value)) {
-      passwordError.innerHTML = "Password must be at least 8 characters long and include at least one uppercase \nletter, one lowercase letter, one digit, and one special character (!@#$%^&*).";
+      passwordError.innerHTML = "<div>Password must be at least 8 characters long and include at least one </br> uppercase letter, one lowercase letter, one digit, and one special </br> character (!@#$%^&*).</div>";
 
       return false;
     }
@@ -150,3 +168,20 @@ function validateStrPassword() {
     passwordError.innerHTML = "";
     return true;
 }
+function toggleDropdown() {
+    var dropdown = document.getElementById("drop");
+    if (dropdown.style.display === "none") {
+      dropdown.style.display = "block";
+    } else {
+      dropdown.style.display = "none";
+    }
+    
+  }
+  
+  window.onclick = function(event){
+    if (!event.target.matches('.dropbtn')){
+        var dropdown = document.getElementById("drop");
+        dropdown.style.display = "none";
+    }
+  }
+  

@@ -21,12 +21,11 @@ function validateNoOfTicket(){
 }
 
 function validateStation(){
-    var Start=document.getElementById("start-station");
-    var End=document.getElementById("end-station");
-    var value1 = Start.value;
-    var value2 = End.value;
-    var StationError=document.getElementById("station-error");
-    if(value1==value2){
+  
+    let Start=document.getElementById("from").getAttribute("stationCode");
+    let End=document.getElementById("to").getAttribute("stationCode");
+    let StationError=document.getElementById("station-error");
+    if(Start==End){
         StationError.innerHTML = "Both start and end stations can't be same.";
         return false;
     }
@@ -37,8 +36,8 @@ function validateStation(){
 function buyETicket() {
   booking = {};
 
-  booking["startStation"] = document.getElementById("start-station").value;
-  booking["endStation"] = document.getElementById("end-station").value;
+  booking["startStation"] = document.getElementById("from").getAttribute("stationName");
+  booking["endStation"] = document.getElementById("to").getAttribute("stationName");
   booking["date"] = new Date(document.getElementById("date").value).toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"})
   booking["trainClass"] = document.getElementById("class").value;
   booking["numberOfTickets"] = document.getElementById("no-of-tickets").value;
@@ -69,11 +68,17 @@ function buyETicket() {
   //   });
 
   console.log(booking);
+  alert("Check your email for E-Ticket.");
+  // window.onbeforeunload = function{
+  //   return true;
+  // }
 }
 
 function getPrice(){
-  var Start=document.getElementById("start-station").value;
-  var End=document.getElementById("end-station").value;
+  var Start=document.getElementById("from").getAttribute("stationCode");
+  var End=document.getElementById("to").getAttribute("stationCode");
+  console.log(Start);
+  console.log(End);
   var Class=document.getElementById("class").value;
   var Count=document.getElementById("no-of-tickets").value;
   if (Start && End && Class && Count) {
@@ -86,9 +91,12 @@ function getPrice(){
 
 async function getTicketPrices(Class,Count) {
   var PriceOfOne=document.getElementById("price-of-one");
+  var Start = document.getElementById("from").getAttribute("stationCode"); 
+  var End = document.getElementById("to").getAttribute("stationCode"); 
+  console.log(Start);
   let params = {
-      startStation: document.getElementById("start-station").value,
-      endStation: document.getElementById("end-station").value
+      startStation: Start,
+      endStation: End
   };
 
   let queryString = Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
@@ -96,7 +104,7 @@ async function getTicketPrices(Class,Count) {
 
   try {
     let data = await customFetch(urlQuery, {credentials: "include"});
-    // document.getElementById("1st_class").value = data.firstclass;
+    console.log(urlQuery);
     if (Class == "1st Class"){
       PriceOfOne.innerHTML = "Price of one ticket is "+data.firstClass+".";
       document.getElementById("total-price").value = data.firstClass*Count;

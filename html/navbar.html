@@ -1,3 +1,4 @@
+
 <a  href="/index.html">
     <img src="/Images/white.png" alt="railboost Logo" class="header-logo" />
     <label class="logo-text">RAILBOOST</label>
@@ -39,5 +40,13 @@
     </li>
     <li id="nav-contact"><a  href="#">Contact</a></li>
     <li ><a  href="/html/signin.html" class="no-hover"><button class="nav-button">Login</button></a></li>
+    <div class="dropdown">
+        <button onclick="toggleDropdown()" class="dropbtn"><i onclick="toggleDropdown(); event.stopPropagation();" class="fa-solid fa-user-circle fa-2xl"></i></button>
+        <div id="drop" class="dropdown-content">
+            <a class="dropdown-item" href="#">Profile </a>  
+            <a class="dropdown-item logout" href="#">Log out </a>  
+        </div>
+      </div>
+      
     <li class="bell-notification" current-count="8"><a href="#" class="no-hover"><i class="fas fa-bell"></i></a></li>
 </ul>

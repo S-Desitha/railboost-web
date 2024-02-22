@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/js/script.js"></script>
 	<script src="/js/auth.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/ticketRate.css">
-    <script src="/js/script.js"></script>
+    
 	<script src="/js/ticketRate.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <title>Ticket Price Management</title>
 </head>
@@ -24,10 +29,10 @@
 
 						<section class="table_header">
 							<h1>Ticket Price Details</h1>
-                            <!-- <div class="input-group">
-                                <input type="search" placeholder="Search Trains...">
+                            <div class="input-group">
+                                <input type="search" placeholder="Search Ticket Rates...">
                                 <img src="/Images/search.png" alt="">
-                            </div> -->
+                            </div>
 						</section>
 
 						<section class="table_body">
@@ -43,22 +48,24 @@
                                     <th>Actions</th>
 								</tr>
 							</thead>
-							<tbody id="train_table">
+							<tbody id="rate_table">
 								
-								
+
 							</tbody>
+							<!-- add some rows in the tbody -->
+
 						</section>
 						</table>
 					</div>
 				
 					<div class="right">
-						<div class="form">
+						<div class="rate-form">
 							
 							<form onsubmit="return false">
 								<h2 class="add-price-heading" id="add-new-price-header">Add A New Price Rate </h2>
 								<div class="wrapper" font-size="1px" id="from">
 									<div class="select-btn">
-										<span>Sart Station:</span> 
+										<span>Start Station:</span> 
 										<i font-size="3px" class="fa fa-angle-down"></i>
 									</div>
 									<div class="content">
@@ -95,7 +102,7 @@
                                 <label for="3class-price"></label>
 					            <input type="Double" id="3class-price" name="3class-pricee" placeholder="3rd Class Price:" required><br>
 						
-								<button class="form-button" id="add-new-price-rate" onclick="addNewPriceRate()">Add A New Price Rate </button>
+								<button class="form-button" id="add-new-price-rate" onclick="addNewRate()">Add A New Price Rate </button>
 
 							</form>
 						</div>
