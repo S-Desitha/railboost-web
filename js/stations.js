@@ -27,19 +27,26 @@ getStations();
 
 
 
-function updateName(selectedLi, stationCode,stationName) {
-    
+
+function updateName(selectedLi) {
     // get closest .wrapper element
     const wrapper = selectedLi.closest(".wrapper");
     const selectBtn = wrapper.querySelector(".select-btn");
     const searchInp = wrapper.querySelector("input");
     searchInp.value = "";
-    addStation(selectedLi.innerText, wrapper);
-    wrapper.classList.remove("active");
-    selectBtn.firstElementChild.innerText = selectedLi.innerText;
 
-    wrapper.setAttribute("stationCode", stationCode);
-    wrapper.setAttribute("stationName", stationName);
+    // Get the station object from the selectedLi
+    const selectedStation = stations.find(station => station.stationName === selectedLi.innerText);
+
+    addStation(selectedStation.stationName, wrapper);
+    wrapper.classList.remove("active");
+    selectBtn.firstElementChild.innerText = selectedStation.stationName;
+
+    wrapper.setAttribute("stationCode", selectedStation.stationCode);
+    wrapper.setAttribute("stationName", selectedStation.stationName);
+
+    console.log(selectedStation.stationName);
+    console.log(selectedStation.stationCode);
 }
 
 function addStation(selectedStation,  wrapper) {
