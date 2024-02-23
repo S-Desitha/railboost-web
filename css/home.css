@@ -123,15 +123,16 @@ nav ul li:hover ul.dropdown{
 
 .box-container {
 
-    display: flex; 
-    min-height: 80vh;
+    /* display: flex;  */
+    min-height: calc(100vh - 185px);
     margin-top: 2%;
-    margin-left: 150px;
-    text-align: center;
+    margin-left: 100px;
+    justify-content: space-between;
+    /* text-align: center; */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-row-gap: 20px;
-    grid-column-gap: 0px;
+    /* grid-row-gap: 20px; */
+    grid-column-gap: 80px;
     padding: 50px 50px;
 
 }
@@ -142,9 +143,9 @@ nav ul li:hover ul.dropdown{
     color:black; ;
     border: 1px solid #ccc;
     padding: 25px;
-    grid-column-gap: 10px;
+    /* grid-column-gap: 10px; */
     text-align: center;
-    flex: 1; 
+    /* flex: 1;  */
     cursor: pointer;
     text-decoration: none; 
 }

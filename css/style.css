@@ -24,13 +24,14 @@ a:hover {
 
 .container {
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh-80px);
   display: flex;
+  /* overflow: hidden; */
 }
 
 .sidebar{
-  width: 256px;
-  height: 100vh;
+  width: 300px;
+  height: calc(100vh-80px);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -39,13 +40,14 @@ a:hover {
   padding: 24px ;
   border-radius: 0 30px 30px 0;
   border-top: 1px solid #ffffff;
-  margin-top: 2px;
+  /* margin-top: 2px; */
+  
 
   
 }
 /* box shadow for sidebar */
 .sidebar{
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
 }
 
 /* colors of paras inside the sidebar should be white */
@@ -54,10 +56,6 @@ a:hover {
 }
 
 
-/* add border with black color to sidebar */
-/* .sidebar{
-  
-} */
 
 
 
@@ -119,6 +117,51 @@ a:hover {
   font-weight: 500;
   color: #757575;
   text-decoration: none;
+  padding: 12px 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+
 
 }
 
+
+.menu ul li > a:hover,
+.menu ul li.active > a{
+  background-color: #f6f6f6;
+  color: #000000;
+}
+
+.menu ul li .icon{
+  font-size: 18px;
+}
+.menu ul li .text{
+  flex:1 ;
+}
+.menu ul li.active .arrow{
+  transform: rotate(180deg);
+  transition: all 0.3s ease;
+
+}
+.menu ul li .arrow{
+  font-size: 14px;
+}
+.Sidenav{
+  flex: 1;
+}
+.menu ul li .fas {
+  font-size: 14px;
+}
+.menu .sub-menu{
+  margin-left: 20px;
+  padding-left: 20px;
+  padding-top: 5px;
+  border-left: 1px solid #ffffff;
+  display: none;
+}
+.menu .sub-menu li a{
+  padding: 10px 8px;
+  font-size: 12px;
+}
+.menu-btn{
+  position:  ;
+}
