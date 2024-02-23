@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/js/script.js"></script>
 	<script src="/js/auth.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/ticketRate.css">
-    <script src="/js/script.js"></script>
+    <link rel="stylesheet" href="/css/table.css">
+	<link rel="stylesheet" href="/css/buttons.css">
+	<link rel="stylesheet" href="/css/validations.css">
+
 	<script src="/js/ticketRate.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <title>Ticket Price Management</title>
 </head>
@@ -17,92 +25,88 @@
 		<script>createNavBar("admin")</script>
 	</nav>	
 
-			<main class="table">
-
-				<div class="container">
-            		<div class="left">
-
-						<section class="table_header">
-							<h1>Ticket Price Details</h1>
-                            <!-- <div class="input-group">
-                                <input type="search" placeholder="Search Trains...">
-                                <img src="/Images/search.png" alt="">
-                            </div> -->
-						</section>
-
-						<section class="table_body">
-
-							<table>
-							<thead>
-								<tr>
-									<th>Start Station</th>
-									<th>End Station</th>
-                                    <th>1st Class</th>
-									<th>2nd Class</th>
-                                    <th>3rd Class</th>
-                                    <th>Actions</th>
-								</tr>
-							</thead>
-							<tbody id="train_table">
-								
-								
-							</tbody>
-						</section>
-						</table>
+	<div class="service-view">
+		<div class="service-container">
+			<button class="add-new-btn" onclick="popupAddPage('.rates-add_edit-modal')" >Add New</button>
+			
+			<div class="table-container">
+				<section class="table_header">
+					<h1>Ticket Price Details</h1>
+					<div class="input-group">
+						<input type="search" placeholder="Search Ticket Rates...">
+						<img src="/Images/search.png" alt="">
 					</div>
-				
-					<div class="right">
-						<div class="form">
-							
-							<form onsubmit="return false">
-								<h2 class="add-price-heading" id="add-new-price-header">Add A New Price Rate </h2>
-								<div class="wrapper" font-size="1px" id="from">
-									<div class="select-btn">
-										<span>Sart Station:</span> 
-										<i font-size="3px" class="fa fa-angle-down"></i>
-									</div>
-									<div class="content">
-										<div class="search">
-											<i class="fas fa-search"></i>
-											<input spellcheck="false" type="text" placeholder="Search">
-										</div>
-										<ul onclick="validateStation();" class="options"></ul>
-									</div>
-								</div>
+				</section>
 
-                                <div class="wrapper" font-size="1px" id="to">
-									<div class="select-btn">
-										<span>End Station:</span> 
-										<i font-size="3px" class="fa fa-angle-down"></i>
-									</div>
-									<div class="content">
-										<div class="search">
-											<i class="fas fa-search"></i>
-											<input spellcheck="false" type="text" placeholder="Search">
-										</div>
-										<ul onclick="validateStation();" class="options"></ul>
-									</div>
-								</div>
-								<span id="station-error"></span>
-								
+				<section class="table_body">
+					<table>
+						<thead>
+							<tr>
+								<th>Start Station</th>
+								<th>End Station</th>
+								<th>1st Class</th>
+								<th>2nd Class</th>
+								<th>3rd Class</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody id="rate_table"></tbody>
+					</table>
+				</section>
+			</div>
+		</div>
+	</div>	
 
-								<label for="1class-price"></label>
-					            <input type="Double" id="1class-price" name="1class-pricee" placeholder="1st Class Price:" required><br>
-
-                                <label for="2class-price"></label>
-					            <input type="Double" id="2class-price" name="2class-pricee" placeholder="2nd Class Price:" required><br>
-
-                                <label for="3class-price"></label>
-					            <input type="Double" id="3class-price" name="3class-pricee" placeholder="3rd Class Price:" required><br>
-						
-								<button class="form-button" id="add-new-price-rate" onclick="addNewPriceRate()">Add A New Price Rate </button>
-
-							</form>
+	<dialog class="rates-add_edit-modal">
+		<div class="rate-form">
+			
+			<form onsubmit="return false">
+				<h2 class="add-price-heading" id="add-new-price-header">Add A New Price Rate </h2>
+				<div class="wrapper" font-size="1px" id="from">
+					<div class="select-btn">
+						<span>Start Station:</span> 
+						<i font-size="3px" class="fa fa-angle-down"></i>
+					</div>
+					<div class="content">
+						<div class="search">
+							<i class="fas fa-search"></i>
+							<input spellcheck="false" type="text" placeholder="Search">
 						</div>
-				
+						<ul onclick="validateStation();" class="options"></ul>
 					</div>
 				</div>
-			</main>	
+
+				<div class="wrapper" font-size="1px" id="to">
+					<div class="select-btn">
+						<span>End Station:</span> 
+						<i font-size="3px" class="fa fa-angle-down"></i>
+					</div>
+					<div class="content">
+						<div class="search">
+							<i class="fas fa-search"></i>
+							<input spellcheck="false" type="text" placeholder="Search">
+						</div>
+						<ul onclick="validateStation();" class="options"></ul>
+					</div>
+				</div>
+				<span id="station-error"></span>
+				
+
+				<label for="1class-price"></label>
+				<input type="Double" id="1class-price" name="1class-pricee" placeholder="1st Class Price:" required><br>
+
+				<label for="2class-price"></label>
+				<input type="Double" id="2class-price" name="2class-pricee" placeholder="2nd Class Price:" required><br>
+
+				<label for="3class-price"></label>
+				<input type="Double" id="3class-price" name="3class-pricee" placeholder="3rd Class Price:" required><br>
+		
+				<button class="form-button" id="add-new-price-rate" onclick="addNewRate()">Add A New Price Rate </button>
+
+			</form>
+		</div>
+
+	</dialog>
 </body>
 
 <script src="/js/stations.js">
