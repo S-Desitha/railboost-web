@@ -45,8 +45,12 @@ function updateName(selectedLi) {
     wrapper.setAttribute("stationCode", selectedStation.stationCode);
     wrapper.setAttribute("stationName", selectedStation.stationName);
 
-    console.log(selectedStation.stationName);
-    console.log(selectedStation.stationCode);
+
+    wrapper.setAttribute("stationCode", stationCode);
+    wrapper.setAttribute("stationName", stationName);
+    console.log(stationName);
+    console.log(stationCode);
+
 }
 
 function addStation(selectedStation,  wrapper) {
