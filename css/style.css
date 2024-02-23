@@ -30,13 +30,14 @@ a:hover {
 }
 
 .sidebar{
+  position: relative;
   width: 300px;
   height: calc(100vh-80px);
   display: flex;
   flex-direction: column;
   gap: 10px;
   background-color:white;
-
+  transition: all 0.3s ease;
   padding: 24px ;
   border-radius: 0 30px 30px 0;
   border-top: 1px solid #ffffff;
@@ -105,6 +106,7 @@ a:hover {
 }
 
 .menu ul li{
+  position: relative;
   list-style: none;
   margin-bottom: 5px;
 }
@@ -163,5 +165,91 @@ a:hover {
   font-size: 12px;
 }
 .menu-btn{
-  position:  ;
+  position: absolute ;
+  right: -14px; 
+  top:3.5%;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: #757575;
+  border: 2px solid #f6fff6;
+  cursor: pointer;
+}
+.menu-btn:hover i {
+  color: #000000;
+}
+
+.menu-btn i{
+  transition: all 0.3s ease;
+}
+.sidebar.active {
+  width: 92px ;
+
+}
+.sidebar.active .menu-btn i{
+  transform: rotate(180deg);
+}
+
+.sidebar.active .user-details{
+  display: none;
+}
+
+.sidebar.active .menu .title{
+  text-align: center;
+}
+.sidebar.active .menu ul li .arrow{
+  display: none;
+}
+.sidebar.active .menu > ul > li > a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar.active .menu > ul > li > a .text{
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  border-radius: 4px; 
+  color: #ffffff;
+  background-color: black;
+  opacity: 0;
+  visibility: hidden ;
+  transition: all 0.3s ease;
+}
+.sidebar.active .menu > ul > li > a .text::after{
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 20%;
+  /* transform: translateY(-50%); */
+  width: 20px;
+  height: 20px;
+  background-color: black;
+  border-radius: 2px  ;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+.sidebar.active .menu > ul > li > a:hover .text{
+  left: 50px;
+  opacity: 1;
+  visibility: visible;
+}
+.sidebar.active .menu .sub-menu{
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 200px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: 1px solid #f6f6f6;
+  background-color: #ffffff;
+  box-shadow: 0px 10px 8px rgba(0,0,0,0.1);
+  
 }

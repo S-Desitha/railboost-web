@@ -11,6 +11,9 @@ $(document).ready(function() {
     // remove active click of submenus
     $(this).siblings().find("ul").find("li").removeClass("active");
   });
+    $(".menu-btn").click(function() {
+        $(".sidebar").toggleClass("active");
+    }); 
 });
 async function customFetch(endpoint, options, sendJWT) {
     let url = "http://localhost:8080/railboost_backend_war_exploded/";
