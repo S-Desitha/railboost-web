@@ -118,7 +118,7 @@ a:hover {
   gap: 10px;
   font-size: 14px;
   font-weight: 500;
-  color: #757575;
+  color:#050505;
   text-decoration: none;
   padding: 12px 8px;
   border-radius: 8px;
@@ -130,7 +130,7 @@ a:hover {
 
 .menu ul li > a:hover,
 .menu ul li.active > a{
-  background-color: #f6f6f6;
+  background-color: #CCE0FF;
   color: #000000;
 }
 
