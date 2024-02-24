@@ -1,4 +1,10 @@
-function showPopup() {
-    document.getElementById('popup').style.display = 'block';
-    document.getElementById('overlay').style.display = 'block';
-}
+function openDialog() {
+    var myDialog = document.getElementById('myDialog');
+    myDialog.showModal();
+  }
+
+  function closeDialog() {
+    var myDialog = document.getElementById('myDialog');
+    myDialog.close();
+  }
+  
