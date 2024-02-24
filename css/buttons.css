@@ -1,0 +1,59 @@
+.add-new-btn {
+    color: var(--text-color);
+    background-color: var(--theme-color);
+    border-radius: 6px;
+    border: none;
+    padding: 10px;
+    margin: 2rem 2rem 0.5rem;
+    cursor: pointer;
+    width: 20vw;
+    font-size: 15px;
+    align-self: flex-end;
+  }
+/* .form-button.table{
+    
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+  
+} */
+
+.edit-button, .delete-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+
+.dialog-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.form-button {
+    color: var(--text-color);
+    background-color: var(--theme-color);
+    border-radius: 6px;
+    border: none;
+    padding: 10px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    width: 20rem;
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+
+.form-clear-btn {
+    width: fit-content;
+    background-color: var(--error-color);
+}
+
+
+.form-button:hover{
+    background-color: var(--secondary-color); 
+  }
