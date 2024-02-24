@@ -2,7 +2,7 @@
 
 const seasonEndpoint = "season";
 const ticketPriceEndpoint = "ticketPrice";
-
+let ENDDATE;
 
 function validateStation(){
   
@@ -22,44 +22,55 @@ function appplySeasonTicket() {
 
   season["startStation"] = document.getElementById("from").getAttribute("stationName");
   season["endStation"] = document.getElementById("to").getAttribute("stationName");
-  season["passenger-type"] = document.getElementById("passenger-type").value;
-  season["Start-date"] = new Date(document.getElementById("Start-date").value).toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"})
+  season["passengerType"] = document.getElementById("passenger-type").value;
+  season["startDate"] = new Date(document.getElementById("Start-date").value).toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"})
   season["duration"] = document.getElementById("duration").value;
-  season["End-date"] = document.getElementById("End-date").value;
+  season["endDate"] = ENDDATE;
   season["trainClass"] = document.getElementById("class").value;
   season["totalPrice"] = document.getElementById("total-price").value;
-  season["file"] = document.getElementById("img");
+  // season["file"] = document.getElementById("img");
   console.log(season);
+  const fileInput = document.getElementById("img");
+  const file = fileInput.files[0];
 
-  const body = season;
-  const params = {
-    headers: {
-      "Content-type": "application/json; charset=UTF-8"
-    },
-    body: JSON.stringify(body),
-    method: "POST",
-    credentials: "include"
-  };
+  let formData = new FormData(); 
 
-  customFetch(seasonEndpoint, params)
-    .then(() => window.location())
-    .catch ((error) => {
-      if (error=="login-redirected")
-          localStorage.setItem("last_url", window.location.pathname);
-    });
 
-  // fetch(url1, params)
-  //   .then(res => {
-  //     if (res.ok) {
-  //       window.location.reload();
-  //     }
-  //   });
+  const body = JSON.stringify(season);
+  formData.append("jsonObj",body);
+  formData.append("file",file);
+  if (season["startStation"] && season["endStation"] && season["passengerType"] && season["startDate"] && season["duration"] && season["endDate"] && season["trainClass"] && season["totalPrice"] && file) {
+    const params = {
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: formData,
+      method: "POST",
+      credentials: "include"
+    };
 
-  console.log(season);
-//   alert("Check your email for E-Ticket.");
-  // window.onbeforeunload = function{
-  //   return true;
-  // }
+    customFetch(seasonEndpoint, params)
+      .then(() => window.location())
+      .catch ((error) => {
+        if (error=="login-redirected")
+            localStorage.setItem("last_url", window.location.pathname);
+      });
+
+    console.log(season);
+    alert("Season application is recieved.");
+    location.reload();
+
+    // // document.getElementById("from").value="null";
+    // document.getElementById("passenger-type").value="";
+    // document.getElementById("Start-date").value="";
+    // document.getElementById("duration").value="";
+    // document.getElementById("End-date").value="";
+    // document.getElementById("class").value="";
+    // document.getElementById("total-price").value="";
+    // document.getElementById("img").value="";
+
+  }
+
 }
 
 function getPrice(){
@@ -135,6 +146,7 @@ function updateEndDate() {
         console.log(endDate);
         let endDateFormatted = (endDate.getMonth() + 1).toString().padStart(2, '0') + '/' + endDate.getDate().toString().padStart(2, '0') + '/' + endDate.getFullYear();
         document.getElementById("End-date").value = endDateFormatted;
+        ENDDATE = endDate.getFullYear() + '-' + ('0' + (endDate.getMonth() + 1)).slice(-2) + '-' + ('0' + endDate.getDate()).slice(-2);
 
         
         

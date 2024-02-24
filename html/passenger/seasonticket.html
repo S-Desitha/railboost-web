@@ -111,8 +111,18 @@
 
                     <label for="img" id="Application">
                         <span class="app">Application</span>
-                        <input type="file" id="img" name="img" accept="image/*" required>
+                        <input type="file" id="img" name="img" accept=".pdf, .jpg, .jpeg, .png" required>
                     </label>
+                    <script>
+                        const uploadField = document.getElementById("img");
+
+                        uploadField.onchange = function() {
+                            if(this.files[0].size > 5242880){
+                            alert("File is too big!");
+                            this.value = "";
+                            }
+                        }
+                    </script>
 
 					<button class="form-button" id="buy-ticket-button" onclick="appplySeasonTicket()">Apply</button>
 				</form>
