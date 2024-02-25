@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/trainSch.css">
 	<link rel="stylesheet" href="/css/table.css">
 	<link rel="stylesheet" href="/css/buttons.css">
+	<link rel="stylesheet" href="/css/datepicker.css">
 	<!-- <link rel="stylesheet" href="/css/passSearch.css"> -->
     <script src="/js/script.js"></script>
 	<script src="/js/schedule.js"></script>
@@ -57,29 +58,7 @@
 							<th>Scheduled Departure Time</th>
 							<th>Actions</th>
 					</thead>
-					<tbody id="schedule_stations">
-						<!-- <tr stationcode="FOT" class="clickable-row">
-							<td>Colombo Fort</td>
-							<td>17:45</td>
-							<td>18:05</td>
-							<td>
-								<button class="edit-button"><i class="fas fa-edit"></i></button>
-								<button class="delete-button"><i class="fas fa-trash"></i></button>
-							</td>
-						</tr>
-						<tr stationcode="MDA" class="clickable-row">
-							<td>Maradana</td>
-							<td>18:10</td>
-							<td>18:11</td>
-							<td><button class="edit-button"><i class="fas fa-edit"></i></button><button class="delete-button"><i class="fas fa-trash"></i></button></td>
-						</tr>
-						<tr stationcode="DAG" class="clickable-row">
-							<td>Dematagoda</td>
-							<td>18:14</td>
-							<td>18:15</td>
-							<td><button class="edit-button"><i class="fas fa-edit"></i></button><button class="delete-button"><i class="fas fa-trash"></i></button></td>
-						</tr> -->
-					</tbody>
+					<tbody id="schedule_stations"></tbody>
 				</table>
 			</section>
 		</div>
@@ -130,6 +109,8 @@
 						<option value="Intercity">Intercity</option>
 					</select>
 
+					<button onclick="popupDatePicker('.datepicker-modal')">Recurs On</button>
+
 					<input type="submit" class="form-button" id="done" value="Done">
 			</form>
 	
@@ -166,6 +147,131 @@
 				<input type="submit" class="form-button" id="add_update-sch_station" value="Add a new stopping">
 			<!-- </fieldset> -->
 		</form>
+	</dialog>
+
+	<dialog class="datepicker-modal">
+		<div class="recurrence-window">
+            <div class="header">
+                <h2>Custom Recurrence</h2>
+            </div>
+        <div class="body">
+            <div class="repeat-every">
+                <label for="repeat-every">Repeat every   </label>
+                <input type="number" id="repeat-every" min="1" value="1">
+
+                <select id="repeat-unit" name="repeat-unit">
+					<option value="null" selected disabled>--Select--</option>
+                    <option value="day">day</option>
+                    <option value="week">week</option>
+                    <option value="month">month</option>
+                    <option value="year">year</option>
+                </select>
+            </div><br>
+            
+            <div id="start-from" class="start-from">
+                <label for="start-from">Start from</label>
+                <div class="start-from">
+                    <input type="date" id="start-from-date">
+                </div>
+            </div>
+            
+            <div id="repeat-on" class="repeat-on">
+                <label for="repeat-on">Repeat on</label>
+            </div>
+                <div id="m-container" class="m-container">
+                    <label>Date   </label>
+                    <input type="number" id="repeat-every" min="1" max="31" value="1">
+                    <br><br>
+                </div>
+                <div id="y-container" class="y-container">
+                    
+                    <label>Month   </label>
+                    <select id="repeat-unit" name="repeat-unit" onchange="setRU();">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select><br><br>
+                    <label>Date      </label>
+                    <input type="number" id="repeat-every" min="1" max="31" value="1">
+                    <br><br>
+                </div>
+                
+
+                <div id="container" class="container">
+                    <div class="cat day">
+                       <label>
+                          <input id="sun" type="checkbox" value="7"><span>S</span>
+                       </label>
+                    </div>
+                    
+                    <div class="cat day">
+                       <label>
+                          <input id="mon" type="checkbox" value="1"><span>M</span>
+                       </label>
+                    </div>
+                    
+                    <div class="cat day">
+                       <label>
+                          <input id="tue" type="checkbox" value="2"><span>T</span>
+                       </label>
+                    </div>
+                    
+                    <div class="cat day">
+                       <label>
+                          <input id="wed" type="checkbox" value="3"><span>W</span>
+                       </label>
+                    </div>
+                    
+                    <div class="cat day">
+                       <label>
+                          <input id="thu" type="checkbox" value="4"><span>T</span>
+                       </label>
+                    </div>
+                    
+                    <div class="cat day">
+                       <label>
+                          <input id="fri" type="checkbox" value="5"><span>F</span>
+                       </label>
+                    </div>
+                    
+                    <div class="cat day">
+                       <label>
+                          <input id="sat" type="checkbox" value="6"><span>S</span>
+                       </label>
+                    </div><br><br><br>
+                </div>
+        <div class="ends">
+            <label for="ends">Ends</label>
+            <div>
+                <input type="radio" name="ends-option" id="never" value="never" checked>
+                <label for="never">Never</label>
+    
+                <input type="radio" name="ends-option" id="on-date" value="on-date">
+                <label for="on-date">On</label>
+                
+    
+                <input type="radio" name="ends-option" id="after-occurrences" value="after-occurrences">
+                <label for="after-occurrences">After</label>
+                <div class="ends-on">
+                    <input type="date" id="ends-on-date">
+                </div>
+                <div class="ends-after">
+                    <br>
+                    <input type="number" id="ends-after-occurrences" min="1" value="1">
+                    <label for="ends-after-occurrences">occurrences</label>
+                </div>
+            </div>
+        </div>
+		<button class="form-button" onclick="this.closest('dialog').close()">Done</button>
 	</dialog>
 
 	<script src="/js/stations.js"></script>				

@@ -20,14 +20,6 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 function addStoppingStation() {
     let schedule = getSchedule();
-    // let schedule = localStorage.getItem("schedule");
-    // if (schedule==null)
-    //     schedule = {nStations: 0, stations: new LinkedList()};
-    // else {
-    //     schedule = JSON.parse(schedule);
-    //     schedule.stations = new LinkedList(null, schedule.stations);
-    // }
-    // schedule = schedule==null ? {nStations: 0, stations: new LinkedList()} : JSON.parse(schedule);
 
     let button = document.getElementById("add_update-sch_station");
     
@@ -55,7 +47,6 @@ function addStoppingStation() {
     }
 
     else {
-        // station.stIndex = schedule.nStations;
         schedule.stations.push(new Node(station));
         insertStationToPage(station);
         schedule.nStations++;
@@ -63,10 +54,6 @@ function addStoppingStation() {
 
     document.getElementById("station-form").reset();
 
-
-    // let serializedSchedule = schedule;
-    // serializedSchedule.stations = schedule.stations.toArray();
-    // localStorage.setItem("schedule", JSON.stringify(serializedSchedule));
     saveSchedule(schedule);
     dynamicDraggableTable();
 }
@@ -75,8 +62,8 @@ function addStoppingStation() {
 
 
 function addNewSchedule() {
-    let schedule = localStorage.getItem("schedule");
-    schedule = JSON.parse(schedule);
+    let schedule = getSchedule();
+    let [startDate, days, endDate] = getDates();
 
     schedule.startStation = document.getElementById("from").getAttribute("stationCode");
     schedule.endStation = document.getElementById("to").getAttribute("stationCode");
@@ -368,6 +355,132 @@ function updateSchedule() {
         }
     });
 }
+
+
+
+function getDates() {
+    const dayIds = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    let unit = document.getElementById("repeat-unit").value;
+    let startDate;
+    let days = [];
+    let endDate = function() {
+        let grpName = "ends-option";
+        let radioValue = document.querySelector(`input[type="radio"][name="${grpName}"]:checked`).value;
+        switch (radioValue) {
+            case "never" :
+                return null;
+                break;
+            case "on-date" :
+                return new Date(document.getElementById("ends-on-date").value);
+                break;
+            case "after-occurrences" :
+                let nOccurences = parseInt(document.getElementById("ends-after-occurrences").value);
+                return (() => {
+                    if (unit=="day") {
+                        return new Date(startDate.getTime() + nOccurences * 24 * 60 * 60 * 1000);
+                    }
+                    else if(unit=="week") {
+                        return new Date(startDate.getTime() + nOccurences * 7 * 24 * 60 * 60 * 1000);
+                    }
+                })();
+        }
+    }
+
+    if (unit==null)
+        return null
+    else {
+        switch (unit) {
+            case "day" :
+                startDate = new Date(document.getElementById("start-from-date").value);
+                break;
+
+            case "week" :
+                startDate = new Date(document.getElementById("start-from-date").value);
+                dayIds.forEach(dayId => {
+                    let checkBox = document.getElementById(dayId);
+                    if (checkBox.checked)
+                        days.push(checkBox.value);
+                });
+                break;
+
+            case "month" :
+
+                
+        }
+    }
+    return [startDate, days, endDate()];
+}
+
+
+
+function popupDatePicker(classname) {
+    let dialog = document.querySelector(classname);
+
+    dialog.showModal();
+
+
+    var repeatUnit = document.getElementById("repeat-unit");
+    var repeatOn = document.getElementById("repeat-on");
+    var container = document.getElementById("container");
+    var ycontainer = document.getElementById("y-container");
+    var mcontainer = document.getElementById("m-container");
+
+    repeatUnit.addEventListener("change", function () {
+        if (repeatUnit.value === "day") {
+            repeatOn.style.display = "none";
+            container.style.display = "none";
+            ycontainer.style.display = "none";
+            mcontainer.style.display = "none";
+        } else if (repeatUnit.value === "month") {
+            repeatOn.style.display = "block";
+            container.style.display = "none";
+            ycontainer.style.display = "none";
+            mcontainer.style.display = "block";
+        }else if (repeatUnit.value === "year") {
+            repeatOn.style.display = "block";
+            container.style.display = "none";
+            ycontainer.style.display = "block";
+            mcontainer.style.display = "none";
+        }else{
+            repeatOn.style.display = "block";
+            container.style.display = "block";
+            ycontainer.style.display = "none";
+            mcontainer.style.display = "none";
+        }
+    });
+    repeatUnit.dispatchEvent(new Event("change"));
+
+    var neverRadio = document.getElementById("never");
+    var onDateRadio = document.getElementById("on-date");
+    var afterOccurrencesRadio = document.getElementById("after-occurrences");
+    var endsOn = document.querySelector(".ends-on");
+    var endsAfter = document.querySelector(".ends-after");
+
+    function updateVisibility() {
+        endsOn.style.display = onDateRadio.checked ? "block" : "none";
+        endsAfter.style.display = afterOccurrencesRadio.checked ? "block" : "none";
+    }
+
+    neverRadio.addEventListener("change", updateVisibility);
+    onDateRadio.addEventListener("change", updateVisibility);
+    afterOccurrencesRadio.addEventListener("change", updateVisibility);
+
+    neverRadio.dispatchEvent(new Event("change"));
+
+    dialog.addEventListener("click", e => {
+        const dialogDimensions = dialog.getBoundingClientRect()
+        if (
+            (e.clientX !=0 && e.clientY !=0) &&
+            (e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom) 
+        ) {
+            dialog.close()
+        }
+    });
+}
+
 
 
 function getSchedule() {
