@@ -1,3 +1,39 @@
+// Wait for the DOM to be ready
+document.addEventListener('DOMContentLoaded', function () {
+    // Get all elements with the class 'count'
+    const counters = document.querySelectorAll('.count');
+
+    // Function to start the counter animation
+    function startCounter(counter) {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const duration = 200; // Animation duration in milliseconds
+        const increment = target / 50; // Increment value for smooth animation
+
+        // Initial value
+        let currentValue = 0;
+
+        // Function to update the counter value
+        function updateCounter() {
+            currentValue += increment;
+            counter.textContent = Math.floor(currentValue);
+
+            // Stop the animation when the target is reached
+            if (currentValue < target) {
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target; // Ensure the final value is exact
+            }
+        }
+
+        // Start the counter animation
+        updateCounter();
+    }
+
+    // Start the counter animation for each element with the class 'count'
+    counters.forEach(startCounter);
+});
+
+
 $(document).ready(function() {
     $(".menu > ul > li").click(function(e) {
     // remove actiive from alreay active li

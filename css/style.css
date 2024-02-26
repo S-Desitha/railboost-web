@@ -300,9 +300,28 @@ main .info-data{
 }
 
 main .info-data .card{
+  font-family: 'Merriweather', serif;
   padding: 20px;
   border-radius: 20px;
   background: #fff;
   box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
   
+}
+main .info-data .card h1.count{
+  font-family: 'Merriweather', serif;
+}
+/* Add this to your CSS file */
+.animated {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
