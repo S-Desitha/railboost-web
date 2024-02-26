@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/staff.css">
     <link rel="stylesheet" href="/css/table.css"> 
     <link rel="stylesheet" href="/css/buttons.css">
-    <!-- <link rel="stylesheet" href="/css/parcelbooking.css"> -->
+    <link rel="stylesheet" href="/css/parcelbooking.css">
     <script src="/js/parcelBooking.js"></script>
     <script src="/js/passenger.js"></script>
     <script src="/js/script.js"></script>
@@ -23,7 +22,7 @@
 
     <div class="service-view" id="hasDataDiv">
 		<div class="service-container">
-            <button class="add-new-btn" type="button"   onclick="openDialog()">ParcelBooking Form</button>
+            <button class="add-new-btn" type="button"   onclick="popupAddPage('.staff-add_edit-modal')">ParcelBooking Form</button>
 			<div class="table-container">
 
 				<section class="table_header">
@@ -51,7 +50,7 @@
 	<div class="service-container">
                         
 
-        <button class="add-new-btn" type="button"   onclick="openDialog()">ParcelBooking Form</button>
+        <button class="add-new-btn" type="button"   onclick="popupAddPage('.staff-add_edit-modal')">ParcelBooking Form</button>
             <div id="pBookinginstructions">
                 <h2>instructions</h2>
                 <br>
@@ -107,18 +106,43 @@
                     <!-- <h3 class="adding-form-heading" id="add-staff-heading">Receiver Details</h3> -->
 
                     <label for="sendingStaion"></label>
-                    <input type="text" id="sendingStaion" placeholder=" Sending Station" name="sendingStaion" required><br>
+                    <div class="wrapper" id="from" name="sendingStaion">
+                        <div class="select-btn">
+                            <span>Select Starting Station</span>
+                            <i class="uil uil-angle-down"></i>
+                        </div>
+                        <div class="content">
+                            <div class="search">
+                                <i class="uil uil-search"></i>
+                                <input spellcheck="false" type="text" placeholder="Search">
+                            </div>
+                            <ul class="options">
+                            </ul>
+                        </div>
+                    </div><br>
 
                     <label for="senderAddress"></label>
                     <input type="text" id="senderAddress" placeholder=" Sender's Address:" name="senderAddress"  required><br>
     
             
                     <label for="senderNIC"></label>
-                    <input type="text" id="senderNIC" name="senderNIC" placeholder="Sender's NIC"required><br>
+                    <input type="text" id="senderNIC" name="senderNIC" placeholder="Sender's NIC"required><br><br>
 
                     
                     <label for="railwayStation"></label>
-                    <input type="text" id="railwayStation" placeholder="Recovering Station" name="railwayStation" required><br>
+                    <div class="wrapper" id="to">
+                        <div class="select-btn">
+                            <span>Select Ending Station</span>
+                            <i class="uil uil-angle-down"></i>
+                        </div>
+                        <div class="content">
+                            <div class="search">
+                                <i class="uil uil-search"></i>
+                                <input spellcheck="false" type="text" placeholder="Search">
+                            </div>
+                            <ul class="options"></ul>
+                        </div>
+                    </div><br>
 
                     <label for="receiverName"></label>
                     <input type="text" id="receiverName" name="receiverName" placeholder="Receiver Name" required>
@@ -155,7 +179,7 @@
 
 
        </div> 
-
+       <script src="/js/stations.js"></script>
      
 </body>
 

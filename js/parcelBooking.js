@@ -43,10 +43,10 @@ document.addEventListener("DOMContentLoaded",async function(){
 function addNewParcel() {
     parcel = {};
 
-    parcel["sendingStation"] = document.getElementById("sendingStaion").value;
+    parcel["sendingStation"] = document.getElementById("from").getAttribute("stationCode");
     parcel["senderAddress"] = document.getElementById("senderAddress").value;
     parcel["SenderNIC"] = document.getElementById("senderNIC").value;
-    parcel["recoveringStation"] = document.getElementById("railwayStation").value;
+    parcel["recoveringStation"] = document.getElementById("to").getAttribute("stationCode");
     parcel["receiverName"] = document.getElementById("receiverName").value;
     parcel["receiverAddress"] = document.getElementById("receiverAddress").value;
     parcel["receiverNIC"] = document.getElementById("receiverNIC").value;
