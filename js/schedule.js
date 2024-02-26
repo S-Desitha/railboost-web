@@ -24,7 +24,7 @@ function addStoppingStation() {
     let button = document.getElementById("add_update-sch_station");
     
     station = {
-        "scheduleId" : document.getElementById("sch-id").value,
+        // "scheduleId" : document.getElementById("sch-id").value,
         "station" : document.getElementById("stopping").getAttribute("stationCode"),
         "stationName" : document.getElementById("stopping").getElementsByTagName("div")[0].getElementsByTagName("span")[0].innerHTML,
         "scheduledArrivalTime" : document.getElementById("SAT").value,
@@ -63,23 +63,32 @@ function addStoppingStation() {
 
 function addNewSchedule() {
     let schedule = getSchedule();
+    let serialSchedule = schedule;
+    
     let [startDate, days, endDate] = getDates();
+    startDate = startDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    endDate = endDate!=null? endDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }) : endDate;
+    
+    serialSchedule.stations = schedule.stations.toArray();
+    serialSchedule.startDate = startDate;
+    serialSchedule.endDate = endDate;
+    serialSchedule.days = days;
+    
+    serialSchedule.startStation = document.getElementById("from").getAttribute("stationCode");
+    serialSchedule.endStation = document.getElementById("to").getAttribute("stationCode");
+    serialSchedule.scheduleId = document.getElementById("sch-id").value;
+    serialSchedule.trainId = document.getElementById("tr-id").value;
+    serialSchedule.speed = document.getElementById("speed").value;
 
-    schedule.startStation = document.getElementById("from").getAttribute("stationCode");
-    schedule.endStation = document.getElementById("to").getAttribute("stationCode");
-    schedule.scheduleId = document.getElementById("sch-id").value;
-    schedule.trainId = document.getElementById("tr-id").value;
-    schedule.speed = document.getElementById("speed").value;
-
-    schedule.stations.forEach(st => {
-        st.scheduleId = schedule.scheduleId;
-    });
+    // serialSchedule.stations.forEach(st => {
+    //     st.scheduleId = serialSchedule.scheduleId;
+    // });    
 
     const params = {
         headers : {
             "Content-type": "application/json; charset=UTF-8"
         },
-        body : JSON.stringify(schedule),
+        body : JSON.stringify(serialSchedule),
         method : "POST"
     };
 
@@ -399,7 +408,7 @@ function getDates() {
                 dayIds.forEach(dayId => {
                     let checkBox = document.getElementById(dayId);
                     if (checkBox.checked)
-                        days.push(checkBox.value);
+                        days.push({"day":checkBox.value});
                 });
                 break;
 

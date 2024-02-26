@@ -98,8 +98,10 @@ class LinkedList {
         let arr = [];
         
         let node = this.head;
-        while(node!=null) {
-            arr.push(node.data);
+        for (let i=0; node!=null; i++) {
+            let data = node.data;
+            data.stIndex = i;
+            arr.push(data);
             node = node.next;
         }
 
