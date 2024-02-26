@@ -55,6 +55,7 @@ function addStoppingStation() {
     document.getElementById("station-form").reset();
 
     saveSchedule(schedule);
+    validateStations();
     dynamicDraggableTable();
 }
 
@@ -291,6 +292,8 @@ function createSpecificSchPage() {
         schedule = JSON.parse(schedule);
         schedule.stations.forEach(station => insertStationToPage(station));
     }
+
+    validateStations();
 }
 
 
@@ -513,6 +516,48 @@ function saveSchedule(schedule) {
 
 
 
+function validateStations() {
+
+    // Array.from(document.getElementById("schedule_stations").rows).forEach(row => row.style.border = "none")
+
+    let schedule = getSchedule();
+    let stationList = schedule.stations;
+
+    if (stationList.head!=null) {
+        let prev = stationList.head;
+        let current = prev.next;
+
+        for (let i=1; current!=null; i++) {
+            let depTime = prev.data.scheduledDepartureTime.split(":").map(e => parseInt(e));
+            let arrTime = current.data.scheduledArrivalTime.split(":").map(e => parseInt(e));
+            let prevDeparture = new Date().setHours(depTime[0], depTime[1], 0);
+            let currArrival = new Date().setHours(arrTime[0], arrTime[1]);
+
+            let row = document.getElementById("schedule_stations").rows[i];
+            if (currArrival <= prevDeparture) {
+                // row.style.border = "2px solid red";
+                row.classList.add("row-invalid");
+            }
+            else {
+                // row.style.border = "none";
+                // row.removeAttribute("style");
+                row.classList.remove("row-invalid");
+                row.classList.add("row-valid");
+            }
+            prev = current;
+            current = prev.next;
+        }
+
+        let first_row = document.getElementById("schedule_stations").rows[0];
+        first_row.classList.remove("row-invalid");
+        first_row.classList.add("row-valid");
+    }
+
+}
+
+
+
+
 // ########################### Table row drag & drop functionalities ##############################
 
 function dynamicDraggableTable() {
@@ -562,6 +607,7 @@ function dynamicDraggableTable() {
 
         // Hide the original table
         table.style.visibility = 'hidden';
+        // table.style.display = "none";
 
         table.querySelectorAll('tr').forEach(function (row, index) {
             // Create a new table from given row
@@ -584,7 +630,6 @@ function dynamicDraggableTable() {
                 const header = document.createElement('thead');
                 header.appendChild(newRow);
                 newTable.appendChild(header);
-                // newTable.appendChild(document.createElement('thead').appendChild(newRow));
             }
             else
                 newTable.appendChild(newRow);
@@ -701,10 +746,13 @@ function dynamicDraggableTable() {
 
         // Bring back the table
         table.style.removeProperty('visibility');
+        // table.style.removeAttribute("display");
 
         // Remove the handlers of mousemove and mouseup
         document.removeEventListener('mousemove', mouseMoveHandler);
         document.removeEventListener('mouseup', mouseUpHandler);
+
+        validateStations();
     };
 
     table.querySelectorAll('tr').forEach(function (row, index) {
