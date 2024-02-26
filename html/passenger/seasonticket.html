@@ -90,7 +90,7 @@
                         <option value="1 Week" style="color: #484848">1 Week</option>
                         <option value="1 Month" style="color: #484848">1 Month</option>
                         <option value="3 Month" style="color: #484848">3 Month</option>
-                        <option value="6 Month" style="color: #484848">6 Month</option>
+                        <!-- <option value="6 Month" style="color: #484848">6 Month</option> -->
                     </select>
 
                     <label for="End-date"></label>
@@ -100,7 +100,7 @@
                     <label for="class"></label>
                     <select id="class" name="class" onchange="getPrice()" required>
                         <option value="" disabled selected>Class:</option>
-                        <option value="1st Class" style="color: #484848">1st Class</option>
+                        <!-- <option value="1st Class" style="color: #484848">1st Class</option> -->
                         <option value="2nd Class" style="color: #484848">2nd Class</option>
                         <option value="3rd Class" style="color: #484848">3rd Class</option>
                     </select> 
@@ -111,35 +111,18 @@
 
                     <label for="img" id="Application">
                         <span class="app">Application</span>
-                        <input type="file" id="img" name="img" accept="image/*" required>
+                        <input type="file" id="img" name="img" accept=".pdf, .jpg, .jpeg, .png" required>
                     </label>
-                    <style>
-                        .app{
-                            text-align: left;
-                            margin-left: 10px;
-                            color:#0d45a5;
-                            font-weight: 900;
-}
-                        }
-                        input[type=file] {
-                            display:grid
-                        }
-                        input[type=file]::file-selector-button {
-                            /* margin-right: 20px; */
-                            border: none;
-                            background: #084cdf;
-                            padding: 10px 20px;
-                            border-radius: 10px;
-                            color: #fff;
-                            cursor: pointer;
-                            transition: background .2s ease-in-out;
-                            }
+                    <script>
+                        const uploadField = document.getElementById("img");
 
-                            input[type=file]::file-selector-button:hover {
-                            background: #0d45a5;
+                        uploadField.onchange = function() {
+                            if(this.files[0].size > 5242880){
+                            alert("File is too big!");
+                            this.value = "";
                             }
-                    </style>
-
+                        }
+                    </script>
 
 					<button class="form-button" id="buy-ticket-button" onclick="appplySeasonTicket()">Apply</button>
 				</form>
