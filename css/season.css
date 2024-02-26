@@ -19,6 +19,7 @@
     border-radius: 8px; 
   }
   .train-form{
+    margin-top: 30px;
     display:flex;
     gap: 12%;
 
@@ -74,7 +75,7 @@
   border-bottom: 1px solid #a9a9a9;
   color: #484848;
   padding: 7px 0;
-  margin: 15px 0;}
+  margin: 1px 0;}
   .input-control.success input {
     border-color: #09c372;
   }
@@ -86,7 +87,7 @@
     border-bottom: 1px solid #a9a9a9;
     color: #484848;
     padding: 7px 0;
-    margin: 15px 0;}
+    margin: 1px 0;}
   #duration {
     cursor: pointer;
     width: 20rem;
@@ -95,11 +96,21 @@
     border-bottom: 1px solid #a9a9a9;
     color: #484848;
     padding: 7px 0;
-    margin: 15px 0;}
+    margin: 1px 0;}
     .input-control.success input {
       border-color: #09c372;
     }
   #Start-date{
+  /* cursor: pointer; */
+    width: 20rem;
+  height: 2.5rem;
+  border: none;
+  border-bottom: 1px solid #a9a9a9;
+  color: #484848;
+  padding: 7px 0;
+  margin: 15px 0;
+}
+#End-date{
   /* cursor: pointer; */
     width: 20rem;
   height: 2.5rem;
@@ -146,6 +157,7 @@
     top: 100%;
     font-size: 12px;
     font-weight: 600;
+    margin-top: 15px;
     color: rgb(24, 80, 211);
   }
   #total-price{
@@ -200,7 +212,7 @@ input[type="date"]:valid::before {
     margin-bottom: 15px;
     cursor: pointer;
     width: 20rem;
-    margin-top: 30px;
+    margin-top: 10px;
     font-size: 20px;
   }
   
