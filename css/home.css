@@ -2,6 +2,7 @@
 @import url('https://fonts.cdnfonts.com/css/cocogoose');
 body{
     /* overflow: hidden; */
+    background: #f1f0f6;
 }
 .header-logo {
     position: fixed;
