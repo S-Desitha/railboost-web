@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/staff.css">
     <link rel="stylesheet" href="/css/table.css"> 
     <link rel="stylesheet" href="/css/buttons.css">
-    <link rel="stylesheet" href="/css/parcelbooking.css">
+    <!-- <link rel="stylesheet" href="/css/parcelbooking.css"> -->
     <script src="/js/parcelBooking.js"></script>
     <script src="/js/passenger.js"></script>
     <script src="/js/script.js"></script>
@@ -21,12 +21,9 @@
     </nav>   
 
 
-    <!-- <div class="service-view">
-
+    <div class="service-view" id="hasDataDiv">
 		<div class="service-container">
-           
-			
-
+            <button class="add-new-btn" type="button"   onclick="openDialog()">ParcelBooking Form</button>
 			<div class="table-container">
 
 				<section class="table_header">
@@ -37,12 +34,11 @@
 					<table>
 						<thead>
 							<tr>
+                                <th>Receiver Name</th>
 								<th>Booking ID</th>
+                                <th>Receiver Address</th>
+                                <th>Receiver Email</th>
                                 <th>Item</th>
-                                <th>Discrption</th>
-                                <th>Weight</th>
-                                <th>Status</th>
-                                <th></th>
 							</tr>
 						</thead>
 						<tbody id="parcelBooking_table"></tbody>
@@ -50,8 +46,8 @@
 				</div>
 			</div>
         </div>
-    </div> -->
-    <div class="service-view">
+    </div>
+    <div class="service-view" id="noDataDiv">
 	<div class="service-container">
                         
 
@@ -128,7 +124,7 @@
                     <input type="text" id="receiverName" name="receiverName" placeholder="Receiver Name" required>
 
                     <label for="receiverNIC"></label>
-                    <input type="text" id="receiverNIC" name="receiverNIC" placeholder="Sender's NIC"required><br>
+                    <input type="text" id="receiverNIC" name="receiverNIC" placeholder="Reveiver's NIC"required><br>
 
                     <label for="receiverAddress"></label>
                     <input type="text" id="receiverAddress" name="receiverAddress" placeholder="Receiver Address" required>

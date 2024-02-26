@@ -1,23 +1,43 @@
 //const url = "http://localhost:8080/railboost_backend_war_exploded/parcelBooking"
 const parcelBookingEndpoint = "parcelBooking";
 
-// document.addEventListener("DOMContentLoaded",async function(){
-//     document.getElementById("parcelBooking_form").reset();
 
-//     let data = await customFetch(endpoint2, {Credential: "include"});
-//     try{
-//             data.forEach(parcel => {
-//             let row = document.getElementById("parcelBooking_table").insertRow(-1);
-//             row.insertCell(0).innerHTML = parcel.bookingId;
+document.addEventListener("DOMContentLoaded",async function(){
+    document.getElementById("parcelBooking_form").reset();
+    var hasDataDiv = document.getElementById("hasDataDiv");
+    var noDataDiv = document.getElementById("noDataDiv");
+    hasDataDiv.style.display = "none";
+    noDataDiv.style.display = "none";
+
+    let data = await customFetch(parcelBookingEndpoint, {});
+
+    if (Array.isArray(data) && data.length !== 0) {
+     //var hasDataDiv =  document.getElementById("hasDataDiv");
+      //var noDataDiv = document.getElementById("noDataDiv");
+      hasDataDiv.style.display = "flex";
+      //noDataDiv.style.display = "none";
+  } else {
+
+      // var hasData =  document.getElementById("hasDataDiv");
+      //var noDataDiv = document.getElementById("noDataDiv");
+      // hasData.style.display = "none";
+      noDataDiv.style.display = "flex";
+  }
+    try{
+            data.forEach(parcel => {
+            let row = document.getElementById("parcelBooking_table").insertRow(-1);
+            row.insertCell(0).innerHTML = parcel.receiverName;
+            row.insertCell(1).innerHTML = parcel.bookingId;
+            row.insertCell(2).innerHTML = parcel.receiverAddress; 
+            row.insertCell(3).innerHTML = parcel.receiverEmail;
+            row.insertCell(4).innerHTML = parcel.item;        
             
-//         });
-//     }catch(error){
-//             if (error=="login-redirected")
-//             localStorage.setItem("last_url", window.location.pathname); 
-//     }
-    
-    
-// });
+        });
+    }catch(error){
+            if (error=="login-redirected")
+            localStorage.setItem("last_url", window.location.pathname); 
+    }       
+});
 
 
 function addNewParcel() {
@@ -52,8 +72,6 @@ function addNewParcel() {
 
     console.log(parcel);
 }
-
-
 
 
 
