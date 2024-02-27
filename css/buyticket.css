@@ -1,19 +1,19 @@
 
 .train-container {
   display: flex;
-  align-items: center;
-  gap: 22%;
+  /* align-items: center; */
+  gap: 11%;
   width: 49%;
   height: 80vh;
-margin-top: 40px;
-  margin-left: 10%;
+margin-top: 4px;
+  /* margin-left: 10%; */
   margin-right: 10%;
 
 }
 .train-image {
-  width: 50vw; 
-  height: 80vh;
-  border-radius: 8px; 
+  width: 68vw; 
+  height: 90vh;
+  /* border-radius: 8px;  */
 }
 
 .train-left {
