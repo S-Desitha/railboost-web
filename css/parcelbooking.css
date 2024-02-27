@@ -234,7 +234,7 @@ table, th, td {
   padding: 1rem;
   text-align: left;
   margin: auto;
-  max-width: 200px;
+  max-width: 500px;
   overflow: hidden;
   text-overflow: ellipsis;
   position: sticky;
@@ -371,3 +371,4 @@ transition: .2s ease-in-out .5s;
   /* border-radius: 5px; */
   background: #f2f2f2;
 }
+

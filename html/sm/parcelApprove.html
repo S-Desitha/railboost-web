@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/buttons.css">
+    <script src="/js/script.js"></script>    
+    <script src="/js/parcelApprove.js"></script>
+    <title>approveParcel</title>
+</head>
+<body>
+    <nav class="navbar" >
+        <script>createNavBar("passenger")</script>
+    </nav>
+
+    <div class="service-view" id="hasDataDiv">
+		<div class="service-container">
+            
+			<div class="table-container">
+
+				<section class="table_header">
+					<h1>Parcel Details</h1>
+				</section>
+				
+				<div class="table_body">
+					<table>
+						<thead>
+							<tr>
+                                <th>Booking ID</th>
+                                <th>Sender Name</th>
+                                <th>Receiver Name</th>
+								<th>Recovering Station</th>
+                                <th>Item</th>
+                                <th>Status</th>
+                                <th></th>
+							</tr>
+						</thead>
+						<tbody id="parcelApprove_table"></tbody>
+					</table>
+				</div>
+			</div>
+        </div>
+    </div>
+    <div class="service-view" id="noDataDiv">
+	<div class="service-container">
+    
+</body>
+</html>
