@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to start the counter animation
     function startCounter(counter) {
         const target = parseInt(counter.getAttribute('data-target'));
-        const duration = 200; // Animation duration in milliseconds
         const increment = target / 50; // Increment value for smooth animation
 
         // Initial value
@@ -15,13 +14,26 @@ document.addEventListener('DOMContentLoaded', function () {
         // Function to update the counter value
         function updateCounter() {
             currentValue += increment;
-            counter.textContent = Math.floor(currentValue);
+
+            // Check if the counter is for revenue
+            if (counter.classList.contains('revenue')) {
+                // Format the current value with "$" sign and commas
+                counter.textContent = '$' + formatNumber(Math.floor(currentValue));
+            } else {
+                // For other counters, just display the value
+                counter.textContent = Math.floor(currentValue);
+            }
 
             // Stop the animation when the target is reached
             if (currentValue < target) {
                 requestAnimationFrame(updateCounter);
             } else {
-                counter.textContent = target; // Ensure the final value is exact
+                // Ensure the final value is exact
+                if (counter.classList.contains('revenue')) {
+                    counter.textContent = '$' + formatNumber(target);
+                } else {
+                    counter.textContent = target;
+                }
             }
         }
 
@@ -29,9 +41,16 @@ document.addEventListener('DOMContentLoaded', function () {
         updateCounter();
     }
 
+    // Format a number with commas
+    function formatNumber(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     // Start the counter animation for each element with the class 'count'
     counters.forEach(startCounter);
 });
+
+
 
 
 $(document).ready(function() {
