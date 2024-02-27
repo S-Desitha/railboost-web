@@ -314,6 +314,7 @@ main .info-data .card:hover{
   transform: translateY(-10px);
   transition: all 0.3s ease;
   box-shadow: 4px 4px 16px rgba(0,0,0,0.2);
+  
 }
 main .info-data .card .head{
   display: flex;
@@ -323,13 +324,13 @@ main .info-data .card .head{
   justify-content: space-between;
 }
 main .info-data .card .head i{
-  font-size: 80px;
-  color: #9d9d9d;
+  font-size: 70px;
+  color: #333333;
   align-self: right;
   margin-right: 10px;
 }
 
-.card::before{
+/* main .info-data .card::before{
   content: "";
   position: absolute;
   bottom: -2rem;
@@ -338,7 +339,7 @@ main .info-data .card .head i{
   height: 0.2rem;
   transform: translate(-50%);
   background-color: #5271FF;
-}
+} */
 
 
 .head h2{
@@ -382,6 +383,12 @@ h2.count{
     transform: translateY(0);
   }
 }
-/* .head h1{
-  font-family: Merriweather, serif;
-} */
+/* Canvas */
+canvas#chart{
+  background: white;
+  max-width: 61%;
+  max-height: 61%;
+  margin-top: 3rem;
+  border-radius: 1.6rem;
+  padding: 1.6em; ;
+}

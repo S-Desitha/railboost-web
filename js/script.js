@@ -48,6 +48,48 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Start the counter animation for each element with the class 'count'
     counters.forEach(startCounter);
+
+    
+        const chartCanvas = document.querySelector(".chart");
+    
+        // Check if the canvas element exists
+        if (!chartCanvas) {
+            console.error("Canvas element with class 'chart' not found.");
+            return;
+        }
+    
+        const chart = new Chart(chartCanvas.getContext("2d"), {
+            type: "line",
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                datasets: [
+                    {
+                        label:"Revenue by Tickets Sold",
+                        data:[0,100,200,300,400,500,600,700,800,900,1000,1100],
+                        backgroundColor:"rgba(255,99,132,0.2)",
+                        borderColor:"rgba(255,99,132,1)",
+                        borderWidth:1
+                        },
+                        {
+                        label:"Revenue by Parcel Delevery",
+                        // random data set
+            
+                        data:[600,300,700,600,400,500,1000,100,800,300,1200,1100],
+                        backgroundColor:"rgba(255,99,132,0.2)",
+                        borderColor:"rgba(255,99,132,1)",
+                        borderWidth:1
+                        }
+                    // Add more datasets if needed
+                ]
+            },
+            options: {
+                responsive: true,
+            }
+        });
+    
+        // Your other JavaScript code...
+    
+    
 });
 
 
@@ -279,3 +321,44 @@ function toggleDropdown() {
     }
   }
   
+const chart=document.querySelector(".chart");
+console.log(chart);
+
+const charts=new Chart(chart,{
+    type:"line",
+    data:{
+        labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+        datasets:[
+            {
+            label:"Revenue by Tickets Sold",
+            data:[0,100,200,300,400,500,600,700,800,900,1000,1100],
+            backgroundColor:"rgba(255,99,132,0.2)",
+            borderColor:"rgba(255,99,132,1)",
+            borderWidth:1
+            },
+            {
+            label:"Revenue by Parcel Delevery",
+            // random data set
+
+            data:[600,300,700,600,400,500,1000,100,800,300,1200,1100],
+            backgroundColor:"rgba(255,99,132,0.2)",
+            borderColor:"rgba(255,99,132,1)",
+            borderWidth:1
+            }
+
+
+
+    
+    ]
+    },
+    options:{
+        responsive:true,
+        // scales:{
+            // yAxes:[{
+            //     ticks:{
+            //         beginAtZero:true
+            //     }
+            // }]
+        
+    }
+})
