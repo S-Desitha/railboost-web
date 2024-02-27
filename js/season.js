@@ -2,7 +2,7 @@
 
 const seasonEndpoint = "season";
 const ticketPriceEndpoint = "ticketPrice";
-let ENDDATE;
+let endDate;
 
 function validateStation(){
   
@@ -25,7 +25,7 @@ function appplySeasonTicket() {
   season["passengerType"] = document.getElementById("passenger-type").value;
   season["startDate"] = new Date(document.getElementById("Start-date").value).toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"})
   season["duration"] = document.getElementById("duration").value;
-  season["endDate"] = ENDDATE;
+  season["endDate"] = new Date(endDate).toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"})
   season["trainClass"] = document.getElementById("class").value;
   season["totalPrice"] = document.getElementById("total-price").value;
   // season["file"] = document.getElementById("img");
@@ -144,7 +144,7 @@ function updateEndDate() {
     let duration = document.getElementById('duration').value;
 
     if (startDate && duration) {
-        let endDate = new Date(startDate);
+        endDate = new Date(startDate);
         switch (duration) {
             case '1 Week':
                 endDate.setDate(endDate.getDate() + 7);
@@ -165,7 +165,7 @@ function updateEndDate() {
         console.log(endDate);
         let endDateFormatted = (endDate.getMonth() + 1).toString().padStart(2, '0') + '/' + endDate.getDate().toString().padStart(2, '0') + '/' + endDate.getFullYear();
         document.getElementById("End-date").value = endDateFormatted;
-        ENDDATE = endDate.getFullYear() + '-' + ('0' + (endDate.getMonth() + 1)).slice(-2) + '-' + ('0' + endDate.getDate()).slice(-2);
+        //ENDDATE = endDate.getFullYear() + '-' + ('0' + (endDate.getMonth() + 1)).slice(-2) + '-' + ('0' + endDate.getDate()).slice(-2);
 
         
         
