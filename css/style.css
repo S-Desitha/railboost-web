@@ -329,7 +329,17 @@ main .info-data .card .head i{
   align-self: right;
   margin-right: 10px;
 }
-
+.card:hover:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  width: 20%;
+  height: 0.2rem;
+  transform: translateX(-50%);
+  background-color: #5271FF;
+}
 /* main .info-data .card::before{
   content: "";
   position: absolute;

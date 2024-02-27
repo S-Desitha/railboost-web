@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Check if the counter is for revenue
             if (counter.classList.contains('revenue')) {
                 // Format the current value with "$" sign and commas
-                counter.textContent = '$' + formatNumber(Math.floor(currentValue));
+                counter.textContent = 'Rs ' + formatNumber(Math.floor(currentValue));
             } else {
                 // For other counters, just display the value
                 counter.textContent = Math.floor(currentValue);
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 // Ensure the final value is exact
                 if (counter.classList.contains('revenue')) {
-                    counter.textContent = '$' + formatNumber(target);
+                    counter.textContent = 'Rs ' + formatNumber(target);
                 } else {
                     counter.textContent = target;
                 }
@@ -64,26 +64,48 @@ document.addEventListener('DOMContentLoaded', function () {
                 labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 datasets: [
                     {
-                        label:"Revenue by Tickets Sold",
-                        data:[0,100,200,300,400,500,600,700,800,900,1000,1100],
-                        backgroundColor:"rgba(255,99,132,0.2)",
-                        borderColor:"rgba(255,99,132,1)",
-                        borderWidth:1
-                        },
-                        {
-                        label:"Revenue by Parcel Delevery",
-                        // random data set
-            
-                        data:[600,300,700,600,400,500,1000,100,800,300,1200,1100],
-                        backgroundColor:"rgba(255,99,132,0.2)",
-                        borderColor:"rgba(255,99,132,1)",
-                        borderWidth:1
-                        }
+                        label: "Revenue by Tickets",
+                        data: [250000, 150000, 180000, 400000, 220000, 250000, 200000, 500000, 270000, 240000, 210000, 700000],
+                        backgroundColor: "rgba(82, 113, 255, 0.2)",
+                        borderColor: "rgba(82, 113, 255, 1)",
+                        borderWidth: 2,
+                        pointRadius: 5,
+                        pointStyle: 'circle'
+                    },
+                    {
+                        label: "Revenue by Parcel Delivery",
+                        data: [80000, 90000, 100000, 300000, 120000, 130000, 350000, 150000, 140000, 130000, 600000, 650000],
+                        backgroundColor: "rgba(75, 192, 192, 0.2)",
+                        borderColor: "rgba(75, 192, 192, 1)",
+                        borderWidth: 2,
+                        pointRadius: 5,
+                        pointStyle: 'rect'
+                    }
                     // Add more datasets if needed
                 ]
             },
             options: {
                 responsive: true,
+    plugins: {
+        tooltip: {
+            mode: 'index',
+            intersect: false,
+        },
+    },
+    scales: {
+        x: {
+            title: {
+                display: true,
+                text: 'Month'
+            }
+        },
+        y: {
+            title: {
+                display: true,
+                text: 'Revenue (in thousands)'
+            }
+        }
+    }
             }
         });
     
