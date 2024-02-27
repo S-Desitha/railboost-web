@@ -8,7 +8,16 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/trainSch.css">
 	<!-- <link rel="stylesheet" href="/css/passSearch.css"> -->
-    <script src="/js/script.js"></script>
+    
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+	<script src="/js/script.js"></script>
 	<script src="/js/schedule.js"></script>
 	<!-- <script src="/js/train.js"></script> -->
 	
@@ -21,97 +30,57 @@
 		<script>createNavBar("admin")</script>
 	</nav>
 
+	<div class="container">
+        <div class="sidebar active">
+            <script>createSideBar("admin")</script>
 
-	<div class="train-container">
-		<div class="train-left">
+        </div>
 
-			<div class="trainsc-header" id="scheduleTitle">
-				<i class="fas fa-train"></i>
-				<h3>Panadura- Colombo Fort</h>
-				<p>Train Number: 1234</p>
-				<p>Train Type: Express</p>
-			</div>
+		<div class="train-container">
+			<div class="train-left">
 
-			<section class="table_header">
-				<h1>Train stopping stations</h1>
-				<div class="input-group">
-					<input type="search" placeholder="Search Station...">
-					<img src="/Images/search.png" alt="">
+				<div class="trainsc-header" id="scheduleTitle">
+					<i class="fas fa-train"></i>
+					<h3>Panadura- Colombo Fort</h>
+					<p>Train Number: 1234</p>
+					<p>Train Type: Express</p>
 				</div>
-				
-			</section>
 
-			<section class="table_body">
-
-				<table>
-				<thead>
-					<tr>
-						<th>Station Name</th>
-						<th>Scheduled Arrival Time</th>
-						<th>Scheduled Departure Time</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody id="schedule_stations">
-				</tbody>
-			</section>
-			</table>
-		</div>
-	
-		<div class="train-right">
-			<h2 class="add-train-heading">Add a new train schedule </h2>
-
-			<form class="train-form" id="station-form" onsubmit="addStoppingStation(this); return false">
-				<!-- <fieldset> -->
-					<legend>Stopping Stations: </legend>
-					<div class="wrapper" id="stopping">
-					<div class="select-btn">
-						<span>Station</span>
-						<i class="uil uil-angle-down"></i>
+				<section class="table_header">
+					<h1>Train stopping stations</h1>
+					<div class="input-group">
+						<input type="search" placeholder="Search Station...">
+						<img src="/Images/search.png" alt="">
 					</div>
-					<div class="content">
-						<div class="search">
-							<i class="uil uil-search"></i>
-							<input spellcheck="false" type="text" placeholder="Search">
-						</div>
-						<ul class="options">
-						</ul>
-					</div>
-					</div>
-						<label for="SAT"></label>
-						<input type="time" id="SAT" placeholder="Scheduled Arrival Time" name="Scheduled Arrival Time" required><br>
-
-						<label for="SDT"></label>
-						<input type="time" id="SDT" placeholder="Scheduled Departure Time" name="Scheduled Departure Time" required><br>
-					<!-- <div class="buttons">
-						<button class="form-button" id="add_update-sch_station" onclick="addStoppingStation(this)">Add a new stopping </button>
-						<button type="submit" class="form-button" id="done" onclick="addNewSchedule()">Done </button>
-					</div> -->
-					<input type="submit" class="form-button" id="add_update-sch_station" value="Add a new stopping">
-				<!-- </fieldset> -->
-			</form>
-
-
-			<form class="train-form" id="schedule-form" onsubmit="addNewSchedule(); return false">
-				<fieldset>
-					<label for="Schedule-ID"></label>
-					<input type="text" id="sch-id" placeholder="Schedule ID" required>
-
-					<label for="Train-ID"></label>
-					<input type="text" id="tr-id" placeholder="Train ID" required>
 					
-					<label for="speed"></label>
-					<select name="speed" id="speed">
-						<option value="">--Select Speed--</option>
-						<option value="Slow">Slow</option>
-						<option value="Semi-Empress">Semi-Express</option>
-						<option value="Express">Express</option>
-						<option value="Intercity">Intercity</option>
-					</select>
+				</section>
 
-					<div class="wrapper" id="from">
+				<section class="table_body">
+
+					<table>
+					<thead>
+						<tr>
+							<th>Station Name</th>
+							<th>Scheduled Arrival Time</th>
+							<th>Scheduled Departure Time</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody id="schedule_stations">
+					</tbody>
+				</section>
+				</table>
+			</div>
+		
+			<div class="train-right">
+				<h2 class="add-train-heading">Add a new train schedule </h2>
+
+				<form class="train-form" id="station-form" onsubmit="addStoppingStation(this); return false">
+					<!-- <fieldset> -->
+						<legend>Stopping Stations: </legend>
+						<div class="wrapper" id="stopping">
 						<div class="select-btn">
-							<span>Select Starting Station</span>
+							<span>Station</span>
 							<i class="uil uil-angle-down"></i>
 						</div>
 						<div class="content">
@@ -122,25 +91,71 @@
 							<ul class="options">
 							</ul>
 						</div>
-					</div>
+						</div>
+							<label for="SAT"></label>
+							<input type="time" id="SAT" placeholder="Scheduled Arrival Time" name="Scheduled Arrival Time" required><br>
 
-					<div class="wrapper" id="to">
-						<div class="select-btn">
-							<span>Select Ending Station</span>
-							<i class="uil uil-angle-down"></i>
-						</div>
-						<div class="content">
-							<div class="search">
-								<i class="uil uil-search"></i>
-								<input spellcheck="false" type="text" placeholder="Search">
+							<label for="SDT"></label>
+							<input type="time" id="SDT" placeholder="Scheduled Departure Time" name="Scheduled Departure Time" required><br>
+						<!-- <div class="buttons">
+							<button class="form-button" id="add_update-sch_station" onclick="addStoppingStation(this)">Add a new stopping </button>
+							<button type="submit" class="form-button" id="done" onclick="addNewSchedule()">Done </button>
+						</div> -->
+						<input type="submit" class="form-button" id="add_update-sch_station" value="Add a new stopping">
+					<!-- </fieldset> -->
+				</form>
+
+
+				<form class="train-form" id="schedule-form" onsubmit="addNewSchedule(); return false">
+					<fieldset>
+						<label for="Schedule-ID"></label>
+						<input type="text" id="sch-id" placeholder="Schedule ID" required>
+
+						<label for="Train-ID"></label>
+						<input type="text" id="tr-id" placeholder="Train ID" required>
+						
+						<label for="speed"></label>
+						<select name="speed" id="speed">
+							<option value="">--Select Speed--</option>
+							<option value="Slow">Slow</option>
+							<option value="Semi-Empress">Semi-Express</option>
+							<option value="Express">Express</option>
+							<option value="Intercity">Intercity</option>
+						</select>
+
+						<div class="wrapper" id="from">
+							<div class="select-btn">
+								<span>Select Starting Station</span>
+								<i class="uil uil-angle-down"></i>
 							</div>
-							<ul class="options"></ul>
+							<div class="content">
+								<div class="search">
+									<i class="uil uil-search"></i>
+									<input spellcheck="false" type="text" placeholder="Search">
+								</div>
+								<ul class="options">
+								</ul>
+							</div>
 						</div>
-					</div>
-					<input type="submit" class="form-button" id="done" value="Done">
-				</fieldset>
-			</form>
-	
+
+						<div class="wrapper" id="to">
+							<div class="select-btn">
+								<span>Select Ending Station</span>
+								<i class="uil uil-angle-down"></i>
+							</div>
+							<div class="content">
+								<div class="search">
+									<i class="uil uil-search"></i>
+									<input spellcheck="false" type="text" placeholder="Search">
+								</div>
+								<ul class="options"></ul>
+							</div>
+						</div>
+						<input type="submit" class="form-button" id="done" value="Done">
+					</fieldset>
+				</form>
+		
+			</div>
 		</div>
 	</div>
 	<script src="/js/stations.js"></script>				

@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/script.js"></script>
+    
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+	<script src="/js/script.js"></script>
 	<script src="/js/auth.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
@@ -21,78 +30,83 @@
 	<nav class="navbar" >
 		<script>createNavBar("admin")</script>
 	</nav>
+	<div class="container">
+        <div class="sidebar active">
+            <script>createSideBar("admin")</script>
 
-	<div class="service-view">
-		<div class="service-container">
-			<button class="add-new-btn" onclick="popupAddPage('.staff-add_edit-modal')" >Add New</button>
+        </div>
 
-			<div class="table-container">
+		<div class="service-view">
+			<div class="service-container">
+				<button class="add-new-btn" onclick="popupAddPage('.staff-add_edit-modal')" >Add New</button>
 
-				<section class="table_header">
-					<h1>Staff Details</h1>
-					<div class="input-group">
-						<input type="search" placeholder="Search Staff...">
-						<img src="/Images/filter.png" class="filter" alt="" onclick="toggleFilterBox()">
-						<img src="/Images/search.png" alt="">
-						
-					</div>
-				</section>
-						
-				<div class="filter-box" id="filter-box">
-					<div class="wrapper" id="from">
-						<div class="select-btn">
-							<span>Railway Station</span>
-							<i class="uil uil-angle-down"></i>
+				<div class="table-container">
+
+					<section class="table_header">
+						<h1>Staff Details</h1>
+						<div class="input-group">
+							<input type="search" placeholder="Search Staff...">
+							<img src="/Images/filter.png" class="filter" alt="" onclick="toggleFilterBox()">
+							<img src="/Images/search.png" alt="">
+							
 						</div>
-						<div class="content">
-							<div class="search">
-								<i class="uil uil-search"></i>
-								<input spellcheck="false" type="text" placeholder="Search">
+					</section>
+							
+					<div class="filter-box" id="filter-box">
+						<div class="wrapper" id="from">
+							<div class="select-btn">
+								<span>Railway Station</span>
+								<i class="uil uil-angle-down"></i>
 							</div>
-							<ul class="options">
-							</ul>
-						</div>
-					</div>
-				
-					<div class="wrapper" id="roles">
-						<div class="select-btn">
-							<span>Role</span>
-							<i class="uil uil-angle-down"></i>
-						</div>
-						<div class="content">
-							<div class="search">
-								<i class="uil uil-search"></i>
-								<input spellcheck="false" type="text" placeholder="Search">
+							<div class="content">
+								<div class="search">
+									<i class="uil uil-search"></i>
+									<input spellcheck="false" type="text" placeholder="Search">
+								</div>
+								<ul class="options">
+								</ul>
 							</div>
-							<ul class="role-options">
-							</ul>
 						</div>
+					
+						<div class="wrapper" id="roles">
+							<div class="select-btn">
+								<span>Role</span>
+								<i class="uil uil-angle-down"></i>
+							</div>
+							<div class="content">
+								<div class="search">
+									<i class="uil uil-search"></i>
+									<input spellcheck="false" type="text" placeholder="Search">
+								</div>
+								<ul class="role-options">
+								</ul>
+							</div>
+						</div>
+					
+						<button onclick="applyFilters()">Filter</button>
 					</div>
-				
-					<button onclick="applyFilters()">Filter</button>
-				</div>
-				
-				<div class="table_body">
-					<table>
-						<thead>
-							<tr>
-								<th>Staff ID</th>
-								<th>Name</th>
-								<th>Username</th>
-								<th>Email</th>
-								<th>Telephone Number</th>
-								<th>Role</th>
-								<th>Railway Station</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody id="staff_table"></tbody>
-					</table>
+					
+					<div class="table_body">
+						<table>
+							<thead>
+								<tr>
+									<th>Staff ID</th>
+									<th>Name</th>
+									<th>Username</th>
+									<th>Email</th>
+									<th>Telephone Number</th>
+									<th>Role</th>
+									<th>Railway Station</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody id="staff_table"></tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<dialog class="staff-add_edit-modal">
 		<div class="adding-form">
 			<section class="table_header">

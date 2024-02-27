@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Get all elements with the class 'count'
     const counters = document.querySelectorAll('.count');
+    
 
     // Function to start the counter animation
     function startCounter(counter) {
@@ -270,6 +271,34 @@ function createNavBar(context) {
                 document.getElementById("nav-about").remove();
                 document.getElementById("nav-contact").remove();
                 document.getElementById("nav-services").innerHTML = "SM Services";
+            }
+            else if (context == "passenger") {
+                document.getElementById("admin-nav").remove();
+                document.getElementById("sm-nav").remove();
+            }
+        });
+}
+
+function createSideBar(context) {
+    fetch("/html/sidebar.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementsByClassName("sidebar")[0].innerHTML = data;
+            if (context == "admin") {
+                document.getElementById("sm-sidebar").remove();
+                document.getElementById("passenger-sidebar").remove();
+
+                // document.getElementById("nav-about").remove();
+                // document.getElementById("nav-contact").remove();
+                document.getElementById("sidebar-services-text").innerHTML = "Admin Services";
+            }
+            else if (context == "sm") {
+                document.getElementById("admin-sidebar").remove();
+                document.getElementById("passenger-sidebar").remove();
+
+                // document.getElementById("nav-about").remove();
+                // document.getElementById("nav-contact").remove();
+                document.getElementById("sidebar-services-text").innerHTML = "Station Master Services";
             }
             else if (context == "passenger") {
                 document.getElementById("admin-nav").remove();
