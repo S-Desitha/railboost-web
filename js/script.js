@@ -96,13 +96,21 @@ document.addEventListener('DOMContentLoaded', function () {
         x: {
             title: {
                 display: true,
-                text: 'Month'
+                text: 'Month',
+                font: {
+                    size: 20,
+                    weight: 'bold'
+                }
             }
         },
         y: {
             title: {
                 display: true,
-                text: 'Revenue (in thousands)'
+                text: 'Revenue (in thousands)',
+                font: {
+                    size: 20,
+                    weight: 'bold'
+                }
             }
         }
     }
@@ -110,8 +118,48 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     
         // Your other JavaScript code...
-    
-    
+        
+        const DchartCanvas = document.querySelector(".donut-chart");
+        const dchart = new Chart(DchartCanvas.getContext("2d"), {
+            type: 'doughnut',
+            data: {
+            labels: [
+              'Delayed',
+              'On-Time',
+              'Cancelled'
+            ],
+            datasets: [{
+              label: 'Punctuality Rate of Trains',
+              data: [50, 80, 20],
+              backgroundColor: [
+                '#5271FF',   // Primary Color (Original Theme Color)
+                '#6495ED',   // Secondary Color (Lighter Shade)
+                '#3A50B6' 
+              ],
+              cutout: 100,
+              radius: 140,
+              borderWidth: 4,
+              hoverOffset: 10,
+              title: 'Punctuality Rate of Trains'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Punctuality Rate of Trains Today',
+                    font: {
+                        size: 20,
+                        weight: 'bold'
+                    }
+                }
+            },
+            
+        }
+          
+        });
 });
 
 
