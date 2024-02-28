@@ -5,14 +5,11 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     if (window.location.pathname.includes("schedule.html"))
         createSchedulesPage();
-    else if (window.location.pathname.includes("trainSch.html"))
+    else if (window.location.pathname.includes("trainSch.html")) {
         createSpecificSchPage();
-    
-    document.getElementById("from").addEventListener("click", function() {
-        console.log("start station");
-    })
+        dynamicDraggableTable();
+    }
 
-    dynamicDraggableTable();
 });
 
 
@@ -230,18 +227,23 @@ function viewStations() {
 
 
 async function createSchedulesPage() {
+    const nextUrl = "/html/admin/trainSch.html";
+    const key = "scheduleId";
+
     let param = {
-        date: new Date().toLocaleDateString(
-            'en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }
-        )
+        // date: new Date().toLocaleDateString(
+        //     'en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }
+        // )
     }
     
     let urlQuery = scheduleEndpoint+`?json=${encodeURIComponent(JSON.stringify(param))}`;
 
     try {
         let data = await customFetch(urlQuery, param);
+        localStorage.setItem("scheduleList", JSON.stringify(data));
         console.log(data);
         data.forEach(sch => {
+            let value = sch.scheduleId;
             // let viewButton = document.createElement("button");
             // viewButton.classList.add("view-button");
             // viewButton.innerHTML = "<i class='fa-regular fa-eye'></i>";
@@ -258,6 +260,7 @@ async function createSchedulesPage() {
             let editButton = document.createElement("button");
             editButton.classList.add("edit-button");
             editButton.innerHTML = "<i class='fas fa-edit'></i>";
+            editButton.onclick = () => {window.location.href = `${nextUrl}?${key}=${value}`;}
             // editButton.onclick = editStation;
 
             let deleteButton = document.createElement("button");
@@ -286,14 +289,54 @@ async function createSchedulesPage() {
 
 
 function createSpecificSchPage() {
-    let schedule = localStorage.getItem("schedule");
+    const scheduleId = new URLSearchParams(window.location.search).get('scheduleId');
 
-    if (schedule!=null) {
-        schedule = JSON.parse(schedule);
-        schedule.stations.forEach(station => insertStationToPage(station));
+    if (scheduleId!=null) {
+        if (localStorage.getItem("scheduleType")==null)
+            localStorage.setItem("scheduleType", "edit");
+        else
+            setEditSchPriority();
+
+        
+        let scheduleList = JSON.parse(localStorage.getItem("scheduleList"));
+        let serialSchedule = scheduleList.find(element => element.scheduleId == scheduleId);
+
+        serialSchedule.stations.forEach(station => insertStationToPage(station));
+
+        let button = document.getElementById("submit-schedule-btn");
+        button.innerHTML = "Update Schedule";
+        button.onclick = updateSchedule;
+
+        form.setAttribute("onsubmit", "updateSchedule");
+        document.getElementById("submit-schedule-btn").value = "Update Schedule"
+        document.getElementById("sch-id").value = serialSchedule.scheduleId;
+        document.getElementById("tr-id").value = serialSchedule.trainId;
+        document.getElementById("from").setAttribute("stationCode", serialSchedule.startStation);
+        document.getElementById("to").setAttribute("stationCode", serialSchedule.endStation);
+        document.getElementById("speed").value = serialSchedule.speed;
+        document.getElementById("sch-id").disabled = true;
+
+
+        localStorage.setItem("schedule", JSON.stringify(serialSchedule));
+    }
+    else {
+        if (localStorage.getItem("scheduleType")==null)
+            localStorage.setItem("scheduleType", "add");
+        else
+            setAddSchPriority();
+
+        let schedule = localStorage.getItem("schedule");
+        if (schedule!=null) {
+            schedule = JSON.parse(schedule);
+            schedule.stations.forEach(station => insertStationToPage(station));
+
+            validateStations();
+        }
     }
 
-    validateStations();
+    
+
+    
 }
 
 
@@ -342,13 +385,34 @@ function deleteSchedule() {
 
 
 function updateSchedule() {
-    const original = JSON.parse(this.getAttribute("schedule"));
-    let updated = Object.assign({}, original);
+    const updated = getSchedule();
+    const original = JSON.parse(localStorage.getItem("scheduleList")).find(schedule => schedule.scheduleId == updated.scheduleId);
+    const scheduleId = original.scheduleId;
 
-    updated["scheduleId"] = document.getElementById("scheduleId").value;
-    updated["trainId"] = document.getElementById("trainId").value;
-    updated["startStation"] = document.getElementById("start-station").value;
-    updated["endStation"] = document.getElementById("end-station").value;
+    updated.stations = updated.stations.toArray();
+    
+    updated.stations = updated.stations.map(st => {st.scheduleId = scheduleId; return st;});
+    updated.days = updated.days.map(day => {day.scheduleId = scheduleId; return day;});
+
+    console.log(original);
+    console.log(updated);
+
+    let [startDate, days, endDate] = getDates();
+    if (!(startDate==null && days==null && endDate==null)) {
+        startDate = startDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+        endDate = endDate!=null? endDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }) : endDate;
+        
+        updated.startDate = startDate;
+        updated.endDate = endDate;
+        updated.days = days;
+    }
+    
+    
+    updated.startStation = document.getElementById("from").getAttribute("stationCode");
+    updated.endStation = document.getElementById("to").getAttribute("stationCode");
+    // updated.scheduleId = document.getElementById("sch-id").value;
+    updated.trainId = document.getElementById("tr-id").value;
+    updated.speed = document.getElementById("speed").value;
 
     const body = [original, updated];
     const params = {
@@ -360,12 +424,18 @@ function updateSchedule() {
         credentials : "include"
     };
 
-    fetch(url, params)
-    .then(res => {
-        if(res.ok) {
-            window.location.reload();
-        }
-    });
+    // fetch(url, params)
+    // .then(res => {
+    //     if(res.ok) {
+    //         window.location.reload();
+    //     }
+    // });
+    customFetch(scheduleEndpoint, params)
+        .then(() => window.location.href = "/html/admin/schedule.html")
+        .catch ((error) => {
+            if (error=="login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
+        });
 }
 
 
@@ -398,8 +468,8 @@ function getDates() {
         }
     }
 
-    if (unit==null)
-        return null
+    if (unit=="null")
+        return [null, null, null]
     else {
         switch (unit) {
             case "day" :
@@ -505,6 +575,36 @@ function getSchedule() {
     }
 
     return schedule;
+}
+
+
+function setAddSchPriority() {
+    let scheduleType = localStorage.getItem("scheduleType");
+
+    if (scheduleType == "edit") {   
+        let schedule = localStorage.getItem("schedule");
+        let otherSchedule = localStorage.getItem("otherSchedule");
+
+        localStorage.setItem("schedule", otherSchedule);
+        localStorage.setItem("otherSchedule", schedule);
+        localStorage.setItem("scheduleType", "add");
+    }
+
+
+}
+
+
+function setEditSchPriority() {
+    let scheduleType = localStorage.getItem("scheduleType");
+
+    if (scheduleType == "add") {   
+        let schedule = localStorage.getItem("schedule");
+        let otherSchedule = localStorage.getItem("otherSchedule");
+
+        localStorage.setItem("schedule", otherSchedule);
+        localStorage.setItem("otherSchedule", schedule);
+        localStorage.setItem("scheduleType", "edit");
+    }
 }
 
 

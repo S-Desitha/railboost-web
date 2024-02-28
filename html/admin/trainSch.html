@@ -64,7 +64,7 @@
 		</div>
 	
 		<div class="train-right">
-			<form class="train-form" id="schedule-form" onsubmit="addNewSchedule(); return false">
+			<form class="train-form" id="schedule-form" onsubmit="return false">
 					<label for="Schedule-ID"></label>
 					<input type="text" id="sch-id" placeholder="Schedule ID" required>
 
@@ -111,7 +111,7 @@
 
 					<input type="button" onclick="popupDatePicker('.datepicker-modal')" value="Recurs On">
 
-					<input type="submit" class="form-button" id="done" value="Done">
+					<button type="submit" class="form-button" id="submit-schedule-btn" onclick="addNewSchedule()">Add Schedule</button>
 			</form>
 	
 		</div>
@@ -160,7 +160,7 @@
                 <input type="number" id="repeat-every" min="1" value="1">
 
                 <select id="repeat-unit" name="repeat-unit">
-					<option value="null" selected disabled>--Select--</option>
+					<option value=null selected disabled>--Select--</option>
                     <option value="day">day</option>
                     <option value="week">week</option>
                     <option value="month">month</option>
