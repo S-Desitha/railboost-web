@@ -285,6 +285,8 @@ async function createSchedulesPage() {
             let deleteButton = document.createElement("button");
             deleteButton.classList.add("delete-button");
             deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
+            deleteButton.setAttribute("scheduleId", sch.scheduleId);
+            deleteButton.onclick = deleteSchedule;
 
             let row = document.getElementById("schedule_table").insertRow(-1);
             row.insertCell(0).innerHTML = sch.scheduleId;
@@ -382,23 +384,29 @@ function editSchedule() {
 
 function deleteSchedule() {
     console.log("Delete Schedule");
-    const schedule = JSON.parse(this.getAttribute("schedule"));
-    const id = schedule["scheduleId"];
+    const scheduleId = JSON.parse(this.getAttribute("scheduleId"));
+    const url_query = scheduleEndpoint+"?scheduleId="+scheduleId;
 
     const params = {
         headers : {
             "Content-type": "application/json; charset=UTF-8"
         },
-        method : "DELETE",
-        credentials : "include"
+        method : "DELETE"
     };
 
-    fetch(url+"?scheduleId="+id, params)
-    .then(res => {
-        if(res.ok){
-            window.location.reload();
-        }
-    });
+    // fetch(url+"?scheduleId="+scheduleId, params)
+    // .then(res => {
+    //     if(res.ok){
+    //         window.location.reload();
+    //     }
+    // });
+
+    customFetch(url_query, params)
+        .then(() => window.location.reload())
+        .catch ((error) => {
+            if (error=="login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
+        });
 }
 
 
