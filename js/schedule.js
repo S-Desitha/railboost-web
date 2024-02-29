@@ -198,9 +198,28 @@ function deleteStation() {
 }
 
 
-function viewStations() {
+function viewStations(scheduleId) {
+    let schedule = JSON.parse(localStorage.getItem("scheduleList")).find(sch => sch.scheduleId==scheduleId);
+    let stations = schedule.stations;
     let dialog = document.querySelector(".stations-data-modal");
-    let stations = JSON.parse(this.getAttribute("stations"));
+
+    document.getElementById("start-from-date").innerHTML = schedule.startDate;
+    if (schedule.endDate!=null)
+        document.getElementById("ends-on-date").innerHTML = schedule.endDate;
+    else
+    document.getElementById("ends-on-date").innerHTML = "--";
+
+
+    document.querySelectorAll(".cat.day input[type='checkbox']").forEach(checkBox => {
+        checkBox.checked = false;
+        checkBox.disabled = true;
+    });
+
+    schedule.days.forEach(day => {
+        let prefix = day.day.substring(0,3).toLowerCase();
+        console.log(prefix);
+        document.getElementById(prefix).checked = true;
+    })
     
     stations.forEach(station => {
         let row = document.getElementById("schedule_stations").insertRow(-1);
@@ -255,7 +274,7 @@ async function createSchedulesPage() {
             infoButton.classList.add("data-open-modal");
             infoButton.innerHTML = "<i class='fa-solid fa-circle-info'></i>";
             infoButton.setAttribute("stations", JSON.stringify(sch.stations));
-            infoButton.onclick = viewStations;
+            infoButton.onclick = function(){ viewStations(sch.scheduleId);}
 
             let editButton = document.createElement("button");
             editButton.classList.add("edit-button");
