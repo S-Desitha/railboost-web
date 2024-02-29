@@ -223,7 +223,7 @@ function viewStations(scheduleId) {
     
     stations.forEach(station => {
         let row = document.getElementById("schedule_stations").insertRow(-1);
-        row.insertCell(0).innerHTML = station.station;
+        row.insertCell(0).innerHTML = station.stationName;
         row.insertCell(1).innerHTML = station.scheduledArrivalTime;
         row.insertCell(2).innerHTML = station.scheduledDepartureTime;
     });
@@ -289,8 +289,8 @@ async function createSchedulesPage() {
             let row = document.getElementById("schedule_table").insertRow(-1);
             row.insertCell(0).innerHTML = sch.scheduleId;
             row.insertCell(1).innerHTML = sch.trainId;
-            row.insertCell(2).innerHTML = sch.startStation;
-            row.insertCell(3).innerHTML = sch.endStation;
+            row.insertCell(2).innerHTML = sch.startStationName;
+            row.insertCell(3).innerHTML = sch.endStationName;
             row.insertCell(4).innerHTML = sch.trainType;
             // row.insertCell(5).innerHTML = `<a href="/html/admin/trainSch.html?scheduleId=${sch.scheduleId}"><button class="view-button">
             //                                     View <i class="fa-regular fa-eye"></i></button>
