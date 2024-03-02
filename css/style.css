@@ -32,7 +32,9 @@ a:hover {
 }
 
 .sidebar{
-  position: relative;
+  position: fixed;
+  z-index: 1000;
+  top: 80px;
   width: 300px;
   min-height: 90vh;
   display: flex;
@@ -49,6 +51,23 @@ a:hover {
 
   
 }
+
+/* .sidebar {
+  position: fixed;
+  top: 80px; 
+  left: 0;
+  width: 300px;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: white;
+  transition: all 0.3s ease;
+  padding: 24px;
+  border-radius: 30px;
+  border-top: 1px solid #ffffff;
+  margin-bottom: 10px;
+} */
 /* box shadow for sidebar */
 .sidebar{
   box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
@@ -257,6 +276,8 @@ a:hover {
   
 }
 .service-view {
+  margin-top: 50px;
+  margin-left: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -272,15 +293,18 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-self: flex-start;
-  box-shadow: 0 .4rem .8rem #0005;
+  /* box-shadow: 0 .4rem .8rem #0005; */
   border-radius: .8rem;
-  height: fit-content;
-  width: fit-content;
+  /* height: fit-content; */
+  /* width: fit-content; */
   max-height: 80%;
-  max-width: 80%;
-  overflow: auto;
+  /* max-width: 80%; */
+  /* overflow: auto; */
 }
 main{
+  flex: 1;
+  margin-top: 80px;
+  margin-left: 100px;
   width: 100%;
   padding: 24px 20px 20px 20px;
 
@@ -291,13 +315,12 @@ main .title{
   margin-bottom: 10px;
 }
 
-main .breadcrumbs{
+.breadcrumbs{
   display: flex;
   grid-gap: 6px;
 }
-
-main .breadcrumbs li,
-main .breadcrumbs li a{
+.breadcrumbs li,
+.breadcrumbs li a{
   font-size: 14px;
   /* font-weight: 500; */
   color: #757575;
@@ -305,17 +328,24 @@ main .breadcrumbs li a{
   list-style: none;
   text-decoration: none; 
 }
-
-main .breadcrumbs li a{
+ .breadcrumbs li a{
   color: #757575;
 }
 
-main .breadcrumbs li a.active,
-main .breadcrumbs li.divider{
+ .breadcrumbs li a.active,
+ .breadcrumbs li.divider{
   color: #8d8d8d;
   pointer-events: none;
 }
-
+.locate {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  /* margin-top: 20px; */
+  margin-left: 30px;
+}
 main .info-data{
 
   display: grid;

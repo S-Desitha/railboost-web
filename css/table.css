@@ -27,7 +27,7 @@
     background-color: #fffb;
     margin: 5px auto;
     border-radius: .6rem;
-    overflow: auto;
+    /* overflow: auto; */
     /* overflow: overlay; */
 }
 
