@@ -367,18 +367,43 @@ main .info-data .card{
 main .info-data .card:hover{
   transform: translateY(-10px);
   transition: all 0.3s ease;
+  box-shadow: 4px 4px 16px rgba(0,0,0,0.2); 
+}
+main .info-data .sm{
+  transition: transform 0.5s ease;
+  cursor: pointer;
+}
+
+main .info-data .sm:hover{
+  transform: scale(1.03);
+  transition: all 0.3s ease;
   box-shadow: 4px 4px 16px rgba(0,0,0,0.2);
   
 }
+/* change the hover to pops in */
+/* main .info-data .sm:hover{
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  box-shadow: 4px 4px 16px rgba(0,0,0,0.2);
+  animation: fadeIn 1s ease-in-out;
+} */
+
 main .info-data .card .head{
   display: flex;
   align-items: center;
-  gap: auto;
+  flex-direction: row;
+  /* gap: 10px; */
   /* margin-bottom: 20px; */
   justify-content: space-between;
 }
 main .info-data .card .head i{
   font-size: 70px;
+  color: #5f5d5d;
+  align-self: right;
+  margin-right: 10px;
+}
+main .info-data .sm .head i{
+  font-size: 60px;
   color: #5f5d5d;
   align-self: right;
   margin-right: 10px;
@@ -409,7 +434,7 @@ main .info-data .card .head i{
 .head h2{
   font-family: 'Merriweather', sans-serif;
   color: #5271FF;
-  /* padding-bottom: 100 px; */
+  padding-bottom: 100 px;
   font-size: 2rem ;
 }
 
@@ -417,6 +442,21 @@ main .info-data .card .head i{
   font-size: 20px;
   font-weight: 600;
   color:#484848;
+}
+
+main .info-data .sm .head p{
+  font-size: 25px;
+  font-weight: 600;
+  color:#484848;
+  line-height: 1.2;
+
+  /* Limit the number of lines to 2 */
+  max-height: 4em;
+
+  /* Enable text to wrap to the next line if it exceeds the container width */
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 
 .card small{
