@@ -4,6 +4,70 @@ const seasonEndpoint = "season";
 const ticketPriceEndpoint = "ticketPrice";
 let endDate;
 
+document.addEventListener("DOMContentLoaded", async function () {
+  let params = {
+    view: "2",
+  };
+  let queryString = Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+  let urlQuery = `${seasonEndpoint}?${queryString}`;
+  
+    try {
+      let data = await customFetch(urlQuery, {credentials: "include"});
+      
+      data.forEach(season => {
+
+        let BuyButton = document.createElement("button");
+        BuyButton.classList.add("Buy-button");
+        BuyButton.innerHTML = "<i class='fa-solid fa-coins' title='Pay' style='color:#0047AB'><span>  Pay </span></i>";
+        BuyButton.setAttribute("season", JSON.stringify(season));
+        BuyButton.onclick = ByuSeason;
+        
+        let row = document.getElementById("season_table").insertRow(0);
+        row.insertCell(0).innerHTML = season.id;
+        row.insertCell(1).innerHTML = season.startStation;
+        row.insertCell(2).innerHTML = season.endStation;
+        row.insertCell(3).innerHTML = season.startDate;
+        row.insertCell(4).innerHTML = season.endDate;
+        row.insertCell(5).innerHTML = season.trainClass;
+        row.insertCell(6).innerHTML = season.totalPrice;
+        row.insertCell(7).innerHTML = season.status;
+        if (season.status == "Approved"){
+          row.insertCell(8).append(BuyButton);
+        }else{
+          row.insertCell(8).innerHTML = "-";
+        }
+      });
+  
+    }
+    catch(error) {
+      if (error=="login-redirected")
+          localStorage.setItem("last_url", window.location.pathname);
+    }
+  });
+
+  function ByuSeason(){
+    season = JSON.parse(this.getAttribute("season"));
+    console.log(season);
+    season["status"] = "Paid";
+    const body = season;
+    const params = {
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify(body),
+        method: "PUT",
+    };
+
+    customFetch(seasonEndpoint, params)
+    .then(() => window.location.reload())
+
+    .catch((error) => {
+        if (error == "login-redirected")
+            localStorage.setItem("last_url", window.location.pathname);
+    });
+}
+  
+
 function validateStation(){
   
     let Start=document.getElementById("from").getAttribute("stationCode");

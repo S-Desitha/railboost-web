@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/season.css">  
+    <link rel="stylesheet" href="/css/table.css">
 	<script src="/js/season.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <title>Buy Season Ticket</title>
@@ -18,12 +19,44 @@
     </nav>
 
 	<div class="train-container">
-        <div class="train-left">
-            <h1 class="add-train-heading" id="add_update-schedule-header">Buy Season Ticket </h1>
+        <!-- <div class="train-left">
+            <div class="Image">
+            <h1 class="add-train-heading" id="add_update-schedule-header">Season Ticket </h1>
             <img src="../../Images/ETicket.png" alt="Train Image" class="train-image ">
-		</div>
+            </div>
+		</div> -->
+
+        <div class="table">
+            <section class="table_header">
+                <h1>Season Ticket</h1>
+                <!-- <button class="add-new-btn" onclick="popupAddPage('.Season-modal')" >Add New</button> -->
+                <!-- <div class="input-group">
+                    <input type="search" placeholder="Search Season Ticket...">
+                    <img src="/Images/search.png" alt="">
+                </div> -->
+            </section>
+            <section class="table_body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                                <th>Start Station</th>
+								<th>End Station</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Train Class</th>
+								<th>Total Price</th>
+								<th>Status</th>
+								<th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="season_table"></tbody>
+                </table>
+            </section>
+        </div>
 				
 		<div class="train-right">
+            <!-- <dialog class="Season-modal"> -->
 		    <div class="train-form">
 							
 				<form onsubmit="return false">
@@ -111,7 +144,7 @@
 
                     <label for="img" id="Application">
                         <span class="app">Application</span>
-                        <input type="file" id="img" name="img" accept=".jpg, .jpeg, .png" required>
+                        <input type="file" id="img" name="img" accept=".pdf, .jpg, .jpeg, .png" required>
                     </label>
                     <script>
                         const uploadField = document.getElementById("img");
@@ -127,7 +160,7 @@
 					<button class="form-button" id="buy-ticket-button" onclick="appplySeasonTicket()">Apply</button>
 				</form>
 	    	</div>
-				
+            <!-- </dialog> -->
 		</div>
 	</div>
 
