@@ -75,7 +75,8 @@ th, td {
 }
 
 thead th {
-    /* position: sticky; */
+    position: sticky;
+    z-index: 100;
     top: 0;
     left: 0;
     background-color: #d5d1defe;

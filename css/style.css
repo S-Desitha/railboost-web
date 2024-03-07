@@ -25,18 +25,22 @@ a:hover {
 
 .container {
   width: 100%;
-  /* min-height: calc(100vh-80px); */
+  /* min-height: calc(100vh-70px); */
   display: flex;
   gap: 10px;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .sidebar{
-  position: fixed;
-  z-index: 1000;
-  top: 80px;
+  position: -webkit-sticky;
+  position:sticky;
+  flex-grow: 2;
+  /* overflow: auto; */
+  /* top: 0; */
+  z-index: 999;
+  top: 90px;
   width: 300px;
-  min-height: 90vh;
+  height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -45,8 +49,8 @@ a:hover {
   padding: 24px ;
   border-radius: 30px 30px 30px 30px;
   border-top: 1px solid #ffffff;
-  margin-bottom: 10px;
-  /* margin-top: 2px; */
+  /* margin-bottom: 10px; */
+  margin-top: 80px;
   
 
   
@@ -209,7 +213,7 @@ a:hover {
   transition: all 0.3s ease;
 }
 .sidebar.active {
-  width: 92px ;
+  width:100px ;
 
 }
 .sidebar.active .menu-btn i{
@@ -277,13 +281,26 @@ a:hover {
 }
 .service-view {
   margin-top: 50px;
-  margin-left: 100px;
+  /* margin-left: 100px; */
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  /* height: calc(100vh - 80px); */
   width: 100vw;
   padding: 2rem 0;
+  flex-grow: 5;
+  /* display: block;
+
+  position: relative; */
+  /* flex: 1; */
+  height: calc(100vh - 90px);
+  margin-top: 80px;
+  overflow: scroll;
+  overflow-x: hidden;
+  /* margin-left: 100px; */
+  width: 100%;
+  padding: 24px 20px 20px 20px;
+
 }
 
 
@@ -302,9 +319,15 @@ a:hover {
   /* overflow: auto; */
 }
 main{
-  flex: 1;
+ flex-grow: 5;
+  /* display: block;
+
+  position: relative; */
+  /* flex: 1; */
+  height: calc(100vh - 90px);
   margin-top: 80px;
-  margin-left: 100px;
+  overflow: scroll;
+  /* margin-left: 100px; */
   width: 100%;
   padding: 24px 20px 20px 20px;
 
@@ -403,7 +426,7 @@ main .info-data .card .head i{
   margin-right: 10px;
 }
 main .info-data .sm .head i{
-  font-size: 60px;
+  font-size: 50px;
   color: #5f5d5d;
   align-self: right;
   margin-right: 10px;
@@ -445,16 +468,11 @@ main .info-data .sm .head i{
 }
 
 main .info-data .sm .head p{
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 600;
   color:#484848;
   line-height: 1.2;
-
-  /* Limit the number of lines to 2 */
   max-height: 4em;
-
-  /* Enable text to wrap to the next line if it exceeds the container width */
-  /* overflow: hidden; */
   text-overflow: ellipsis;
   white-space: normal;
 }
