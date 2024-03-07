@@ -328,7 +328,9 @@ function createSpecificSchPage() {
         button.innerHTML = "Update Schedule";
         button.onclick = updateSchedule;
 
-        form.setAttribute("onsubmit", "updateSchedule");
+        console.log(serialSchedule);
+
+        // form.setAttribute("onsubmit", "updateSchedule");
         document.getElementById("submit-schedule-btn").value = "Update Schedule"
         document.getElementById("sch-id").value = serialSchedule.scheduleId;
         document.getElementById("tr-id").value = serialSchedule.trainId;
