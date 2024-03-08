@@ -1,5 +1,16 @@
 // Wait for the DOM to be ready
 document.addEventListener('DOMContentLoaded', function () {
+    
+    const parcelItems = document.querySelectorAll('.parcel-list li');
+
+    parcelItems.forEach(item => {
+        const parcelCount = parseInt(item.querySelector('.No-of-parcels h4').innerText);
+        console.log(parcelCount);
+        // Check if parcel count is more than 10
+        if (parcelCount > 10) {
+            item.classList.add('high-parcels');
+        }
+    });
     // Get all elements with the class 'count'
     const counters = document.querySelectorAll('.count');
     
@@ -183,6 +194,8 @@ $(document).ready(function() {
         $(".sidebar").toggleClass("active");
     }); 
 });
+
+
 async function customFetch(endpoint, options, sendJWT) {
     let url = "http://localhost:8080/railboost_backend_war_exploded/";
     // const frontendPort = window.location.port;
@@ -256,6 +269,7 @@ function createNavBar(context) {
         .then(response => response.text())
         .then(data => {
             document.getElementsByClassName("navbar")[0].innerHTML = data;
+            
             if (context == "admin") {
                 document.getElementById("sm-nav").remove();
                 document.getElementById("passenger-nav").remove();
@@ -283,22 +297,32 @@ function createSideBar(context) {
     fetch("/html/sidebar.html")
         .then(response => response.text())
         .then(data => {
+            // console.log(data);
             document.getElementsByClassName("sidebar")[0].innerHTML = data;
+            const Name=localStorage.getItem("name");
+            console.log(Name);
+         document.getElementById("name").innerHTML=Name;
             if (context == "admin") {
                 document.getElementById("sm-sidebar").remove();
-                document.getElementById("passenger-sidebar").remove();
+                // document.getElementById("passenger-sidebar").remove();
 
                 // document.getElementById("nav-about").remove();
                 // document.getElementById("nav-contact").remove();
-                document.getElementById("sidebar-services-text").innerHTML = "Admin Services";
+                document.getElementById("sidebar-services-text-span").innerHTML = "Admin Services";
             }
             else if (context == "sm") {
+                // console.log("CONTEXT IDENTIFIED AS SM");
                 document.getElementById("admin-sidebar").remove();
-                document.getElementById("passenger-sidebar").remove();
-
+                // document.getElementById("passenger-sidebar").remove();
+                console.log("LINE 300");
                 // document.getElementById("nav-about").remove();
                 // document.getElementById("nav-contact").remove();
-                document.getElementById("sidebar-services-text").innerHTML = "Station Master Services";
+                // change p class="title" to Station Master
+                // console.log(document.getElementById("name").innerHTML);
+                // console.log(document.getElementById("title").innerHTML);
+                document.getElementById("title").innerHTML = "Station Master";
+                
+                document.getElementById("sidebar-services-text-span").innerHTML = "Station Master Services";
             }
             else if (context == "passenger") {
                 document.getElementById("admin-nav").remove();
@@ -306,7 +330,6 @@ function createSideBar(context) {
             }
         });
 }
-
 
 
 function popupAddPage(classname) {

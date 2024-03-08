@@ -15,8 +15,11 @@
 
     <script src="/js/script.js"></script>
     <script src="/js/auth.js"></script> 
+    <link rel="stylesheet" href="/css/table.css">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
+    <!-- import table.css -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     
     <title>Station Master-dashboard</title>
@@ -35,7 +38,11 @@
         </div>
        
         <main>
-            <h1 class="title">Station Master Dashboard</h1>
+            <div class="heading">
+                <h1 class="title">Station Master Dashboard -  </h1>
+                <h1 class="station"><b> Dehiwala</b></h1>
+            </div>
+            
             <ul class="breadcrumbs">
                 <li><a href="admin.html">Home</a></li>
                 <li class="divider">/</li>
@@ -100,11 +107,119 @@
                     
                 </div>
             </div>
-            
-            <div class="charts">
+            <div class="table-data">
+                <div class="recent-trains">
+                    <div class="head">
+                        <h3>Inbound Train Updates</h3>
+                        <a href="sm/sm-live.html">View All</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Train No</th>
+                                <th>Estimated Arrival Time</th>
+                                <th>Estimated Departure Time</th>
+                                <th>Actions</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>12345</td>
+                                <td>12:00</td>
+                                <td>12:30</td>
+                                <td><a href="sm/sm-live.html" class="update">Update Time</a></td>
+                            </tr>
+                            <tr>
+                                <td>12345</td>
+                                <td>12:00</td>
+                                <td>12:30</td>
+                                <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
+                            </tr>
+                            <tr>
+                                <td>12345</td>
+                                <td>12:00</td>
+                                <td>12:30</td>
+                                <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
+                            </tr>
+                            <tr>
+                                <td>12345</td>
+                                <td>12:00</td>
+                                <td>12:30</td>
+                                <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
+                            </tr>
+                            <tr>
+                                <td>12345</td>
+                                <td>12:00</td>
+                                <td>12:30</td>
+                                <td><a href="sm/sm-live.html" class="update">Update Time</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="parcels">
+                    <div class="head">
+                        <h3>    Incoming Parcels Today</h3>
+                        <!-- <a href="sm/approve-parcels.html">View All</a> -->
+                    </div>
+                    <ul class="parcel-list">
+                        <li>
+                            <div class="parcel-train">
+                                <h4>Train No: 8513 </h4>
+                            </div>
+                            <div class="No-of-parcels">
+                                <h4>21 Parcels</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="parcel-train">
+                                <h4>Train No: 1077 </h4>
+                            </div>
+                            <div class="No-of-parcels">
+                                <h4>10 Parcels</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="parcel-train">
+                                <h4>Train No: 8355 </h4>
+                            </div>
+                            <div class="No-of-parcels">
+                                <h4>10 Parcels</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="parcel-train">
+                                <h4>Train No: 8321 </h4>
+                            </div>
+                            <div class="No-of-parcels">
+                                <h4>15 Parcels</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="parcel-train">
+                                <h4>Train No: 12345 </h4>
+                            </div>
+                            <div class="No-of-parcels">
+                                <h4>10 Parcels</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="parcel-train">
+                                <h4>Train No: 12345 </h4>
+                            </div>
+                            <div class="No-of-parcels">
+                                <h4>10 Parcels</h4>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <!-- <div class="charts">
             <canvas class="chart" id="chart"></canvas>
             <canvas class="donut-chart"></canvas>
-            </div> 
+            </div>  -->
             
    
         </main>

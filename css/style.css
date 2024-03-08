@@ -327,6 +327,8 @@ main{
   height: calc(100vh - 90px);
   margin-top: 80px;
   overflow: scroll;
+  overflow-x: hidden;
+  margin-bottom: 0px;
   /* margin-left: 100px; */
   width: 100%;
   padding: 24px 20px 20px 20px;
@@ -470,7 +472,7 @@ main .info-data .sm .head i{
 main .info-data .sm .head p{
   font-size: 22px;
   font-weight: 600;
-  color:#484848;
+  color:#000000;
   line-height: 1.2;
   max-height: 4em;
   text-overflow: ellipsis;
@@ -530,4 +532,108 @@ canvas#chart{
   /* margin-top: 20px; */
   /* justify-content: center; */
   align-items:left;
+}
+
+.table-data{
+  display: flex;
+  gap: 20px;
+}
+.recent-trains{
+  box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
+  background: white;
+  max-width: 60%;
+  max-height:90%;
+  margin-top: 3rem;
+  border-radius: 1.6rem;
+  padding: 1.6em; ;
+}
+.parcels{
+  box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
+  background: white;
+  max-width: 100%;
+  max-height:90%;
+  margin-top: 3rem;
+  border-radius: 1.6rem;
+  padding: 1.6em; ;
+}
+.update{
+  font-size: small;
+  padding: 6px ;
+  color: #000000 ;
+  background-color: #4f4a4a1b;
+  border-radius: 10px;
+  border: 1px solid #0000001b;
+}
+
+.update:hover{
+  background-color: var(--theme-color);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+h3{
+  font-size: 22px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 10px;
+}
+.table-data .head{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+.table-data .head a{
+  margin-right: 5px;
+  background-color: #5f5d5d;
+  font-size: 15px;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  padding:6px;
+  border-radius: 8px;
+  transition: all 0.1s ease;
+}
+
+.parcels .parcel-list li{
+  border: #0000001b;
+  width: 500px;
+  background-color: #7c7c7c1b;
+  padding: 14px 20px;
+  border-left: 10px solid #5271FF;
+  border-radius: 10px; ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* flex-direction: column; */
+  gap: 20px;
+  margin-top: 20px;
+  list-style: none;
+
+}
+
+.recent-trains .head a:hover{
+  background-color: var(--theme-color);
+  color: #ffffff;
+  transition: all 0.1s ease;
+}
+.parcels .parcel-list .high-parcels {
+  border-left: 10px solid orange;
+}
+.parcels .head{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  justify-content: space-between;
+}
+
+.heading{
+  display: flex;
+}
+
+.heading h1{
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
