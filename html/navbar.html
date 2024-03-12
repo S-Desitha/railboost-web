@@ -40,7 +40,7 @@
         </ul> -->
     <!-- </li> -->
     <li id="nav-contact"><a  href="#">Help</a></li>
-    <li ><a  href="/html/signin.html" class="no-hover"><button class="nav-button">Login</button></a></li>
+    <li ><a  href="/html/signin.html" class="no-hover"><button class="nav-button" id="navb">Login</button></a></li>
     <!-- <div class="dropdown">
         <button onclick="toggleDropdown()" class="dropbtn"><i onclick="toggleDropdown(); event.stopPropagation();" class="fa-solid fa-user-circle fa-2xl"></i></button>
         <div id="drop" class="dropdown-content">
@@ -49,11 +49,11 @@
         </div>
       </div> -->
       
-    <li class="bell-notification" current-count="8"><a href="#" class="no-hover"><i class="fas fa-bell"></i></a></li>
+    <li class="bell-notification" current-count="8"><a href="#" class="no-hover" onclick="toggleNotify()"><i class="fas fa-bell"></i></a></li>
     <div class="notification-bar" id="notification-bar">
         <div class="notification-item">
             <div>
-                <p>New parcel delivery request received. Approve or reject?</p>
+                <p>New parcel delivery request received. </p>
                 <span class="notification-time">2 minutes ago</span>
             </div>
                 <button class="view-notification">View</button>
@@ -61,7 +61,7 @@
         </div>
         <div class="notification-item">
             <div>
-                <p>Season ticket application submitted. Validate and process.</p>
+                <p>Season ticket application submitted. </p>
                 <span class="notification-time">1 hour ago</span>
             </div>    
             <div>
@@ -70,7 +70,7 @@
         </div>
         <div class="notification-item">
             <div>
-          <p>Important: Train 123 delayed by 30 minutes.</p>
+          <p>Train 123 delayed by 30 minutes.</p>
           <span class="notification-time">3 hours ago</span>
         </div>
           <button class="view-notification">View</button>

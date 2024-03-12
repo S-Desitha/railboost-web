@@ -308,12 +308,33 @@ function createNavBar(context) {
     fetch("/html/navbar.html")
         .then(response => response.text())
         .then(data => {
+            
+            console.log(data);
             document.getElementsByClassName("navbar")[0].innerHTML = data;
+            const loginStatus=localStorage.getItem("loggedIn");
+            const Name=localStorage.getItem("name");
+            if (loginStatus=="true"){
+                document.getElementById("navb").innerHTML= Name;
+                localStorage.getItem("loggedIn")=-null;
+            }
+            else{
+                // localStorage.clear();
+
+            }
+            // clear local storage
+
+            // console.log("Name: "+Name);
+            // console.log(document.getElementById("navb").innerHTML);
+            // document.getElementById("navb").innerHTML= Name;
+            // //remove cursor events
+           
+
+            document.getElementById("navb").style.pointerEvents = "none";
             
             if (context == "admin") {
                 document.getElementById("sm-nav").remove();
                 document.getElementById("passenger-nav").remove();
-
+                
                 document.getElementById("nav-about").remove();
                 document.getElementById("nav-contact").remove();
                 document.getElementById("nav-services").innerHTML = "Admin Services";
@@ -466,22 +487,22 @@ function validateStrPassword() {
     passwordError.innerHTML = "";
     return true;
 }
-// function toggleDropdown() {
-//     var dropdown = document.getElementById("drop");
-//     if (dropdown.style.display === "none") {
-//       dropdown.style.display = "block";
-//     } else {
-//       dropdown.style.display = "none";
-//     }
+function toggleNotify() {
+    var dropdown = document.getElementById("notification-bar");
+    if (dropdown.style.display === "none") {
+      dropdown.style.display = "block";
+    } else {
+      dropdown.style.display = "none";
+    }
     
-//   }
+  }
   
-//   window.onclick = function(event){
-//     if (!event.target.matches('.dropbtn')){
-//         var dropdown = document.getElementById("drop");
-//         dropdown.style.display = "none";
-//     }
-//   }
+  window.onclick = function(event){
+    if (!event.target.matches('.dropbtn')){
+        var dropdown = document.getElementById("drop");
+        dropdown.style.display = "none";
+    }
+  }
   
 const chart=document.querySelector(".chart");
 console.log(chart);
