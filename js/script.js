@@ -309,16 +309,17 @@ function createNavBar(context) {
         .then(response => response.text())
         .then(data => {
             
-            console.log(data);
+            // console.log(data);
             document.getElementsByClassName("navbar")[0].innerHTML = data;
             const loginStatus=localStorage.getItem("loggedIn");
             const Name=localStorage.getItem("name");
             if (loginStatus=="true"){
                 document.getElementById("navb").innerHTML= Name;
-                localStorage.getItem("loggedIn")=-null;
+                
             }
             else{
-                // localStorage.clear();
+                localStorage.setItem("loggedIn", null);
+                console.log("Logged in status set to null" + localStorage.getItem("loggedIn"));
 
             }
             // clear local storage
