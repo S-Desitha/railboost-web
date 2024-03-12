@@ -1,5 +1,45 @@
 // Wait for the DOM to be ready
 document.addEventListener('DOMContentLoaded', function () {
+
+   
+        // const counters1 = document.querySelectorAll('.count');
+      
+        // function startCounter(counter) {
+        //   const target = parseInt(counter.getAttribute('data-target'));
+        //   const increment = target / 50;
+      
+        //   let currentValue = 0;
+      
+        //   function updateCounter() {
+        //     currentValue += increment;
+        //     counter.textContent = Math.floor(currentValue);
+      
+        //     if (currentValue < target) {
+        //       requestAnimationFrame(updateCounter);
+        //     } else {
+        //       counter.textContent = target;
+        //     }
+        //   }
+      
+        //   updateCounter();
+        // }
+      
+        // counters1.forEach(startCounter);
+      
+        // const bellIcon = document.getElementById('bell-notification');
+    //     const notificationBar = document.getElementById('notification-bar');
+    //   console.log("bellIcon",bellIcon);
+    //     bellIcon.addEventListener('click', function () {
+    //         notificationBar.classList.remove('none');
+    //         notificationBar.classList.add('block');
+
+    //     });
+
+         //   make display none removed when the bell icon is clicked
+        
+
+      
+      
     
     const parcelItems = document.querySelectorAll('.parcel-list li');
 
@@ -426,22 +466,22 @@ function validateStrPassword() {
     passwordError.innerHTML = "";
     return true;
 }
-function toggleDropdown() {
-    var dropdown = document.getElementById("drop");
-    if (dropdown.style.display === "none") {
-      dropdown.style.display = "block";
-    } else {
-      dropdown.style.display = "none";
-    }
+// function toggleDropdown() {
+//     var dropdown = document.getElementById("drop");
+//     if (dropdown.style.display === "none") {
+//       dropdown.style.display = "block";
+//     } else {
+//       dropdown.style.display = "none";
+//     }
     
-  }
+//   }
   
-  window.onclick = function(event){
-    if (!event.target.matches('.dropbtn')){
-        var dropdown = document.getElementById("drop");
-        dropdown.style.display = "none";
-    }
-  }
+//   window.onclick = function(event){
+//     if (!event.target.matches('.dropbtn')){
+//         var dropdown = document.getElementById("drop");
+//         dropdown.style.display = "none";
+//     }
+//   }
   
 const chart=document.querySelector(".chart");
 console.log(chart);

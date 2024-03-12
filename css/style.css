@@ -637,3 +637,85 @@ h3{
   font-weight: 600;
   margin-bottom: 10px;
 }
+
+/* Your existing styles */
+
+.notification-bar {
+  background: #fff;
+    border: 1px solid #e1e1e1;
+    -webkit-box-shadow: 0 2px 8px rgba(0,0,0,.12);
+    box-shadow: 0 2px 8px rgba(0,0,0,.12);
+    width: 380px;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    height: 500px;
+}
+.notification-bar::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  top: -10px;
+  left: 325px;
+}
+.notification-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.notification-item p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.notification-time {
+  font-size: 12px;
+  color: #555;
+}
+.notification-item {
+  display: flex;
+  gap: 2px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+
+.view-notification {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  padding: 5px 10px;
+  /* background-color: #5271FF; */
+  /* color: #fff; */
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.view-notification:hover {
+  /* background-color: #29499c; */
+}
+
+/* For webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d1d1d1; /* Set the color of the thumb (the draggable part) */
+  border-radius: 4px; /* Add a slight border radius for a softer look */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5; /* Set the color of the track (the non-draggable part) */
+}
+
+
