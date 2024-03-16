@@ -12,8 +12,9 @@ margin-top: 4px;
 }
 .train-image {
   width: 70vw; 
-  height: 720px;
-  margin-top: 18px;
+  height: 660px;
+  margin-top: 80px;
+  margin-left: 3px;
   /* border-radius: 8px;  */
 }
 
