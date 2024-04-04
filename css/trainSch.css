@@ -41,11 +41,13 @@
 	border-bottom: 1px solid #a9a9a9;
 	color: #a9a9a9;
 	padding: 7px 0;
-	margin: 20px 0;}
+	margin: 20px 0;
+}
+
 .add-train-heading {
-    font-size: 24px;
-    color: #333;
-    font-weight: bold;
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
 	margin-bottom: 15px;
 	text-align: center;
 	/* margin-top: 10px; */
@@ -181,7 +183,7 @@ table, th, td {
     text-align: center;
 }
 
-thead th {
+thead  {
     position: sticky;
     top: 0;
     left: 0;
@@ -194,10 +196,10 @@ tbody tr:nth-child(even) {
     background-color: #0000000b;
 }
 
-tbody tr {
+/* tbody tr {
     --delay: .1s;
     transition: .5s ease-in-out var(--delay), background-color 0s;
-}
+} */
 
 tbody tr.hide {
     opacity: 0;
@@ -386,3 +388,55 @@ thead th.active,tbody td.active {
     /* border-radius: 5px; */
     background: #f2f2f2;
   }
+
+
+#speed {
+  width: 20vw;
+	height: 2.5rem;
+	border: none;
+	border-bottom: 1px solid #a9a9a9;
+	color: #6e6b6b;
+	padding: 7px 0;
+	margin: 20px 0;
+}
+
+
+
+/* .table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  border: 1px solid #ccc;
+}
+.table th,
+.table td {
+  padding: 0.5rem;
+} */
+.draggable {
+  cursor: move;
+  user-select: none;
+}
+.placeholder {
+  background-color: #edf2f7;
+  border: 2px dashed #cbd5e0;
+}
+/* .clone-list {
+  border-top: 1px solid #ccc;
+} */
+/* .clone-table {
+  border-collapse: collapse;
+  border: none;
+}
+.clone-table th,
+.clone-table td {
+  border: 1px solid #ccc;
+  border-top: none;
+  padding: 0.5rem;
+} */
+.dragging {
+  background: #fff;
+  border-top: 1px solid #ccc;
+  z-index: 999;
+}
