@@ -1,3 +1,20 @@
+$(document).ready(function() {
+    $(".menu > ul > li").click(function(e) {
+    // remove actiive from alreay active li
+    $(this).siblings().removeClass("active");
+    // add active to clicked li
+        $(this).toggleClass("active");
+    // if has sub menu open it
+    $(this).find("ul").slideToggle();
+    // close all other sub menus if open
+    $(this).siblings().find("ul").slideUp();
+    // remove active click of submenus
+    $(this).siblings().find("ul").find("li").removeClass("active");
+  });
+    $(".menu-btn").click(function() {
+        $(".sidebar").toggleClass("active");
+    }); 
+});
 async function customFetch(endpoint, options, sendJWT) {
     let url = "http://localhost:8080/railboost_backend_war_exploded/";
     // const frontendPort = window.location.port;

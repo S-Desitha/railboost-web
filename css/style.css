@@ -20,7 +20,241 @@
 a:hover {
   text-decoration: none;
   cursor: pointer;
+
+} 
+
+.container {
+  width: 100%;
+  min-height: calc(100vh-80px);
+  display: flex;
+  /* overflow: hidden; */
 }
+
+.sidebar{
+  position: relative;
+  width: 300px;
+  height: calc(100vh-80px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color:white;
+  transition: all 0.3s ease;
+  padding: 24px ;
+  border-radius: 30px 30px 30px 30px;
+  border-top: 1px solid #ffffff;
+  /* margin-top: 2px; */
+  
+
+  
+}
+/* box shadow for sidebar */
+.sidebar{
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+}
+
+/* colors of paras inside the sidebar should be white */
+.sidebar p{
+  color: #000000;
+}
+
+
+
+
+
+.sidebar .head{
+  display: flex;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #757575;
+
+}
+
+.user-img{
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.user-img img{
+  width: 100%;
+  object-fit: cover;
+}
+
+.user-details .title{
+  font-size: 10px;
+  font-weight: 500;
+  color: #757575;
+  text-transform: uppercase;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.user-details .name{
+  color: #000000;
+  font-size: 14px;
+  font-weight: 500;
+  
+}
+
+.menu .title {
+  font-size: 10px;
+  font-weight: 500;
+  color: #757575;
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.menu ul li{
+  position: relative;
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+.menu ul li a{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #757575;
+  text-decoration: none;
+  padding: 12px 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+
+
+}
+
+
+.menu ul li > a:hover,
+.menu ul li.active > a{
+  background-color: #f6f6f6;
+  color: #000000;
+}
+
+.menu ul li .icon{
+  font-size: 18px;
+}
+.menu ul li .text{
+  flex:1 ;
+}
+.menu ul li.active .arrow{
+  transform: rotate(180deg);
+  transition: all 0.3s ease;
+
+}
+.menu ul li .arrow{
+  font-size: 14px;
+}
+.Sidenav{
+  flex: 1;
+}
+.menu ul li .fas {
+  font-size: 14px;
+}
+.menu .sub-menu{
+  margin-left: 20px;
+  padding-left: 20px;
+  padding-top: 5px;
+  border-left: 1px solid #ffffff;
+  display: none;
+}
+.menu .sub-menu li a{
+  padding: 10px 8px;
+  font-size: 12px;
+}
+.menu-btn{
+  position: absolute ;
+  right: -14px; 
+  top:3.5%;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: #757575;
+  border: 2px solid #f6fff6;
+  cursor: pointer;
+}
+.menu-btn:hover i {
+  color: #000000;
+}
+
+.menu-btn i{
+  transition: all 0.3s ease;
+}
+.sidebar.active {
+  width: 92px ;
+
+}
+.sidebar.active .menu-btn i{
+  transform: rotate(180deg);
+}
+
+.sidebar.active .user-details{
+  display: none;
+}
+
+.sidebar.active .menu .title{
+  text-align: center;
+}
+.sidebar.active .menu ul li .arrow{
+  display: none;
+}
+.sidebar.active .menu > ul > li > a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar.active .menu > ul > li > a .text{
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  border-radius: 4px; 
+  color: #ffffff;
+  background-color: black;
+  opacity: 0;
+  visibility: hidden ;
+  transition: all 0.3s ease;
+}
+.sidebar.active .menu > ul > li > a .text::after{
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 20%;
+  /* transform: translateY(-50%); */
+  width: 20px;
+  height: 20px;
+  background-color: black;
+  border-radius: 2px  ;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+.sidebar.active .menu > ul > li > a:hover .text{
+  left: 50px;
+  opacity: 1;
+  visibility: visible;
+}
+.sidebar.active .menu .sub-menu{
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 200px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: 1px solid #f6f6f6;
+  background-color: #ffffff;
+  box-shadow: 0px 10px 8px rgba(0,0,0,0.1);
+  
+}
+
 
 .service-view {
   display: flex;
@@ -102,3 +336,4 @@ input:focus {
 input::placeholder {
   color: #6e6b6b;
 }
+
