@@ -2,7 +2,71 @@
 
 const seasonEndpoint = "season";
 const ticketPriceEndpoint = "ticketPrice";
-let ENDDATE;
+let endDate;
+
+document.addEventListener("DOMContentLoaded", async function () {
+  let params = {
+    view: "2",
+  };
+  let queryString = Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+  let urlQuery = `${seasonEndpoint}?${queryString}`;
+  
+    try {
+      let data = await customFetch(urlQuery, {credentials: "include"});
+      
+      data.forEach(season => {
+
+        let BuyButton = document.createElement("button");
+        BuyButton.classList.add("Buy-button");
+        BuyButton.innerHTML = "<i class='fa-solid fa-coins' title='Pay' style='color:#0047AB'><span>  Pay </span></i>";
+        BuyButton.setAttribute("season", JSON.stringify(season));
+        BuyButton.onclick = ByuSeason;
+        
+        let row = document.getElementById("season_table").insertRow(0);
+        row.insertCell(0).innerHTML = season.id;
+        row.insertCell(1).innerHTML = season.startStation;
+        row.insertCell(2).innerHTML = season.endStation;
+        row.insertCell(3).innerHTML = season.startDate;
+        row.insertCell(4).innerHTML = season.endDate;
+        row.insertCell(5).innerHTML = season.trainClass;
+        row.insertCell(6).innerHTML = season.totalPrice;
+        row.insertCell(7).innerHTML = season.status;
+        if (season.status == "Approved"){
+          row.insertCell(8).append(BuyButton);
+        }else{
+          row.insertCell(8).innerHTML = "-";
+        }
+      });
+  
+    }
+    catch(error) {
+      if (error=="login-redirected")
+          localStorage.setItem("last_url", window.location.pathname);
+    }
+  });
+
+  function ByuSeason(){
+    season = JSON.parse(this.getAttribute("season"));
+    console.log(season);
+    season["status"] = "Paid";
+    const body = season;
+    const params = {
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify(body),
+        method: "PUT",
+    };
+
+    customFetch(seasonEndpoint, params)
+    .then(() => window.location.reload())
+
+    .catch((error) => {
+        if (error == "login-redirected")
+            localStorage.setItem("last_url", window.location.pathname);
+    });
+}
+  
 
 function validateStation(){
   
@@ -25,7 +89,7 @@ function appplySeasonTicket() {
   season["passengerType"] = document.getElementById("passenger-type").value;
   season["startDate"] = new Date(document.getElementById("Start-date").value).toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"})
   season["duration"] = document.getElementById("duration").value;
-  season["endDate"] = ENDDATE;
+  season["endDate"] = new Date(endDate).toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"})
   season["trainClass"] = document.getElementById("class").value;
   season["totalPrice"] = document.getElementById("total-price").value;
   // season["file"] = document.getElementById("img");
@@ -144,7 +208,7 @@ function updateEndDate() {
     let duration = document.getElementById('duration').value;
 
     if (startDate && duration) {
-        let endDate = new Date(startDate);
+        endDate = new Date(startDate);
         switch (duration) {
             case '1 Week':
                 endDate.setDate(endDate.getDate() + 7);
@@ -165,7 +229,7 @@ function updateEndDate() {
         console.log(endDate);
         let endDateFormatted = (endDate.getMonth() + 1).toString().padStart(2, '0') + '/' + endDate.getDate().toString().padStart(2, '0') + '/' + endDate.getFullYear();
         document.getElementById("End-date").value = endDateFormatted;
-        ENDDATE = endDate.getFullYear() + '-' + ('0' + (endDate.getMonth() + 1)).slice(-2) + '-' + ('0' + endDate.getDate()).slice(-2);
+        //ENDDATE = endDate.getFullYear() + '-' + ('0' + (endDate.getMonth() + 1)).slice(-2) + '-' + ('0' + endDate.getDate()).slice(-2);
 
         
         

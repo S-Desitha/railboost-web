@@ -11,6 +11,10 @@
 	<link rel="stylesheet" href="/css/table.css">
 	<link rel="stylesheet" href="/css/buttons.css">
 
+	<link rel="stylesheet" href="/css/datepicker.css">
+	<link rel="stylesheet" href="/css/admin_schedule.css">
+
+
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
@@ -74,6 +78,71 @@
 			<div class="input-group">
 				<input type="search" placeholder="Search Station...">
 				<img src="/Images/search.png" alt="">
+			</div>
+		</section>
+
+		<section class="schedule-dates-view">
+			<div id="start-from" class="start-from">
+                <label for="start-from">Start from</label>
+                <div class="start-from">
+                    <span id="start-from-date"></span>
+                </div>
+            </div>
+
+			<div id="start-from" class="start-from">
+                <label for="start-from">Ends On</label>
+                <div class="start-from">
+                    <span id="ends-on-date"></span>
+                </div>
+            </div>
+
+			<div id="container" class="container">
+				<label>Days</label>
+				<div>
+
+				
+					<div class="cat day">
+					<label>
+						<input id="sun" type="checkbox" value="SUNDAY"><span>S</span>
+					</label>
+					</div>
+					
+					<div class="cat day">
+					<label>
+						<input id="mon" type="checkbox" value="MONDAY"><span>M</span>
+					</label>
+					</div>
+					
+					<div class="cat day">
+					<label>
+						<input id="tue" type="checkbox" value="TUESDAY"><span>T</span>
+					</label>
+					</div>
+					
+					<div class="cat day">
+					<label>
+						<input id="wed" type="checkbox" value="WEDNESDAY"><span>W</span>
+					</label>
+					</div>
+					
+					<div class="cat day">
+					<label>
+						<input id="thu" type="checkbox" value="THURSDAY"><span>T</span>
+					</label>
+					</div>
+					
+					<div class="cat day">
+					<label>
+						<input id="fri" type="checkbox" value="FRIDAY"><span>F</span>
+					</label>
+					</div>
+					
+					<div class="cat day">
+					<label>
+						<input id="sat" type="checkbox" value="SATURDAY"><span>S</span>
+					</label>
+					</div><br><br><br>
+				</div>
 			</div>
 		</section>
 
