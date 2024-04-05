@@ -1,4 +1,6 @@
 // const url = "http://localhost:8080/railboost_backend_war_exploded/trainSchedule";
+
+
 const scheduleEndpoint = "trainSchedule";
 
 document.addEventListener("DOMContentLoaded", async function() {
@@ -167,12 +169,29 @@ function editStation() {
 
 
 function viewStations() {
-    const url = "trainSch.html";
-    const schedule = this.getAttribute("schedule");
-    localStorage.setItem("schedule", schedule);
-    // const schedule = JSON.parse(this.getAttribute("schedule"));
+    let dialog = document.querySelector(".stations-data-modal");
+    let stations = JSON.parse(this.getAttribute("stations"));
+    
+    stations.forEach(station => {
+        let row = document.getElementById("schedule_stations").insertRow(-1);
+        row.insertCell(0).innerHTML = station.station;
+        row.insertCell(1).innerHTML = station.scheduledArrivalTime;
+        row.insertCell(2).innerHTML = station.scheduledDepartureTime;
+    });
 
-    window.location.href = url+"?addNew=false&schedule="+encodeURIComponent(schedule);
+    dialog.showModal();
+
+    dialog.addEventListener("click", e => {
+        const dialogDimensions = dialog.getBoundingClientRect()
+        if (
+          e.clientX < dialogDimensions.left ||
+          e.clientX > dialogDimensions.right ||
+          e.clientY < dialogDimensions.top ||
+          e.clientY > dialogDimensions.bottom
+        ) {
+          dialog.close()
+        }
+    });
 }
 
 
@@ -190,11 +209,27 @@ async function createSchedulesPage() {
         let data = await customFetch(urlQuery, param);
         console.log(data);
         data.forEach(sch => {
-            let viewButton = document.createElement("button");
-            viewButton.classList.add("view-button");
-            viewButton.innerHTML = "<i class='fa-regular fa-eye'></i>";
-            viewButton.setAttribute("schedule", JSON.stringify(sch));
-            viewButton.onclick = viewStations;
+            // let viewButton = document.createElement("button");
+            // viewButton.classList.add("view-button");
+            // viewButton.innerHTML = "<i class='fa-regular fa-eye'></i>";
+            // viewButton.setAttribute("schedule", JSON.stringify(sch));
+            // viewButton.onclick = viewStations;
+
+            let infoButton = document.createElement("button");
+            infoButton.classList.add("edit-button");
+            infoButton.classList.add("data-open-modal");
+            infoButton.innerHTML = "<i class='fa-solid fa-circle-info'></i>";
+            infoButton.setAttribute("stations", JSON.stringify(sch.stations));
+            infoButton.onclick = viewStations;
+
+            let editButton = document.createElement("button");
+            editButton.classList.add("edit-button");
+            editButton.innerHTML = "<i class='fas fa-edit'></i>";
+            // editButton.onclick = editStation;
+
+            let deleteButton = document.createElement("button");
+            deleteButton.classList.add("delete-button");
+            deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
 
             let row = document.getElementById("schedule_table").insertRow(-1);
             row.insertCell(0).innerHTML = sch.scheduleId;
@@ -202,10 +237,11 @@ async function createSchedulesPage() {
             row.insertCell(2).innerHTML = sch.startStation;
             row.insertCell(3).innerHTML = sch.endStation;
             row.insertCell(4).innerHTML = sch.trainType;
-            row.insertCell(5).innerHTML = `<a href="/html/admin/trainSch.html?scheduleId=${sch.scheduleId}"><button class="view-button">
-                                                View <i class="fa-regular fa-eye"></i></button>
-                                            </a>`;
-            row.insertCell(6).innerHTML = `<a href=""><button class="edit-button"><i class="fas fa-edit"></i> </button></a><a href=""><button class="delete-button"><i class="fas fa-trash"></i> </button></a>`;
+            // row.insertCell(5).innerHTML = `<a href="/html/admin/trainSch.html?scheduleId=${sch.scheduleId}"><button class="view-button">
+            //                                     View <i class="fa-regular fa-eye"></i></button>
+            //                                 </a>`;
+            // row.insertCell(6).innerHTML = `<a href=""><button class="edit-button"><i class="fas fa-edit"></i> </button></a><a href=""><button class="delete-button"><i class="fas fa-trash"></i> </button></a>`;
+            row.insertCell(5).append(infoButton, editButton, deleteButton);
         })
     }
     catch(error) {

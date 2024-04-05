@@ -28,14 +28,14 @@ document.addEventListener("DOMContentLoaded", async function() {
             let row = document.getElementById("staff_table").insertRow(-1);
             row.insertCell(0).innerHTML = staffMember.staffId;
             row.insertCell(1).innerHTML = staffMember.user.fName + " " + staffMember.user.lName;
-            row.insertCell(2).innerHTML = staffMember.user.username;
-            row.insertCell(3).innerHTML = staffMember.user.email;
-            row.insertCell(4).innerHTML = staffMember.user.telNo;
-            let roleCell = row.insertCell(5);
+            // row.insertCell(2).innerHTML = staffMember.user.username;
+            row.insertCell(2).innerHTML = staffMember.user.email;
+            row.insertCell(3).innerHTML = staffMember.user.telNo;
+            let roleCell = row.insertCell(4);
             roleCell.innerHTML = staffMember.user.role.role;
             roleCell.setAttribute("roleId", staffMember.user.role.roleId);
-            row.insertCell(6).innerHTML = staffMember.station;
-            row.insertCell(7).append(editButton, deleteButton);
+            row.insertCell(5).innerHTML = staffMember.station;
+            row.insertCell(6).append(editButton, deleteButton);
     
         });
     } catch(error) {
@@ -138,6 +138,28 @@ function updateUsername() {
     document.getElementById('username').value = username;
     
 }
+
+
+
+// function popupAddPage() {
+//     let dialog = document.querySelector(".staff-add-modal");
+
+//     dialog.showModal();
+
+//     dialog.addEventListener("click", e => {
+//         const dialogDimensions = dialog.getBoundingClientRect()
+//         if (
+//             (e.clientX !=0 && e.clientY !=0) &&
+//             (e.clientX < dialogDimensions.left ||
+//             e.clientX > dialogDimensions.right ||
+//             e.clientY < dialogDimensions.top ||
+//             e.clientY > dialogDimensions.bottom) 
+//         ) {
+//             dialog.close()
+//         }
+//     });
+// }
+
 
 
 

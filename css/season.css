@@ -209,131 +209,156 @@ input[type="date"]:valid::before {
   }
   /* .wrapper{
                           
-                          width: 20vw;
-                          margin: 20px 20px;
-                          box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-                          /* box radius */
-                          /* border-radius: 7px;
-                        } */
-                         
-                        .select-btn, .options li{
-                          display: flex;
-                          align-items: left;
-                          cursor: pointer;
-                          
-                        }
-                        .select-btn{
-                          position: relative;
-                          font-size: 13px;
-                          margin-left: 10px;
-                          padding-left: 10px;
-                         /*padding-left: 100px;
-                         text-align: 100px; */
-                            width: 20rem;
-                            height: 2.5rem;
-                            border: none;
-                            border-bottom: 1px solid #a9a9a9;
-                            color: #484848;
-                            padding: 7px 0;
-                            margin: 15px 0;}
-                          .input-control.success input {
-                            border-color: #09c372;
-                            cursor: pointer;
-                        
-                        }
-                        .select-btn i{
-                          position: absolute;
-                          /* font-size: 70px; */
-                          color: #474646;
-                          font-size: 12px;
-                          /* top: 0; */
-                          right: 0;
-                          padding-right: 5px;
-                          /* padding-left: 215px; */
-                        }
-                        
-                        .content{
-                          position: absolute;
-                            z-index: 100;
-                            background: white;
-                          display: none;
-                          margin-top:1px;
-                          background: #fff;
-                          border-radius: 7px;
-                          /* box-shadow: 0 10px 25px rgba(0,0,0,0.1); */
-                        }
-                        .wrapper.active .content{
-                          display: block;
-                          border: black;
-                          
+    width: 20vw;
+    margin: 20px 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    /* box radius */
+    /* border-radius: 7px;
+  } */
+    
+  .select-btn, .options li{
+    display: flex;
+    align-items: left;
+    cursor: pointer;
+    
+  }
+  .select-btn{
+    position: relative;
+    font-size: 13px;
+    margin-left: 10px;
+    padding-left: 10px;
+    /*padding-left: 100px;
+    text-align: 100px; */
+      width: 20rem;
+      height: 2.5rem;
+      border: none;
+      border-bottom: 1px solid #a9a9a9;
+      color: #484848;
+      padding: 7px 0;
+      margin: 15px 0;}
+    .input-control.success input {
+      border-color: #09c372;
+      cursor: pointer;
   
-                        }
-                        .content .search{
-                          position: relative;
-                        }
-                        .search i{
-                          top: 50%;
-                          left: 15px;
-                          padding-left: 10px;
-                          color: #9f9292;
-                          font-size: 20px;
-                          pointer-events: none;
-                          transform: translateY(-50%);
-                          position: absolute;
-                        }
-                        .search input{
-                          height: 40px;
-                          width: 90%;
-                          outline: none;
-                          font-size: 14px;
-                          /* border-radius: 5px; */
-                          padding: 0 15px 0 43px;
-                          border: 1px solid #B3B3B3; 
-                        }
-                        /* .search input:focus{
-                          padding-left: 42px;
-                          border: 2px solid #4285f4;
-                        }
-                        .search input::placeholder{
-                          color: #bfbfbf;
-                        /* } */
-                        .content .options{
-                          margin-top: 10px;
-                          max-height: 240px;
-                          overflow-y: auto;
-                          padding-right: 7px;
-                          
-                        }
-                        .options::-webkit-scrollbar{
-                          width: 7px;
-                        }
-                        .options::-webkit-scrollbar-track{
-                          background: #f1f1f1;
-                          border-radius: 25px;
-                        }
-                        .options::-webkit-scrollbar-thumb{
-                          background: #ccc;
-                          border-radius: 25px;
-                        }
-                        .options::-webkit-scrollbar-thumb:hover{
-                          background: #b3b3b3;
-                        }
-                        .options li{
-                        
-                          height: 40px;
-                          border-radius: 5px;
-                          /* background: #f2f2f2; */
-                          padding: 0 13px;
-                          font-size: 15px;
-                        }
-                        .options li:hover{
-                          background: #f2f2f2;
-               
+  }
+  .select-btn i{
+    position: absolute;
+    /* font-size: 70px; */
+    color: #474646;
+    font-size: 12px;
+    /* top: 0; */
+    right: 0;
+    padding-right: 5px;
+    /* padding-left: 215px; */
+  }
   
-                        }
-                        .select-btn span {
-                            margin-left: 4px;
-                        }
+  .content{
+    position: absolute;
+      z-index: 100;
+      background: white;
+    display: none;
+    margin-top:1px;
+    background: #fff;
+    border-radius: 7px;
+    /* box-shadow: 0 10px 25px rgba(0,0,0,0.1); */
+  }
+  .wrapper.active .content{
+    display: block;
+    border: black;
+    
+
+  }
+  .content .search{
+    position: relative;
+  }
+  .search i{
+    top: 50%;
+    left: 15px;
+    padding-left: 10px;
+    color: #9f9292;
+    font-size: 20px;
+    pointer-events: none;
+    transform: translateY(-50%);
+    position: absolute;
+  }
+  .search input{
+    height: 40px;
+    width: 90%;
+    outline: none;
+    font-size: 14px;
+    /* border-radius: 5px; */
+    padding: 0 15px 0 43px;
+    border: 1px solid #B3B3B3; 
+  }
+  /* .search input:focus{
+    padding-left: 42px;
+    border: 2px solid #4285f4;
+  }
+  .search input::placeholder{
+    color: #bfbfbf;
+  /* } */
+  .content .options{
+    margin-top: 10px;
+    max-height: 240px;
+    overflow-y: auto;
+    padding-right: 7px;
+    
+  }
+  .options::-webkit-scrollbar{
+    width: 7px;
+  }
+  .options::-webkit-scrollbar-track{
+    background: #f1f1f1;
+    border-radius: 25px;
+  }
+  .options::-webkit-scrollbar-thumb{
+    background: #ccc;
+    border-radius: 25px;
+  }
+  .options::-webkit-scrollbar-thumb:hover{
+    background: #b3b3b3;
+  }
+  .options li{
+  
+    height: 40px;
+    border-radius: 5px;
+    /* background: #f2f2f2; */
+    padding: 0 13px;
+    font-size: 15px;
+  }
+  .options li:hover{
+    background: #f2f2f2;
+
+
+  }
+  .select-btn span {
+      margin-left: 4px;
+  }
+                        
+  .app{
+    text-align: left;
+    margin-left: 10px;
+    color:#0d45a5;
+    font-weight: 900;
+}
+
+input[type=file] {
+    display:grid
+}
+input[type=file]::file-selector-button {
+    /* margin-right: 20px; */
+    border: none;
+    background: #084cdf;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+    }
+
+    input[type=file]::file-selector-button:hover {
+    background: #0d45a5;
+    }
                         
                         
   

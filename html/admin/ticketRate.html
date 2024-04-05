@@ -3,12 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
 	<script src="/js/script.js"></script>
 	<script src="/js/auth.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/ticketRate.css">
-    
+    <link rel="stylesheet" href="/css/table.css">
+	<link rel="stylesheet" href="/css/buttons.css">
+	<link rel="stylesheet" href="/css/validations.css">
+
 	<script src="/js/ticketRate.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
 
@@ -22,94 +34,94 @@
 		<script>createNavBar("admin")</script>
 	</nav>	
 
-			<main class="table">
+	<div class="container">
+        <div class="sidebar active">
+            <script>createSideBar("admin")</script>
 
-				<div class="container">
-            		<div class="left">
+        </div>
 
-						<section class="table_header">
-							<h1>Ticket Price Details</h1>
-                            <div class="input-group">
-                                <input type="search" placeholder="Search Ticket Rates...">
-                                <img src="/Images/search.png" alt="">
-                            </div>
-						</section>
+		<div class="service-view">
+			<div class="service-container">
+				<button class="add-new-btn" onclick="popupAddPage('.rates-add_edit-modal')" >Add New</button>
+				
+				<div class="table-container">
+					<section class="table_header">
+						<h1>Ticket Price Details</h1>
+						<div class="input-group">
+							<input type="search" placeholder="Search Ticket Rates...">
+							<img src="/Images/search.png" alt="">
+						</div>
+					</section>
 
-						<section class="table_body">
-
-							<table>
+					<section class="table_body">
+						<table>
 							<thead>
 								<tr>
 									<th>Start Station</th>
 									<th>End Station</th>
-                                    <th>1st Class</th>
+									<th>1st Class</th>
 									<th>2nd Class</th>
-                                    <th>3rd Class</th>
-                                    <th>Actions</th>
+									<th>3rd Class</th>
+									<th>Actions</th>
 								</tr>
 							</thead>
-							<tbody id="rate_table">
-								
-
-							</tbody>
-							<!-- add some rows in the tbody -->
-
-						</section>
+							<tbody id="rate_table"></tbody>
 						</table>
+					</section>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<dialog class="rates-add_edit-modal">
+		<div class="rate-form">
+			
+			<form onsubmit="return false">
+				<h2 class="add-price-heading" id="add-new-price-header">Add A New Price Rate </h2>
+				<div class="wrapper" font-size="1px" id="from">
+					<div class="select-btn">
+						<span>Start Station:</span> 
+						<i font-size="3px" class="fa fa-angle-down"></i>
 					</div>
-				
-					<div class="right">
-						<div class="rate-form">
-							
-							<form onsubmit="return false">
-								<h2 class="add-price-heading" id="add-new-price-header">Add A New Price Rate </h2>
-								<div class="wrapper" font-size="1px" id="from">
-									<div class="select-btn">
-										<span>Start Station:</span> 
-										<i font-size="3px" class="fa fa-angle-down"></i>
-									</div>
-									<div class="content">
-										<div class="search">
-											<i class="fas fa-search"></i>
-											<input spellcheck="false" type="text" placeholder="Search">
-										</div>
-										<ul onclick="validateStation();" class="options"></ul>
-									</div>
-								</div>
-
-                                <div class="wrapper" font-size="1px" id="to">
-									<div class="select-btn">
-										<span>End Station:</span> 
-										<i font-size="3px" class="fa fa-angle-down"></i>
-									</div>
-									<div class="content">
-										<div class="search">
-											<i class="fas fa-search"></i>
-											<input spellcheck="false" type="text" placeholder="Search">
-										</div>
-										<ul onclick="validateStation();" class="options"></ul>
-									</div>
-								</div>
-								<span id="station-error"></span>
-								
-
-								<label for="1class-price"></label>
-					            <input type="Double" id="1class-price" name="1class-pricee" placeholder="1st Class Price:" required><br>
-
-                                <label for="2class-price"></label>
-					            <input type="Double" id="2class-price" name="2class-pricee" placeholder="2nd Class Price:" required><br>
-
-                                <label for="3class-price"></label>
-					            <input type="Double" id="3class-price" name="3class-pricee" placeholder="3rd Class Price:" required><br>
-						
-								<button class="form-button" id="add-new-price-rate" onclick="addNewRate()">Add A New Price Rate </button>
-
-							</form>
+					<div class="content">
+						<div class="search">
+							<i class="fas fa-search"></i>
+							<input spellcheck="false" type="text" placeholder="Search">
 						</div>
-				
+						<ul onclick="validateStation();" class="options"></ul>
 					</div>
 				</div>
-			</main>	
+
+				<div class="wrapper" font-size="1px" id="to">
+					<div class="select-btn">
+						<span>End Station:</span> 
+						<i font-size="3px" class="fa fa-angle-down"></i>
+					</div>
+					<div class="content">
+						<div class="search">
+							<i class="fas fa-search"></i>
+							<input spellcheck="false" type="text" placeholder="Search">
+						</div>
+						<ul onclick="validateStation();" class="options"></ul>
+					</div>
+				</div>
+				<span id="station-error"></span>
+				
+
+				<label for="1class-price"></label>
+				<input type="Double" id="1class-price" name="1class-pricee" placeholder="1st Class Price:" required><br>
+
+				<label for="2class-price"></label>
+				<input type="Double" id="2class-price" name="2class-pricee" placeholder="2nd Class Price:" required><br>
+
+				<label for="3class-price"></label>
+				<input type="Double" id="3class-price" name="3class-pricee" placeholder="3rd Class Price:" required><br>
+		
+				<button class="form-button" id="add-new-price-rate" onclick="addNewRate()">Add A New Price Rate </button>
+
+			</form>
+		</div>
+
+	</dialog>
 </body>
 
 <script src="/js/stations.js">

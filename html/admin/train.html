@@ -6,7 +6,18 @@
 	<script src="/js/auth.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/train.css">
+    <!-- <link rel="stylesheet" href="/css/train.css"> -->
+	<link rel="stylesheet" href="/css/table.css">
+	<link rel="stylesheet" href="/css/buttons.css">
+
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
     <script src="/js/script.js"></script>
 	<script src="/js/train.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
@@ -16,23 +27,28 @@
 	<nav class="navbar" >
 		<script>createNavBar("admin")</script>
 	</nav>	
+	<div class="container">
+        <div class="sidebar active">
+            <script>createSideBar("admin")</script>
 
-			<main class="table">
+        </div>
 
-				<div class="train-container">
-            		<div class="train-left">
+		<div class="service-view">
+			<div class="service-container">
+				<button class="add-new-btn" onclick="popupAddPage('.train-add_edit-modal')" >Add New</button>
 
-						<section class="table_header">
-							<h1>Train Details</h1>
-                            <div class="input-group">
-                                <input type="search" placeholder="Search Trains...">
-                                <img src="/Images/search.png" alt="">
-                            </div>
-						</section>
+				<div class="table-container">
+					
+					<section class="table_header">
+						<h1>Train Details</h1>
+						<div class="input-group">
+							<input type="search" placeholder="Search Trains...">
+							<img src="/Images/search.png" alt="">
+						</div>
+					</section>
 
-						<section class="table_body">
-
-							<table>
+					<section class="table_body">
+						<table>
 							<thead>
 								<tr>
 									<th>Train ID</th>
@@ -40,29 +56,28 @@
 									<th>Actions</th>
 								</tr>
 							</thead>
-							<tbody id="train_table">
-							</tbody>
-						</section>
+							<tbody id="train_table"></tbody>
 						</table>
-					</div>
-				
-					<div class="train-right">
-						<div class="train-form">
-							
-							<form onsubmit="return false" id="train-form">
-								<h2 class="add-train-heading" id="add-new-train-header">Add a new train </h2>
-								<label for="trainId"></label>
-								<input type="text" id="trainId" placeholder="Train ID:" name="trainId" required><br>
-
-								<label for="train-type"></label>
-								<input type="text" id="trainType" name="name" placeholder="Train Type:" required><br>
-						
-								<button class="form-button" id="add-new-train-button" onclick="addNewTrain()">Add a new train </button>
-
-							</form>
-						</div>
-				
-					</div>
+					</section>
 				</div>
-			</main>	
+			</div>
+		</div>
+	</div>
+	<dialog class="train-add_edit-modal">
+		<div class="adding-form">
+			
+			<form onsubmit="return false" id="train-form">
+				<h2 class="add-train-heading" id="add-new-train-header">Add a new train </h2>
+				<label for="trainId"></label>
+				<input type="text" id="trainId" placeholder="Train ID:" name="trainId" required><br>
+
+				<label for="train-type"></label>
+				<input type="text" id="trainType" name="name" placeholder="Train Type:" required><br>
+		
+				<button class="form-button" id="add-new-train-button" onclick="addNewTrain()">Add a new train </button>
+
+			</form>
+		</div>
+
+	</dialog>
 </body>

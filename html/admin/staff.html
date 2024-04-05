@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/script.js"></script>
+    
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+	<script src="/js/script.js"></script>
 	<script src="/js/auth.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/staff.css">
+	<link rel="stylesheet" href="/css/table.css">
+	<link rel="stylesheet" href="/css/buttons.css">
+	<link rel="stylesheet" href="/css/validations.css">
 	<script src="/js/staff.js"></script>
 	
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
@@ -18,72 +31,75 @@
 	<nav class="navbar" >
 		<script>createNavBar("admin")</script>
 	</nav>
-            </nav>
+	<div class="container">
+        <div class="sidebar active">
+            <script>createSideBar("admin")</script>
 
-			<main class="table">
+        </div>
 
-				<div class="staff-container">
-            		<div class="staff-left">
+		<div class="service-view">
+			<div class="service-container">
+				<!-- <div class="locate"> -->
+					<!-- <ul class="breadcrumbs">
+						<li><a href="admin.html">Admin Dashboard</a></li>
+						<li class="divider">/</li>
+						<li><a href="admin.html" class="active">Staff Management</a></li>
+					</ul> -->
+					<button class="add-new-btn" onclick="popupAddPage('.staff-add_edit-modal')" >Add New</button>
+				<!-- </div> -->
+				<div class="table-container">
 
-						<section class="table_header">
-							<h1>Staff Details</h1>
-							<div class="input-group">
-                                <input type="search" placeholder="Search Staff...">
-                                <img src="/Images/filter.png" class="filter" alt="" onclick="toggleFilterBox()">
-								<img src="/Images/search.png" alt="">
-								
-                            </div>
-						</section>
-								
-						<div class="filter-box" id="filter-box">
-							<div class="wrapper" id="from">
-								<div class="select-btn">
-									<span>Railway Station</span>
-									<i class="uil uil-angle-down"></i>
-								</div>
-								<div class="content">
-									<div class="search">
-										<i class="uil uil-search"></i>
-										<input spellcheck="false" type="text" placeholder="Search">
-									</div>
-									<ul class="options">
-										<!-- Add options dynamically, if needed -->
-									</ul>
-								</div>
-							</div>
-						
-							<!-- Filter by Role Dropdown -->
-							<div class="wrapper" id="roles">
-								<div class="select-btn">
-									<span>Role</span>
-									<i class="uil uil-angle-down"></i>
-								</div>
-								<div class="content">
-									<div class="search">
-										<i class="uil uil-search"></i>
-										<input spellcheck="false" type="text" placeholder="Search">
-									</div>
-									<ul class="role-options">
-										<!-- Add options dynamically, if needed -->
-									</ul>
-								</div>
-							</div>
-						
-							<button onclick="applyFilters()">Filter</button>
+					<section class="table_header">
+						<h1>Staff Details</h1>
+						<div class="input-group">
+							<input type="search" placeholder="Search Staff...">
+							<img src="/Images/filter.png" class="filter" alt="" onclick="toggleFilterBox()">
+							<img src="/Images/search.png" alt="">
+							
 						</div>
-						
-
-
-
-						<section class="table_body">
+					</section>
 							
-							<table>
-							
+					<div class="filter-box" id="filter-box">
+						<div class="wrapper" id="from">
+							<div class="select-btn">
+								<span>Railway Station</span>
+								<i class="uil uil-angle-down"></i>
+							</div>
+							<div class="content">
+								<div class="search">
+									<i class="uil uil-search"></i>
+									<input spellcheck="false" type="text" placeholder="Search">
+								</div>
+								<ul class="options">
+								</ul>
+							</div>
+						</div>
+					
+						<div class="wrapper" id="roles">
+							<div class="select-btn">
+								<span>Role</span>
+								<i class="uil uil-angle-down"></i>
+							</div>
+							<div class="content">
+								<div class="search">
+									<i class="uil uil-search"></i>
+									<input spellcheck="false" type="text" placeholder="Search">
+								</div>
+								<ul class="role-options">
+								</ul>
+							</div>
+						</div>
+					
+						<button onclick="applyFilters()">Filter</button>
+					</div>
+					
+					<div class="table_body">
+						<table>
 							<thead>
 								<tr>
 									<th>Staff ID</th>
 									<th>Name</th>
-									<th>Username</th>
+									<!-- <th>Username</th> -->
 									<th>Email</th>
 									<th>Telephone Number</th>
 									<th>Role</th>
@@ -92,54 +108,59 @@
 								</tr>
 							</thead>
 							<tbody id="staff_table"></tbody>
-						</section>
 						</table>
 					</div>
-				
-					<div class="staff-right">
-						<div class="staff-form">
-							
-							<form onsubmit="return false" id="staff_form">
-								<h2 class="add-staff-heading" id="add-staff-heading">Add a new staff member</h2>
-								<label for="staffId"></label>
-								<input type="text" id="staffId" placeholder="Staff ID:" name="staffId" onchange="updateUsername()" required><br>
-
-								<label for="fName"></label>
-								<input type="text" id="fName" name="name" placeholder="First Name:" onchange="updateUsername()"required><br>
-						
-								<label for="lName"></label>
-								<input type="text" id="lName" name="name" placeholder="Last Name:" onchange="updateUsername()"required><br>
-
-								<label for="role"></label>
-								<!-- <select id="role" name="role"  onchange="updateUsername()" required> -->
-									<select id="role" name="role" onchange="updateUsername()" required>	
-									<option value="" disabled selected>Role</option>
-									<!-- <option value="SM">Station Master</option>
-									<option value="TCO">Ticket Checking Officer</option> -->
-								</select><br>
-						
-								<label for="railwayStation"></label>
-								<input type="text" id="railwayStation" placeholder="Railway Station:" name="railwayStation" required><br>
-						
-								
-									<label id="email-label"></label>
-									<input type="email" spellcheck="false" id="email-field" onkeyup="validateEmail()" name="email" placeholder="Email" required><br />
-									<span id="email-error"></span> 
-								 
-								 
-								<label for="telephone"></label>
-								<input type="tel" name="telephone" id="phone-field" onkeyup="validatePhone()"placeholder="Telephone Number:" required><br>
-								<span id="phone-error"></span>
-								
-								<label for="username"></label>
-								<input type="text" id="username" name="username" placeholder="Username:"><br>
-						
-								<button type="submit" class="form-button" id="add-staff-button" onclick="addStaff()">Add Staff Member</button>
-							</form>
-						</div>
-					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+	<dialog class="staff-add_edit-modal">
+		<div class="adding-form">
+			<section class="table_header">
+				<h1 id="add-staff-heading">Add a New Staff Memeber</h1>
+			</section>
+			<form onsubmit="return false" id="staff_form">
+				<!-- <h2 class="adding-form-heading" id="add-staff-heading">Add a new staff member</h2> -->
+				<label for="staffId"></label>
+				<input type="text" id="staffId" placeholder="Staff ID:" name="staffId" onchange="updateUsername()" required><br>
+
+				<label for="fName"></label>
+				<input type="text" id="fName" name="name" placeholder="First Name:" onchange="updateUsername()"required><br>
+		
+				<label for="lName"></label>
+				<input type="text" id="lName" name="name" placeholder="Last Name:" onchange="updateUsername()"required><br>
+
+				<label for="role"></label>
+				<!-- <select id="role" name="role"  onchange="updateUsername()" required> -->
+					<select id="role" name="role" onchange="updateUsername()" required>	
+					<option value="" disabled selected>Role</option>
+					<!-- <option value="SM">Station Master</option>
+					<option value="TCO">Ticket Checking Officer</option> -->
+				</select><br>
+		
+				<label for="railwayStation"></label>
+				<input type="text" id="railwayStation" placeholder="Railway Station:" name="railwayStation" required><br>
+		
 				
-			</main>	
-			<script src="/js/stations.js"></script>
+					<label id="email-label"></label>
+					<input type="email" spellcheck="false" id="email-field" onkeyup="validateEmail()" name="email" placeholder="Email" required><br />
+					<span id="email-error"></span> 
+					
+					
+				<label for="telephone"></label>
+				<input type="tel" name="telephone" id="phone-field" onkeyup="validatePhone()"placeholder="Telephone Number:" required><br>
+				<span id="phone-error"></span>
+				
+				<label for="username"></label>
+				<input type="text" id="username" name="username" placeholder="Username:"><br>
+		
+				<div class="dialog-buttons">
+					<button class="form-button form-clear-btn" onclick="document.getElementById('staff_form').reset()">Clear</button>
+					<button type="submit" class="form-button" id="add-staff-button" onclick="addStaff()">Add Staff Member</button>
+				</div>
+			</form>
+		</div>
+	</dialog>
+				
+	<script src="/js/stations.js"></script>
 </body>

@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/addStation.css">
+    <link rel="stylesheet" href="/css/table.css">
+	<link rel="stylesheet" href="/css/buttons.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
     <script src="/js/script.js"></script>
     <script src="/js/addStation.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
@@ -21,75 +32,86 @@
     <nav class="navbar">
         <script>createNavBar("admin")</script>
     </nav>
+    <div class="container">
+        <div class="sidebar active">
+            <script>createSideBar("admin")</script>
 
-    <main class="addStation">
-        <div class="addStation-container">
-            <div class="table-left">
-                <section class="table_header">
-                    <h1>Station Details</h1>
-                    <div class="input-group">
-                        <input type="search" placeholder="Search Trains...">
-                        <img src="/Images/search.png" alt="">
-                    </div>
-                </section>
+        </div>
 
-                <section class="table_body">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Station ID</th>
-                                <th>Station Name</th>
-                                <th>Address</th>
-                                <th>Line</th>
-                                <th>Contact Number</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="train_table">
-                            <!-- Populate table body as needed -->
-                        </tbody>
-                    </table>
-                </section>
-            </div>
+        <div class="service-view">
+            <div class="service-container">
+                <button class="add-new-btn" onclick="popupAddPage('.station-add-modal')" >Add New</button>
 
-            <div class="table-right">
-                <div class="station-form">
-                    <form onsubmit="return false">
-                        <h2 class="add-station-heading" id="add-new-station-header">Add a new Station </h2>
-
-                        
-                        <select name="line" id="selectLine" placeholder="Line" required>
-                            <option value="Select Line" data-image="/Images/search.png">Select Line  </option>
-                            <option value="Line1">Line 1</option>
-                            <option value="Line2">Line 2</option>
-                            <option value="Line3">Line 3</option>
-                            <option value="addNewLine">Add new line</option>
-                        </select>
-                        <br>
-
-                        <label for="stationId"></label>
-                        <input type="text" id="trainId" placeholder="Station ID:" name="trainId" required><br>
-
-                        <label for="station-name"></label>
-                        <input type="text" id="stationName" name="stationName" placeholder="Station Name" required><br>
-
-                        <label for="Address"></label>
-                        <input type="text" id="address" placeholder="Address" name="address" required><br>
-
-                        <label for="contactNumber"></label>
-                        <input type="text" id="contactNumber" name="contactNumber" placeholder="Contact Number" required>
-
-                        <div id="option1Elements" class="hidden">
-                            <label for="addNewLine"></label>
-                            <input type="text" id="addNewLine" name="addNewLine" placeholder="Add New Line">
+                <div class="table-container">
+                    <section class="table_header">
+                        <h1>Station Details</h1>
+                        <div class="input-group">
+                            <input type="search" placeholder="Search Trains...">
+                            <img src="/Images/search.png" alt="">
                         </div>
+                    </section>
 
-                        <button class="form-button" id="add-new-station-button">Add a new station </button>
-                    </form>
+                    <section class="table_body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Station ID</th>
+                                    <th>Station Name</th>
+                                    <th>Address</th>
+                                    <th>Line</th>
+                                    <th>Contact Number</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="train_table">
+                                <!-- Populate table body as needed -->
+                            </tbody>
+                        </table>
+                    </section>
                 </div>
+
+                
             </div>
         </div>
-    </main>
+    </div>
+    <dialog class="station-add-modal">
+        <div class="station-form">
+            <form onsubmit="return false">
+                <h2 class="add-station-heading" id="add-new-station-header">Add a new Station </h2>
+
+                
+                <select name="line" id="selectLine" placeholder="Line" required>
+                    <option value="Select Line" data-image="/Images/search.png">Select Line  </option>
+                    <option value="Line1">Line 1</option>
+                    <option value="Line2">Line 2</option>
+                    <option value="Line3">Line 3</option>
+                    <option value="addNewLine">Add new line</option>
+                </select>
+                <br>
+
+                <label for="stationId"></label>
+                <input type="text" id="trainId" placeholder="Station ID:" name="trainId" required><br>
+
+                <label for="station-name"></label>
+                <input type="text" id="stationName" name="stationName" placeholder="Station Name" required><br>
+
+                <label for="Address"></label>
+                <input type="text" id="address" placeholder="Address" name="address" required><br>
+
+                <label for="contactNumber"></label>
+                <input type="text" id="contactNumber" name="contactNumber" placeholder="Contact Number" required>
+
+                <div id="option1Elements" class="hidden">
+                    <label for="addNewLine"></label>
+                    <input type="text" id="addNewLine" name="addNewLine" placeholder="Add New Line">
+                </div>
+
+                <button class="form-button" id="add-new-station-button">Add a new station </button>
+            </form>
+        </div>
+    </dialog>
+
+
 
     <script>
         var selectLine = document.getElementById("selectLine");
