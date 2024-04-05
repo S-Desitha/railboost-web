@@ -1,63 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
     <script src="/js/script.js"></script>
-    <script src="/js/auth.js"></script>
+    <script src="/js/auth.js"></script> 
+    <link rel="stylesheet" href="/css/table.css">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
+    <!-- import table.css -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    
     <title>Station Master-dashboard</title>
 </head>
-<body> 
-     
-            <nav class="navbar" >
-                <script>createNavBar("sm")</script>
-            </nav>
-            
-            <div class="admin-header">
-                <h1>Station Master Dashboard</h1>
-                
+<body style="background-color:#f6f8fa"> 
+    
+      
+    <nav class="navbar" >
+        <script>createNavBar("sm")</script>
+    </nav>
 
-            <div class="box-container">
-        
-                <a href="/html/sm/sm-live.html" class="box">
-                    <i class="fa-solid fa-map-location-dot"></i> 
-                    <h2>Train Live Update</h2>
-                    <p>Update Arrival and departure times</p>
-                </a>
-        
-                <a href="/html/sm/seasonvalid.html" class="box">
-                    <i class="fa-solid fa-clipboard-list"></i>
-                    <h2>Season Applications</h2>
-                    <p>Validate Season Ticketr Applications here</p>
-                </a>
-        
-                <a href="/html/sm/announcements.html" class="box">
-                    <i class="fa-solid fa-bullhorn"></i>
-                    <h2>Announcements</h2>
-                    <p>Make announcements here</p>
-                </a>
-        
-                <a href="/html/sm/emcontact.html" class="box">
-                    <i class="fa-solid fa-address-book"></i>
-                    <h2>Emergency </h2>
-                    <p>Get Emergency contact numbers here.</p>
-                </a>
+    <div class="container">
+        <div class="sidebar active">
+            <script>createSideBar("sm")</script>
 
-                <a href="/html/sm/approve-parcels.html" class="box">
-                    <i class="fa-solid fa-box"></i>
-                    <h2>Parcel Approval</h2>
-                    <p>Approve parcels here</p>
-                </a>
-
-                <a href="/html/sm/staff.html" class="box">
-                    <i class="fa-solid fa-user-gear"></i>
-                    <h2>Staff Duties</h2>
-                    <p>Assign Duties to staff here</p>
-                </a>
-     
+        </div>
+       
+        <main>
+            <div class="heading">
+                <h1 class="title">Station Master Dashboard -  </h1>
+                <h1 class="station"><b> Dehiwala</b></h1>
             </div>
+            
+            <ul class="breadcrumbs">
+                <li><a href="admin.html">Home</a></li>
+                <li class="divider">/</li>
+                <li><a href="admin.html" class="active">Station Master Dashboard</a></li>
+            </ul> 
+            <div class="info-data">
+                <div class="card sm">
+                    <div class="head">
+                        <div>
+                            <!-- <h2 class="count"data-target="490">0</h2> -->
+                            <p>Train Live Update</p>
+                            <!-- <small class="text-muted">Last 24 hours</small> -->
+                        </div>
+                        
+                        <!-- icon for live update -->
+                        <i class="fas fa-train"> </i>
+
+                        
+                    </div>
+                    
+                </div>
+                <div class="card sm">
+                    <div class="head">
+                        <div>
+                            <!-- <h2 class="count"data-target="392">0</h2> -->
+                            <p>Parcel Approval </p>
+                            <!-- <small class="text-muted">Last 24 hours</small> -->
+                        </div>
+                        <i class="fas fa-box"> </i>
+                        <!-- <i class="fas fa-train"> </i> -->
+                        
+                    </div>
+                    
+                </div>
+                <div class="card sm">
+                    <div class="head">
+                        <div>
+                            <!-- <h2 class="count"data-target="21340">0</h2> -->
+                            <p>Season Application Validation </p>
+                            <!-- <small class="text-muted">Last 24 hours</small> -->
+                        </div>
+                        <!-- application icon -->
+                        <i class="fas fa-file-alt"> </i>
+
+
+                    </div>
+                    
+                    
+                </div>
+
+                <div class="card sm">
+                    <div class="head">
+                        <div>
+                            <!-- <h2 class="count revenue"data-target="653400">$</h2> -->
+                            <p class="revenue">Announcements </p>
+                            <!-- <small class="text-muted">Last 24 hours</small> -->
+                        </div>
+                        <i class="fas fa-bullhorn"> </i>
+                        <!-- <i class="fas fa-money-bill-wave"> </i> -->
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="table-data">
+                <div class="recent-trains">
+                    <div class="head">
+                        <h3>Inbound Train Updates</h3>
+                        <a href="sm/sm-live.html">View All</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Train No</th>
+                                <th>Estimated Arrival Time</th>
+                                <th>Estimated Departure Time</th>
+                                <th>Actions</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>12345</td>
+                                <td>12:00</td>
+                                <td>12:30</td>
+                                <td><a href="sm/sm-live.html" class="update">Update Time</a></td>
+                            </tr>
+                            <tr>
+                                <td>12345</td>
+                                <td>12:00</td>
+                                <td>12:30</td>
+                                <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
+                            </tr>
+                            <tr>
+                                <td>12345</td>
+                                <td>12:00</td>
+                                <td>12:30</td>
+                                <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
+                            </tr>
+                            <tr>
+                                <td>12345</td>
+                                <td>12:00</td>
+                                <td>12:30</td>
+                                <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
+                            </tr>
+                            <tr>
+                                <td>12345</td>
+                                <td>12:00</td>
+                                <td>12:30</td>
+                                <td><a href="sm/sm-live.html" class="update">Update Time</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="parcels">
+                    <div class="head">
+                        <h3>    Incoming Parcels Today</h3>
+                        <!-- <a href="sm/approve-parcels.html">View All</a> -->
+                    </div>
+                    <ul class="parcel-list">
+                        <li>
+                            <div class="parcel-train">
+                                <h4>Train No: 8513 </h4>
+                            </div>
+                            <div class="No-of-parcels">
+                                <h4>21 Parcels</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="parcel-train">
+                                <h4>Train No: 1077 </h4>
+                            </div>
+                            <div class="No-of-parcels">
+                                <h4>10 Parcels</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="parcel-train">
+                                <h4>Train No: 8355 </h4>
+                            </div>
+                            <div class="No-of-parcels">
+                                <h4>10 Parcels</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="parcel-train">
+                                <h4>Train No: 8321 </h4>
+                            </div>
+                            <div class="No-of-parcels">
+                                <h4>15 Parcels</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="parcel-train">
+                                <h4>Train No: 12345 </h4>
+                            </div>
+                            <div class="No-of-parcels">
+                                <h4>10 Parcels</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="parcel-train">
+                                <h4>Train No: 12345 </h4>
+                            </div>
+                            <div class="No-of-parcels">
+                                <h4>10 Parcels</h4>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <!-- <div class="charts">
+            <canvas class="chart" id="chart"></canvas>
+            <canvas class="donut-chart"></canvas>
+            </div>  -->
+            
+   
+        </main>
+    </div>
 </body>
 </html>

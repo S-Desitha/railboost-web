@@ -10,8 +10,19 @@
     <!-- <link rel="stylesheet" href="/css/passSch.css"> -->
 	<link rel="stylesheet" href="/css/table.css">
 	<link rel="stylesheet" href="/css/buttons.css">
+
 	<link rel="stylesheet" href="/css/datepicker.css">
 	<link rel="stylesheet" href="/css/admin_schedule.css">
+
+
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
     <script src="/js/script.js"></script>
 	<script src="/js/schedule.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
@@ -21,41 +32,46 @@
 	<nav class="navbar" >
 		<script>createNavBar("admin")</script>
 	</nav>
+	<div class="container">
+        <div class="sidebar active">
+            <script>createSideBar("admin")</script>
 
-	<div class="service-view">
-		<div class="service-container train-table">
-			<button type="submit" class="add-new-btn" > <a href="/html/admin/trainSch.html">Add New</a></button>
-			
-			<div class="table-container">
-				<section class="table_header">
-					<h1>Train Schedule Details</h1>
-				</section>
+        </div>
 
-				<section class="table_body">
-
-					<table>
-					<thead>
-						<tr>
-							<th>Schedule ID</th>
-							<th>Train ID</th>
-							<th>Start Station</th>
-							<th>End Station</th>
-							<th>Speed</th>
-							<!-- <th>Stopping Stations</th> -->
-							<th>Actions</th>
-
-						</tr>
-					</thead>
-					
-					<tbody id="schedule_table"></tbody>
-
-					</table>
-				</section>
+		<div class="service-view">
+			<div class="service-container train-table">
+				<button type="submit" class="add-new-btn" > <a href="/html/admin/trainSch.html">Add New</a></button>
 				
+				<div class="table-container">
+					<section class="table_header">
+						<h1>Train Schedule Details</h1>
+					</section>
+
+					<section class="table_body">
+
+						<table>
+						<thead>
+							<tr>
+								<th>Schedule ID</th>
+								<th>Train ID</th>
+								<th>Start Station</th>
+								<th>End Station</th>
+								<th>Speed</th>
+								<!-- <th>Stopping Stations</th> -->
+								<th>Actions</th>
+
+							</tr>
+						</thead>
+						
+						<tbody id="schedule_table"></tbody>
+
+						</table>
+					</section>
+					
+				</div>
 			</div>
 		</div>
-	</div>
-		
+	</div>	
 	<dialog class="stations-data-modal">
 		<section class="table_header">
 			<h1>Train stopping stations</h1>

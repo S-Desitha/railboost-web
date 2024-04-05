@@ -1,4 +1,6 @@
 // const url = "http://localhost:8080/railboost_backend_war_exploded/trainSchedule";
+
+
 const scheduleEndpoint = "trainSchedule";
 
 document.addEventListener("DOMContentLoaded", async function() {
