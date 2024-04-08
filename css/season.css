@@ -8,12 +8,15 @@
     /* margin-left: 36%; */
     align-items: center;
     /* gap: 22%; */
-    width: 49%;
+    width: 90%;
     height: 80vh; 
   margin-top: 30px;/*
     margin-left: 10%;
     margin-right: 10%; */
   
+  }
+  .info , .table_body{
+    display: none; 
   }
   .train-form{
     margin-top: 30px;
@@ -40,6 +43,11 @@
   justify-content:center;
   /* margin-right: 10%; */
   }
+  .train-right {
+    display: none;
+    }
+
+  
 
   .Buy-button{
     background: #eeeded;
@@ -157,7 +165,7 @@
   .input-control.success input {
     border-color: #09c372;
   }
-  #error, #station-error{
+  #error, #station-error, #date-error{
     text-align: left;
     top: 100%;
     left: 2px;
