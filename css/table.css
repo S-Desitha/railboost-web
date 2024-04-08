@@ -27,7 +27,7 @@
     background-color: #fffb;
     margin: 5px auto;
     border-radius: .6rem;
-    overflow: auto;
+    /* overflow: auto; */
     /* overflow: overlay; */
 }
 
@@ -48,6 +48,7 @@
 
 
 table {
+    border-radius: 5.6rem;
     border-collapse: collapse;
     padding: 1.5rem;
     margin: 0.5rem 2rem 1rem;
@@ -55,8 +56,9 @@ table {
 }
 
 table, th, td {
+    
     border-collapse: collapse;
-    padding: 1rem;
+    /* padding: 1rem; */
     text-align: left;
     margin: auto;
     max-width: 100%;
@@ -75,7 +77,8 @@ th, td {
 }
 
 thead th {
-    /* position: sticky; */
+    position: sticky;
+    z-index: 100;
     top: 0;
     left: 0;
     background-color: #d5d1defe;
@@ -87,10 +90,10 @@ tbody tr:nth-child(even) {
     background-color: #0000000b;
 }
 
-tbody tr {
+/* tbody tr {
     --delay: .1s;
     transition: .5s ease-in-out var(--delay), background-color 0s;
-}
+} */
 
 tbody tr.hide {
     opacity: 0;
@@ -186,4 +189,14 @@ thead th.active,tbody td.active {
     height: 20px;
     margin-right: 10px;
     cursor: pointer;
+  }
+
+
+  .row-valid {
+    /* border: 2px solid green; */
+    border: none;
+  }
+  
+  .row-invalid {
+    border: 2px solid red;
   }

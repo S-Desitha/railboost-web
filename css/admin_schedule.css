@@ -1,0 +1,4 @@
+.schedule-dates-view {
+    display: flex;
+    flex-direction: row;
+}

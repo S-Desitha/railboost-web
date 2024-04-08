@@ -1,4 +1,3 @@
-console.log("Hello from station.js");
 const url = "http://localhost:8080/railboost_backend_war_exploded/stations";
 const endpoint = "stations";
 
@@ -44,13 +43,6 @@ function updateName(selectedLi) {
 
     wrapper.setAttribute("stationCode", selectedStation.stationCode);
     wrapper.setAttribute("stationName", selectedStation.stationName);
-
-
-    wrapper.setAttribute("stationCode", stationCode);
-    wrapper.setAttribute("stationName", stationName);
-    console.log(stationName);
-    console.log(stationCode);
-
 }
 
 function addStation(selectedStation,  wrapper) {
@@ -101,7 +93,6 @@ function createList() {
 
 
 async function getStations() {
-    console.log("Hellow");
     try {
         stations = await customFetch(endpoint, {}, false);
         createList();

@@ -4,186 +4,104 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
     <script src="/js/script.js"></script>
     <script src="/js/auth.js"></script> 
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
     <title>Admin-dashboard</title>
 </head>
-<body> 
+<body style="background-color:#f6f8fa"> 
     
-        
-
-
-
-    
-     
+      
     <nav class="navbar" >
         <script>createNavBar("admin")</script>
     </nav>
 
     <div class="container">
         <div class="sidebar active">
-            <div class="menu-btn">
-                <i class="ph-bold ph-caret-left"></i>
-            </div>
-        
-            <div class ="head">
-                <div class="user-img">
-                    <img src="/Images/users/dewmitha.jpg" alt="" />
-                </div>
-                <div class="user-details">
-                    <p class="title">Admin</p>
-                    <p class="name">Dewmitha Mahiti</p>
-                </div>
-            </div>
-            <div class="Sidenav">
-                <div class="menu">
-                    <p class="title">Main</p>
-                    <ul>
-                        <li class="">
-                            <a href="admin.html">
-                                <i class="icon ph-bold ph-house-simple"></i>
-                                <span class="text">Dashboard  </span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="#">
-                                <i class="fas fa-cogs"></i>
-                                <span class="text">Admin Services </span>
-                                <i class="arrow ph-bold ph-caret-down"></i>
-                                
-                            </a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="staff.html">
-                                        <i class="fas fa-user-cog"></i>
-                                        <span class="text">Staff Management</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="train.html">
-                                        <i class="fas fa-train"></i>
-                                        <span class="text">Train Management</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="schedule.html">
-                                        <i class="fas fa-calendar-alt"></i>
-                                        <span class="text">Train Schedule Management</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="addStations.html">
-                                        <i class="fas fa-regular fa-building"></i>
-                                        <span class="text">Railway Station Management</span>
-                                    </a>
-                                </li>
-                                
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-route"></i>
-                                        <span class="text">Train Line Management</span>
-                                    </a>
-                                </li> 
-                                
-                                <li>
-                                    <a href="ticketRate.html">
-                                        <i class="fas fa-table"></i>
-                                        <span class="text">Rate Table Management</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="">
-                            <a href="#">
-                                <i class="fas fa-chart-bar"></i>
-                                <span class="text">Reports </span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="#">
-                                <i class="fa-solid fa-bullhorn"></i>
-                                <span class="text">Announcements </span>
-                            </a>
-                        </li>
-                    </ul>
-                    </ul>
-                </div> 
-            </div>
-            <div class="menu">
-                    <p class="title">Account</p>
-                    <ul>
-                        <li class="">
-                            <a href="#">
-                                <i class="fas fa-user-cog"></i>
-                                <span class="text">Profile </span>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a href="#">
-                                <i class="fas fa-sign-out-alt"></i>
-                                <span class="text">Logout </span>
-                            </a>
-                        </li>
-                    </ul>
-            </div>
+            <script>createSideBar("admin")</script>
 
         </div>
-        <div class="right-content">
+       
+        <main>
+            <h1 class="title">Admin Dashboard</h1>
+            <ul class="breadcrumbs">
+                <li><a href="admin.html">Home</a></li>
+                <li class="divider">/</li>
+                <li><a href="admin.html" class="active">Admin Dashboard</a></li>
+            </ul> 
+            <div class="info-data">
+                <div class="card">
+                    <div class="head">
+                        <div>
+                            <h2 class="count"data-target="490">0</h2>
+                            <p>Site Visits </p>
+                            <small class="text-muted">Last 24 hours</small>
+                        </div>
+                        <i class="fas fa-eye"> </i>
+                        
+                    </div>
+                    
+                </div>
+                <div class="card">
+                    <div class="head">
+                        <div>
+                            <h2 class="count"data-target="392">0</h2>
+                            <p>Trains in Operation </p>
+                            <small class="text-muted">Last 24 hours</small>
+                        </div>
+                        <i class="fas fa-train"> </i>
+                        
+                    </div>
+                    
+                </div>
+                <div class="card">
+                    <div class="head">
+                        <div>
+                            <h2 class="count"data-target="21340">0</h2>
+                            <p>Total Tickets Issued </p>
+                            <small class="text-muted">Last 24 hours</small>
+                        </div>
+                        <i class="fa-solid fa-ticket"></i>
+                        <!-- different ticket icon -->
 
-            <div class="admin-header">
-                <h1>Admin Dashboard</h1>
-            </div>    
+                    </div>
+                    
+                    
+                </div>
 
-            <div class="box-container">
-                <a href="staff.html" class="box">
-                    <i class="fa-solid fa-user-gear"></i>
-                    <h2>Staff Management</h2>
-                    <p>Add remove or edit staff details here</p>
-                </a>
-        
-                <a href="train.html" class="box">
-                    <i class="fa-solid fa-train"></i>
-                    <h2>Train Management</h2>
-                    <p>Add or remove trains here</p>
-                </a>
-        
-                <a href="schedule.html" class="box">
-                    <i class="fa-solid fa-calendar-days"></i>
-                    <h2>Train Schedule Management</h2>
-                    <p>Add remove or edit train schedules here</p>
-                </a>
-        
-                <a href="announcements.html" class="box">
-                    <i class="fa-solid fa-bullhorn"></i>
-                    <h2>Announcements</h2>
-                    <p>Make special announcements here</p>
-                </a>
-        
-                <a href="ticketRate.html" class="box">
-                    <i class="fa-solid fa-table-list"></i>
-                    <h2>Rate Table Management</h2>
-                    <p>Update ticket rates here.</p>
-                </a>
-
-                <a href="addStations.html" class="box">
-                    <i class="fa-solid fa-route"></i>
-                    <h2>Station and Line Management</h2>
-                    <p>Add remove or edit trains and lines here</p>
-                </a>
-     
+                <div class="card">
+                    <div class="head">
+                        <div>
+                            <h2 class="count revenue"data-target="653400">$</h2>
+                            <p class="revenue">Total Revenue </p>
+                            <small class="text-muted">Last 24 hours</small>
+                        </div>
+                        <i class="fas fa-money-bill-wave"> </i>
+                        
+                    </div>
+                    
+                </div>
             </div>
-        </div>
+            
+            <div class="charts">
+            <canvas class="chart" id="chart"></canvas>
+            <canvas class="donut-chart"></canvas>
+            </div> 
+            
+   
+        </main>
     </div>
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-      integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-      crossorigin="anonymous"
-    ></script>
 </body>
 </html>

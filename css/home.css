@@ -2,6 +2,7 @@
 @import url('https://fonts.cdnfonts.com/css/cocogoose');
 body{
     /* overflow: hidden; */
+    background: #ffff;
 }
 .header-logo {
     position: fixed;
@@ -44,6 +45,16 @@ label.logo-text{
     height: 80px;
     width: 100%;
     
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--theme-color);
+  justify-content: center;
+  height: 80px;
+  width: 100%;
+  z-index: 1000; 
 }
 nav ul{
     float: right;
