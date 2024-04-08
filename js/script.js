@@ -224,3 +224,56 @@ function toggleDropdown() {
     }
   }
   
+  async function customFetch1(endpoint, options, sendJWT) {
+    let url = "http://localhost:8080/railboost_backend_war_exploded/";
+
+    if (endpoint !== "login" && sendJWT !== false) {
+        options.headers = {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`
+        };
+    }
+
+    url = url + endpoint;
+
+    try {
+        let resp = await fetch(url, options);
+        if (resp.ok) {
+            if (resp.headers.get('content-type').includes('image')) {
+                return await resp.blob();
+            }else if(resp.headers.get('content-type').includes('application/pdf')){
+                return await resp.blob();
+            } else {
+                try {
+                    return await resp.json();
+                } catch (e) {
+                    return {status: resp.status};
+                }
+            }
+        } else {
+            console.log("Invalid response");
+            console.log(resp);
+            if (resp.status === 401) {
+                let msg = await resp.text();
+                if (msg === "expired") {
+                    window.alert("Session expired. Please login again.");
+                    window.location.href = "/html/signin.html";
+                    return Promise.reject("login-redirected");
+                }
+            } else if (resp.status === 400) {
+                let data = await resp.json();
+                let error_msg = data.detailMessage;
+                if (error_msg === "signup-expired") {
+                    window.alert("Your signup session has expired. Please contact the administrator and sign up again.");
+                }
+                window.location.href = "/index.html";
+                return Promise.reject(data.detailMessage);
+            }
+            return {
+                isSuccessful: false,
+                status: resp.status
+            };
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}

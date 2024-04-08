@@ -3,6 +3,7 @@
 const seasonEndpoint = "season";
 const ticketPriceEndpoint = "ticketPrice";
 let endDate;
+let VSDate = new Date();
 
 document.addEventListener("DOMContentLoaded", async function () {
   let params = {
@@ -13,6 +14,16 @@ document.addEventListener("DOMContentLoaded", async function () {
   
     try {
       let data = await customFetch(urlQuery, {credentials: "include"});
+      if (data.length === 0) {
+        document.querySelector(".info").style.display = "block";
+        document.querySelector(".table_body").style.display = "none";
+        document.querySelector(".train-right").style.display = "block";
+        return;
+      }else{
+        document.querySelector(".info").style.display = "none";
+        document.querySelector(".table_body").style.display = "block";
+        document.querySelector(".train-right").style.display = "block";
+      }
       
       data.forEach(season => {
 
@@ -31,12 +42,19 @@ document.addEventListener("DOMContentLoaded", async function () {
         row.insertCell(5).innerHTML = season.trainClass;
         row.insertCell(6).innerHTML = season.totalPrice;
         row.insertCell(7).innerHTML = season.status;
+        if (season.status === "Rejected") {
+          row.style.border = "3px solid rgba(255, 0, 0, 0.5)";
+        }
         if (season.status == "Approved"){
           row.insertCell(8).append(BuyButton);
         }else{
           row.insertCell(8).innerHTML = "-";
         }
+        if(season.status != "Rejected" && new Date(season.endDate) > VSDate){
+            VSDate = new Date(season.endDate);
+        }
       });
+      console.log(VSDate);
   
     }
     catch(error) {
@@ -65,6 +83,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (error == "login-redirected")
             localStorage.setItem("last_url", window.location.pathname);
     });
+  console.log(season);
+  alert("Check your email for Season Ticket.");
+  window.location.reload();
 }
   
 
@@ -234,4 +255,18 @@ function updateEndDate() {
         
         
     }
+}
+
+function validateSDate() {
+  let startDate = new Date(document.getElementById('Start-date').value);
+  let dateError=document.getElementById("date-error");
+
+  if (startDate <= VSDate) {
+    dateError.innerHTML = "You can not have two season applications/tickets for same date.";
+    return false;
+  }
+
+  dateError.innerHTML = "";
+  return true;
+
 }

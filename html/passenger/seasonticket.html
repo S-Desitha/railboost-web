@@ -19,23 +19,36 @@
     </nav>
 
 	<div class="train-container">
-        <!-- <div class="train-left">
+        <div class="train-left" style="display: none;">
             <div class="Image">
-            <h1 class="add-train-heading" id="add_update-schedule-header">Season Ticket </h1>
-            <img src="../../Images/ETicket.png" alt="Train Image" class="train-image ">
-            </div>
-		</div> -->
+            <!-- <h1 class="add-train-heading" id="add_update-schedule-header">Season Ticket </h1> -->
+            <!-- <img src="../../Images/ETicket.png" alt="Train Image" class="train-image "> -->
+           </div>
+		</div>
 
         <div class="table">
-            <section class="table_header">
-                <h1>Season Ticket</h1>
-                <!-- <button class="add-new-btn" onclick="popupAddPage('.Season-modal')" >Add New</button> -->
-                <!-- <div class="input-group">
-                    <input type="search" placeholder="Search Season Ticket...">
-                    <img src="/Images/search.png" alt="">
-                </div> -->
-            </section>
+            <section class="table_header"></section>
+                
+                <div class="info">
+                    <h1>Season Ticket</h1></n></br>
+                <p style="font-weight:550; font-size: large; margin-left: 60px;">
+                    Follow the instructions below for purchasing a season ticket.</p>
+
+                    <p style="margin-left: 90px;">   <br> - Obtain the application form from your workplace, university, or railway station. <br>
+                        <br> - Fill out the online application form provided.<br>
+                        <br> - Upload a photo or PDF of the completed application form.<br>
+                        <br> - Ensure that the size of the uploaded file (photo or PDF) is less than 5MB.<br>
+                        <br> - Submit the application form.<br>
+                        <br> - The station master at your designated start station will review the application.<br>
+                        <br> - Depending on its validity, the application will be either approved or rejected and notification will be sent to inform you of the outcome.<br>
+                        <br> - If your application is approved, proceed to make the payment for the season ticket.<br>
+                        <br> - Upon successful payment, you will receive the season ticket via email.<br>
+                        <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+                
+                </div>
+            
             <section class="table_body">
+                <h1>Season Ticket</h1></n></br>
                 <table>
                     <thead>
                         <tr>
@@ -60,7 +73,7 @@
 		    <div class="train-form">
 							
 				<form onsubmit="return false">
-					<!-- <h2 class="add-train-heading" id="add_update-schedule-header">Buy Season Ticket </h2> -->
+					<!-- <h2 class="add-train-heading" id="add_update-schedule-header"></n></br>Buy Season Ticket </h2> -->
                     <label for="start-station"></label>
                   
 					            <div class="wrapper" font-size="1px" id="from">
@@ -103,7 +116,8 @@
                     </select>
 								
                     <label for="Start-date"></label>
-                    <input type="date" id="Start-date" name="Start-date" placeholder=" Start Date: " onchange="getPrice(); updateEndDate();" max="" required><br />   
+                    <input type="date" id="Start-date" name="Start-date" placeholder=" Start Date: " onchange="getPrice(); updateEndDate(); validateSDate();" max="" required><br /> 
+                    <span id="date-error"></span>  
                                 
                     <script>
                         var currentDate = new Date();
