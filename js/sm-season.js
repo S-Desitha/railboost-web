@@ -186,7 +186,7 @@ function viewSeason() {
                             console.error("Dialog element not found");
                             return;
                         }
-                        dialogElement.innerHTML = ""; // Clear previous content
+                        dialogElement.innerHTML = ""; 
                         const imgElement = document.createElement("img");
                         imgElement.src = imageUrl;
                         
