@@ -16,8 +16,20 @@ dialog::backdrop {
     background-color: rgba(41, 40, 40, 0.533);
     opacity: 0.45;
 }
+#ilog{
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
 #plog {
     overflow: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
   .service-view {
