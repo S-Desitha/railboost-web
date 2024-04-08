@@ -394,6 +394,13 @@ function createSideBar(context) {
 }
 
 
+function signout() {
+    localStorage.clear();
+    window.location.href = "/index.html";
+}
+
+
+
 function popupAddPage(classname) {
     let dialog = document.querySelector(classname);
 
