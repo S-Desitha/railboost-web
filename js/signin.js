@@ -29,11 +29,12 @@ async function processLoginResp(response) {
     console.log(response)
     if (response["isSuccessful"]==true){
         localStorage.setItem("access_token", response.jwt);
+        localStorage.setItem("userId", response["userId"]);
         localStorage.setItem("name", response["name"]);
         localStorage.setItem("loggedIn", response["isSuccessful"]);
         const role = response["role"].roleId;
         const username = response["username"];
-
+        
         if (role==1){
             window.location.replace("/html/admin/admin.html");
         }

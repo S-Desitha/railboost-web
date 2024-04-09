@@ -349,8 +349,8 @@ function createNavBar(context) {
                 document.getElementById("nav-services").innerHTML = "SM Services";
             }
             else if (context == "passenger") {
-                document.getElementById("admin-nav").remove();
-                document.getElementById("sm-nav").remove();
+                // document.getElementById("admin-nav").remove();
+                // document.getElementById("sm-nav").remove();
             }
         });
 }
