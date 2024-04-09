@@ -318,7 +318,7 @@ function createNavBar(context) {
                 
             }
             else{
-                localStorage.setItem("loggedIn", null);
+                localStorage.setItem("loggedIn", false);
                 console.log("Logged in status set to null" + localStorage.getItem("loggedIn"));
 
             }
@@ -387,17 +387,36 @@ function createSideBar(context) {
                 document.getElementById("sidebar-services-text-span").innerHTML = "Station Master Services";
             }
             else if (context == "passenger") {
-                document.getElementById("admin-nav").remove();
-                document.getElementById("sm-nav").remove();
+                document.getElementById("sm-sidebar").remove();
+                document.getElementById("admin-sidebar").remove();
+                document.getElementById("title").innerHTML = "Passenger";
+                
+                document.getElementById("sidebar-services-text-span").innerHTML = "Services";
             }
         });
 }
 
 
 function signout() {
-    localStorage.clear();
-    window.location.href = "/index.html";
+    Swal.fire({
+        title: 'Are you sure you want to log out?',
+        text: 'You will be redirected to the login page.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, log out'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            localStorage.clear();
+            // localStorage.setItem("loggedIn", false);
+            var currentPort = window.location.port; 
+            window.location.replace("/html/signin.html");; // Construct the URL
+        }
+    });
 }
+
+
 
 
 
