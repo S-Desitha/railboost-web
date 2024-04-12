@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 
-  function ByuSeason(){
+  function BuySeason(){
     season = JSON.parse(this.getAttribute("season"));
     console.log(season);
     season["status"] = "Paid";
@@ -161,7 +161,6 @@ function getPrice(){
   }
 }
 
-
 async function getTicketPrices(Class,Duration) {
   let price;
   var PriceOfOne=document.getElementById("price-of-one");
@@ -216,7 +215,7 @@ async function getTicketPrices(Class,Duration) {
     }else if(type == "Railway Servant"){
       price = Math.ceil(((price/100)*3)/100)*100;
     }
-    document.getElementById("total-price").value = price;
+    document.getElementById("total-price").value = "Total Price of the Season: " + price;
   }
   catch (error) {
     console.log("Error fetching ticket price: " + error);

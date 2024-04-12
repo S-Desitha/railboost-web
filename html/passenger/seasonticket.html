@@ -37,15 +37,14 @@
     </nav>
 
 	<div class="train-container">
-        <div class="sidebar active">
-            <script>createSideBar("passenger")</script>
-        </div>
-        <div class="train-left" style="display: none;">
-            <div class="Image">
-            <!-- <h1 class="add-train-heading" id="add_update-schedule-header">Season Ticket </h1> -->
-            <!-- <img src="../../Images/ETicket.png" alt="Train Image" class="train-image "> -->
-           </div>
-		</div>
+        
+        <!-- <div style="position: relative;">
+            
+            <div class="sidebar active" style="position: absolute; top: 0; left: 0;">
+                <script>createSideBar("passenger")</script>
+            </div>
+        </div> -->
+        
 
         <div class="table">
             <section class="table_header"></section>
@@ -175,7 +174,9 @@
 
                     <div class="price-of-1"> <span id="price-of-one"></span></div>
                     <label for="total-price"></label>
-					<input disabled value="" type="Double" id="total-price" name="total-price" placeholder=" Total Price:" ><br>
+                    <input disabled value="" type="Double" id="total-price" name="total-price" placeholder=" Total Price:"><br>
+                    <span id="total-price-text"></span>
+
 
                     <label for="img" id="Application">
                         <span class="app">Application</span>

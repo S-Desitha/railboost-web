@@ -212,24 +212,29 @@ document.addEventListener('DOMContentLoaded', function () {
         }
           
         });
+
+        
 });
 
 
 
 
-$(document).ready(function() {
+
+$(window).on("pageshow", function() {
+    // Your jQuery code here
     $(".menu > ul > li").click(function(e) {
-    // remove actiive from alreay active li
-    $(this).siblings().removeClass("active");
-    // add active to clicked li
+        // remove actiive from alreay active li
+        $(this).siblings().removeClass("active");
+        // add active to clicked li
         $(this).toggleClass("active");
-    // if has sub menu open it
-    $(this).find("ul").slideToggle();
-    // close all other sub menus if open
-    $(this).siblings().find("ul").slideUp();
-    // remove active click of submenus
-    $(this).siblings().find("ul").find("li").removeClass("active");
-  });
+        // if has sub menu open it
+        $(this).find("ul").slideToggle();
+        // close all other sub menus if open
+        $(this).siblings().find("ul").slideUp();
+        // remove active click of submenus
+        $(this).siblings().find("ul").find("li").removeClass("active");
+    });
+    
     $(".menu-btn").click(function() {
         $(".sidebar").toggleClass("active");
     }); 
@@ -531,6 +536,16 @@ function toggleNotify() {
 //     }
 //   }
   
+document.addEventListener('DOMContentLoaded', function() {
+    const totalPriceInput = document.getElementById('total-price');
+    const totalPriceText = document.getElementById('total-price-text');
+
+    totalPriceInput.addEventListener('input', function() {
+        const totalPrice = totalPriceInput.value;
+        totalPriceText.textContent = 'Total Price of the Season: ' + totalPrice;
+    });
+});
+
 
   async function customFetch1(endpoint, options, sendJWT) {
     let url = "http://localhost:8080/railboost_backend_war_exploded/";
