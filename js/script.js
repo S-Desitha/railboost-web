@@ -371,7 +371,7 @@ function createSideBar(context) {
          document.getElementById("name").innerHTML=Name;
             if (context == "admin") {
                 document.getElementById("sm-sidebar").remove();
-                // document.getElementById("passenger-sidebar").remove();
+                document.getElementById("passenger-sidebar").remove();
 
                 // document.getElementById("nav-about").remove();
                 // document.getElementById("nav-contact").remove();
@@ -380,13 +380,8 @@ function createSideBar(context) {
             else if (context == "sm") {
                 // console.log("CONTEXT IDENTIFIED AS SM");
                 document.getElementById("admin-sidebar").remove();
-                // document.getElementById("passenger-sidebar").remove();
-                console.log("LINE 300");
-                // document.getElementById("nav-about").remove();
-                // document.getElementById("nav-contact").remove();
-                // change p class="title" to Station Master
-                // console.log(document.getElementById("name").innerHTML);
-                // console.log(document.getElementById("title").innerHTML);
+                document.getElementById("passenger-sidebar").remove();
+                
                 document.getElementById("title").innerHTML = "Station Master";
                 
                 document.getElementById("sidebar-services-text-span").innerHTML = "Station Master Services";

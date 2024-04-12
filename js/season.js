@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         BuyButton.classList.add("Buy-button");
         BuyButton.innerHTML = "<i class='fa-solid fa-coins' title='Pay' style='color:#0047AB'><span>  Pay </span></i>";
         BuyButton.setAttribute("season", JSON.stringify(season));
-        BuyButton.onclick = ByuSeason;
+        BuyButton.onclick = BuySeason;
         
         let row = document.getElementById("season_table").insertRow(0);
         row.insertCell(0).innerHTML = season.id;
@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           row.style.border = "3px solid rgba(255, 0, 0, 0.5)";
         }
         if (season.status == "Approved"){
+          row.style.border = "3px solid rgba(3,148,135,1.00)";
           row.insertCell(8).append(BuyButton);
         }else{
           row.insertCell(8).innerHTML = "-";
@@ -63,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 
-  function ByuSeason(){
+  function BuySeason(){
     season = JSON.parse(this.getAttribute("season"));
     console.log(season);
     season["status"] = "Paid";
@@ -142,8 +143,14 @@ function appplySeasonTicket() {
       });
 
     console.log(season);
-    alert("Season application is recieved.");
-    location.reload();
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: 'Season application is received.',
+      onClose: () => {
+          location.reload();
+      }
+  });
 
   }
 
@@ -216,7 +223,9 @@ async function getTicketPrices(Class,Duration) {
     }else if(type == "Railway Servant"){
       price = Math.ceil(((price/100)*3)/100)*100;
     }
+    
     document.getElementById("total-price").value = price;
+   
   }
   catch (error) {
     console.log("Error fetching ticket price: " + error);
