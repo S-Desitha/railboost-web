@@ -524,12 +524,12 @@ function toggleNotify() {
     
   }
   
-  window.onclick = function(event){
-    if (!event.target.matches('.dropbtn')){
-        var dropdown = document.getElementById("drop");
-        dropdown.style.display = "none";
-    }
-  }
+//   window.onclick = function(event){
+//     if (!event.target.matches('.dropbtn')){
+//         var dropdown = document.getElementById("drop");
+//         // dropdown.style.display = "none";
+//     }
+//   }
   
 
   async function customFetch1(endpoint, options, sendJWT) {

@@ -52,3 +52,8 @@ async function processLoginResp(response) {
         document.getElementById("signin-form").reset();
     }
 }
+// function called "guest" to clear the local storage and riderect to home.html
+function guest() {
+    localStorage.clear();
+    window.location.replace("/html/passenger/home.html");
+}
