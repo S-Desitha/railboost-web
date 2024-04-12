@@ -520,8 +520,10 @@ function validateStrPassword() {
     return true;
 }
 function toggleNotify() {
+    console.log("Toggle notification bar");
     var dropdown = document.getElementById("notification-bar");
     if (dropdown.style.display === "none") {
+        console.log("Displaying notification bar");
       dropdown.style.display = "block";
     } else {
       dropdown.style.display = "none";
@@ -532,7 +534,7 @@ function toggleNotify() {
 //   window.onclick = function(event){
 //     if (!event.target.matches('.dropbtn')){
 //         var dropdown = document.getElementById("drop");
-//         // dropdown.style.display = "none";
+//         dropdown.style.display = "none";
 //     }
 //   }
   

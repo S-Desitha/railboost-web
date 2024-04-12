@@ -14,7 +14,7 @@ function fetchNotifications() {
         return;
     }
 
-    console.log('Fetching notifications...');
+    console.log('Fetching notifications line 17...');
     // Make an AJAX request to fetch notifications for the signed-in user
     axios.get('http://localhost:8080/railboost_backend_war_exploded/notifications', {
         params: {
@@ -24,6 +24,7 @@ function fetchNotifications() {
     })
     .then(response => {
         console.log('Notifications fetched:', response.data);
+        console.log('Displaying notifications with axios...');
         // Clear existing notifications
         const notificationBar = document.getElementById('notification-bar');
         notificationBar.innerHTML = '';

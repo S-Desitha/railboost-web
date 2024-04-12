@@ -10,6 +10,7 @@
       right: 20px;
       display: none;
       height: 500px;
+      /* z-index: 1000; */
   }
   .notification-bar::after {
     content: "";

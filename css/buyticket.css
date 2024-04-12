@@ -2,7 +2,7 @@
 .train-container {
   display: flex;
   /* align-items: center; */
-  gap: 11%;
+  gap: 9%;
   width: 49%;
   height: 80vh;
 margin-top: 4px;
@@ -15,7 +15,7 @@ margin-top: 4px;
   height: 660px;
   margin-top: 70px;
  
-  /* margin-left: 3px; */
+  margin-left: 30px;
   /* border-radius: 8px;  */
 }
 
