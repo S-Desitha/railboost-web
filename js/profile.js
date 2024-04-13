@@ -232,6 +232,51 @@ async function checkPW() {
     }
     
 }
+function changePW(){
+    user = {};
+    let pw = document.getElementById("password").value;
+    let cpw = document.getElementById("cpassword").value;  
+
+    if(pw==cpw){
+    user["userId"] = localStorage.getItem("userId");
+    user["password"] = pw;
+
+    console.log(user);
+
+    const body = user;
+    const params = {
+        headers: {
+        "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify(body),
+        method: "POST",
+        credentials: "include"
+    };
+    let qparams = {
+        view: 1
+    };
+    let queryString = Object.keys(qparams).map(key => key + '=' + encodeURIComponent(qparams[key])).join('&');
+    let urlQuery = `${endpoint2}?${queryString}`;
+
+    console.log(params);
+    customFetch(urlQuery, params)
+    
+        CancelChgPw();
+        Swal.fire({
+            title: "Password is changed.",
+            // text: "The rate has been successfully updated!",
+            icon: "success",
+        }).then((result) => {
+        })
+    .then(() => {
+    })
+        .catch ((error) => {
+        if (error=="login-redirected")
+            localStorage.setItem("last_url", window.location.pathname);
+        });
+    
+    }
+}
 
 function CancelChgPw(){
     let dialog = document.getElementById("Chng-modal");
