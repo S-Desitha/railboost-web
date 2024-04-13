@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+	<script src="/js/script.js"></script>
+	<script src="/js/auth.js"></script>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/table.css">
+	<link rel="stylesheet" href="/css/buttons.css">
+	<link rel="stylesheet" href="/css/validations.css">
+    <link rel="stylesheet" href="/css/announcement.css">
+	<script src="/js/viewAnnouncement.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <title>User profile</title>
+</head>
+<body> 
+	<nav class="navbar" >
+		<script>createNavBar("passenger")</script>
+	</nav>
+	<div class="container">
+        <div class="sidebar active">
+            <script>createSideBar("passenger")</script>
+
+        </div>
+
+		<div class="service-view">
+			<div class="card-1">
+                <div class="head">
+                    <div class="title">
+                        <button class="edit-btn" style="justify-content: end;" onclick="" >Edit</button>
+                        <h3 class="title1">My account</h3>
+                      
+                    </div>
+                </div>
+                <div class="card-1-body">
+                    <div class="title">
+                        
+                        <h4 class="title2">User Information</h3>
+                    </div>
+                    <div class="info">
+                        <div class="info1">
+                            <div class="Uname-con">
+                                <label class="Uname" for="Uname">Username</label>
+                                <input type="text" class="Username" value="kalindu" disabled>
+                            </div>
+                            <div class="Email-con">
+                                <label class="Email-l" for="Email-l">E-mail</label>
+                                <input type="text" class="email" value="kalindu@gmail.com" disabled>
+                            </div>
+                        </div>
+                        <div class="info2">
+                            <div class="Name-con">
+                                <label class="Name" for="Name">Name</label>
+                                <input type="text" class="Fname" value="Kalindu Sankalpa" disabled>
+                            </div>
+                            <div class="Gender-con">
+                                <label class="Gen-l" for="Gen-l">Gender</label>
+                                <input type="text" class="gen" value="Male" disabled>
+                            </div>
+                        </div>
+                        <div class="info3">
+                            <div class="Name-con">
+                                <label class="Name" for="Name">Date Of Birth</label>
+                                <input type="text" class="Fname" value="06/08/2001" disabled>
+                            </div>
+                            <div class="Gender-con">
+                                <label class="Gen-l" for="Gen-l">Telephone No</label>
+                                <input type="text" class="gen" value="07777777777" disabled>
+                            </div>
+                        </div>
+                        
+                        <div class="two-button">
+                            <div class="chn-pw-and-delete-acc">
+                                <button class="change-pw" onclick="" >Change Password</button>
+                                <button class="delete-acc" onclick="" >Delete Account</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-2">
+                <h1>Kalindu Sankalpa</h1>
+                <p>passenger</p>
+                <img id="profile-p" src="../Images/users/profile-user.png" alt="">
+                <label for="dp" class="dp">Change Profile Picture</label>
+                <input class="input-dp" id="dp" type="file" accept="Image/jpeg, Image/jpg, Image/png">
+                <script>
+                    let pp = document.getElementById("profile-p");
+                    let ip = document.getElementById("dp");
+
+                    ip.onchange = function(){
+                        pp.src = URL.createObjectURL(ip.files[0]);
+                    }
+                </script>
+            </div>
+		</div>
+	</div>
+	
+</body>
+</html>
