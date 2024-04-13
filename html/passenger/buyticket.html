@@ -3,25 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+     <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+
+    <!-- icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
     <script src="/js/script.js"></script>
     <script src="/js/auth.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/buyticket.css">  
 	<script src="/js/buyticket.js" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    
     <title>Buy E-Ticket</title>
 </head>
 <body> 
     <nav class="navbar" >
         <script>createNavBar("passenger")</script>
     </nav>
+    
 
 	<div class="train-container">
-        <div class="train-left">
-            <img src="../../Images/t33.png" alt="Train Image" class="train-image ">
-		</div>
-				
+         
+        <div style="position: relative;">
+            <div class="train-left">
+                <img src="../../Images/t33.png" alt="Train Image" class="train-image">
+            </div>
+            <div class="sidebar active" style="position: absolute; top: 0; left: 0;">
+                <script>createSideBar("passenger")</script>
+            </div>
+        </div>
+        
 		<div class="train-right">
 		    <div class="train-form">
 							

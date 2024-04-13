@@ -212,24 +212,29 @@ document.addEventListener('DOMContentLoaded', function () {
         }
           
         });
+
+        
 });
 
 
 
 
-$(document).ready(function() {
+
+$(window).on("pageshow", function() {
+    // Your jQuery code here
     $(".menu > ul > li").click(function(e) {
-    // remove actiive from alreay active li
-    $(this).siblings().removeClass("active");
-    // add active to clicked li
+        // remove actiive from alreay active li
+        $(this).siblings().removeClass("active");
+        // add active to clicked li
         $(this).toggleClass("active");
-    // if has sub menu open it
-    $(this).find("ul").slideToggle();
-    // close all other sub menus if open
-    $(this).siblings().find("ul").slideUp();
-    // remove active click of submenus
-    $(this).siblings().find("ul").find("li").removeClass("active");
-  });
+        // if has sub menu open it
+        $(this).find("ul").slideToggle();
+        // close all other sub menus if open
+        $(this).siblings().find("ul").slideUp();
+        // remove active click of submenus
+        $(this).siblings().find("ul").find("li").removeClass("active");
+    });
+    
     $(".menu-btn").click(function() {
         $(".sidebar").toggleClass("active");
     }); 
@@ -318,7 +323,7 @@ function createNavBar(context) {
                 
             }
             else{
-                localStorage.setItem("loggedIn", null);
+                localStorage.setItem("loggedIn", false);
                 console.log("Logged in status set to null" + localStorage.getItem("loggedIn"));
 
             }
@@ -349,8 +354,8 @@ function createNavBar(context) {
                 document.getElementById("nav-services").innerHTML = "SM Services";
             }
             else if (context == "passenger") {
-                document.getElementById("admin-nav").remove();
-                document.getElementById("sm-nav").remove();
+                // document.getElementById("admin-nav").remove();
+                // document.getElementById("sm-nav").remove();
             }
         });
 }
@@ -366,7 +371,7 @@ function createSideBar(context) {
          document.getElementById("name").innerHTML=Name;
             if (context == "admin") {
                 document.getElementById("sm-sidebar").remove();
-                // document.getElementById("passenger-sidebar").remove();
+                document.getElementById("passenger-sidebar").remove();
 
                 // document.getElementById("nav-about").remove();
                 // document.getElementById("nav-contact").remove();
@@ -375,29 +380,73 @@ function createSideBar(context) {
             else if (context == "sm") {
                 // console.log("CONTEXT IDENTIFIED AS SM");
                 document.getElementById("admin-sidebar").remove();
-                // document.getElementById("passenger-sidebar").remove();
-                console.log("LINE 300");
-                // document.getElementById("nav-about").remove();
-                // document.getElementById("nav-contact").remove();
-                // change p class="title" to Station Master
-                // console.log(document.getElementById("name").innerHTML);
-                // console.log(document.getElementById("title").innerHTML);
+                document.getElementById("passenger-sidebar").remove();
+                
                 document.getElementById("title").innerHTML = "Station Master";
                 
                 document.getElementById("sidebar-services-text-span").innerHTML = "Station Master Services";
             }
             else if (context == "passenger") {
-                document.getElementById("admin-nav").remove();
-                document.getElementById("sm-nav").remove();
+                document.getElementById("sm-sidebar").remove();
+                document.getElementById("admin-sidebar").remove();
+                document.getElementById("title").innerHTML = "Passenger";
+                
+                document.getElementById("sidebar-services-text-span").innerHTML = "Services";
             }
         });
 }
 
 
 function signout() {
-    localStorage.clear();
-    window.location.href = "/index.html";
+    Swal.fire({
+        title: 'Are you sure you want to log out?',
+        text: 'You will be redirected to the login page.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, log out'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            localStorage.clear();
+            // localStorage.setItem("loggedIn", false);
+            var currentPort = window.location.port; 
+            window.location.replace("/html/signin.html");; // Construct the URL
+        }
+    });
 }
+function togglePW() {
+    const passwordField = document.getElementById("password");
+    const eyeIcon = document.getElementById("password-toggle");
+
+    
+
+    // Toggle password visibility
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+    } else {
+        passwordField.type = 'password';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+    }
+}
+
+function toggleEye() {
+    const passwordField = document.getElementById("password");
+    const eyeIcon = document.getElementById("password-toggle");
+
+    // Toggle eye icon visibility based on the input field value
+    if (passwordField.value.length > 0) {
+        eyeIcon.style.display = 'inline-block';
+    } else {
+        eyeIcon.style.display = 'none';
+    }
+}
+
+
+
 
 
 
@@ -496,8 +545,10 @@ function validateStrPassword() {
     return true;
 }
 function toggleNotify() {
+    console.log("Toggle notification bar");
     var dropdown = document.getElementById("notification-bar");
     if (dropdown.style.display === "none") {
+        console.log("Displaying notification bar");
       dropdown.style.display = "block";
     } else {
       dropdown.style.display = "none";
@@ -505,13 +556,23 @@ function toggleNotify() {
     
   }
   
-  window.onclick = function(event){
-    if (!event.target.matches('.dropbtn')){
-        var dropdown = document.getElementById("drop");
-        dropdown.style.display = "none";
-    }
-  }
+//   window.onclick = function(event){
+//     if (!event.target.matches('.dropbtn')){
+//         var dropdown = document.getElementById("drop");
+//         dropdown.style.display = "none";
+//     }
+//   }
   
+document.addEventListener('DOMContentLoaded', function() {
+    const totalPriceInput = document.getElementById('total-price');
+    const totalPriceText = document.getElementById('total-price-text');
+
+    totalPriceInput.addEventListener('input', function() {
+        const totalPrice = totalPriceInput.value;
+        totalPriceText.textContent = 'Total Price of the Season: ' + totalPrice;
+    });
+});
+
 
   async function customFetch1(endpoint, options, sendJWT) {
     let url = "http://localhost:8080/railboost_backend_war_exploded/";

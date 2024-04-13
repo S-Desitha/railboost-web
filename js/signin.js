@@ -29,11 +29,12 @@ async function processLoginResp(response) {
     console.log(response)
     if (response["isSuccessful"]==true){
         localStorage.setItem("access_token", response.jwt);
-        localStorage.setItem("name", response["username"]);
+        localStorage.setItem("userId", response["userId"]);
+        localStorage.setItem("name", response["name"]);
         localStorage.setItem("loggedIn", response["isSuccessful"]);
         const role = response["role"].roleId;
         const username = response["username"];
-
+        
         if (role==1){
             window.location.replace("/html/admin/admin.html");
         }
@@ -50,4 +51,9 @@ async function processLoginResp(response) {
         window.alert("Username or password incorrect. Please try again!");
         document.getElementById("signin-form").reset();
     }
+}
+// function called "guest" to clear the local storage and riderect to home.html
+function guest() {
+    localStorage.clear();
+    window.location.replace("/html/passenger/home.html");
 }
