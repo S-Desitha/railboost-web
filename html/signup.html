@@ -8,9 +8,15 @@
      <!-- sweet alert -->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
-     
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
     <link rel="stylesheet" href="/css/style.css" />
+    <!-- <link rel="stylesheet" href="/css/signin.css"> -->
     <link rel="stylesheet" href="/css/signup.css">
+    <!-- signin.css import -->
+    
+    
 
     <script src="/js/script.js"></script>
     <script src="/js/signup.js"></script>
@@ -72,17 +78,26 @@
                     <input type="text" id="station" name="station" placeholder="Station:" style="display: none;">
                   </div>
                     <div class="input-group">
-                    <!-- <label for="password"></label> -->
-                    <input class="input-field" type="password" id="password" name="password"onkeyup="validateStrPassword()" placeholder="Password" required /><br />  
-                    <span id="spassword-error"></span> 
-                  </div>
+                  <!-- <label for="password"></label> -->
+                  <div class="password-wrapper">
+                    <input class="password" type="password" id="password" name="password" placeholder="Password" oninput="toggleEye()" />
+                    <i class="toggle-password fas fa-eye-slash" id="password-toggle" style="display: none;" onclick="togglePW()"></i>
+                </div>
+                
+                  <br />  
+                  <span id="spassword-error"></span> 
+              </div>
 
-                    <div class="input-group">
-
-                    <!-- <label for="confirm-password"></label> -->
-                    <input class="input-field" type="password" id="cpassword" name="confirm-password" onkeyup="validatePassword()" placeholder="Confirm Password" required /><br /> 
-                    <span id="password-error"></span> 
+              <div class="input-group">
+                  <!-- <label for="confirm-password"></label> -->
+                  <div class="password-wrapper">
+                      <input class="input-field password" type="password" id="cpassword" name="confirm-password" onkeyup="validatePassword()" placeholder="Confirm Password" required />
+                      <i class="toggle-password fas fa-eye-slash" onclick="togglePW('cpassword')"></i>
                   </div>
+                  <br /> 
+                  <span id="password-error"></span> 
+              </div>
+
                   <button type="submit" class="signup-button form-button" onclick="signUp()">Signup</button>
                 </form>
             </div>

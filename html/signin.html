@@ -8,7 +8,7 @@
      <!-- sweet alert -->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
-     
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <script src="/js/script.js"></script>
     <script src="/js/signin.js"></script>
@@ -33,9 +33,10 @@
                 <input class="username" type="text" id="username" name="username" placeholder="Username" /><br />
                 <label for="password"></label>
                 <div class="password-wrapper">
-                    <input class="password" type="password" id="password" name="password" placeholder="Password" />
-                    <i class="toggle-password fas fa-eye-slash" onclick="togglePW()"></i>
+                  <input class="password" type="password" id="password" name="password" placeholder="Password" oninput="toggleEye()" />
+                  <i class="toggle-password fas fa-eye-slash" id="password-toggle" style="display: none;" onclick="togglePW()"></i>
                 </div>
+
                 <input type="submit" class="login-button form-button" value="Login" onclick="login(this)"/><br>
             </form>
         </div>

@@ -415,21 +415,37 @@ function signout() {
         }
     });
 }
-
 function togglePW() {
-    var passwordField = document.getElementById("password");
-    var eyeIcon = document.querySelector(".toggle-password");
+    const passwordField = document.getElementById("password");
+    const eyeIcon = document.getElementById("password-toggle");
 
-    if (passwordField.type === "password") {
-        passwordField.type = "text";
-        eyeIcon.classList.remove("fa-eye-slash");
-        eyeIcon.classList.add("fa-eye");
+    
+
+    // Toggle password visibility
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
     } else {
-        passwordField.type = "password";
-        eyeIcon.classList.remove("fa-eye");
-        eyeIcon.classList.add("fa-eye-slash");
+        passwordField.type = 'password';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
     }
 }
+
+function toggleEye() {
+    const passwordField = document.getElementById("password");
+    const eyeIcon = document.getElementById("password-toggle");
+
+    // Toggle eye icon visibility based on the input field value
+    if (passwordField.value.length > 0) {
+        eyeIcon.style.display = 'inline-block';
+    } else {
+        eyeIcon.style.display = 'none';
+    }
+}
+
+
 
 
 
