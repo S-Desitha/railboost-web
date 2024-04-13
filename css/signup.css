@@ -98,7 +98,7 @@ input::placeholder {
 #dob{
     color: #a9a9a9; 
     }
-
+  
 #dob::before {
     content: "Date of Birth:  "; 
     color: #a9a9a9;

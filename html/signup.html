@@ -53,7 +53,7 @@
                     <input type="text" id="username" name="username" placeholder="Username" required><br /> 
 
                     <!-- <label for="dob"></label> -->
-                    <input type="text" id="dob" name="dob" placeholder="Date of Birth:" onmouseenter="(this.type='date')" onmouseleave="(this.type='text')" required><br />   
+                    <input type="text" id="dob" name="dob" placeholder="Date of Birth:" onclick="(this.type='date')"  required><br />   
 
                     <!-- <label for="gender"></label> -->
                     <select id="gender" name="gender">
@@ -80,21 +80,25 @@
                     <div class="input-group">
                   <!-- <label for="password"></label> -->
                   <div class="password-wrapper">
-                    <input class="password" type="password" id="password" name="password" placeholder="Password" oninput="toggleEye()" />
+                    <input class="password" type="password" id="password" name="password" placeholder="Password" onkeyup="validateStrPassword()" oninput="toggleEye()" />
                     <i class="toggle-password fas fa-eye-slash" id="password-toggle" style="display: none;" onclick="togglePW()"></i>
                 </div>
                 
-                  <br />  
+                  <!-- <br />   -->
                   <span id="spassword-error"></span> 
               </div>
 
               <div class="input-group">
                   <!-- <label for="confirm-password"></label> -->
                   <div class="password-wrapper">
-                      <input class="input-field password" type="password" id="cpassword" name="confirm-password" onkeyup="validatePassword()" placeholder="Confirm Password" required />
-                      <i class="toggle-password fas fa-eye-slash" onclick="togglePW('cpassword')"></i>
+                      <input class="input-field password" type="password" id="cpassword" name="confirm-password" onkeyup="validatePassword()" oninput="toggleEye()" placeholder="Confirm Password" required />
+                      <i class="toggle-password fas fa-eye-slash" style="display: none;" onclick="togglePW('cpassword')"></i>
                   </div>
-                  <br /> 
+
+                  
+
+
+                  <!-- <br />  -->
                   <span id="password-error"></span> 
               </div>
 
