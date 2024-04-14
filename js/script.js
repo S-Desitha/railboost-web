@@ -444,6 +444,13 @@ function toggleEye() {
         eyeIcon.style.display = 'none';
     }
 }
+function closeDialog() {
+    const openDialogs = document.querySelectorAll('dialog[open]');
+    openDialogs.forEach(dialog => {
+        dialog.close();
+    });
+}
+
 
 
 
@@ -669,4 +676,16 @@ const charts=new Chart(chart,{
         
     }
 })
+
+// Get the width of the dialog modal
+const dialogWidth = document.querySelector('.dialog-modal').offsetWidth;
+
+// Get the width of the table header
+const headerWidth = document.querySelector('.table_header').offsetWidth;
+
+// Calculate the left margin to center the header
+const leftMargin = (dialogWidth - headerWidth) / 2;
+
+// Apply the calculated left margin to the table header
+document.querySelector('.table_header').style.marginLeft = leftMargin + 'px';
 

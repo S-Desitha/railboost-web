@@ -15,11 +15,12 @@
 	<script src="/js/script.js"></script>
 	<script src="/js/auth.js"></script>
     <link rel="stylesheet" href="/css/home.css">
-    <link rel="stylesheet" href="/css/style.css">
+    
     <link rel="stylesheet" href="/css/ticketRate.css">
     <link rel="stylesheet" href="/css/table.css">
 	<link rel="stylesheet" href="/css/buttons.css">
 	<link rel="stylesheet" href="/css/validations.css">
+	<link rel="stylesheet" href="/css/style.css">
 
 	<script src="/js/ticketRate.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
@@ -42,7 +43,7 @@
 
 		<div class="service-view">
 			<div class="service-container">
-				<button class="add-new-btn" onclick="popupAddPage('.rates-add_edit-modal')" >Add New</button>
+				<button class="add-new-btn" onclick="popupAddPage('.dialog-modal')" >Add New</button>
 				
 				<div class="table-container">
 					<section class="table_header">
@@ -72,11 +73,14 @@
 			</div>
 		</div>	
 	</div>
-	<dialog class="rates-add_edit-modal">
+	<dialog class="dialog-modal" style="width: 400px;">
 		<div class="rate-form">
 			
 			<form onsubmit="return false">
-				<h2 class="add-price-heading" id="add-new-price-header">Add A New Price Rate </h2>
+				<button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
+				<div class="table_header">
+				<h1 class="add-price-heading" id="add-new-price-header">Add A New Price Rate </h1>
+				</div>
 				<div class="wrapper" font-size="1px" id="from">
 					<div class="select-btn">
 						<span>Start Station:</span> 
@@ -84,8 +88,9 @@
 					</div>
 					<div class="content">
 						<div class="search">
-							<i class="fas fa-search"></i>
+							
 							<input spellcheck="false" type="text" placeholder="Search">
+							<i class="fas fa-search"></i>
 						</div>
 						<ul onclick="validateStation();" class="options"></ul>
 					</div>
@@ -116,7 +121,7 @@
 				<label for="3class-price"></label>
 				<input type="Double" id="3class-price" name="3class-pricee" placeholder="3rd Class Price:" required><br>
 		
-				<button class="form-button" id="add-new-price-rate" onclick="addNewRate()">Add A New Price Rate </button>
+				<button class="form-button" id="add-new-price-rate" onclick="addNewRate()" style="width: 100%;">Add A New Price Rate </button>
 
 			</form>
 		</div>

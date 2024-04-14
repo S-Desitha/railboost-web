@@ -656,3 +656,142 @@ h3{
 }
 
 
+.dialog-modal {
+  position: fixed;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; 
+  background-color: #ffffff; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+  padding: 20px; /* Padding */
+  overflow: hidden;
+}
+
+
+.dialog-modal .adding-form {
+  align-self: center;
+  padding: 0px 10px 10px 10px;
+}
+
+.dialog-modal .table_header {
+  text-align: center; /* Center align the header */
+  margin-bottom: 20px;
+  display: ruby-text /* Add space below the header */
+}
+
+
+.dialog-modal h1 {
+  font-size: 24px; /* Adjust heading font size if needed */
+  margin: 0;
+  align-self: center; /* Remove default margin */
+}
+
+.dialog-modal form {
+  /* Add additional styling for the form if needed */
+}
+
+.dialog-modal input[type="text"],
+.dialog-modal input[type="double"],
+.dialog-modal .select-btn,
+.dialog-modal input[type="email"],
+.dialog-modal input[type="tel"],
+.dialog-modal select {
+  width: 100%;
+  padding: 10px; /* Set input padding */
+  margin-bottom: 10px; /* Add space between inputs */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; 
+  box-sizing: border-box;
+   /* Ensure padding and border are included in width */
+}
+
+.dialog-modal .dialog-buttons {
+  text-align: center; /* Center align the buttons */
+}
+
+.dialog-modal .form-button {
+  padding: 10px 20px; 
+  background-color: var(--theme-color); 
+  color: #fff; 
+  border: none; 
+  border-radius: 4px;
+  cursor: pointer; 
+  /* width: 100%; */
+}
+
+.dialog-modal .form-clear-btn {
+  background-color: #ccc; 
+  color: #fff;
+}
+/* hover */
+.dialog-modal .form-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.dialog-modal .form-clear-btn:hover {
+  background-color: #999;
+  
+}
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  margin-right: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #888;
+}
+
+.close-button:hover {
+  color: #333;
+}
+
+.datepicker-modal {
+  position: fixed;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px; 
+  background-color: #ffffff; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+  padding: 20px; /* Padding */
+  overflow: hidden;
+}
+
+
+.datepicker-modal .adding-form {
+  align-self: center;
+  padding: 10px;
+}
+
+.datepicker-modal .table_header {
+  text-align: center; /* Center align the header */
+  margin-bottom: 20px;
+  display: flow /* Add space below the header */
+}
+.days-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;;
+  margin-top: 20px;
+}
+.swal-overlay {
+  z-index: 99999 !important;
+}
+.custom-swal-container {
+  z-index: 99999 !important;
+}

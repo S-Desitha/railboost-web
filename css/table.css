@@ -37,14 +37,14 @@
 }
 
 
-#role {
+/* #role {
 	height: 2.5rem;
 	border: none;
 	border-bottom: 1px solid #a9a9a9;
 	color: #6e6b6b;
 	padding: 7px 0;
 	margin: 20px 0;
-}
+} */
 
 
 table {
@@ -157,7 +157,7 @@ thead th.active,tbody td.active {
     width: 45%;
     height: 100%;
     background-color: #fff5;
-    padding: 0 .8rem;
+    padding: .8rem;
     border-radius: 2rem;
     box-shadow: 0 .005rem .1rem #0002;
   

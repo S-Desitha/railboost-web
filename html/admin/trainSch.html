@@ -52,7 +52,7 @@
 				<p>Train Type: Express</p>
 			</div> -->
 
-			<button class="add-new-btn" onclick="popupAddPage('.add-station-modal')" >Add New</button>
+			<button class="add-new-btn" onclick="popupAddPage('.dialog-modal')" >Add New</button>
 
 
 			<section class="table_header">
@@ -81,10 +81,10 @@
 		<div class="train-right">
 			<form class="train-form" id="schedule-form" onsubmit="return false">
 					<label for="Schedule-ID"></label>
-					<input type="text" id="sch-id" placeholder="Schedule ID" required>
+					<input type="text" id="sch-id" placeholder="Schedule ID" required><br>
 
 					<label for="Train-ID"></label>
-					<input type="text" id="tr-id" placeholder="Train ID" required>
+					<input type="text" id="tr-id" placeholder="Train ID" required><br>
 
 					<div class="wrapper" id="from">
 						<div class="select-btn">
@@ -99,7 +99,7 @@
 							<ul class="options">
 							</ul>
 						</div>
-					</div>
+					</div><br>
 
 					<div class="wrapper" id="to">
 						<div class="select-btn">
@@ -122,7 +122,7 @@
 						<option value="Semi-Empress">Semi-Express</option>
 						<option value="Express">Express</option>
 						<option value="Intercity">Intercity</option>
-					</select>
+					</select><br>
 
 					<input type="button" onclick="popupDatePicker('.datepicker-modal')" value="Recurs On">
 
@@ -132,7 +132,9 @@
 		</div>
 	</div>
 
-	<dialog class="add-station-modal">
+	<dialog class="dialog-modal">
+		<div class="adding-form">
+			<button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
 		<form class="train-form" id="station-form" onsubmit="addStoppingStation(this); return false">
 			<!-- <fieldset> -->
 				<legend>Stopping Stations: </legend>
@@ -162,11 +164,13 @@
 				<input type="submit" class="form-button" id="add_update-sch_station" value="Add a new stopping">
 			<!-- </fieldset> -->
 		</form>
+	</div>
 	</dialog>
 
 	<dialog class="datepicker-modal">
 		<div class="recurrence-window">
-            <div class="header">
+			<button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
+            <div class="table_header">
                 <h2>Custom Recurrence</h2>
             </div>
         <div class="body">
@@ -221,7 +225,7 @@
                 </div>
                 
 
-                <div id="container" class="container">
+                <div id="container" class="days-container">
                     <div class="cat day">
                        <label>
                           <input id="sun" type="checkbox" value="SUNDAY"><span>S</span>
@@ -287,6 +291,7 @@
             </div>
         </div>
 		<button class="form-button" onclick="this.closest('dialog').close()">Done</button>
+		
 	</dialog>
 
 	<script src="/js/stations.js"></script>				

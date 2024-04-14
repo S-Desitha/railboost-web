@@ -40,7 +40,7 @@
 
         <div class="service-view">
             <div class="service-container">
-                <button class="add-new-btn" onclick="popupAddPage('.station-add-modal')" >Add New</button>
+                <button class="add-new-btn" onclick="popupAddPage('.dialog-modal')" >Add New</button>
 
                 <div class="table-container">
                     <section class="table_header">
@@ -74,11 +74,12 @@
             </div>
         </div>
     </div>
-    <dialog class="station-add-modal">
+    <dialog class="dialog-modal">
         <div class="station-form">
             <form onsubmit="return false">
-                <h2 class="add-station-heading" id="add-new-station-header">Add a new Station </h2>
-
+                <div class="table_header">
+                <h1 class="add-station-heading" id="add-new-station-header">Add a new Station </h2>
+                </div>
                 
                 <select name="line" id="selectLine" placeholder="Line" required>
                     <option value="Select Line" data-image="/Images/search.png">Select Line  </option>

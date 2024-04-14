@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+	 <!-- sweet alert -->
+	 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+	 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
+
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
@@ -45,13 +49,13 @@
 						<li class="divider">/</li>
 						<li><a href="admin.html" class="active">Staff Management</a></li>
 					</ul> -->
-					<button class="add-new-btn" onclick="popupAddPage('.staff-add_edit-modal')" >Add New</button>
+					<button class="add-new-btn" onclick="popupAddPage('.dialog-modal')" >Add New</button>
 				<!-- </div> -->
 				<div class="table-container">
 
 					<section class="table_header">
 						<h1>Staff Details</h1>
-						<div class="input-group">
+						<div class="input-group" style="padding: 0 .8rem;">
 							<input type="search" placeholder="Search Staff...">
 							<img src="/Images/filter.png" class="filter" alt="" onclick="toggleFilterBox()">
 							<img src="/Images/search.png" alt="">
@@ -114,11 +118,13 @@
 			</div>
 		</div>
 	</div>
-	<dialog class="staff-add_edit-modal">
+	<dialog class="dialog-modal">
 		<div class="adding-form">
-			<section class="table_header">
+			<button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
+			
+			<div class="table_header">
 				<h1 id="add-staff-heading">Add a New Staff Memeber</h1>
-			</section>
+			</div>
 			<form onsubmit="return false" id="staff_form">
 				<!-- <h2 class="adding-form-heading" id="add-staff-heading">Add a new staff member</h2> -->
 				<label for="staffId"></label>
@@ -128,15 +134,14 @@
 				<input type="text" id="fName" name="name" placeholder="First Name:" onchange="updateUsername()"required><br>
 		
 				<label for="lName"></label>
-				<input type="text" id="lName" name="name" placeholder="Last Name:" onchange="updateUsername()"required><br>
+				<input type="text" id="lName" name="name" placeholder="Last Name:" onchange="updateUsername()"required><br><br>
 
 				<label for="role"></label>
-				<!-- <select id="role" name="role"  onchange="updateUsername()" required> -->
+				
 					<select id="role" name="role" onchange="updateUsername()" required>	
 					<option value="" disabled selected>Role</option>
-					<!-- <option value="SM">Station Master</option>
-					<option value="TCO">Ticket Checking Officer</option> -->
-				</select><br>
+					
+				</select>
 		
 				<label for="railwayStation"></label>
 				<input type="text" id="railwayStation" placeholder="Railway Station:" name="railwayStation" required><br>
