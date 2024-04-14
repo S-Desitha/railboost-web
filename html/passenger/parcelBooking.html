@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/table.css"> 
+    <link rel="stylesheet" href="/css/buttons.css">
+    <link rel="stylesheet" href="/css/parcelbooking.css">
+    <script src="/js/parcelBooking.js"></script>
+    <script src="/js/passenger.js"></script>
+    <script src="/js/script.js"></script>
+    <title>parcelbookingForm</title>
+</head>
+<body>
+    
+    <nav class="navbar" >
+        <script>createNavBar("passenger")</script>
+    </nav>   
+
+
+    <div class="service-view" id="hasDataDiv">
+		<div class="service-container">
+            <button class="add-new-btn" type="button"   onclick="popupAddPage('.staff-add_edit-modal')">ParcelBooking Form</button>
+			<div class="table-container">
+
+				<section class="table_header">
+					<h1>Parcel Details</h1>
+				</section>
+				
+				<div class="table_body">
+					<table>
+						<thead>
+							<tr>
+                                <th>Receiver Name</th>
+								<th>Booking ID</th>
+                                <th>Receiver Address</th>
+                                <th>Receiver Email</th>
+                                <th>Item</th>
+                                <th>Status</th>
+							</tr>
+						</thead>
+						<tbody id="parcelBooking_table"></tbody>
+					</table>
+				</div>
+			</div>
+        </div>
+    </div>
+    <div class="service-view" id="noDataDiv">
+	<div class="service-container">
+                        
+
+        <button class="add-new-btn" type="button"   onclick="popupAddPage('.staff-add_edit-modal')">ParcelBooking Form</button>
+            <div id="pBookinginstructions">
+                <h2>instructions</h2>
+                <br>
+                
+                <h4>Online Registration:</h4>
+                <p>
+                    <li>Visit the official website and log in or create an account if you haven't already.</li>
+                    <li>Navigate to the parcel booking section and fill out the required details for your parcel. </li>
+                </p>
+                <h4>Drop-off at the Station:</h4>
+                <p>
+                    <li>Once the online registration is complete, bring your parcel to the designated station.</li>
+                    <li>Hand over your parcel to the station staff and inform them that you've completed the online registration.</li>
+                </p>
+                <h4>Weight Measurement and Package Check:</h4>
+                <p>
+                    <li>The station master will measure the weight of your parcel using the appropriate equipment.</li>
+                    <li>The station staff will conduct a thorough check of the packaging to ensure it meets the required<br> standards and is suitable for transportation.</li>
+                </p>
+                <h4>Attachment of Details Form:</h4>
+                <p>
+                    <li>After measuring and checking, the station master will attach a details form to your parcel.</li>
+                    <li>This form will include essential information such as the tracking number, sender's details, <br>recipient's details, and any special handling instructions.</li>
+                </p>
+                <h4>Email Notification to Receiver:</h4>
+                <p>
+                    <li>Once the details form is attached, an automated email notification will be sent to the recipient's email address.</li>
+                    <li>The email will contain the tracking number and a link to track the parcel's current location and status.</li>
+                </p>
+                <h4>Parcel Tracking:</h4>
+                <p>
+                    <li>You can track your parcel in real-time by clicking on the provided tracking link in the email<br> or by logging into your account on the website.</li>
+                    <li>Regularly check the tracking information to stay updated on your parcel's journey and expected delivery date.</li>
+                </p>
+            
+            </div>
+
+		</div>
+	</div>
+
+    
+    
+
+        
+
+
+    	<dialog class="staff-add_edit-modal" id="myDialog">
+            <div class="adding-form">
+                <section class="table_header">
+                    <h1 id="add-staff-heading">Parcel Booking Form</h1>
+                </section>
+                <form onsubmit="return false" id="parcelBooking_form">
+                    <!-- <h3 class="adding-form-heading" id="add-staff-heading">Receiver Details</h3> -->
+
+                    <label for="sendingStaion"></label>
+                    <div class="wrapper" id="from" name="sendingStaion">
+                        <div class="select-btn">
+                            <span>Select Starting Station</span>
+                            <i class="uil uil-angle-down"></i>
+                        </div>
+                        <div class="content">
+                            <div class="search">
+                                <i class="uil uil-search"></i>
+                                <input spellcheck="false" type="text" placeholder="Search">
+                            </div>
+                            <ul class="options">
+                            </ul>
+                        </div>
+                    </div><br>
+
+                    <label for="senderAddress"></label>
+                    <input type="text" id="senderAddress" placeholder=" Sender's Address:" name="senderAddress"  required><br>
+    
+            
+                    <label for="senderNIC"></label>
+                    <input type="text" id="senderNIC" name="senderNIC" placeholder="Sender's NIC"required><br><br>
+
+                    
+                    <label for="railwayStation"></label>
+                    <div class="wrapper" id="to">
+                        <div class="select-btn">
+                            <span>Select Ending Station</span>
+                            <i class="uil uil-angle-down"></i>
+                        </div>
+                        <div class="content">
+                            <div class="search">
+                                <i class="uil uil-search"></i>
+                                <input spellcheck="false" type="text" placeholder="Search">
+                            </div>
+                            <ul class="options"></ul>
+                        </div>
+                    </div><br>
+
+                    <label for="receiverName"></label>
+                    <input type="text" id="receiverName" name="receiverName" placeholder="Receiver Name" required>
+
+                    <label for="receiverNIC"></label>
+                    <input type="text" id="receiverNIC" name="receiverNIC" placeholder="Reveiver's NIC"required><br>
+
+                    <label for="receiverAddress"></label>
+                    <input type="text" id="receiverAddress" name="receiverAddress" placeholder="Receiver Address" required>
+
+    
+                    <label for="telephone"></label>
+                    <input type="tel" name="telephone" id="phone-field" onkeyup="validatePhone()"placeholder="Telephone No" required><br>
+                    <span id="phone-error"></span>
+
+                    <label id="email-label"></label>
+                    <input type="email" spellcheck="false" id="email-field" onkeyup="validateEmail()" name="email" placeholder=" Receiver Email" required><br />
+                    <span id="email-error"></span> 
+
+                    <h3 class="adding-form-heading" id="add-staff-heading">Parcel Details</h3>
+                    <label for="item"></label>
+                    <input type="text" id="item" name="item" placeholder="Item:"><br>
+                    
+                    
+                    <!-- <label for="Discrption"></label>
+                    <input type="text" id="Discrption" name="Discrption" placeholder="Discrption:"><br> -->
+            
+                    <div class="dialog-buttons">
+                        <button class="form-button form-clear-btn">Clear</button>
+                        <button type="submit" class="form-button" id="add-staff-button" onclick="addNewParcel()">Add Parcel</button>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+
+       </div> 
+       <script src="/js/stations.js"></script>
+     
+</body>
+
+</html>
