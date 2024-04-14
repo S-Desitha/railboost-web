@@ -51,6 +51,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.log("1=");
     console.log(rate);
   
+    
+    const dialogModal = document.querySelector('.dialog-modal');
+    dialogModal.showModal();
     const button = document.getElementById("add-new-price-rate");
   
     document.getElementById("add-new-price-header").innerHTML = "Update Rate";
@@ -81,6 +84,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
   function updateRate() {
+    // close any opened dilalogs
+    const dialogModal = document.querySelector('.dialog-modal');
+    dialogModal.close();
     rate = {};
     rate["startCode"] = document.getElementById("from").getAttribute("stationCode");
     rate["endCode"] = document.getElementById("to").getAttribute("stationCode");
@@ -134,6 +140,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     button.innerHTML = "Add a New Price Rate";
             clearForm();
         }
+        
     });
 }
 
