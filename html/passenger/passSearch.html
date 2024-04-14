@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="/css/passSearch.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <!-- <script src="/js/passenger.js"></script> -->
+    <script src="/js/passenger.js"></script>
     <script src="/js/script.js"></script>
     <title>Select Stating and ending stations</title>
 </head>
 
 <body>
     <nav class="navbar">
-        <script>createNavBar("passenger")</script>
+        <script>createNavBar("passenger");</script>
     </nav>
 
     <div class="train-container">
@@ -36,18 +36,9 @@
                     <i class="uil uil-search"></i>
                     <input spellcheck="false" type="text" placeholder="Search">
                 </div>
-                <ul class="options">
-                </ul>
+                <ul class="options"></ul>
             </div>
         </div>
-<!-- //add a new button to swap the stations by calling the swap function -->
- <!-- //call the swap function when the button is clicked -->
- 
-
-
-
-
-        <!-- <button onclick="swap()">Swap</button> -->
 
         <div class="wrapper" id="to">
             <div class="select-btn">
@@ -59,7 +50,7 @@
                     <i class="uil uil-search"></i>
                     <input spellcheck="false" type="text" placeholder="Search">
                 </div>
-                <ul class="options"></ul>
+                <select class="options"></select>
             </div>
         </div>
 

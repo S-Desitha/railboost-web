@@ -1,4 +1,20 @@
+.password-wrapper {
+  position: relative;
+}
 
+.password-wrapper .password {
+  padding-right: 30px; /* Adjust this value based on the width of the icon */
+}
+
+.toggle-password {
+  position: absolute;
+  font-size: 10px;
+  right: 5px; /* Adjust the positioning of the icon */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--secondary-text-color);
+}
 
 
 .signup-content {
@@ -82,7 +98,7 @@ input::placeholder {
 #dob{
     color: #a9a9a9; 
     }
-
+  
 #dob::before {
     content: "Date of Birth:  "; 
     color: #a9a9a9;

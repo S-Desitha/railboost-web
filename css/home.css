@@ -2,6 +2,7 @@
 @import url('https://fonts.cdnfonts.com/css/cocogoose');
 body{
     /* overflow: hidden; */
+    background: #ffff;
 }
 .header-logo {
     position: fixed;
@@ -44,6 +45,16 @@ label.logo-text{
     height: 80px;
     width: 100%;
     
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--theme-color);
+  justify-content: center;
+  height: 80px;
+  width: 100%;
+  z-index: 1000; 
 }
 nav ul{
     float: right;
@@ -123,15 +134,16 @@ nav ul li:hover ul.dropdown{
 
 .box-container {
 
-    display: flex; 
-    min-height: 80vh;
+    /* display: flex;  */
+    min-height: calc(100vh - 185px);
     margin-top: 2%;
-    margin-left: 150px;
-    text-align: center;
+    margin-left: 100px;
+    justify-content: space-between;
+    /* text-align: center; */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-row-gap: 20px;
-    grid-column-gap: 0px;
+    /* grid-row-gap: 20px; */
+    grid-column-gap: 80px;
     padding: 50px 50px;
 
 }
@@ -142,9 +154,9 @@ nav ul li:hover ul.dropdown{
     color:black; ;
     border: 1px solid #ccc;
     padding: 25px;
-    grid-column-gap: 10px;
+    /* grid-column-gap: 10px; */
     text-align: center;
-    flex: 1; 
+    /* flex: 1;  */
     cursor: pointer;
     text-decoration: none; 
 }
@@ -197,8 +209,8 @@ nav ul li:hover ul.dropdown{
     top: 21%;
     right: 20%;
     left: 50%;
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background-color:red;
     display: flex;
