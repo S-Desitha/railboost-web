@@ -30,7 +30,8 @@ document.addEventListener("DOMContentLoaded",async function(){
             row.insertCell(1).innerHTML = parcel.bookingId;
             row.insertCell(2).innerHTML = parcel.receiverAddress; 
             row.insertCell(3).innerHTML = parcel.receiverEmail;
-            row.insertCell(4).innerHTML = parcel.item;        
+            row.insertCell(4).innerHTML = parcel.item;   
+            row.insertCell(5).innerHTML = parcel.status;        
             
         });
     }catch(error){
