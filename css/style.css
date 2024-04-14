@@ -656,3 +656,89 @@ h3{
 }
 
 
+.dialog-modal {
+  position: fixed;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; /* Adjust width as needed */
+  background-color: #ffffff; /* Background color */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 8px; /* Border radius */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
+  padding: 20px; /* Padding */
+  overflow: hidden;
+}
+
+
+.dialog-modal .adding-form {
+  align-self: center;
+  padding: 10px;
+}
+
+.dialog-modal .table_header {
+  margin-left: calc(50% - 150px);
+  text-align: center; /* Center align the header */
+  margin-bottom: 20px; /* Add space below the header */
+}
+
+.dialog-modal h1 {
+  font-size: 24px; /* Adjust heading font size if needed */
+  margin: 0;
+  align-self: center; /* Remove default margin */
+}
+
+.dialog-modal form {
+  /* Add additional styling for the form if needed */
+}
+
+.dialog-modal input[type="text"],
+.dialog-modal input[type="email"],
+.dialog-modal input[type="tel"],
+.dialog-modal select {
+  width: 100%;
+  padding: 10px; /* Set input padding */
+  margin-bottom: 10px; /* Add space between inputs */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; /* Border radius */
+  box-sizing: border-box;
+   /* Ensure padding and border are included in width */
+}
+
+.dialog-modal .dialog-buttons {
+  text-align: center; /* Center align the buttons */
+}
+
+.dialog-modal .form-button {
+  padding: 10px 20px; /* Button padding */
+  /* margin: 0 10px; Add space between buttons */
+  background-color: var(--theme-color); 
+  color: #fff; /* Button text color */
+  border: none; /* Remove button border */
+  border-radius: 4px; /* Button border radius */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.dialog-modal .form-clear-btn {
+  background-color: #ccc; /* Clear button background color */
+  color: #000; /* Clear button text color */
+}
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  margin-right: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #888;
+}
+
+.close-button:hover {
+  color: #333;
+}
+

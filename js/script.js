@@ -444,6 +444,12 @@ function toggleEye() {
         eyeIcon.style.display = 'none';
     }
 }
+function closeDialog() {
+    const dialog = document.querySelector('.dialog-modal');
+    if (dialog) {
+        dialog.close();
+    }
+}
 
 
 

@@ -35,7 +35,7 @@
 
 		<div class="service-view">
 			<div class="service-container">
-				<button class="add-new-btn" onclick="popupAddPage('.train-add_edit-modal')" >Add New</button>
+				<button class="add-new-btn" onclick="popupAddPage('.dialog-modal')" >Add New</button>
 
 				<div class="table-container">
 					
@@ -63,18 +63,24 @@
 			</div>
 		</div>
 	</div>
-	<dialog class="train-add_edit-modal">
+	<dialog class="dialog-modal">
 		<div class="adding-form">
 			
 			<form onsubmit="return false" id="train-form">
-				<h2 class="add-train-heading" id="add-new-train-header">Add a new train </h2>
+				<button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
+			<section class="table_header">
+				<h1 id="add-train-heading">Add a New Train</h1>
+			</section>
 				<label for="trainId"></label>
-				<input type="text" id="trainId" placeholder="Train ID:" name="trainId" required><br>
+				<input type="text" id="trainId" placeholder="Train ID:" name="trainId" required><br><br>
 
 				<label for="train-type"></label>
 				<input type="text" id="trainType" name="name" placeholder="Train Type:" required><br>
 		
-				<button class="form-button" id="add-new-train-button" onclick="addNewTrain()">Add a new train </button>
+				<div class="dialog-buttons">
+					<button class="form-button form-clear-btn" onclick="document.getElementById('train-form').reset()">Clear</button>
+					<button type="submit" class="form-button" id="add-train-button" onclick="addNewTrain()">Add a new train</button>
+				</div>
 
 			</form>
 		</div>

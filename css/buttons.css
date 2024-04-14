@@ -30,6 +30,7 @@
 .dialog-buttons {
     display: flex;
     flex-direction: row;
+    gap: 20px;
     justify-content: space-between;
 }
 

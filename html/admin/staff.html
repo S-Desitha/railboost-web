@@ -45,7 +45,7 @@
 						<li class="divider">/</li>
 						<li><a href="admin.html" class="active">Staff Management</a></li>
 					</ul> -->
-					<button class="add-new-btn" onclick="popupAddPage('.staff-add_edit-modal')" >Add New</button>
+					<button class="add-new-btn" onclick="popupAddPage('.dialog-modal')" >Add New</button>
 				<!-- </div> -->
 				<div class="table-container">
 
@@ -114,8 +114,9 @@
 			</div>
 		</div>
 	</div>
-	<dialog class="staff-add_edit-modal">
+	<dialog class="dialog-modal">
 		<div class="adding-form">
+			<button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
 			<section class="table_header">
 				<h1 id="add-staff-heading">Add a New Staff Memeber</h1>
 			</section>
@@ -128,7 +129,7 @@
 				<input type="text" id="fName" name="name" placeholder="First Name:" onchange="updateUsername()"required><br>
 		
 				<label for="lName"></label>
-				<input type="text" id="lName" name="name" placeholder="Last Name:" onchange="updateUsername()"required><br>
+				<input type="text" id="lName" name="name" placeholder="Last Name:" onchange="updateUsername()"required><br><br>
 
 				<label for="role"></label>
 				<!-- <select id="role" name="role"  onchange="updateUsername()" required> -->
