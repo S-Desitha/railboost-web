@@ -157,7 +157,7 @@ thead th.active,tbody td.active {
     width: 45%;
     height: 100%;
     background-color: #fff5;
-    padding: 0 .8rem;
+    padding: .8rem;
     border-radius: 2rem;
     box-shadow: 0 .005rem .1rem #0002;
   

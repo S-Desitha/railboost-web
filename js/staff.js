@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", async function() {
             let deleteButton = document.createElement("button");
             deleteButton.classList.add("delete-button");
             deleteButton.innerHTML = "<i class='fas fa-trash-alt'></i>";
+            deleteButton.setAttribute("staffMember", JSON.stringify(staffMember));
+            deleteButton.onclick = deleteStaff;
     
             let row = document.getElementById("staff_table").insertRow(-1);
             row.insertCell(0).innerHTML = staffMember.staffId;
@@ -51,6 +53,9 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 
 function editStaff() {
+    
+    const dialogModal = document.querySelector('.dialog-modal');
+    dialogModal.showModal();
     let member = JSON.parse(this.getAttribute("staffMember"));
 
     console.log(member);
@@ -84,13 +89,15 @@ function editStaff() {
 
 
 function updateStaff() {
+    const dialogModal = document.querySelector('.dialog-modal');
+    dialogModal.close();
     staffMember = {user: {}};
 
     staffMember["staffId"] = document.getElementById('staffId').value;
     staffMember["station"] = document.getElementById('railwayStation').value;
     // staffMember.user["fName"] = document.getElementById("fName").value;
     // staffMember.user["lName"] = document.getElementById("lName").value;
-    // staffMember.user["role"] = document.getElementById("role").value;
+    staffMember.user["role"] = document.getElementById("role").value;
     // staffMember.user["email"] = document.getElementById('email-field').value;
     // staffMember.user["telNo"] = document.getElementById('phone-field').value;
     // staffMember.user["username"] = document.getElementById('username').value;
@@ -186,31 +193,34 @@ function addStaff() {
 
     console.log(staffMember);
 
-
     const body = staffMember;
     const params = {
-        headers : {
+        headers: {
             "Content-type": "application/json; charset=UTF-8"
         },
-        body : JSON.stringify(body),
-        method : "POST"
+        body: JSON.stringify(body),
+        method: "POST"
     };
-
+    closeDialog();
     customFetch(endpoint2, params)
-        .then(()=> window.location.reload())
+        .then(() => {
+             // Close the dialog modal
+            Swal.fire({
+                title: "Success!",
+                text: `Link to create a password for the Username: ${username} has been sent to the email: ${email}.`,
+                icon: "success"
+            }).then(() => window.location.reload());
+        })
         .catch((error) => {
-            if (error=="login-redirected")
+            if (error == "login-redirected") {
                 localStorage.setItem("last_url", window.location.pathname);
+            }
         });
 
-
-
-    alert(`Link to create a password for the Username :${username} has been sent to the email: ${email}.`);
     // Clear the form
-
     document.getElementById('staffId').value = '';
     document.getElementById('name').value = '';
-    document.getElementById('role').value = ''; 
+    document.getElementById('role').value = '';
     document.getElementById('railwayStation').value = '';
     document.getElementById('email').value = '';
     document.getElementById('telephone').value = '';
@@ -242,11 +252,13 @@ async function setRoles() {
         let roleParent = document.getElementById("role");
         
         for (role of data) {
-            let option = document.createElement("option");
-            option.innerHTML = role.role;
-            option.value = role.roleId;
             
-            roleParent.appendChild(option);
+            if (role.roleId !== 5) { // Skip appending passenger
+                let option = document.createElement("option");
+                option.innerHTML = role.role;
+                option.value = role.roleId;
+                roleParent.appendChild(option);
+            }
         }
     }
     catch(error) {
@@ -288,3 +300,50 @@ function applyFilters() {
     var filterBox = document.getElementById('filter-box');
         filterBox.style.display = 'none';
 }
+
+function deleteStaff() {
+    member = JSON.parse(this.getAttribute("staffMember"));
+    console.log(member);
+  
+    Swal.fire({
+        title: "Are you sure?",
+        text: `Are you sure you want to delete Staff Member ${member.user["fName"]}  ${member.user["lName"]}`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#5271FF",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const body = member;
+            const params = {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                },
+                body: JSON.stringify(body),
+                method: "DELETE",
+            };
+  
+            customFetch(endpoint2, params)
+                .then(() => {
+                Swal.fire({
+                  title: "Staff Member Deleted",
+                  text: "The Staff Member has been successfully deleted!",
+                  icon: "success",
+              }).then((result) => {
+                  if (result.isConfirmed) window.location.reload();
+              
+              })
+          })
+                .catch((error) => {
+                    if (error == "login-redirected")
+                        localStorage.setItem("last_url", window.location.pathname);
+                });
+        }
+        else {
+      Swal.fire("Cancelled", "Your operation has been cancelled", "error");
+        }
+        
+    });
+  }
+  

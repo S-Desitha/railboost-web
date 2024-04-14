@@ -676,7 +676,7 @@ h3{
 
 .dialog-modal .adding-form {
   align-self: center;
-  padding: 10px;
+  padding: 0px 10px 10px 10px;
 }
 
 .dialog-modal .table_header {
@@ -722,7 +722,7 @@ h3{
   border: none; 
   border-radius: 4px;
   cursor: pointer; 
-  width: 100%;
+  /* width: 100%; */
 }
 
 .dialog-modal .form-clear-btn {
