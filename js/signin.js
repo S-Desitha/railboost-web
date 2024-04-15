@@ -28,6 +28,8 @@ async function processLoginResp(response) {
     console.log("processLoginResp function called");
     console.log(response)
     if (response["isSuccessful"]==true){
+        localStorage.setItem("userId",response.userId);
+        localStorage.setItem("username", response["username"]);
         localStorage.setItem("access_token", response.jwt);
         localStorage.setItem("userId", response["userId"]);
         localStorage.setItem("name", response["name"]);
