@@ -21,15 +21,25 @@ document.addEventListener("DOMContentLoaded",async function(){
         rejectButton.setAttribute("rejectParcel", JSON.stringify(approveParcel));
         rejectButton.onclick = rejectParcel;   
 
+        let addWeightButton = document.createElement("button");
+        addWeightButton.add("view-button");
+        addWeightButton.innerHTML = "<i class='fa-solid fa-eye' title='View Application' style='color:#0047AB'><span>  View</span></i>";
+        addWeightButton.setAttribute("addWeight", JSON.stringify(approveParcel));
+        addWeightButton.onclick = addWeight;
+
+        
 
         let row = document.getElementById("parcelApprove_table").insertRow(-1);
         row.insertCell(0).innerHTML = approveParcel.bookingId;
         row.insertCell(1).innerHTML = approveParcel.senderName;
         row.insertCell(2).innerHTML = approveParcel.receiverName; 
         row.insertCell(3).innerHTML = approveParcel.recoveringStation;
-        row.insertCell(4).innerHTML = approveParcel.item;  
-        row.insertCell(5).innerHTML = approveParcel.status;   
-        row.insertCell(6).append(approveButton, rejectButton);
+        row.insertCell(4).innerHTML = approveParcel.item;
+        // row.insertCell(5).innerHTML = approveParcel.weight;
+        // row.insertCell(6).append(editButton);
+        // row.insertCell(7).innerHTML = approveParcel.total;  
+        row.insertCell(8).innerHTML = approveParcel.status;   
+        row.insertCell(9).append(approveButton, rejectButton);
    
         
     });
@@ -135,4 +145,7 @@ function approveParcelF() {
             
         }
     });
+}
+function addWeight(){
+
 }
