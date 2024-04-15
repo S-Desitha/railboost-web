@@ -3,13 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/script.js"></script>
-    <script src="/js/auth.js"></script>
+    
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- sweet alert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
+
+    <!-- jquery -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+
+    <!-- charts -->
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    
+    <!-- icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    
+    <!-- css imports -->
+    <link rel="stylesheet" href="/css/notifications.css">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/season.css">  
+    <link rel="stylesheet" href="/css/table.css">
+
+    <!-- js imports -->
+    <script src="/js/notification.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/auth.js"></script>
 	<script src="/js/season.js" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    
     <title>Buy Season Ticket</title>
 </head>
 <body> 
@@ -18,16 +45,63 @@
     </nav>
 
 	<div class="train-container">
-        <div class="train-left">
-            <h1 class="add-train-heading" id="add_update-schedule-header">Buy Season Ticket </h1>
-            <img src="../../Images/ETicket.png" alt="Train Image" class="train-image ">
-		</div>
+        
+        <!-- <div style="position: relative;">
+            
+            <div class="sidebar active" style="position: absolute; top: 0; left: 0;">
+                <script>createSideBar("passenger")</script>
+            </div>
+        </div> -->
+        
+
+        <div class="table">
+            <section class="table_header"></section>
+                
+                <div class="info" style="margin-top: 100px;">
+                    <h1>Season Ticket</h1></n></br>
+                <p style="font-weight:550; font-size: large; margin-left: 60px;">
+                    Follow the instructions below for purchasing a season ticket.</p>
+
+                    <p style="margin-left: 90px;">   <br> - Obtain the application form from your workplace, university, or railway station. <br>
+                        <br> - Fill out the online application form provided.<br>
+                        <br> - Upload a photo or PDF of the completed application form.<br>
+                        <br> - Ensure that the size of the uploaded file (photo or PDF) is less than 5MB.<br>
+                        <br> - Submit the application form.<br>
+                        <br> - The station master at your designated start station will review the application.<br>
+                        <br> - Depending on its validity, the application will be either approved or rejected and notification will be sent to inform you of the outcome.<br>
+                        <br> - If your application is approved, proceed to make the payment for the season ticket.<br>
+                        <br> - Upon successful payment, you will receive the season ticket via email.<br>
+                        <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+                
+                </div>
+            
+            <section class="table_body" style="margin-top: 140px;">
+                <h1>Season Ticket</h1></n></br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                                <th>Start Station</th>
+								<th>End Station</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Train Class</th>
+								<th>Total Price</th>
+								<th>Status</th>
+								<th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="season_table"></tbody>
+                </table>
+            </section>
+        </div>
 				
 		<div class="train-right">
+            <!-- <dialog class="Season-modal"> -->
 		    <div class="train-form">
 							
 				<form onsubmit="return false">
-					<!-- <h2 class="add-train-heading" id="add_update-schedule-header">Buy Season Ticket </h2> -->
+					<!-- <h2 class="add-train-heading" id="add_update-schedule-header"></n></br>Buy Season Ticket </h2> -->
                     <label for="start-station"></label>
                   
 					            <div class="wrapper" font-size="1px" id="from">
@@ -70,7 +144,8 @@
                     </select>
 								
                     <label for="Start-date"></label>
-                    <input type="date" id="Start-date" name="Start-date" placeholder=" Start Date: " onchange="getPrice(); updateEndDate();" max="" required><br />   
+                    <input type="date" id="Start-date" name="Start-date" placeholder=" Start Date: " onchange="getPrice(); updateEndDate(); validateSDate();" max="" required><br /> 
+                    <span id="date-error"></span>  
                                 
                     <script>
                         var currentDate = new Date();
@@ -90,7 +165,7 @@
                         <option value="1 Week" style="color: #484848">1 Week</option>
                         <option value="1 Month" style="color: #484848">1 Month</option>
                         <option value="3 Month" style="color: #484848">3 Month</option>
-                        <option value="6 Month" style="color: #484848">6 Month</option>
+                        <!-- <option value="6 Month" style="color: #484848">6 Month</option> -->
                     </select>
 
                     <label for="End-date"></label>
@@ -100,51 +175,36 @@
                     <label for="class"></label>
                     <select id="class" name="class" onchange="getPrice()" required>
                         <option value="" disabled selected>Class:</option>
-                        <option value="1st Class" style="color: #484848">1st Class</option>
+                        <!-- <option value="1st Class" style="color: #484848">1st Class</option> -->
                         <option value="2nd Class" style="color: #484848">2nd Class</option>
                         <option value="3rd Class" style="color: #484848">3rd Class</option>
                     </select> 
 
                     <div class="price-of-1"> <span id="price-of-one"></span></div>
                     <label for="total-price"></label>
-					<input disabled value="" type="Double" id="total-price" name="total-price" placeholder=" Total Price:" ><br>
+                    <input disabled value="" type="Double" id="total-price" name="total-price" placeholder=" Total Price:"><br>
+                    <span id="total-price-text"></span>
+
 
                     <label for="img" id="Application">
                         <span class="app">Application</span>
-                        <input type="file" id="img" name="img" accept="image/*" required>
+                        <input type="file" id="img" name="img" accept=".pdf, .jpg, .jpeg, .png" required>
                     </label>
-                    <style>
-                        .app{
-                            text-align: left;
-                            margin-left: 10px;
-                            color:#0d45a5;
-                            font-weight: 900;
-}
-                        }
-                        input[type=file] {
-                            display:grid
-                        }
-                        input[type=file]::file-selector-button {
-                            /* margin-right: 20px; */
-                            border: none;
-                            background: #084cdf;
-                            padding: 10px 20px;
-                            border-radius: 10px;
-                            color: #fff;
-                            cursor: pointer;
-                            transition: background .2s ease-in-out;
-                            }
+                    <script>
+                        const uploadField = document.getElementById("img");
 
-                            input[type=file]::file-selector-button:hover {
-                            background: #0d45a5;
+                        uploadField.onchange = function() {
+                            if(this.files[0].size > 5242880){
+                            alert("File is too big!");
+                            this.value = "";
                             }
-                    </style>
-
+                        }
+                    </script>
 
 					<button class="form-button" id="buy-ticket-button" onclick="appplySeasonTicket()">Apply</button>
 				</form>
 	    	</div>
-				
+            <!-- </dialog> -->
 		</div>
 	</div>
 

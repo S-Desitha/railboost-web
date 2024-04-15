@@ -89,8 +89,20 @@ async function signUp() {
     };
 
     let data = await customFetch(endpoint, params, false);
-    if (data.role.roleId==5)
-        window.location.replace("/html/passenger/home.html");
+    if (data.role.roleId==5) {
+
+    let swalPromise = Swal.fire({
+        icon: 'success',
+        title: 'Signup Successful!',
+        text: 'You will be automatically logged in and redirected to the dashboard.',
+        showConfirmButton: true // Show the "OK" button
+    });
+    
+    // Wait for the user to click "OK"
+    await swalPromise;
+
+    // Automatically log in after the user clicks "OK"
+    await login();
 
     // fetch(url, params)
     // .then(res => {
@@ -98,6 +110,7 @@ async function signUp() {
     //         window.location.replace("home.html");
     //     }
     // });
+    }
 }
 
 

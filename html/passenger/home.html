@@ -3,10 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/home.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/script.js"></script>
+    
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- sweet alert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
+
+    <!-- jquery -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+
+    <!-- charts -->
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    
+    <!-- icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
+    <!-- css imports -->
+    <link rel="stylesheet" href="/css/notifications.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- js -->
+    <script src="/js/notification.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/auth.js"></script>
+    
     <title>RailBoost - Railway Service Enhancement</title>
 </head>
 <body> 
@@ -14,7 +42,196 @@
                 <script>createNavBar("passenger")</script>
             </nav>
 
-            <div class="box-container">
+            <div class="container">
+                <div class="sidebar active">
+                    <script>createSideBar("passenger")</script>
+                </div>
+            
+                <main>
+                    <div class="heading">
+                        <h1 class="title">Passenger Dashboard  </h1>
+                        
+                    </div>
+                    
+                    <ul class="breadcrumbs">
+                        <li><a href="home.html">Home</a></li>
+                        <li class="divider">/</li>
+                        <li><a href="home.html" class="active">Passenger Dashboard</a></li>
+                    </ul> 
+                    <div class="info-data">
+                        <div class="card sm">
+                            <div class="head">
+                                <div>
+                                    <a href="passSearch.html" >
+                                        <p>Train Schedule</p>
+                                    </a>
+                                </div>
+                                
+                                <!-- icon for live update -->
+                                <i class="fas fa-train"> </i>
+        
+                                
+                            </div>
+                            
+                        </div>
+                        <div class="card sm"><a href="buyticket.html">
+                            <div class="head">
+                                <div>
+                                    <!-- <h2 class="count"data-target="392">0</h2> -->
+                                    <p>Buy E ticket </p>
+                                    <!-- <small class="text-muted">Last 24 hours</small> -->
+                                </div>
+                                <!-- e ticket icon -->
+                                <i class="fas fa-ticket-alt"> </i>
+                                <!-- <i class="fas fa-box"> </i> -->
+                                <!-- <i class="fas fa-train"> </i> -->
+                                
+                            </div>
+                        </a>  
+                        </div>
+                        <div class="card sm"><a href="seasonticket.html">
+                            <div class="head">
+                                <div>
+                                    <!-- <h2 class="count"data-target="21340">0</h2> -->
+                                    <p>Buy Season Ticket </p>
+                                    <!-- <small class="text-muted">Last 24 hours</small> -->
+                                </div>
+                                <!-- application icon -->
+                                <i class="fas fa-file-alt"> </i>
+        
+                            
+                            </div>
+                        </a>
+                            
+                        </div>
+        
+                        <div class="card sm">
+                            <div class="head">
+                                <div>
+                                    <!-- <h2 class="count revenue"data-target="653400">$</h2> -->
+                                    <p class="revenue"><a href=""></a>Register Parcels </a></p>
+                                    <!-- <small class="text-muted">Last 24 hours</small> -->
+                                </div>
+                                <!-- parcel icon -->
+                                <i class="fas fa-box"> </i>
+                                
+                                <!-- <i class="fas fa-money-bill-wave"> </i> -->
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="table-data">
+                        <div class="recent-trains">
+                            <div class="head">
+                                <h3>Inbound Train Updates</h3>
+                                <a href="sm/sm-live.html">View All</a>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Train No</th>
+                                        <th>Estimated Arrival Time</th>
+                                        <th>Estimated Departure Time</th>
+                                        <th>Actions</th>
+                                    </tr>
+        
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>12345</td>
+                                        <td>12:00</td>
+                                        <td>12:30</td>
+                                        <td><a href="sm/sm-live.html" class="update">Update Time</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>12345</td>
+                                        <td>12:00</td>
+                                        <td>12:30</td>
+                                        <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>12345</td>
+                                        <td>12:00</td>
+                                        <td>12:30</td>
+                                        <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>12345</td>
+                                        <td>12:00</td>
+                                        <td>12:30</td>
+                                        <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>12345</td>
+                                        <td>12:00</td>
+                                        <td>12:30</td>
+                                        <td><a href="sm/sm-live.html" class="update">Update Time</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="parcels">
+                            <div class="head">
+                                <h3>    Incoming Parcels Today</h3>
+                                <!-- <a href="sm/approve-parcels.html">View All</a> -->
+                            </div>
+                            <ul class="parcel-list">
+                                <li>
+                                    <div class="parcel-train">
+                                        <h4>Train No: 8513 </h4>
+                                    </div>
+                                    <div class="No-of-parcels">
+                                        <h4>21 Parcels</h4>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="parcel-train">
+                                        <h4>Train No: 1077 </h4>
+                                    </div>
+                                    <div class="No-of-parcels">
+                                        <h4>10 Parcels</h4>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="parcel-train">
+                                        <h4>Train No: 8355 </h4>
+                                    </div>
+                                    <div class="No-of-parcels">
+                                        <h4>10 Parcels</h4>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="parcel-train">
+                                        <h4>Train No: 8321 </h4>
+                                    </div>
+                                    <div class="No-of-parcels">
+                                        <h4>15 Parcels</h4>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="parcel-train">
+                                        <h4>Train No: 12345 </h4>
+                                    </div>
+                                    <div class="No-of-parcels">
+                                        <h4>10 Parcels</h4>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="parcel-train">
+                                        <h4>Train No: 12345 </h4>
+                                    </div>
+                                    <div class="No-of-parcels">
+                                        <h4>10 Parcels</h4>
+                                    </div>
+                                </li>
+                            </ul>
+        
+                        </div>
+                    </div>
+            
+
+            <!-- <div class="box-container">
                 <a href="/html/passenger/passSearch.html" class="box">
                     <i class="fas fa-train"></i> 
                     <h2>Train Schedule</h2>
@@ -51,6 +268,6 @@
                     <p>Reserve your train seats here.</p>
                 </a>
      
-            </div>
+            </div> -->
 </body>
 </html>
