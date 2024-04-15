@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 title.textContent = announcement.title;
 
                 const date = document.createElement("h5");
-                date.textContent = announcement.date;
+                date.textContent = announcement.recivers+": "+announcement.date;
                 date.style.textAlign = "right";
                 date.style.fontWeight = "100";
 
@@ -76,6 +76,7 @@ function addAnns() {
 
     announcement["title"] = document.getElementById("Announcement-title").value.trim();
     announcement["category"] = document.getElementById("category").value.trim();
+    announcement["recivers"] = document.getElementById("recivers").value.trim();
     announcement["body"] = document.getElementById("Announcement-body").value.trim();
     announcement["date"] = new Date().toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"})
 
@@ -125,6 +126,7 @@ function editAnns(){
 
     document.getElementById('editAnnouncement-title').value = announcement["title"];
     document.getElementById('editcategory').value = announcement["category"];
+    document.getElementById('editrecivers').value = announcement["recivers"];
     document.getElementById('editAnnouncement-body').value = announcement["body"];
 
     const button = document.getElementById("editform-submit-button");
@@ -142,9 +144,10 @@ function updateAnns(){
 
     announcement["title"] = document.getElementById('editAnnouncement-title').value;
     announcement["category"] = document.getElementById('editcategory').value;
+    announcement["recivers"] = document.getElementById('editrecivers').value;
     announcement["body"] = document.getElementById('editAnnouncement-body').value;
 
-    if(!announcement["title"] || !announcement["category"] || !announcement["body"] ){
+    if(!announcement["title"] || !announcement["category"] || !announcement["body"] || !announcement["recivers"]){
         console.log("fill all fields!");
         return;
     }
