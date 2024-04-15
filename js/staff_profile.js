@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         document.getElementById("email").value=data.email;
         document.getElementById("Fname").value=data.fName + " " +data.lName;
         document.getElementById("gen").value=data.gender;
-        document.getElementById("homeStation").value=data.homeStation;
+        document.getElementById("homeStation").value=data.dob;
         document.getElementById("tel").value=data.telNo;
 
         document.getElementById("name-c2").textContent = data.fName + " " +data.lName;
@@ -106,13 +106,14 @@ function editProfile(){
 
     document.getElementById('edit-fname').value = data["fName"];
     document.getElementById('edit-lname').value = data["lName"];
-    document.getElementById("homest-edit").innerHTML = data["homeStation"];
+    // document.getElementById("homest-edit").innerHTML = data["homeStation"];
     
+    // document.getElementById('edit-dob').value = data["dob"];
     // document.getElementById("home").stationcode = data[homeStCode];
     // document.getElementById("home").stationcode = data["homeStation"];
-    const homeDiv = document.getElementById('home');
-    homeDiv.setAttribute('stationcode',  data["homeStCode"]);
-    homeDiv.setAttribute('stationname', data["homeStation"]);
+    // const homeDiv = document.getElementById('home');
+    // homeDiv.setAttribute('stationcode',  data["homeStCode"]);
+    // homeDiv.setAttribute('stationname', data["homeStation"]);
     // const ddd=document.getElementById("home").getAttribute("stationCode");
     // console.log(ddd);
     document.getElementById('edit-email').value = data["email"];
@@ -133,8 +134,8 @@ function updateProfile() {
 
     user["fName"] = document.getElementById('edit-fname').value;
     user["lName"] = document.getElementById('edit-lname').value;
-    user["homeStCode"] = document.getElementById("home").getAttribute("stationCode");
-    user["homeStation"] = document.getElementById("home").getAttribute("stationName");
+    // user["homeStCode"] = document.getElementById("home").getAttribute("stationCode");
+    // user["homeStation"] = document.getElementById("home").getAttribute("stationName");
     user["email"] = document.getElementById('edit-email').value
     user["gender"] = document.getElementById('editgender').value;
     user["telNo"] = document.getElementById('edit-telno').value;
@@ -338,80 +339,4 @@ function togglePasswordVisibility4() {
         eyeIcon.classList.remove('fa-eye-slash');
         eyeIcon.classList.add('fa-eye');
     }
-}
-
-
-async function check_for_delete() {
-    const endpoint = "login";
-    
-    let username = localStorage.getItem("username");
-    let password = document.getElementById("existing-pw").value;
-
-    const body = {
-        username : username,
-        password : password
-    };
-
-    const params = {
-        headers : {
-            "Content-Type": "application/json; charset=UTF-8"
-        },
-        body : JSON.stringify(body),
-        method : "POST"
-    };
-
-    let response = await customFetch(endpoint, params);
-    // console.log(response);
-    if (response){
-        var checkpwerror = document.getElementById("existing-pw");
-        checkpwerror.innerHTML = "";
-        console.log("ok")
-        let dialog = document.getElementById("Delete-modal");
-        dialog.close();
-        Swal.fire({
-            title: "Are you sure you want to delete your account?",
-            text: "You won't be able to recover this account!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-        if (result.isConfirmed) {
-            deleteACC();
-            // signout();
-        }
-        });
-
-    }
-    else {
-        var checkpwerror = document.getElementById("deleteac-error");
-    
-        checkpwerror.innerHTML = "Password is incorrect. Please try again!";
-        // window.alert("password is incorrect. Please try again!");
-        document.getElementById("deleteac_form").reset();
-    }
-    
-}
-
-function deleteACC(){
-    user = {};
-    user["userId"] = localStorage.getItem("userId");
-    const body = user;
-    const params = {
-    headers: {
-        "Content-type": "application/json; charset=UTF-8"
-    },
-    body: JSON.stringify(body),
-    method: "DELETE"
-    };
-
-    customFetch(endpoint2, params)
-        .then(() => {
-            signout();
-        })
-    .catch ((error) => {
-        if (error=="login-redirected")
-            localStorage.setItem("last_url", window.location.pathname);
-    });
 }

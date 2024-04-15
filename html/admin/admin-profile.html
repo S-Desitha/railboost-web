@@ -15,7 +15,7 @@
 
 	<script src="/js/script.js"></script>
 	<script src="/js/auth.js"></script>
-    <script src="/js/profile.js"></script>
+    <script src="/js/staff_profile.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/table.css">
@@ -32,11 +32,11 @@
 </head>
 <body> 
 	<nav class="navbar" >
-		<script>createNavBar("passenger")</script>
+		<script>createNavBar("admin")</script>
 	</nav>
 	<div class="container">
         <div class="sidebar active">
-            <script>createSideBar("passenger")</script>
+            <script>createSideBar("admin")</script>
 
         </div>
 
@@ -77,7 +77,7 @@
                         </div>
                         <div class="info3">
                             <div class="hemeSt-con">
-                                <label class="homeSt" for="homeSt">Home Station</label>
+                                <label class="homeSt" for="homeSt">Birthday</label>
                                 <input type="text" id="homeStation" class="homeStation" value="" disabled>
                             </div>
                             <div class="tel-con">
@@ -89,7 +89,7 @@
                         <div class="two-button">
                             <div class="chn-pw-and-delete-acc">
                                 <button class="change-pw" onclick="popupAddPage('.Cpw-modal');" >Change Password</button>
-                                <button class="delete-acc" onclick="popupAddPage('.Delete-modal')" >Delete Account</button>
+                                <!-- <button class="delete-acc" onclick="popupAddPage('.Delete-modal')" >Delete Account</button> -->
                             </div>
                         </div>
                     </div>
@@ -133,19 +133,8 @@
                 <label for="edit-lname"></label>
                 <input type="text" id="edit-lname" name="edit-lname" placeholder="Last Name:" required><br>
 
-                <div class="wrapper" font-size="1px" id="home">
-                    <div class="select-btn">
-                        <span id="homest-edit">Home Station:</span> 
-                        <i font-size="3px" class="fa fa-angle-down"></i>
-                    </div>
-                    <div class="content">
-                        <div class="search">
-                            <i class="fas fa-search"></i>
-                            <input spellcheck="false" type="text" placeholder="Search">
-                        </div>
-                        <ul class="options"></ul>
-                    </div>
-                </div>
+                <!-- <label for="edit-dob"></label>
+                <input type="date" id="edit-dob" name="edit-dob" placeholder="Birthday:" required><br> -->
 
                 <label for="edit-email"></label>
                 <input type="text" id="edit-email" name="edit-email" placeholder="Email:" onkeyup="validateEmail()"><br>
@@ -219,28 +208,6 @@
 				<div class="dialog-buttons">
 					<button class="form-clear-button" onclick="CancelChgPw()">Cancel</button>
 					<button type="submit" class="editform-submit-button" id="editform-submit-button" onclick="changePW()" style="margin-left: 40px;">Confirm</button>
-				</div>
-			</form>
-		</div>
-	</dialog>
-
-    <dialog class="Delete-modal" id="Delete-modal">
-		<div class="editing-form">
-			<section class="table_header">
-				<h1 id="edit-heading">Enter the password</h1>
-			</section>
-			<form onsubmit="return false" id="deleteac_form">
-                <div class="user-box">
-				<label for="existing-pw"></label>
-                <input type="password" id="existing-pw" name="existing-pw" placeholder="Password:" required>
-                    <span class="password-toggle-icon4" onclick="togglePasswordVisibility4()"><i class="fas fa-eye"></i></span>
-                <br>
-            </div>
-                <p id="deleteac-error"></p> 
-                
-				<div class="dialog-buttons">
-					<!-- <button class="form-clear-button" onclick="popupClosePage('Cpw-modal')">Cancel</button> -->
-					<button type="submit" class="editform-submit-button" id="editform-submit-button" onclick="check_for_delete()" style="margin-left: 10px;">Submit</button>
 				</div>
 			</form>
 		</div>
