@@ -34,7 +34,7 @@
 		margin-right: 10px;
 		margin-left: 5px;
 	  } 
-  #Announcement-title, #category,#editAnnouncement-title,#editcategory {
+  #Announcement-title, #category,#editAnnouncement-title,#editcategory, #recivers,#editrecivers {
     border: none;
     border-bottom: 1px solid #a9a9a9;
     color: #484848;
@@ -50,6 +50,9 @@
   }
 
   #category:focus {
+    border-bottom: 2px solid black;
+  }
+  #recivers:focus, #editrecivers{
     border-bottom: 2px solid black;
   }
   #editcategory:focus {
@@ -182,7 +185,7 @@ p {
   transform: translate(-50%, -50%);
   border-color: white;
   width: 900px;
-  height: 600px;
+  /* height: 600px; */
   padding: 30px;
 }
 #Announcement-body,#editAnnouncement-body {

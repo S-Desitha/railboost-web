@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 title.textContent = announcement.title;
 
                 const date = document.createElement("h5");
-                date.textContent = announcement.date;
+                date.textContent = announcement.recivers+": "+announcement.date;
                 date.style.textAlign = "right";
                 date.style.fontWeight = "100";
 
