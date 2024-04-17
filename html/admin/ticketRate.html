@@ -48,11 +48,38 @@
 				<div class="table-container">
 					<section class="table_header">
 						<h1>Ticket Price Details</h1>
-						<div class="input-group">
+						<div class="input-group" style="padding: 0 .8rem;">
 							<input type="search" placeholder="Search Ticket Rates...">
 							<img src="/Images/search.png" alt="">
 						</div>
 					</section>
+					<script>
+						const searchInput = document.querySelector('.table_header input[type="search"]');
+						searchInput.addEventListener('input', filterRateTable);
+
+						function filterRateTable() {
+							const searchTerm = searchInput.value.toLowerCase();
+							const tableRows = document.querySelectorAll('#rate_table tr');
+
+							tableRows.forEach(row => {
+								let rowVisible = false;
+
+								for (let i = 0; i < row.cells.length; i++) {
+									const cellText = row.cells[i].textContent.toLowerCase();
+									if (cellText.includes(searchTerm)) {
+										rowVisible = true;
+										break;
+									}
+								}
+
+								if (rowVisible) {
+									row.style.display = 'table-row';
+								} else {
+									row.style.display = 'none';
+								}
+							});
+						}
+					</script>
 
 					<section class="table_body">
 						<table>
