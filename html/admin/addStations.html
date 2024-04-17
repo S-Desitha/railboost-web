@@ -55,15 +55,15 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Station ID</th>
+                                    <th>Station Code</th>
                                     <th>Station Name</th>
                                     <th>Address</th>
                                     <th>Line</th>
                                     <th>Contact Number</th>
-                                    <th></th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody id="train_table">
+                            <tbody id="station_table">
                                 <!-- Populate table body as needed -->
                             </tbody>
                         </table>
@@ -75,45 +75,60 @@
         </div>
     </div>
     <dialog class="dialog-modal">
-        <div class="station-form">
-            <form onsubmit="return false">
+        <div class="adding-form">
+            <form onsubmit="return false" id="station-form">
                 <div class="table_header">
-                <h1 class="add-station-heading" id="add-new-station-header">Add a new Station </h2>
+                <h1 class="add-station-heading" id="add-station-heading">Add a new Station </h2>
                 </div>
                 
-                <select name="line" id="selectLine" placeholder="Line" required>
-                    <option value="Select Line" data-image="/Images/search.png">Select Line  </option>
-                    <option value="Line1">Line 1</option>
-                    <option value="Line2">Line 2</option>
-                    <option value="Line3">Line 3</option>
-                    <option value="addNewLine">Add new line</option>
-                </select>
-                <br>
-
-                <label for="stationId"></label>
-                <input type="text" id="trainId" placeholder="Station ID:" name="trainId" required><br>
+                
+                <label for="stationCode"></label>
+                <input type="text" id="stationId" placeholder="Station Code:" name="trainId" required><br>
 
                 <label for="station-name"></label>
                 <input type="text" id="stationName" name="stationName" placeholder="Station Name" required><br>
 
                 <label for="Address"></label>
-                <input type="text" id="address" placeholder="Address" name="address" required><br>
+                <input type="text" id="address" placeholder="Address" name="address" required><br><br>
+
+                <label for="Line"></label>
+                <!-- select lines are Coastal,Main,Nothern,Batticalo,Kelani Valley,Mannar,Mathale,Puttalam and Trincomalee -->
+
+                <select id="selectLine" name="selectLine">
+                    <option value="" disabled selected>Line</option>
+                    <option value="Coastal">Coastal</option>
+                    <option value="Main">Main</option>
+                    <option value="Northern">Northern</option>
+                    <option value="Batticalo">Batticalo</option>
+                    <option value="Kelani Valley">Kelani Valley</option>
+                    <option value="Mannar">Mannar</option>
+                    <option value="Mathale">Mathale</option>
+                    <option value="Puttalam">Puttalam</option>
+                    <option value="Trincomalee">Trincomalee</option>
+                    <!-- <option value="addNewLine">Add New Line</option> -->
+                </select>
+
+                <label for="Previous Station"></label>
+                <input type="text"id="PrevStation" placeholder="Previous Station">
+
+                <label for="Next Station"></label>
+                <input type="text" id="NextStation" placeholder="Next Station">
 
                 <label for="contactNumber"></label>
                 <input type="text" id="contactNumber" name="contactNumber" placeholder="Contact Number" required>
 
-                <div id="option1Elements" class="hidden">
+                <!-- <div id="option1Elements" class="hidden">
                     <label for="addNewLine"></label>
                     <input type="text" id="addNewLine" name="addNewLine" placeholder="Add New Line">
-                </div>
+                </div> -->
 
-                <button class="form-button" id="add-new-station-button">Add a new station </button>
+                <button class="form-button" id="add-station-button" style="width: 100%;">Add a new station </button>
             </form>
         </div>
     </dialog>
 
 
-
+<!-- 
     <script>
         var selectLine = document.getElementById("selectLine");
         var option1Elements = document.getElementById("option1Elements");
@@ -128,6 +143,6 @@
                 option1Elements.classList.remove("hidden");
             }
         });
-    </script>
+    </script> -->
 </body>
 </html>
