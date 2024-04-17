@@ -408,7 +408,7 @@ function deleteACC(){
 
     customFetch(endpoint2, params)
         .then(() => {
-            signout();
+            signoutAfterDelete();
         })
     .catch ((error) => {
         if (error=="login-redirected")

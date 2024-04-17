@@ -415,6 +415,11 @@ function signout() {
         }
     });
 }
+
+function signoutAfterDelete(){
+    localStorage.clear();
+    window.location.replace("/html/signin.html");
+}
 function togglePW() {
     const passwordField = document.getElementById("password");
     const eyeIcon = document.getElementById("password-toggle");

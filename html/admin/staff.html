@@ -57,11 +57,38 @@
 						<h1>Staff Details</h1>
 						<div class="input-group" style="padding: 0 .8rem;">
 							<input type="search" placeholder="Search Staff...">
-							<img src="/Images/filter.png" class="filter" alt="" onclick="toggleFilterBox()">
+							<!-- <img src="/Images/filter.png" class="filter" alt="" onclick="toggleFilterBox()"> -->
 							<img src="/Images/search.png" alt="">
 							
 						</div>
 					</section>
+					<script>
+						const searchInput = document.querySelector('.table_header input[type="search"]');
+						searchInput.addEventListener('input', filterStaffTable);
+
+						function filterStaffTable() {
+							const searchTerm = searchInput.value.toLowerCase();
+							const tableRows = document.querySelectorAll('#staff_table tr');
+
+							tableRows.forEach(row => {
+								let rowVisible = false;
+
+								for (let i = 0; i < row.cells.length; i++) {
+									const cellText = row.cells[i].textContent.toLowerCase();
+									if (cellText.includes(searchTerm)) {
+										rowVisible = true;
+										break;
+									}
+								}
+
+								if (rowVisible) {
+									row.style.display = 'table-row';
+								} else {
+									row.style.display = 'none';
+								}
+							});
+						}
+					</script>
 							
 					<div class="filter-box" id="filter-box">
 						<div class="wrapper" id="from">
