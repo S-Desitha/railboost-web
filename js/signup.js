@@ -89,7 +89,8 @@ async function signUp() {
     };
 
     let data = await customFetch(endpoint, params, false);
-    if (data.role.roleId==5) {
+    console.log(data);
+    if (user.role.roleId==5) {
 
     let swalPromise = Swal.fire({
         icon: 'success',
