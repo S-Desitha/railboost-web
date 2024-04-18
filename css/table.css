@@ -171,7 +171,7 @@ thead th.active,tbody td.active {
 
 .table_header .input-group input {
     width: 100%;
-    padding: .8rem ;
+    padding: 0.8rem ;
     background-color: transparent;
     border: none;
     outline: none;
