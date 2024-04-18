@@ -95,8 +95,6 @@ function updateStaff() {
 
     staffMember["staffId"] = document.getElementById('staffId').value;
     staffMember["station"] = document.getElementById('railwayStation').value;
-    // staffMember.user["fName"] = document.getElementById("fName").value;
-    // staffMember.user["lName"] = document.getElementById("lName").value;
     staffMember.user["role"] = document.getElementById("role").value;
     // staffMember.user["email"] = document.getElementById('email-field').value;
     // staffMember.user["telNo"] = document.getElementById('phone-field').value;
@@ -202,20 +200,31 @@ function addStaff() {
         method: "POST"
     };
     closeDialog();
+    Swal.fire({
+        title: "Success!",
+        text: `Link to create a password for the Username: ${username} has been sent to the email: ${email}.`,
+        icon: "success",
+        showCancelButton: false,
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "OK"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          
+          window.location.reload();
+        }
+      });
+      
     customFetch(endpoint2, params)
-        .then(() => {
-             // Close the dialog modal
-            Swal.fire({
-                title: "Success!",
-                text: `Link to create a password for the Username: ${username} has been sent to the email: ${email}.`,
-                icon: "success"
-            }).then(() => window.location.reload());
-        })
-        .catch((error) => {
-            if (error == "login-redirected") {
-                localStorage.setItem("last_url", window.location.pathname);
-            }
-        });
+    .then(() => {
+    })
+    .catch((error) => {
+        if (error == "login-redirected")
+            localStorage.setItem("last_url", window.location.pathname);
+    });
+
+
+    // alert(`Link to create a password for the Username :${username} has been sent to the email: ${email}.`);
+    
 
     // Clear the form
     document.getElementById('staffId').value = '';
@@ -226,9 +235,7 @@ function addStaff() {
     document.getElementById('telephone').value = '';
     document.getElementById('username').value = '';
 
-    // Hide the message
-    document.getElementById('message').style.display = 'none';
-}
+    }
 
 
 

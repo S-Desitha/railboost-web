@@ -795,3 +795,50 @@ h3{
 .custom-swal-container {
   z-index: 99999 !important;
 }
+.tooltip {
+  position: relative;
+  display: inline-block;
+  
+}
+
+.tooltip::after {
+  content: attr(title);
+  position: absolute;
+  background-color: black; /* Background color */
+  color: white; /* Text color */
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tooltip:hover::after {
+  visibility: visible;
+  opacity: 1;
+}
+.add-heading {
+  /* Add styles for the heading "Add a new Station" */
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding: 7px 0;
+  margin: 15px 0;
+  width: 100%;
+}
+
+input {
+ 
+  border: none;
+  border-bottom: 1px solid #a9a9a9;
+  color: #484848;
+  /* padding: 7px 0; */
+  margin: 15px 0;
+  width: 100%;
+}
+
+

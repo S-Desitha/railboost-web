@@ -453,6 +453,8 @@ function closeDialog() {
     const openDialogs = document.querySelectorAll('dialog[open]');
     openDialogs.forEach(dialog => {
         dialog.close();
+        // Clear the form fields
+        
     });
 }
 
@@ -464,6 +466,9 @@ function closeDialog() {
 
 function popupAddPage(classname) {
     let dialog = document.querySelector(classname);
+    
+    // clear the form fields
+
 
     dialog.showModal();
 
