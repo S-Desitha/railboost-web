@@ -1,5 +1,6 @@
 //const url = "http://localhost:8080/railboost_backend_war_exploded/parcelBooking"
 const parcelBookingEndpoint = "parcelBooking";
+const parcelCategoryEndpoint = "parcelCategory";
 
 
 document.addEventListener("DOMContentLoaded",async function(){
@@ -54,7 +55,9 @@ function addNewParcel() {
     parcel["receiverTelNo"] = document.getElementById("phone-field").value;
     parcel["receiverEmail"] = document.getElementById("email-field").value;
     parcel["item"] = document.getElementById("item").value;
-   
+    parcel["category"]  = document.getElementById("parcelCategory").value;
+    
+
 
     const body = parcel;
     const params = {
@@ -80,14 +83,34 @@ function addNewParcel() {
 
 
 function openDialog() {
-    var myDialog = document.getElementById('myDialog');
-    myDialog.showModal();
+  
+  getCategory();
+  var myDialog = document.getElementById('myDialog');
+  myDialog.showModal();
   }
 
-  function closeDialog() {
-    var myDialog = document.getElementById('myDialog');
-    myDialog.close();
+function closeDialog() {
+  var myDialog = document.getElementById('myDialog');
+  myDialog.close();
   }
+  async function getCategory(){
+    try{
+      var data = await customFetch(parcelCategoryEndpoint, {}, false);
 
+      console.log(data)
+
+      var select = document.getElementById('parcelCategory');
+      data.forEach(category => {
+        var opt = document.createElement('option');
+        opt.value = category.itemId;
+        opt.innerHTML = category.specialItem;;
+        select.appendChild(opt);
+      });
+    }catch{
+
+    }
+    popupAddPage('.staff-add_edit-modal')
+    
+  }
 
   

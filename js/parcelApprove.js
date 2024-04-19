@@ -3,10 +3,11 @@ const approveParcelEndPoint =  "approveParcel";
 
 document.addEventListener("DOMContentLoaded",async function(){
     
-    let data = await customFetch(approveParcelEndPoint, {});
+    
 
     try{
 
+        let data = await customFetch(approveParcelEndPoint, {});
 
         data.forEach(approveParcel => {
         let approveButton = document.createElement("button");
@@ -22,10 +23,10 @@ document.addEventListener("DOMContentLoaded",async function(){
         rejectButton.onclick = rejectParcel;   
 
         let addWeightButton = document.createElement("button");
-        addWeightButton.add("view-button");
+        addWeightButton.classList.add("view-button");
         addWeightButton.innerHTML = "<i class='fa-solid fa-eye' title='View Application' style='color:#0047AB'><span>  View</span></i>";
         addWeightButton.setAttribute("addWeight", JSON.stringify(approveParcel));
-        addWeightButton.onclick = addWeight;
+        addWeightButton.onclick = openDialog;
 
         
 
@@ -35,9 +36,9 @@ document.addEventListener("DOMContentLoaded",async function(){
         row.insertCell(2).innerHTML = approveParcel.receiverName; 
         row.insertCell(3).innerHTML = approveParcel.recoveringStation;
         row.insertCell(4).innerHTML = approveParcel.item;
-        // row.insertCell(5).innerHTML = approveParcel.weight;
-        // row.insertCell(6).append(editButton);
-        // row.insertCell(7).innerHTML = approveParcel.total;  
+        row.insertCell(5).innerHTML = approveParcel.weight;
+        row.insertCell(6).append(addWeightButton);
+        row.insertCell(7).innerHTML = approveParcel.totalprice;  
         row.insertCell(8).innerHTML = approveParcel.status;   
         row.insertCell(9).append(approveButton, rejectButton);
    
@@ -49,6 +50,19 @@ document.addEventListener("DOMContentLoaded",async function(){
 }
 
 });
+
+function openDialog() {
+    var parcel = JSON.parse(this.getAttribute("addWeight"));
+    localStorage.setItem("AddWeightParcels",parcel["bookingId"]);
+    console.log(localStorage.getItem("AddWeightParcels"));
+    var myDialog = document.getElementById('addWeightId');
+    myDialog.showModal();
+  }
+
+  function closeDialog() {
+    var myDialog = document.getElementById('addWeightId');
+    myDialog.close();
+  }
 
 
 function rejectParcel() {
@@ -147,5 +161,42 @@ function approveParcelF() {
     });
 }
 function addWeight(){
+    const approveParcel = localStorage.getItem("AddWeightParcels");
+    weight={}
+    weight["weight"] = document.getElementById("addWeight").value;
+    weight["bookingId"]= localStorage.getItem("AddWeightParcels")
 
-}
+    const body = weight;
+    const params = {
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify(body),
+      method: "PUT"
+    };
+
+    let qparams = {
+        view: 1
+    };
+    
+    let queryString = Object.keys(qparams).map(key => key + '=' + encodeURIComponent(qparams[key])).join('&');
+    let urlQuery = `${approveParcelEndPoint}?${queryString}`;
+
+
+    // console.log(params);
+    customFetch(urlQuery, params)
+    .then(() => {
+        Swal.fire({
+            title: "Weight is added",
+            // text: "The rate has been successfully updated!",
+            icon: "success",
+        }).then((result) => {
+        })
+    })
+        .catch ((error) => {
+        if (error=="login-redirected")
+            localStorage.setItem("last_url", window.location.pathname);
+        });
+    
+    }
+
