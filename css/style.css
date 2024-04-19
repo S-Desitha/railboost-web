@@ -50,7 +50,7 @@ a:hover {
   border-radius: 30px 30px 30px 30px;
   border-top: 1px solid #ffffff;
   /* margin-bottom: 10px; */
-  margin-top: 77px;
+  margin-top: 80px;
   
 
   
@@ -306,7 +306,6 @@ a:hover {
 
 
 
-
 .service-container {
   display: flex;
   flex-direction: column;
@@ -527,6 +526,15 @@ canvas#chart{
   border-radius: 1.6rem;
   padding: 1.6em; ;
 }
+.polar-chart{
+  box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
+  background: white;
+  max-width: 40%;
+  max-height:90%;
+  margin-top: 3rem;
+  border-radius: 1.6rem;
+  padding: 1.6em; ;
+}
 .charts{
   display: flex;
   gap: 20px;
@@ -537,17 +545,35 @@ canvas#chart{
 
 .table-data{
   display: flex;
-  gap: 20px;
+  flex-direction: row;
+  gap: 30px;
+  width: 100%;
+
 }
 .recent-trains{
   box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
   background: white;
-  max-width: 60%;
+  width: 150%;
+  /* max-width: 60%; */
   max-height:90%;
   margin-top: 3rem;
   border-radius: 1.6rem;
-  padding: 1.6em; ;
+  padding: 1.6em; 
 }
+
+.annns-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 120px;
+  margin-top: 3rem;
+  box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
+  background: white;
+  border-radius:1.6rem ;
+  padding: 1.6em; 
+  
+}
+
 .parcels{
   box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
   background: white;
@@ -595,6 +621,17 @@ h3{
   border-radius: 8px;
   transition: all 0.1s ease;
 }
+.stat{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 20px;
+  /* justify-content: space-between; */
+
+}
+
+
 
 .parcels .parcel-list li{
   border: #0000001b;

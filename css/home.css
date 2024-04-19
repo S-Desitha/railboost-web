@@ -289,7 +289,7 @@ nav ul li:hover ul.dropdown{
   }
   
 /* mobile */
-  @media only screen and (max-width: 1250px) {
+  @media only screen and (max-width: 1000px) {
     body {
       /* background-color: lightblue; */
 

@@ -101,118 +101,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Start the counter animation for each element with the class 'count'
     counters.forEach(startCounter);
 
-    
-        const chartCanvas = document.querySelector(".chart");
-    
-        // Check if the canvas element exists
-        if (!chartCanvas) {
-            console.error("Canvas element with class 'chart' not found.");
-            return;
-        }
-    
-        const chart = new Chart(chartCanvas.getContext("2d"), {
-            type: "line",
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [
-                    {
-                        label: "Revenue by Tickets",
-                        data: [250000, 150000, 180000, 400000, 220000, 250000, 200000, 500000, 270000, 240000, 210000, 700000],
-                        backgroundColor: "rgba(82, 113, 255, 0.2)",
-                        borderColor: "rgba(82, 113, 255, 1)",
-                        borderWidth: 2,
-                        pointRadius: 5,
-                        pointStyle: 'circle'
-                    },
-                    {
-                        label: "Revenue by Parcel Delivery",
-                        data: [80000, 90000, 100000, 300000, 120000, 130000, 350000, 150000, 140000, 130000, 600000, 650000],
-                        backgroundColor: "rgba(75, 192, 192, 0.2)",
-                        borderColor: "rgba(75, 192, 192, 1)",
-                        borderWidth: 2,
-                        pointRadius: 5,
-                        pointStyle: 'rect'
-                    }
-                    // Add more datasets if needed
-                ]
-            },
-            options: {
-                responsive: true,
-    plugins: {
-        tooltip: {
-            mode: 'index',
-            intersect: false,
-        },
-    },
-    scales: {
-        x: {
-            title: {
-                display: true,
-                text: 'Month',
-                font: {
-                    size: 20,
-                    weight: 'bold'
-                }
-            }
-        },
-        y: {
-            title: {
-                display: true,
-                text: 'Revenue (in thousands)',
-                font: {
-                    size: 20,
-                    weight: 'bold'
-                }
-            }
-        }
-    }
-            }
-        });
-    
-        // Your other JavaScript code...
-        
-        const DchartCanvas = document.querySelector(".donut-chart");
-        const dchart = new Chart(DchartCanvas.getContext("2d"), {
-            type: 'doughnut',
-            data: {
-            labels: [
-              'Delayed',
-              'On-Time',
-              'Cancelled'
-            ],
-            datasets: [{
-              label: 'Punctuality Rate of Trains',
-              data: [50, 80, 20],
-              backgroundColor: [
-                '#5271FF',   // Primary Color (Original Theme Color)
-                '#6495ED',   // Secondary Color (Lighter Shade)
-                '#3A50B6' 
-              ],
-              cutout: 100,
-              radius: 140,
-              borderWidth: 4,
-              hoverOffset: 10,
-              title: 'Punctuality Rate of Trains'
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Punctuality Rate of Trains Today',
-                    font: {
-                        size: 20,
-                        weight: 'bold'
-                    }
-                }
-            },
-            
-        }
-          
-        });
-
         
 });
 
@@ -327,35 +215,23 @@ function createNavBar(context) {
                 console.log("Logged in status set to null" + localStorage.getItem("loggedIn"));
 
             }
-            // clear local storage
-
-            // console.log("Name: "+Name);
-            // console.log(document.getElementById("navb").innerHTML);
-            // document.getElementById("navb").innerHTML= Name;
-            // //remove cursor events
+           
            
 
             document.getElementById("navb").style.pointerEvents = "none";
             
             if (context == "admin") {
-                document.getElementById("sm-nav").remove();
-                document.getElementById("passenger-nav").remove();
+        
+                document.getElementById("nav-home").querySelector('a').setAttribute("href", "/html/admin/admin.html") ;
+               
                 
-                document.getElementById("nav-about").remove();
-                document.getElementById("nav-contact").remove();
-                document.getElementById("nav-services").innerHTML = "Admin Services";
             }
             else if (context == "sm") {
-                document.getElementById("admin-nav").remove();
-                document.getElementById("passenger-nav").remove();
-
-                document.getElementById("nav-about").remove();
-                document.getElementById("nav-contact").remove();
-                document.getElementById("nav-services").innerHTML = "SM Services";
+                document.getElementById("nav-home").querySelector('a').setAttribute("href", "/html/sm/sm.html") ;
             }
             else if (context == "passenger") {
-                // document.getElementById("admin-nav").remove();
-                // document.getElementById("sm-nav").remove();
+                 
+                document.getElementById("nav-home").querySelector('a').setAttribute("href", "/html/passenger/home.html") ;
             }
         });
 }
@@ -372,7 +248,8 @@ function createSideBar(context) {
             if (context == "admin") {
                 document.getElementById("sm-sidebar").remove();
                 document.getElementById("passenger-sidebar").remove();
-
+                document.getElementById("anns").querySelector('a').setAttribute("href", "/html/admin/announcement.html") ;
+               
                 // document.getElementById("nav-about").remove();
                 // document.getElementById("nav-contact").remove();
                 document.getElementById("sidebar-services-text-span").innerHTML = "Admin Services";
@@ -387,9 +264,12 @@ function createSideBar(context) {
                 document.getElementById("sidebar-services-text-span").innerHTML = "Station Master Services";
             }
             else if (context == "passenger") {
+
                 document.getElementById("sm-sidebar").remove();
                 document.getElementById("admin-sidebar").remove();
                 document.getElementById("title").innerHTML = "Passenger";
+                document.getElementById("anns").querySelector('a').setAttribute("href", "/html/passenger/viewAnnouncement.html") ;
+               
                 
                 document.getElementById("sidebar-services-text-span").innerHTML = "Services";
             }

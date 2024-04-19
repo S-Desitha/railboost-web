@@ -12,12 +12,13 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
 
     <!-- jquery -->
-    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
     integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
     crossorigin="anonymous"></script>
 
     <!-- charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
     
     <!-- icons -->
@@ -34,6 +35,7 @@
     <script src="/js/notification.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/auth.js"></script>
+    <script src="/js/charts.js"></script>
     
     <title>RailBoost - Railway Service Enhancement</title>
 </head>
@@ -121,115 +123,78 @@
                             
                         </div>
                     </div>
-                    <div class="table-data">
-                        <div class="recent-trains">
-                            <div class="head">
-                                <h3>Inbound Train Updates</h3>
-                                <a href="sm/sm-live.html">View All</a>
+                    <div class="annns-bar">
+                        <div class="annns">
+                            <h3>Announcements</h3>
+                            <div class="annn">
+                                <p>Train 1234 will be delayed by 30 minutes due to technical issues.</p>
                             </div>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Train No</th>
-                                        <th>Estimated Arrival Time</th>
-                                        <th>Estimated Departure Time</th>
-                                        <th>Actions</th>
-                                    </tr>
-        
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>12345</td>
-                                        <td>12:00</td>
-                                        <td>12:30</td>
-                                        <td><a href="sm/sm-live.html" class="update">Update Time</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>12345</td>
-                                        <td>12:00</td>
-                                        <td>12:30</td>
-                                        <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>12345</td>
-                                        <td>12:00</td>
-                                        <td>12:30</td>
-                                        <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>12345</td>
-                                        <td>12:00</td>
-                                        <td>12:30</td>
-                                        <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>12345</td>
-                                        <td>12:00</td>
-                                        <td>12:30</td>
-                                        <td><a href="sm/sm-live.html" class="update">Update Time</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="parcels">
-                            <div class="head">
-                                <h3>    Incoming Parcels Today</h3>
-                                <!-- <a href="sm/approve-parcels.html">View All</a> -->
-                            </div>
-                            <ul class="parcel-list">
-                                <li>
-                                    <div class="parcel-train">
-                                        <h4>Train No: 8513 </h4>
-                                    </div>
-                                    <div class="No-of-parcels">
-                                        <h4>21 Parcels</h4>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="parcel-train">
-                                        <h4>Train No: 1077 </h4>
-                                    </div>
-                                    <div class="No-of-parcels">
-                                        <h4>10 Parcels</h4>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="parcel-train">
-                                        <h4>Train No: 8355 </h4>
-                                    </div>
-                                    <div class="No-of-parcels">
-                                        <h4>10 Parcels</h4>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="parcel-train">
-                                        <h4>Train No: 8321 </h4>
-                                    </div>
-                                    <div class="No-of-parcels">
-                                        <h4>15 Parcels</h4>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="parcel-train">
-                                        <h4>Train No: 12345 </h4>
-                                    </div>
-                                    <div class="No-of-parcels">
-                                        <h4>10 Parcels</h4>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="parcel-train">
-                                        <h4>Train No: 12345 </h4>
-                                    </div>
-                                    <div class="No-of-parcels">
-                                        <h4>10 Parcels</h4>
-                                    </div>
-                                </li>
-                            </ul>
-        
                         </div>
                     </div>
+                    <div class="stat">
+                        <div class="table-data">
+                            <div class="recent-trains">
+                                <div class="head">
+                                    <h3>Inbound Train Updates</h3>
+                                    <a href="sm/sm-live.html">View All</a>
+                                </div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Schedule ID</th>
+                                            <th>Estimated Arrival Time</th>
+                                            <th>Estimated Departure Time</th>
+                                            <!-- <th>Actions</th> -->
+                                        </tr>
             
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>12345</td>
+                                            <td>12:00</td>
+                                            <td>12:30</td>
+                                            <!-- <td><a href="sm/sm-live.html" class="update">Update Time</a></td> -->
+                                        </tr>
+                                        <tr>
+                                            <td>12345</td>
+                                            <td>12:00</td>
+                                            <td>12:30</td>
+                                            <!-- <td><a href="sm/sm-live.html"class="update">Update Time</a></td> -->
+                                        </tr>
+                                        <tr>
+                                            <td>12345</td>
+                                            <td>12:00</td>
+                                            <td>12:30</td>
+                                            <!-- <td><a href="sm/sm-live.html"class="update">Update Time</a></td> -->
+                                        </tr>
+                                        <tr>
+                                            <td>12345</td>
+                                            <td>12:00</td>
+                                            <td>12:30</td>
+                                            <!-- <td><a href="sm/sm-live.html"class="update">Update Time</a></td> -->
+                                        </tr>
+                                        <tr>
+                                            <td>12345</td>
+                                            <td>12:00</td>
+                                            <td>12:30</td>
+                                            <!-- <td><a href="sm/sm-live.html" class="update">Update Time</a></td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                         
+                        </div> 
+                        
+                            <!-- <canvas class="chart" id="chart"></canvas> -->
+                            <canvas class="polar-chart" id="pchart"></canvas>
+                        
+                    </div>
+                    
+                </main>
+            </div>
+        </body>
+        </html>
+        
 
             <!-- <div class="box-container">
                 <a href="/html/passenger/passSearch.html" class="box">
