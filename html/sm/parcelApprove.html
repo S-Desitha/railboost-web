@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/table.css">
     <link rel="stylesheet" href="/css/buttons.css">
+    <link rel="stylesheet" href="/css/parcelApprove.css">
 
     <link rel="stylesheet" href="/css/sweetalert2.min.css">
     <script src="/js/sweetalert2.all.min.js"></script>
@@ -15,10 +16,9 @@
     <title>approveParcel</title>
 </head>
 <body>
-    <nav class="navbar" >
-        <script>createNavBar("passenger")</script>
-    </nav>
-
+    <!-- <nav class="navbar" >
+		<script>createNavBar("sm")</script>
+	</nav> -->
     <div class="service-view" id="hasDataDiv">
 		<div class="service-container">
             
@@ -37,6 +37,9 @@
                                 <th>Receiver Name</th>
 								<th>Recovering Station</th>
                                 <th>Item</th>
+                                <th>Weight</th>
+                                <th></th>
+                                <th>Total</th>
                                 <th>Status</th>
                                 <th></th>
 							</tr>
@@ -49,6 +52,16 @@
     </div>
     <div class="service-view" id="noDataDiv">
 	<div class="service-container">
+
+
+        <dialog class="addWeightClass" id="addWeightId">
+            <button autofocus id="form-clear-btn">Close</button>
+            <input type="number" id="addWeight" name="addWeight" placeholder="Add weight"required>
+            <button type="submit" onclick="addWeight()" id="dialog-buttons">Add Weight</button>
+            
+
+          </dialog>
+          <button>Show the dialog</button>
     
 </body>
 </html>
