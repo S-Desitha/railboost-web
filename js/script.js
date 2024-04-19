@@ -370,11 +370,22 @@ function popupAddPage(classname) {
 
 
 function seatReserve() {
-    var userResponse = confirm("Now you'll be redirected to the official website for seat reservations of Sri Lanka Railways.");
-    if (userResponse) {
-        window.location.href = "https://seatreservation.railway.gov.lk/"; 
-    }
+    Swal.fire({
+        title: 'Redirect to Seat Reservation',
+        text: "You'll be redirected to the official website for seat reservations of Sri Lanka Railways.",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, proceed!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "https://seatreservation.railway.gov.lk/"; 
+        }
+    });
 }
+
 
 
 function confirmCall() {

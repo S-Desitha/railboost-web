@@ -203,7 +203,7 @@ function deleteStation() {
 function viewStations(scheduleId) {
     let schedule = JSON.parse(localStorage.getItem("scheduleList")).find(sch => sch.scheduleId==scheduleId);
     let stations = schedule.stations;
-    let dialog = document.querySelector(".stations-data-modal");
+    let dialog = document.querySelector(".dialog-modal");
 
     document.getElementById("start-from-date").innerHTML = schedule.startDate;
     if (schedule.endDate!=null)
