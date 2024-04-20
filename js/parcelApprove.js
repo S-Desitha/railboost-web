@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded",async function(){
 
         let addWeightButton = document.createElement("button");
         addWeightButton.classList.add("view-button");
-        addWeightButton.innerHTML = "<i class='fa-solid fa-eye' title='View Application' style='color:#0047AB'><span>  View</span></i>";
+        addWeightButton.innerHTML = "<i title='Add Weight' style='color:#0047AB; font-weight: bold;'><span> Add Weight</span></i>";
         addWeightButton.setAttribute("addWeight", JSON.stringify(approveParcel));
         addWeightButton.onclick = openDialog;
 
@@ -39,8 +39,8 @@ document.addEventListener("DOMContentLoaded",async function(){
         row.insertCell(5).innerHTML = approveParcel.weight;
         row.insertCell(6).append(addWeightButton);
         row.insertCell(7).innerHTML = approveParcel.totalprice;  
-        row.insertCell(8).innerHTML = approveParcel.status;   
-        row.insertCell(9).append(approveButton, rejectButton);
+        // row.insertCell(8).innerHTML = approveParcel.status;   
+        row.insertCell(8).append(approveButton, rejectButton);
    
         
     });
@@ -57,6 +57,12 @@ function openDialog() {
     console.log(localStorage.getItem("AddWeightParcels"));
     var myDialog = document.getElementById('addWeightId');
     myDialog.showModal();
+
+    myDialog.addEventListener('click', function(event) {
+        if (event.target === myDialog) {
+          myDialog.close();
+        }
+      });
   }
 
   function closeDialog() {
@@ -186,11 +192,14 @@ function addWeight(){
     // console.log(params);
     customFetch(urlQuery, params)
     .then(() => {
+        var myDialog = document.getElementById('addWeightId');
+        myDialog.close();
         Swal.fire({
             title: "Weight is added",
             // text: "The rate has been successfully updated!",
             icon: "success",
         }).then((result) => {
+            window.location.reload();
         })
     })
         .catch ((error) => {
