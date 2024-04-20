@@ -62,7 +62,7 @@
 .edit-btn {
 
     color: rgb(255, 255, 255);
-    background: rgba(0, 34, 184, 0.784);
+    background: #007bff;
     padding: 5px;
     width: 70px;
     border-radius: 4px;
@@ -73,7 +73,7 @@
 }
 .change-pw{
     color: rgb(255, 255, 255);
-    background: rgba(0, 34, 184, 0.784);
+    background: #007bff;
     padding: 5px;
     width: 160px;
     border-radius: 4px;
@@ -83,7 +83,7 @@
 .delete-acc {
 
     color: rgb(255, 255, 255);
-    background: #c84040e4;
+    background: #333;
     padding: 5px;
     width: 160px;
     border-radius: 4px;
@@ -103,7 +103,7 @@
     background: var(--secondary-color);
 }
 .delete-acc:hover{
-    background: rgba(114, 2, 2, 0.942);
+    background: #222;
 }
 .card-2 img{
     width: 180px;
@@ -116,7 +116,7 @@
 .dp{
     display: block;
     width: 200px;
-    background: #e3362c;
+    background: #007bff;
     color: #fff;
     padding: 12px;
     margin: 10px auto;
@@ -125,7 +125,7 @@
     margin-bottom: 26px;
 }
 .dp:hover{
-    background: rgba(114, 2, 2, 0.942);
+    background: var(--secondary-color);;
 }
 .input-dp{
     display: none;
@@ -152,7 +152,7 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 500px; 
+   
   background-color: #ffffff; 
   border: 1px solid #ccc; 
   border-radius: 8px; 
