@@ -18,12 +18,14 @@ document.addEventListener("DOMContentLoaded",async function(){
                 if (parcel.recoveringStation==stationParcels[i].recoveringStation) {
                     stationParcels[i].numberOfParcels++;
                     stationParcels[i].bookingId.push(parcel.bookingId)
+                    stationParcels[i].item.push(parcel.item);
                     break;
                 }
                 if (i==stationParcels.length-1) {
                     stationParcels.push({
                         recoveringStation: parcel.recoveringStation,
                         bookingId: [parcel.bookingId],
+                        item: [parcel.item],
                         numberOfParcels: 1
                     });
                     break;
@@ -33,9 +35,12 @@ document.addEventListener("DOMContentLoaded",async function(){
                 stationParcels.push({
                     recoveringStation: parcel.recoveringStation,
                     bookingId: [parcel.bookingId],
+                    item: [parcel.item],
                     numberOfParcels: 1
                 });
             }
+            var parcel = JSON.stringify(stationParcels)
+            localStorage.setItem("stationParcels",parcel);
         });
 
         for (let index = 0; index < stationParcels.length; index++) {
@@ -45,8 +50,9 @@ document.addEventListener("DOMContentLoaded",async function(){
             addParcelsSchedule.classList.add("set-station-button");
             addParcelsSchedule.innerHTML = "<i title='addParcel' ><span> Add Parcel</span></i>";
             addParcelsSchedule.setAttribute("parcelSchedule", JSON.stringify(stationParcels[index]));
-            addParcelsSchedule.onclick = showSelectParcelPage;
-
+            // addParcelsSchedule.onclick = showSelectParcelPage(stationParcels[index].recoveringStation);
+            addParcelsSchedule.onclick = showSelectParcelPage.bind(addParcelsSchedule, stationParcels[index].recoveringStation);
+            console.log(stationParcels[index]);
 
             let row = document.getElementById("myParcels").insertRow(-1);
             row.insertCell(0).innerHTML = stationParcels[index].recoveringStation;
@@ -96,4 +102,14 @@ document.addEventListener("DOMContentLoaded",async function(){
     console.log(stationParcels)
 
 });
+function showSelectParcelPage(recoveringStation){
+    const endPoint = "selectParcel.html";
+    let params = {
+        recoveringStation: recoveringStation,
+      };
+      let queryString = Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+      let urlQuery = `${endPoint}?${queryString}`;
+      console.log(urlQuery)
+      window.location.href = urlQuery;
+}
 
