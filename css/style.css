@@ -520,8 +520,8 @@ canvas#chart{
 .donut-chart{
   box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
   background: white;
-  max-width: 40%;
-  max-height:90%;
+  max-width: 35%;
+  max-height:100%;
   margin-top: 3rem;
   border-radius: 1.6rem;
   padding: 1.6em; ;
@@ -553,9 +553,9 @@ canvas#chart{
 .recent-trains{
   box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
   background: white;
-  width: 150%;
+  width: 180%;
   /* max-width: 60%; */
-  max-height:90%;
+  max-height:50%;
   margin-top: 3rem;
   border-radius: 1.6rem;
   padding: 1.6em; 

@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         '#3A50B6' 
                     ],
                     cutout: 100,
-                    radius: 140,
+                    radius: 160,
                     borderWidth: 4,
                     hoverOffset: 10,
                     title: 'Punctuality Rate of Trains'

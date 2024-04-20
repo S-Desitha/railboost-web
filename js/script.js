@@ -249,6 +249,7 @@ function createSideBar(context) {
                 document.getElementById("sm-sidebar").remove();
                 document.getElementById("passenger-sidebar").remove();
                 document.getElementById("anns").querySelector('a').setAttribute("href", "/html/admin/announcement.html") ;
+                document.getElementById("profile").querySelector('a').setAttribute("href", "/html/admin/admin-profile.html") ;
                
                 // document.getElementById("nav-about").remove();
                 // document.getElementById("nav-contact").remove();
@@ -256,19 +257,23 @@ function createSideBar(context) {
             }
             else if (context == "sm") {
                 // console.log("CONTEXT IDENTIFIED AS SM");
+                document.getElementById("reports").remove();
                 document.getElementById("admin-sidebar").remove();
                 document.getElementById("passenger-sidebar").remove();
                 
                 document.getElementById("title").innerHTML = "Station Master";
+                document.getElementById("profile").querySelector('a').setAttribute("href", "/html/sm/sm-profile.html") ;
                 
                 document.getElementById("sidebar-services-text-span").innerHTML = "Station Master Services";
             }
             else if (context == "passenger") {
 
+                document.getElementById("reports").remove();
                 document.getElementById("sm-sidebar").remove();
                 document.getElementById("admin-sidebar").remove();
                 document.getElementById("title").innerHTML = "Passenger";
                 document.getElementById("anns").querySelector('a').setAttribute("href", "/html/passenger/viewAnnouncement.html") ;
+                document.getElementById("profile").querySelector('a').setAttribute("href", "/html/passenger/profile.html") ;
                
                 
                 document.getElementById("sidebar-services-text-span").innerHTML = "Services";

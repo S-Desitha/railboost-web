@@ -3,12 +3,20 @@
 authorize(window.location.pathname);
 
 function manageAccess(resp, resource) {
-    if (!localStorage.getItem("loggedIn") || resp.isSuccessful ==false || !((resource=="admin" && resp.role["roleId"]==1) || (resource=="sm" && resp.role["roleId"]==3) || (resource=="passenger" && resp.role["roleId"]==5))) {
-        alert("Unauthorized Access");
-        window.location.replace("/html/forbidden.html");
+    if (!localStorage.getItem("loggedIn") || resp.isSuccessful == false || !((resource == "admin" && resp.role["roleId"] == 1) || (resource == "sm" && resp.role["roleId"] == 3) || (resource == "passenger" && resp.role["roleId"] == 5))) {
+        // Using SweetAlert for unauthorized access notification
+        Swal.fire({
+            icon: 'error',
+            title: 'Unauthorized Access',
+            text: 'You do not have permission to access this resource.',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.replace("/html/forbidden.html");
+            }
+        });
     }
 }
-
 
 
 async function authorize(pageUrl){
