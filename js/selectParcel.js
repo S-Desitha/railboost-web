@@ -14,8 +14,9 @@ let station = urlParams.get("recoveringStation");
                     let addToTrain = document.createElement("button");
 
                     addToTrain.classList.add("set-station-button");
-                    addToTrain.innerHTML = "<i title='addParcel' ><span> Add To Train</span></i>";
+                    addToTrain.innerHTML = "<i title='addParcel' style='color:grey; font-weight: bold;' ><span> Assign</span></i>";
                     addToTrain.setAttribute("parcelBookingId", JSON.stringify(parcel.bookingId[index]));
+                    addToTrain.setAttribute("disabled", true);
                     addToTrain.onclick = addParcelsToTrain;
         
         
@@ -74,7 +75,7 @@ let station = urlParams.get("recoveringStation");
                 let addSchedule = document.createElement("button");
                
                 addSchedule.classList.add("set-station-button");
-                addSchedule.innerHTML = "<i title='addParcel' ><span> Add To Schedule</span></i>";
+                addSchedule.innerHTML = "<i title='addParcel' style='color:#0047AB; font-weight: bold;' ><span> Select</span></i>";
                 addSchedule.setAttribute("parcelSchedule", JSON.stringify(sch));
                 addSchedule.onclick = setSchedule;
 
@@ -95,36 +96,58 @@ let station = urlParams.get("recoveringStation");
     var parcelSchedule = JSON.parse(this.getAttribute("parcelSchedule"));
     scheduleId = parcelSchedule.scheduleId;
     console.log(scheduleId);
+
+    var assignButtons = document.querySelectorAll(".set-station-button");
+    assignButtons.forEach(button => {
+        button.removeAttribute("disabled");
+        button.querySelector('span').style.color = 'green';
+    });
+    this.style.backgroundColor = "#AED6F1";
+    
   }
 
   function addParcelsToTrain(){
-    const parcelTrackingEndPoint = "parcelTracking";
-    parcel = {};
-    console.log(scheduleId);
-    var parcelBookingId = JSON.parse(this.getAttribute("parcelBookingId"));
+    Swal.fire({
+        title: "Are you sure?",
+        text: `You won't be able to revert this!`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#5271FF",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Assign!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const parcelTrackingEndPoint = "parcelTracking";
+            parcel = {};
+            console.log(scheduleId);
+            var parcelBookingId = JSON.parse(this.getAttribute("parcelBookingId"));
 
-    parcel["bookingId"] = parcelBookingId;
-    parcel["scheduleId"] = scheduleId;
+            parcel["bookingId"] = parcelBookingId;
+            parcel["scheduleId"] = scheduleId;
 
-    const body = parcel;
-    const params = {
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      },
-      body: JSON.stringify(body),
-      method: "PUT"
-    };
-    customFetch(parcelTrackingEndPoint, params)
-        .then(()=> window.location.reload())
-        .catch((error) => {
-            if (error=="login-redirected")
-                localStorage.setItem("last_url", window.location.pathname);
-        });
+            const body = parcel;
+            const params = {
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(body),
+            method: "PUT"
+            };
+            customFetch(parcelTrackingEndPoint, params)
+                .then(()=> window.location.reload())
+                .catch((error) => {
+                    if (error=="login-redirected")
+                        localStorage.setItem("last_url", window.location.pathname);
+                });
+
+        } else {
+            Swal.fire("Cancelled", "Your operation has been cancelled", "error");
+            
+        }
+    });
 
   }
   
-
-
 
 
 
