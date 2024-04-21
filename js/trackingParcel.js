@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded",async function(){
                     stationParcels[i].numberOfParcels++;
                     stationParcels[i].bookingId.push(parcel.bookingId)
                     stationParcels[i].item.push(parcel.item);
+                    stationParcels[i].item.push(parcel.sendingStation);
                     break;
                 }
                 if (i==stationParcels.length-1) {
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded",async function(){
                         recoveringStation: parcel.recoveringStation,
                         bookingId: [parcel.bookingId],
                         item: [parcel.item],
+                        sendingStation :[parcel.sendingStation],
                         numberOfParcels: 1
                     });
                     break;
@@ -36,11 +38,12 @@ document.addEventListener("DOMContentLoaded",async function(){
                     recoveringStation: parcel.recoveringStation,
                     bookingId: [parcel.bookingId],
                     item: [parcel.item],
+                    sendingStation :[parcel.sendingStation],
                     numberOfParcels: 1
                 });
             }
             var parcel = JSON.stringify(stationParcels)
-            localStorage.setItem("stationParcels",parcel);
+            localStorage.setItem("stationParcels1234",parcel);
         });
 
         for (let index = 0; index < stationParcels.length; index++) {
