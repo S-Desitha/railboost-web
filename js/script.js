@@ -291,7 +291,7 @@ async function customFetch(endpoint, options, sendJWT) {
                     let data = await resp.json();
                     let error_msg = data.detailMessage;
                     if (error_msg=="signup-expired"){
-                        window.alert("You signup session has expired. Please contact administrator and signup again.");
+                        window.alert("Your session has expired. Please contact administrator.");
                     }
                     window.location.href="/index.html";
                     return Promise.reject(data.detailMessage);
