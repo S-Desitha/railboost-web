@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forget Password</title>
+
+     <!-- sweet alert -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <script src="/js/script.js"></script>
+    <!-- <script src="/js/signin.js"></script> -->
+    <script src="/js/forgetPW.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/signin.css">
+    <link rel="stylesheet" href="/css/signup.css">
+  </head>
+
+  <body>
+    <div class="login-container">
+
+      <div class="login-left">
+        <img src="/Images/train3.png" alt="Login photo" class="login-image" />
+      </div>
+
+    <div class="login-right">
+      
+        <div class="login-content">
+           <img src="/Images/RailBoost Logo.png" alt="railboost Logo" class="logo" />
+           <div class="login-form">
+            <form onsubmit="return false" method="post" id="signin-form">
+                <h3 style="text-align: center;">Create New Password</h3><br>
+                <!-- <label for="username"></label>
+                <input class="username" type="text" id="username" name="username" placeholder="Username" /><br /> -->
+                <div class="input-group">
+                    <div class="password-wrapper">
+                    <input class="password" type="password" id="password" name="password" placeholder="New Password" onkeyup="validateStrPassword()" oninput="toggleEye()" />
+                    <i class="toggle-password fas fa-eye-slash" id="password-toggle" style="display: none;" onclick="togglePW()"></i>
+                    </div>
+                    <span id="spassword-error"></span>
+                </div>
+
+                <div class="input-group">
+                    <div class="password-wrapper">
+                        <input class="input-field password" type="password" id="cpassword" name="confirm-password" onkeyup="validatePassword()" oninput="toggleEye()" placeholder="Confirm Password" required />
+                        <i class="toggle-password fas fa-eye-slash" style="display: none;" onclick="togglePW('cpassword')"></i>
+                    </div>
+                    <span id="password-error"></span>
+                </div>
+                <input type="submit" class="login-button form-button" value="Submit" onclick="createNewPW()"/><br>
+            </form>
+        </div>
+        
+        </div>
+    </div>
+    </div>  
+
+  </body>
+</html>
