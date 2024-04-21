@@ -12,46 +12,39 @@
     <title>Train Schedule Management</title>
 </head>
 <body> 
-    <nav class="navbar" >
+    <!-- <nav class="navbar" >
         <script>createNavBar("admin")</script>
-    </nav>
+    </nav> -->
 
-            <div class="trainsc-header">
+            <!-- <div class="trainsc-header">
                 <i class="fas fa-train"></i>
                 <h3>Panadura- Colombo Fort</h>
                 <p>Train Number: 1234</p>
                 <p>Train Type: Express</p>
             </div>
 				<div class="train-container">
-            		<div class="train-left">
+            		<div class="train-left"> -->
+						<div class="dialog-container" style="max-width: 1500px;">
+							
 
-						<section class="table_header">
-							<h1>Train stopping stations</h1>
-                            <div class="input-group">
-                                <input type="search" placeholder="Search Station...">
-                                <img src="/Images/search.png" alt="">
-                            </div>
-                            
-						</section>
+							<section class="table_body" >
 
-						<section class="table_body">
-
-							<table>
-							<thead>
-								<tr>
-                                    <th>Station Name</th>
-									<th>Scheduled Arrival Time</th>
-									<th>Scheduled Departure Time</th>
-									<th>Actual Arrival Time</th>
-                                    <th>Actual Departure Time</th>
-								</tr>
-							</thead>
-							<tbody id="schedule_stops">
-								<script>getSchedule()</script>
-							</tbody>
-						</section>
-						</table>
-					</div>
+								<table >
+								<thead>
+									<tr>
+										<th>Station Name</th>
+										<th>Scheduled Arrival Time</th>
+										<th>Scheduled Departure Time</th>
+										<th>Actual Arrival Time</th>
+										<th>Actual Departure Time</th>
+									</tr>
+								</thead>
+								<tbody id="schedule_stops">
+									<script>getSchedule()</script>
+								</tbody>
+							</section>
+						</div>
+					
 				
 					<!-- <div class="train-right">
 						<div class="train-form">
@@ -77,6 +70,6 @@
 						</div>
 				
 					</div> -->
-				</div>
+				
 				
 </body>

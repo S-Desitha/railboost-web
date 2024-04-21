@@ -117,9 +117,28 @@ async function getSchedules() {
 
             // Handle button click event
             let stopButton = trainContainer.querySelector(".stopping-stations-button");
-            stopButton.onclick = function() {
-                window.location.href = `/html/passenger/traintimes.html?scheduleId=${sch.scheduleId}&date=${schParams.date}`;
-            };
+            // stopButton.onclick = function() {
+            //     window.location.href = `/html/passenger/traintimes.html?scheduleId=${sch.scheduleId}&date=${schParams.date}`;
+            // };
+            // Get the dialog modal
+           // Get the dialog modal
+            // var dialogModal = document.querySelector(".dialog-modal");
+
+            // // Get the iframe inside the dialog
+            // var modalFrame = dialogModal.querySelector("#modalFrame");
+
+            // // When the button is clicked, open the dialog modal, load content into the iframe, and call popupAddPage function
+            // stopButton.onclick = function() {
+            //     popupAddPage('.dialog-modal'); // Call popupAddPage function
+            //     modalFrame.src = `/html/passenger/traintimes.html?scheduleId=${sch.scheduleId}&date=${schParams.date}`; // Load content into the iframe
+            // }
+
+            // // Close the dialog modal when the close button is clicked
+            // dialogModal.querySelector(".close").addEventListener("click", function() {
+            //     dialogModal.close(); // Close the dialog modal
+            // });
+
+
 
             // Add dots to the corresponding dots container
             let iconsContainer = trainContainer.querySelector(`#icons-container`);
