@@ -250,6 +250,7 @@ function createSideBar(context) {
                 document.getElementById("passenger-sidebar").remove();
                 document.getElementById("anns").querySelector('a').setAttribute("href", "/html/admin/announcement.html") ;
                 document.getElementById("profile").querySelector('a').setAttribute("href", "/html/admin/admin-profile.html") ;
+                document.getElementById("dashboard").querySelector('a').setAttribute("href", "/html/admin/admin.html") ;
                
                 // document.getElementById("nav-about").remove();
                 // document.getElementById("nav-contact").remove();
@@ -263,6 +264,7 @@ function createSideBar(context) {
                 
                 document.getElementById("title").innerHTML = "Station Master";
                 document.getElementById("profile").querySelector('a').setAttribute("href", "/html/sm/sm-profile.html") ;
+                document.getElementById("dashboard").querySelector('a').setAttribute("href", "/html/sm/sm.html") ;
                 
                 document.getElementById("sidebar-services-text-span").innerHTML = "Station Master Services";
             }
@@ -272,6 +274,7 @@ function createSideBar(context) {
                 document.getElementById("sm-sidebar").remove();
                 document.getElementById("admin-sidebar").remove();
                 document.getElementById("title").innerHTML = "Passenger";
+                document.getElementById("dashboard").querySelector('a').setAttribute("href", "/html/passenger/home.html") ;
                 document.getElementById("anns").querySelector('a').setAttribute("href", "/html/passenger/viewAnnouncement.html") ;
                 document.getElementById("profile").querySelector('a').setAttribute("href", "/html/passenger/profile.html") ;
                

@@ -27,8 +27,10 @@
 
     <!-- css imports -->
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/sch.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/passSch.css">
+    <!-- <link rel="stylesheet" href="/css/sch.css"> -->
+    <!-- <link rel="stylesheet" href="/css/passSch.css"> -->
 
     <!-- js imports -->
     <script src="/js/script.js"></script>
@@ -41,37 +43,33 @@
         <script>createNavBar("passenger")</script>
     </nav>
 
-				<div class="train-container train-table2">
-            		<div class="train-left">
+    <div class="container">
 
-						<section class="table_header">
-							<h1>Train Schedule Details</h1>
-                            <div class="input-group">
-                                <input type="search" placeholder="Search Train Schedule...">
-                                <img src="/Images/search.png" alt="">
+        <div class="sidebar active" >
+            <script>createSideBar("passenger")</script>
+        </div>
+
+        <div class="service-view">
+			<div class="service-container">
+                
+                <div class="train-containers" id="train-containers">
+                	<div class="service-header">
+                    
+                        <h1 style="margin-left:0px ; font-size: 35px;">Train Time Table</h1>
+                        <div class="SnE-stations">
+                            <div class="selectedsstation" id="selectedsstation">
+                                <p style="font-size: 25px; margin-right: 5px;"> Colombo Fort &nbsp </p>
                             </div>
-						</section>
-
-						<section class="table_body">
-
-							<table>
-							<thead>
-								<tr>
-                                    <th>Schedule ID</th>
-									<th>Train ID</th>
-									<th>Start Station</th>
-                                    <th>End Station</th>
-                                    <th>Speed</th>
-                                    <th>Stopping Stations</th>
-
-								</tr>
-							</thead>
-							<tbody id="schedule_table">
-                                <script>getSchedules()</script>
-                            </tbody>
-						</section>
-						</table>
-					</div>
-				</div>
-				
+                            <div class="selecteddstation" id="selecteddstation">
+                                <p style="font-size: 25px; margin-left: 10px;"> Panadura </p>
+                            </div>
+                        </div>
+                    </div>
+                    <script>getSchedules()</script>
+                    
+        
+                </div>
+			</div>
+        </div>
+    </div>		
 </body>

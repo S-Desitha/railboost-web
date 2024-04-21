@@ -1,0 +1,120 @@
+
+.train-container {
+    display: flex;
+    align-self: center;
+    align-items: center;
+    /* margin-left: 350px; */
+    /* gap: 180px; */
+    /* width: 30vw; */
+    
+    width: 50vw;
+    min-height: 50vh;
+    box-shadow: 0 0.4rem 0.8rem #0005;
+    border-radius: 0.8rem;
+    margin: 80px auto;
+    /* overflow-y: auto; */
+    flex-direction: column;
+    padding: 20px;
+
+}
+
+
+.buttons {
+    
+    top: 10px;
+    right: 10px;
+}
+
+.form-button {
+    color: var(--text-color);
+    background-color: var(--theme-color);
+    border-radius: 6px;
+    border: none;
+    padding: 10px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    width: 20rem;
+    margin-top: 30px;
+    font-size: 20px;
+  }
+
+.form-button:hover{
+    background-color: var(--secondary-color); 
+  }
+
+
+h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.train {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    width: 600px;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    color: #333;
+    font-size: 20px;
+    margin: 0;
+}
+
+/* p {
+    font-size: 16px;
+    margin: 10px 0;
+} */
+
+/* increse the size of icon fas fa-train */
+.fa-train {
+    font-size: 40px;
+}
+
+/* display flex for .SnE-stations */
+.SnE-stations {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+/* display flex for .Express */
+.tnum-speed {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+/* display flex for .train-heading */
+.train-heading {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* display flex for .selected-info */
+.selected-info {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    margin-left: 30px;
+}
+
+/* reduce the size of .fa-circle icon */
+.fa-circle {
+    font-size: 7px;
+}
+
+/* align center items in ..duration */
+.duration {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}

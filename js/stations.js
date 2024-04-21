@@ -1,5 +1,6 @@
 // const url = "http://localhost:8080/railboost_backend_war_exploded/stations";
 const endpoint = "stations";
+console.log("stations.js");
 
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -252,8 +253,11 @@ function addStation(selectedStation,  wrapper) {
 
 
 function createList() {
+    console.log("created station List");
     wrappers.forEach(wrapper => {
+      console.log("wrapper");
     const selectBtn = wrapper.querySelector(".select-btn");
+    console.log("selectBtn");
     const searchInp = wrapper.querySelector("input");
     const options = wrapper.querySelector(".options");
 

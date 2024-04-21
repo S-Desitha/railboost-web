@@ -1,38 +1,140 @@
-// const url = "http://localhost:8080/railboost_backend_war_exploded/";
-
-
-
+function getStationInfo(array, selectedStation) {
+    const stationInfo = [];
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].station === selectedStation) {
+            stationInfo.push({
+                stationName: array[i].stationName,
+                scheduledArrivalTime: array[i].scheduledArrivalTime
+            });
+        }
+    }
+    return stationInfo.length > 0 ? stationInfo : null; // Return the array of station info or null if station is not found
+}
+function calculateDuration(startStationInfo, endStationInfo) {
+    if (startStationInfo && endStationInfo) {
+       
+        const startTime = startStationInfo[0].scheduledArrivalTime.split(":").map(Number);
+        const endTime = endStationInfo[0].scheduledArrivalTime.split(":").map(Number);
+        
+        const startInMinutes = startTime[0] * 60 + startTime[1];
+        const endInMinutes = endTime[0] * 60 + endTime[1];
+        
+        const durationMinutes = endInMinutes - startInMinutes;
+        return durationMinutes;
+    } else {
+        return null; // Return null if either start or end station info is missing
+    }
+}
 async function getSchedules() {
+    console.log("Getting schedules");
     const endpoint = "trainSchedule";
     let queryParams = new URLSearchParams(window.location.search);
     let schParams = JSON.parse(queryParams.get("schedule"));
     console.log(schParams);
 
-    let urlQuery = endpoint+`?json=${encodeURIComponent(JSON.stringify(schParams))}`;
+    let urlQuery = endpoint + `?json=${encodeURIComponent(JSON.stringify(schParams))}`;
 
     try {
 
         let schedules = await customFetch(urlQuery, {}, false);
-        
+        console.log(schedules);
+
+
+        const trainContainersDiv = document.getElementById('train-containers');
         schedules.forEach(sch => {
-            let viewButton = document.createElement("button");
-            viewButton.classList.add("view-button");
-            viewButton.innerHTML = "View <i class='fa-regular fa-eye'>";
-            viewButton.onclick = function() {window.location.href = `/html/passenger/traintimes.html?scheduleId=${sch.scheduleId}&date=${schParams.date}`};
-            
-            let row = document.getElementById("schedule_table").insertRow(-1);
-            row.insertCell(0).innerHTML = sch.scheduleId;
-            row.insertCell(1).innerHTML = sch.trainId;
-            row.insertCell(2).innerHTML = sch.startStation;
-            row.insertCell(3).innerHTML = sch.endStation;
-            row.insertCell(4).innerHTML = sch.speed;
-            row.insertCell(5).appendChild(viewButton);
+            // Create a new train container for each schedule
+            let trainContainer = document.createElement('div');
+            trainContainer.classList.add('train');
+            console.log(sch.stations);
+            console.log(schParams.startStation);
+            console.log(schParams.endStation);
+            const startStationInfo = getStationInfo(sch.stations, schParams.startStation);
+            console.log("Start Station Info:", startStationInfo);
+            console.log(startStationInfo[0].stationName);
+
+            const endStationInfo = getStationInfo(sch.stations, schParams.endStation);
+            console.log("End Station Info:", endStationInfo);
+
+            const duration = calculateDuration(startStationInfo, endStationInfo);
+            console.log("Duration (minutes):", duration);
+            trainContainer.innerHTML = `
+
+                
+                <div class="train-heading">
+                    <i class="fas fa-train"></i>
+                    <div class="train-info">
+                        <div class="SnE-stations">
+                            <div class="sstation">
+                                <p> <b>${sch.startStationName}</b> <i class="fa-solid fa-play"></i> </p>
+                            </div>
+                            <div class="dstation">
+                                <p style="margin-left:10px"> <b>${sch.endStationName}</b> </p>
+                            </div>
+                        </div>
+                        <div class="tnum-speed">
+                            <div class="train-number">
+                                <p> <b>${sch.scheduleId}</b> </p>
+                            </div>
+                            <div class="speed">
+                                <p> <b>${sch.speed}</b> </p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="stopping-stations-button">Stopping Stations</button>
+                </div>
+                <div class="selected-info">
+                    <div class="start">
+                        <div class="stime">
+                            <p> <b>${startStationInfo[0].scheduledArrivalTime}</b> </p>
+                        </div>
+                        <div class="selected-sstation">
+                            <p> <b>${startStationInfo[0].stationName}</b> </p>
+                        </div>
+                    </div>
+                    <div class="duration-n">
+                        <div class="dots">
+                            <p id="icons-container"></p>
+                        </div>
+                        <div class="mins">
+                            <p> <b>${duration} mins</b> </p>
+                        </div>
+                    </div>
+                    <div class="end" style="align-items:right">
+                        <div class="etime">
+                            <p> <b >${endStationInfo[0].scheduledArrivalTime}</b> </p>
+                        </div>
+                        <div class="selected-estation">
+                            <p> <b>${endStationInfo[0].stationName}</b> </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Append the new train container to the document body
+            trainContainersDiv.appendChild(trainContainer);
+            document.getElementById("selectedsstation").querySelector('p').innerHTML = `${startStationInfo[0].stationName} &nbsp <i  class="fa-solid fa-play"></i>`;
+            document.getElementById("selecteddstation").querySelector('p').innerHTML = `${endStationInfo[0].stationName}`;
+
+            // Handle button click event
+            let stopButton = trainContainer.querySelector(".stopping-stations-button");
+            stopButton.onclick = function() {
+                window.location.href = `/html/passenger/traintimes.html?scheduleId=${sch.scheduleId}&date=${schParams.date}`;
+            };
+
+            // Add dots to the corresponding dots container
+            let iconsContainer = trainContainer.querySelector(`#icons-container`);
+            for (let i = 0; i < 25; i++) {
+                const icon = document.createElement('i');
+                icon.classList.add('fa', 'fa-solid', 'fa-circle');
+                iconsContainer.appendChild(icon);
+            }
         });
-    } catch(error) {
-        if (error=="login-redirected")
+    } catch (error) {
+        if (error == "login-redirected")
             localStorage.setItem("last_url", window.location.pathname);
     }
 }
+
 
 
 
@@ -83,7 +185,7 @@ function createStoppingStations(data, context) {
     if (Object.keys(data)) {
         data.stations.forEach(station => {
             let row = document.getElementById("schedule_stops").insertRow(-1);
-            row.insertCell(0).innerHTML = station.station;
+            row.insertCell(0).innerHTML = station.stationName;
             row.insertCell(1).innerHTML = new Date('', '', '', station.scheduledArrivalTime.split(":")[0], station.scheduledArrivalTime.split(":")[1], station.scheduledArrivalTime.split(":")[2]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
             row.insertCell(2).innerHTML = new Date('', '', '', station.scheduledDepartureTime.split(":")[0], station.scheduledDepartureTime.split(":")[1], station.scheduledDepartureTime.split(":")[2]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
             if (context=="journey"){
