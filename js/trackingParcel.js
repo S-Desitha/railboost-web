@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded",async function(){
             let addParcelsSchedule = document.createElement("button");
 
             addParcelsSchedule.classList.add("set-station-button");
-            addParcelsSchedule.innerHTML = "<i title='addParcel' ><span> Add Parcel</span></i>";
+            addParcelsSchedule.innerHTML = "<i title='addParcel' style='color:#0047AB; font-weight: bold;' ><span> View</span></i>";
             addParcelsSchedule.setAttribute("parcelSchedule", JSON.stringify(stationParcels[index]));
             // addParcelsSchedule.onclick = showSelectParcelPage(stationParcels[index].recoveringStation);
             addParcelsSchedule.onclick = showSelectParcelPage.bind(addParcelsSchedule, stationParcels[index].recoveringStation);
