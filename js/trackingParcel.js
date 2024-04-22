@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded",async function(){
                     stationParcels[i].numberOfParcels++;
                     stationParcels[i].bookingId.push(parcel.bookingId)
                     stationParcels[i].item.push(parcel.item);
-                    stationParcels[i].item.push(parcel.sendingStation);
+                    // stationParcels[i].item.push(parcel.sendingStation);
                     break;
                 }
                 if (i==stationParcels.length-1) {
