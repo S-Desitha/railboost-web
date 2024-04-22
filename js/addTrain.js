@@ -46,10 +46,15 @@ async function searchParcels(){
     try{
         const data = await customFetch(urlQuery, {});
         data.forEach(sch => {
+            const tableContainer = document.querySelector('.table_body');
+        const addDeliveryStatusButton = document.getElementById('addDileveryStatus');
+        
+        tableContainer.style.display = 'block';
+        addDeliveryStatusButton.style.display = 'block';
             let addButten = document.createElement("button");
            
             addButten.classList.add("set-station-button");
-            addButten.innerHTML = "<i title='addParcel' ><span> Add </span></i>";
+            addButten.innerHTML = "<i title='addParcel' style='color:#0047AB; font-weight: bold;'><span> Select </span></i>";
             addButten.setAttribute("addedParcel", JSON.stringify(sch));
             addButten.onclick = addParcelSet;
 
@@ -90,30 +95,48 @@ async function addParcelSet(){
     //         if (error=="login-redirected")
     //             localStorage.setItem("last_url", window.location.pathname);
     //     });
+    var SelectButtons = document.querySelectorAll(".set-station-button");
+    this.innerHTML = "<i title='addParcel' style='color:#0047AB; font-weight: bold;'><span> Selected </span></i>";
+    this.style.backgroundColor = "#AED6F1";
 
 
 }
 
 async function addDileveryStatus(){
-    var scheduleId = document.getElementById("scheduleDropDown").value;
-        const body = {bookingIdList:addedParcelsArray,
-                      scheduleId : scheduleId
-                        
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: `You won't be able to revert this!`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#5271FF",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Send!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var scheduleId = document.getElementById("scheduleDropDown").value;
+                const body = {bookingIdList:addedParcelsArray,
+                    scheduleId : scheduleId
                     };
-        const params = {
-        sid: scheduleId,
-        headers: {
-        "Content-type": "application/json; charset=UTF-8"
-        },
-        body: JSON.stringify(body),
-        method: "PUT"
-    };
-    customFetch(addTrainsEndPoint, params)
-        .then(()=> window.location.reload())
-        .catch((error) => {
-            if (error=="login-redirected")
-                localStorage.setItem("last_url", window.location.pathname);
-        });
+                const params = {
+                sid: scheduleId,
+                headers: {
+                "Content-type": "application/json; charset=UTF-8"
+                },
+                body: JSON.stringify(body),
+                method: "PUT"
+            };
+            customFetch(addTrainsEndPoint, params)
+                .then(()=> window.location.reload())
+                .catch((error) => {
+                    if (error=="login-redirected")
+                        localStorage.setItem("last_url", window.location.pathname);
+                });
+        } else {
+            Swal.fire("Cancelled", "Your operation has been cancelled", "error");
+            
+        }
+    });
 
 
 }

@@ -102,6 +102,7 @@ let station = urlParams.get("recoveringStation");
         button.removeAttribute("disabled");
         button.querySelector('span').style.color = 'green';
     });
+    this.innerHTML = "<i title='addParcel' style='color:#0047AB; font-weight: bold;'><span> Selected </span></i>";
     this.style.backgroundColor = "#AED6F1";
     
   }
