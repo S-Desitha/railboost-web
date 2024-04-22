@@ -514,7 +514,7 @@ h2.count{
 canvas#chart{
   box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
   background: white;
-  max-width: 60%;
+  max-width: 65%;
   max-height:90%;
   margin-top: 3rem;
   border-radius: 1.6rem;
@@ -542,7 +542,7 @@ canvas#chart{
   display: flex;
   gap: 20px;
   /* margin-top: 20px; */
-  /* justify-content: center; */
+  /* justify-content: space-between; */
   align-items:left;
 }
 
