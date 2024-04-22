@@ -39,6 +39,7 @@ function addStoppingStation() {
         row.cells[0].innerHTML = station.stationName;
         row.cells[1].innerHTML = station.scheduledArrivalTime;
         row.cells[2].innerHTML = station.scheduledDepartureTime;
+        
 
         row.removeAttribute("tag");
         button.setAttribute("context", "");
@@ -209,7 +210,7 @@ function viewStations(scheduleId) {
     if (schedule.endDate!=null)
         document.getElementById("ends-on-date").innerHTML = schedule.endDate;
     else
-    document.getElementById("ends-on-date").innerHTML = "--";
+    document.getElementById("ends-on-date").innerHTML = "Continuous";
 
 
     document.querySelectorAll(".cat.day input[type='checkbox']").forEach(checkBox => {
@@ -295,7 +296,7 @@ async function createSchedulesPage() {
             row.insertCell(1).innerHTML = sch.trainId;
             row.insertCell(2).innerHTML = sch.startStationName;
             row.insertCell(3).innerHTML = sch.endStationName;
-            row.insertCell(4).innerHTML = sch.trainType;
+            row.insertCell(4).innerHTML = sch.speed;
             // row.insertCell(5).innerHTML = `<a href="/html/admin/trainSch.html?scheduleId=${sch.scheduleId}"><button class="view-button">
             //                                     View <i class="fa-regular fa-eye"></i></button>
             //                                 </a>`;

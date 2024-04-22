@@ -748,7 +748,7 @@ h3{
 .dialog-modal .table_header {
   text-align: center; /* Center align the header */
   margin-bottom: 20px;
-  display: ruby-text /* Add space below the header */
+  display: ruby-text; /* Add space below the header */
 }
 
 
@@ -770,7 +770,7 @@ h3{
 .dialog-modal select {
   width: 100%;
   padding: 10px; /* Set input padding */
-  margin-bottom: 10px; /* Add space between inputs */
+  margin-bottom: 20px; /* Add space between inputs */
   border: 1px solid #ccc; /* Border color */
   border-radius: 4px; 
   box-sizing: border-box;
@@ -834,7 +834,7 @@ h3{
   border-radius: 8px; 
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
   padding: 20px; /* Padding */
-  overflow: hidden;
+  overflow-y: scroll;
 }
 
 

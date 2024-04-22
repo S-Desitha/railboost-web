@@ -164,8 +164,9 @@ margin-top: 10px;
     background-color: #fffb;
     margin: .8rem auto;
     border-radius: .6rem;
-    overflow: auto;
-    overflow: overlay;
+    /* overflow-y: scroll; */
+    /* overflow: auto;*/
+    /* overflow: overlay; */
 }
 
 
