@@ -1,0 +1,20 @@
+.set-station-button{
+    background: #eeeded;
+    border:#9f9292 ;
+    width: 100px;
+    height: 29px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 15px;
+}
+
+.set-station-button:hover {
+background: rgb(210, 210, 210);
+} 
+
+.service-container{
+    padding-left: 80px;
+    padding-right: 80px;
+}
