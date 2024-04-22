@@ -4,7 +4,7 @@ div label input {margin-right: 100px;}
             margin: 4px;
             /* border-radius: 4px; */
             border-radius: 50%;
-            border: 1px solid #000000;
+            /* border: 1px solid #000000; */
             overflow: hidden;
             float: left;
             
@@ -21,6 +21,7 @@ div label input {margin-right: 100px;}
             text-align: center;
             /* padding: 3px 0; */
             display: block;
+            background-color:rgb(241, 243, 244);
             }
     
             .cat label input {
@@ -98,7 +99,7 @@ div label input {margin-right: 100px;}
             border-color: #09c372;
             }
             .y-container{
-                margin-left: 35px;
+                /* margin-left: 35px; */
             }
             .m-container{
                 margin-left: 35px;

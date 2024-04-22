@@ -117,9 +117,9 @@ async function getSchedules() {
 
             // Handle button click event
             let stopButton = trainContainer.querySelector(".stopping-stations-button");
-            // stopButton.onclick = function() {
-            //     window.location.href = `/html/passenger/traintimes.html?scheduleId=${sch.scheduleId}&date=${schParams.date}`;
-            // };
+            stopButton.onclick = function() {
+                window.location.href = `/html/passenger/traintimes.html?scheduleId=${sch.scheduleId}&date=${schParams.date}`;
+            };
             // Get the dialog modal
            // Get the dialog modal
             // var dialogModal = document.querySelector(".dialog-modal");

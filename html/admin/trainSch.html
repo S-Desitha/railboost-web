@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<!-- axios -->
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+	<!-- sweet alert -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
     integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
@@ -42,8 +48,8 @@
 	
 
 	<div class="service-view">
-			<div class="service-container">
-			<h2 class="add-train-heading">Add a new train schedule </h2>
+			<div class="service-container" style="flex-direction: row;gap: 150px;">
+			
 
 			<!-- <div class="trainsc-header" id="scheduleTitle">
 				<i class="fas fa-train"></i>
@@ -51,8 +57,61 @@
 				<p>Train Number: 1234</p>
 				<p>Train Type: Express</p>
 			</div> -->
-
-			<button class="add-new-btn" onclick="popupAddPage('.dialog-modal')" >Add New</button>
+			<div class="scheduleadd">
+				<form class="train-form" id="schedule-form" onsubmit="return false">
+					<h2 class="add-train-heading" >Add a new train schedule </h2>
+						<label for="Schedule-ID"></label>
+						<input type="text" id="sch-id" placeholder="Schedule ID" required><br>
+	
+						<label for="Train-ID"></label>
+						<input type="text" id="tr-id" placeholder="Train ID" required><br>
+	
+						<div class="wrapper" id="from" style="margin-left:0px ;margin-right:0px ;">
+							<div class="select-btn">
+								<span>Select Starting Station</span>
+								<i class="uil uil-angle-down"></i>
+							</div>
+							<div class="content">
+								<div class="search">
+									<i class="uil uil-search"></i>
+									<input spellcheck="false" type="text" placeholder="Search">
+								</div>
+								<ul class="options">
+								</ul>
+							</div>
+						</div><br>
+	
+						<div class="wrapper" id="to" style="margin-left:0px ;margin-right:0px ;">
+							<div class="select-btn">
+								<span>Select Ending Station</span>
+								<i class="uil uil-angle-down"></i>
+							</div>
+							<div class="content">
+								<div class="search">
+									<i class="uil uil-search"></i>
+									<input spellcheck="false" type="text" placeholder="Search">
+								</div>
+								<ul class="options"></ul>
+							</div>
+						</div>
+	
+						<label for="speed"></label>
+						<select name="speed" id="speed">
+							<option value="" disabled>--Select Speed--</option>
+							<option value="Slow">Slow</option>
+							<option value="Semi-Empress">Semi-Express</option>
+							<option value="Express">Express</option>
+							<option value="Intercity">Intercity</option>
+						</select><br>
+	
+						<input type="button" onclick="popupDatePicker('.datepicker-modal')" value="Add Recurrence">
+	
+						<button type="submit" class="form-button" style="width: 19rem;" id="submit-schedule-btn" onclick="addNewSchedule()">Add Schedule</button>
+				</form>
+		
+			</div>
+			<div >
+			<button class="add-new-btn" onclick="popupAddPage('.dialog-modal')" >Add New Stopping</button>
 
 
 			<section class="table_header">
@@ -77,59 +136,10 @@
 				</table>
 			</section>
 		</div>
-	
-		<div class="train-right">
-			<form class="train-form" id="schedule-form" onsubmit="return false">
-					<label for="Schedule-ID"></label>
-					<input type="text" id="sch-id" placeholder="Schedule ID" required><br>
-
-					<label for="Train-ID"></label>
-					<input type="text" id="tr-id" placeholder="Train ID" required><br>
-
-					<div class="wrapper" id="from">
-						<div class="select-btn">
-							<span>Select Starting Station</span>
-							<i class="uil uil-angle-down"></i>
-						</div>
-						<div class="content">
-							<div class="search">
-								<i class="uil uil-search"></i>
-								<input spellcheck="false" type="text" placeholder="Search">
-							</div>
-							<ul class="options">
-							</ul>
-						</div>
-					</div><br>
-
-					<div class="wrapper" id="to">
-						<div class="select-btn">
-							<span>Select Ending Station</span>
-							<i class="uil uil-angle-down"></i>
-						</div>
-						<div class="content">
-							<div class="search">
-								<i class="uil uil-search"></i>
-								<input spellcheck="false" type="text" placeholder="Search">
-							</div>
-							<ul class="options"></ul>
-						</div>
-					</div>
-
-					<label for="speed"></label>
-					<select name="speed" id="speed">
-						<option value="" disabled>--Select Speed--</option>
-						<option value="Slow">Slow</option>
-						<option value="Semi-Empress">Semi-Express</option>
-						<option value="Express">Express</option>
-						<option value="Intercity">Intercity</option>
-					</select><br>
-
-					<input type="button" onclick="popupDatePicker('.datepicker-modal')" value="Add Recurrence">
-
-					<button type="submit" class="form-button" id="submit-schedule-btn" onclick="addNewSchedule()">Add Schedule</button>
-			</form>
-	
 		</div>
+	
+		
+	</div>
 	</div>
 
 	<dialog class="dialog-modal">
@@ -175,7 +185,7 @@
             </div>
         <div class="body">
             <div class="repeat-every">
-                <label for="repeat-every">Repeat every   </label>
+                <label for="repeat-every"><b>Repeat every</b>   </label>
                 <input type="number" id="repeat-every" min="1" value="1">
 
                 <select id="repeat-unit" name="repeat-unit">
@@ -194,8 +204,8 @@
                 </div>
             </div>
             
-            <div id="repeat-on" class="repeat-on">
-                <label for="repeat-on">Repeat on</label>
+            <div id="repeat-on" class="repeat-on" style="margin-bottom: 10px;">
+                <label for="repeat-on">Repeat on</label><br>
             </div>
                 <div id="m-container" class="m-container">
                     <label>Date   </label>
@@ -204,8 +214,8 @@
                 </div>
                 <div id="y-container" class="y-container">
                     
-                    <label>Month   </label>
-                    <select id="repeat-unit" name="repeat-unit" onchange="setRU();">
+                    <label>Month   <br></label>
+                    <select id="repeat-unit" style="margin-top:10px ;" name="repeat-unit" onchange="setRU();">
                         <option value="1">January</option>
                         <option value="2">February</option>
                         <option value="3">March</option>
@@ -220,7 +230,7 @@
                         <option value="12">December</option>
                     </select><br><br>
                     <label>Date      </label>
-                    <input type="number" id="repeat-every" min="1" max="31" value="1">
+                    <input type="number" style="margin-top:0px ;" id="repeat-every" min="1" max="31" value="1">
                     <br><br>
                 </div>
                 
@@ -269,24 +279,29 @@
                     </div><br><br><br>
                 </div>
         <div class="ends">
-            <label for="ends">Ends</label>
-            <div>
-                <input type="radio" name="ends-option" id="never" value="never" checked>
-                <label for="never">Never</label>
+            <label for="ends">Ends</label><br>
+            <div class="repetition" >
+                <div>
+					<label for="never">Never</label>
+					<input type="radio" name="ends-option" id="never" value="never" checked>
+				</div>
     
-                <input type="radio" name="ends-option" id="on-date" value="on-date">
-                <label for="on-date">On</label>
-                
-    
-                <input type="radio" name="ends-option" id="after-occurrences" value="after-occurrences">
-                <label for="after-occurrences">After</label>
+				<div>
+					<label for="on-date">On</label>
+					<input type="radio" name="ends-option" id="on-date" value="on-date">
+				</div>
+				
+                <div>
+					<label for="after-occurrences">After</label>
+					<input type="radio" name="ends-option" id="after-occurrences" value="after-occurrences">
+				</div>	
                 <div class="ends-on">
-                    <input type="date" id="ends-on-date">
+                    <input type="date" style="background-color: rgb(241, 243, 244);" id="ends-on-date">
                 </div>
                 <div class="ends-after">
                     <br>
-                    <input type="number" id="ends-after-occurrences" min="1" value="1">
-                    <label for="ends-after-occurrences">occurrences</label>
+                    <input type="number" style="background-color: rgb(241, 243, 244);" id="ends-after-occurrences" min="1" value="1">
+                    <label for="ends-after-occurrences">Occurrences</label>
                 </div>
             </div>
         </div>

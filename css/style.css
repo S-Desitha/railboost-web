@@ -317,6 +317,7 @@ a:hover {
   /* height: fit-content; */
   /* width: fit-content; */
   max-height: 80%;
+  /* gap: 150px; */
   /* max-width: 80%; */
   /* overflow: auto; */
 }
@@ -834,7 +835,7 @@ h3{
   border-radius: 8px; 
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
   padding: 20px; /* Padding */
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 
@@ -852,7 +853,7 @@ h3{
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;;
+  gap: 30px;;
   margin-top: 20px;
 }
 .swal-overlay {
