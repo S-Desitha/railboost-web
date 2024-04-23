@@ -1,6 +1,7 @@
 const selectParcelString = localStorage.getItem("stationParcels1234");
 const selectParcel = JSON.parse(selectParcelString)
 const stationsForSchecdul =[];
+const addedParcelsArray= [];
 var scheduleId = 0;
 console.log(selectParcel);
 let urlParams = new URLSearchParams(window.location.search);
@@ -108,6 +109,36 @@ let station = urlParams.get("recoveringStation");
   }
 
   function addParcelsToTrain(){
+
+            const parcelTrackingEndPoint = "parcelTracking";
+            parcel = {};
+            console.log(scheduleId);
+            var parcelBookingId = JSON.parse(this.getAttribute("parcelBookingId"));
+            addedParcelsArray.push(parcelBookingId);
+            console.log(addedParcelsArray);
+            // parcel["bookingId"] = parcelBookingId;
+            // parcel["scheduleId"] = scheduleId;
+
+            // const body = parcel;
+            // const params = {
+            // headers: {
+            //     "Content-type": "application/json; charset=UTF-8"
+            // },
+            // body: JSON.stringify(body),
+            // method: "PUT"
+            // };
+            // customFetch(parcelTrackingEndPoint, params)
+            //     .then(()=> window.location.reload())
+            //     .catch((error) => {
+            //         if (error=="login-redirected")
+            //             localStorage.setItem("last_url", window.location.pathname);
+            //     });
+
+
+
+  }
+
+  async function assignSchedule(){
     Swal.fire({
         title: "Are you sure?",
         text: `You won't be able to revert this!`,
@@ -118,35 +149,31 @@ let station = urlParams.get("recoveringStation");
         confirmButtonText: "Yes, Assign!",
     }).then((result) => {
         if (result.isConfirmed) {
-            const parcelTrackingEndPoint = "parcelTracking";
-            parcel = {};
-            console.log(scheduleId);
-            var parcelBookingId = JSON.parse(this.getAttribute("parcelBookingId"));
-
-            parcel["bookingId"] = parcelBookingId;
-            parcel["scheduleId"] = scheduleId;
-
-            const body = parcel;
-            const params = {
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            },
-            body: JSON.stringify(body),
-            method: "PUT"
-            };
-            customFetch(parcelTrackingEndPoint, params)
-                .then(()=> window.location.reload())
-                .catch((error) => {
-                    if (error=="login-redirected")
-                        localStorage.setItem("last_url", window.location.pathname);
-                });
-
-        } else {
-            Swal.fire("Cancelled", "Your operation has been cancelled", "error");
-            
-        }
-    });
-
+    const parcelTrackingEndPoint = "parcelTracking";
+    // var scheduleId = document.getElementById("scheduleDropDown").value;
+        const body = {bookingIdList:addedParcelsArray,
+                      scheduleId : scheduleId
+                        
+                    };
+        const params = {
+        sid: scheduleId,
+        headers: {
+        "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify(body),
+        method: "PUT"
+    };
+    customFetch(parcelTrackingEndPoint, params)
+        .then(()=> window.location.reload())
+        .catch((error) => {
+            if (error=="login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
+        });
+    } else {
+        Swal.fire("Cancelled", "Your operation has been cancelled", "error");
+        
+    }
+});
   }
   
 
