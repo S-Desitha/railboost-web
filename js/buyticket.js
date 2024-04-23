@@ -41,7 +41,7 @@ function buyETicket() {
   booking["date"] = new Date(document.getElementById("date").value).toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"})
   booking["trainClass"] = document.getElementById("class").value;
   booking["numberOfTickets"] = document.getElementById("no-of-tickets").value;
-  booking["totalPrice"] = document.getElementById("total-price").value;
+  booking["totalPrice"] = document.getElementById("amount").value;
 
   const body = booking;
   const params = {
@@ -108,13 +108,13 @@ async function getTicketPrices(Class,Count) {
     console.log(urlQuery);
     if (Class == "1st Class"){
       // PriceOfOne.innerHTML = "Price of one ticket is "+data.firstClass+".";
-      document.getElementById("total-price").value = data.firstClass*Count;
+      document.getElementById("amount").value = data.firstClass*Count;
     }else if(Class == "2nd Class"){
       // PriceOfOne.innerHTML = "Price of one ticket is "+data.secondClass+".";
-      document.getElementById("total-price").value = data.secondClass*Count;
+      document.getElementById("amount").value = data.secondClass*Count;
     }else if(Class == "3rd Class"){
       // PriceOfOne.innerHTML = "Price of one ticket is "+data.thirdClass+".";
-      document.getElementById("total-price").value = data.thirdClass*Count;
+      document.getElementById("amount").value = data.thirdClass*Count;
     }
   }
   catch (error) {
