@@ -47,6 +47,7 @@
 
 
     <div class="service-view" id="hasDataDiv">
+
         <div class="service-container">
             <button class="add-new-btn" type="button" onclick="popupAddPage('.staff-add_edit-modal')">ParcelBooking
                 Form</button>
@@ -60,7 +61,7 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Receiver Name</th>
+                 <th>Receiver Name</th>
                                 <th>Booking ID</th>
                                 <th>Receiver Address</th>
                                 <th>Receiver Email</th>
@@ -78,8 +79,10 @@
         <div class="service-container">
 
 
+
             <button class="add-new-btn" type="button" onclick="popupAddPage('.staff-add_edit-modal')">ParcelBooking
                 Form</button>
+
             <div id="pBookinginstructions">
                 <h2>instructions</h2>
                 <br>
@@ -201,12 +204,16 @@
                     placeholder=" Receiver Email" required><br />
                 <span id="email-error"></span>
 
-                <h3 class="adding-form-heading" id="add-staff-heading">Parcel Details</h3>
-                <label for="item"></label>
-                <input type="text" id="item" name="item" placeholder="Item:"><br>
 
+                    <h3 class="adding-form-heading" id="add-staff-heading">Parcel Details</h3>
+                    <select name="parcelCategory" id="parcelCategory"></select>
 
-                <!-- <label for="Discrption"></label>
+                    <label for="item"></label>
+                    <input type="text" id="item" name="item" placeholder="Item:"><br>
+                    
+                    
+                    <!-- <label for="Discrption"></label>
+
                     <input type="text" id="Discrption" name="Discrption" placeholder="Discrption:"><br> -->
 
                 <div class="dialog-buttons">

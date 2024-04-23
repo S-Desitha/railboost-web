@@ -54,7 +54,7 @@
 }
 .info1, .info2 ,.info3{
     display: flex;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
 }
 .Email-con, .Gender-con, .tel-con{
     margin-left: 150px;

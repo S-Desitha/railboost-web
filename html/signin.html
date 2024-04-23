@@ -44,12 +44,33 @@
         
             <!-- <button class="login-button form-button" onclick="login()">Login</button> -->
             <div class="form-links">
-              <p><a href="#">Forgot Password?</a></p>
+              <p><a href="#" onclick="popupAddPage('.getUname-modal');">Forgot Password?</a></p>
               <p><a href="/html/signup.html">Don't have an account? Sign up</a></p>
               <p><a onclick="guest()">Continue as a Guest</a></p>
             </div>
         </div>
     </div>
-    </div>            
+    </div>  
+    
+    <dialog class="getUname-modal" id="getUname-modal">
+      <div class="editing-form">
+        <section class="table_header">
+          <h1 id="edit-heading">Enter the username</h1>
+        </section>
+        <form onsubmit="return false" id="checkUname_form">
+                  <div class="user-box">
+          <label for="uname"></label>
+                  <input type="text" id="uname" name="uname" placeholder="Username:" required>
+                  <br>
+              </div>
+                  <p id="checkUname-error"></p> 
+                  
+          <div class="dialog-buttons">
+            <button type="submit" class="editform-submit-button" id="editform-submit-button" onclick="checkUaname();" style="margin-left: 18px;">Submit</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
   </body>
 </html>
