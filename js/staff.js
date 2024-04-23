@@ -168,7 +168,7 @@ function updateUsername() {
 
 
 
-function addStaff() {
+async function addStaff() {
     staffMember = {
         user: {
             role: {}
@@ -189,7 +189,13 @@ function addStaff() {
     staffMember.user["isStaff"] = true;
     staffMember.user["username"] = document.getElementById("username").value;
 
+    if (!staffMember["staffId"] || !staffMember["station"] || !staffMember.user["fName"] || !staffMember.user["lName"] || !staffMember.user.role["roleId"] || !staffMember.user["email"] || !staffMember.user["telNo"]) {
+        return; // Prevent form submission
+    }
+
     console.log(staffMember);
+    var Iderror = document.getElementById('staffIDError');
+    Iderror.innerHTML='';
 
     const body = staffMember;
     const params = {
@@ -198,44 +204,41 @@ function addStaff() {
         },
         body: JSON.stringify(body),
         method: "POST"
-    };
-    closeDialog();
-    Swal.fire({
-        title: "Success!",
-        text: `Link to create a password for the Username: ${username} has been sent to the email: ${email}.`,
-        icon: "success",
-        showCancelButton: false,
-        confirmButtonColor: "#3085d6",
-        confirmButtonText: "OK"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          
-          window.location.reload();
-        }
-      });
+    };    
       
-    customFetch(endpoint2, params)
-    .then(() => {
-    })
-    .catch((error) => {
-        if (error == "login-redirected")
-            localStorage.setItem("last_url", window.location.pathname);
-    });
-
-
-    // alert(`Link to create a password for the Username :${username} has been sent to the email: ${email}.`);
-    
-
-    // Clear the form
-    document.getElementById('staffId').value = '';
-    document.getElementById('name').value = '';
-    document.getElementById('role').value = '';
-    document.getElementById('railwayStation').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('telephone').value = '';
-    document.getElementById('username').value = '';
-
+    try {
+        const response = await customFetch(endpoint2, params);
+        if (response.uid) {
+            closeDialog();
+            Swal.fire({
+                title: "Success!",
+                text: `Link to create a password for the Username: ${username} has been sent to the email: ${email}.`,
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "OK"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.reload();
+                }
+            });
+        } else {
+            var Iderror = document.getElementById('staffIDError');
+            Iderror.innerHTML='Existing Staff ID';
+            document.getElementById('staffId').value = '';
+        }
+    } catch (error) {
+        console.error('Error adding staff member:', error);
+        Swal.fire({
+            title: "Error!",
+            text: "An error occurred while adding the staff member.",
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "OK"
+        });
     }
+}
 
 
 
