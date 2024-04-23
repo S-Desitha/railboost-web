@@ -71,16 +71,11 @@ function buyETicket() {
 
   booking["startStation"] = localStorage.getItem("Sstationcode");
   booking["endStation"] = localStorage.getItem("Estationcode");
-  booking["date"] = booking["date"] = new Date(localStorage.getItem("date")).toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"});
+  booking["date"] = new Date(localStorage.getItem("date")).toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"});
   booking["trainClass"] = localStorage.getItem("class");
   booking["numberOfTickets"] = localStorage.getItem("no-of-tickets");
   booking["totalPrice"] = localStorage.getItem("amount");
-  console.log(booking["date"]);
-  // type of date
-  console.log(typeof booking["date"]);
-
-  console.log("Booking details:", booking);
-
+  
   const body = booking;
   const params = {
     headers: {
@@ -91,28 +86,22 @@ function buyETicket() {
     credentials: "include"
   };
 
-  customFetch(bookingEndpoint, params)
-    .then(() => {
-      // Show SweetAlert notification for successful payment
-      Swal.fire({
-        icon: 'success',
-        title: 'Payment Successful!',
-        text: 'Check your email for the E-Ticket.',
-        confirmButtonText: 'OK'
-      }).then(() => {
-        // Reload the page after the user clicks OK
-        // redirect to buytickets.html page
-
-
-        window.location.href = 'http://localhost:5500/html/passenger/buyticket.html';
-      });
-    })
-    .catch ((error) => {
-      if (error == "login-redirected")
-        localStorage.setItem("last_url", window.location.pathname);
-    });
+ 
+  showSuccessNotification();
+  return customFetch(bookingEndpoint, params);
 }
 
+// Function to show success notification using SweetAlert
+function showSuccessNotification() {
+  Swal.fire({
+    icon: 'success',
+    title: 'Payment Successful!',
+    text: 'Check your email for the E-Ticket.',
+    confirmButtonText: 'OK'
+  }).then(() => {
+    window.location.href = 'http://localhost:5500/html/passenger/buyticket.html';
+  });
+}
 
 function getPrice(){
   var Start=document.getElementById("from").getAttribute("stationCode");

@@ -106,10 +106,17 @@ input:focus {
   left: 50%;
   transform: translate(-50%, -50%);
   border-color: white;
-  /* width: 900px;
-  height: 600px; */
   padding: 30px;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%); 
+  background-color: #ffffff; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+  overflow: hidden;
 }
+
 #uname{
   border: none;
   border-bottom: 1px solid #a9a9a9;

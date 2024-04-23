@@ -337,6 +337,36 @@ function toggleEye() {
         eyeIcon.style.display = 'none';
     }
 }
+
+function toggleCPW() {
+    const passwordField = document.getElementById("cpassword");
+    const eyeIcon = document.getElementById("cpassword-toggle");
+
+    
+
+    // Toggle password visibility
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+    } else {
+        passwordField.type = 'password';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+    }
+}
+
+function CtoggleEye() {
+    const passwordField = document.getElementById("cpassword");
+    const eyeIcon = document.getElementById("cpassword-toggle");
+
+    // Toggle eye icon visibility based on the input field value
+    if (passwordField.value.length > 0) {
+        eyeIcon.style.display = 'inline-block';
+    } else {
+        eyeIcon.style.display = 'none';
+    }
+}
 function closeDialog() {
     const openDialogs = document.querySelectorAll('dialog[open]');
     openDialogs.forEach(dialog => {

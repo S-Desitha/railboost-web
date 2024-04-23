@@ -92,14 +92,9 @@
               <div class="input-group">
                   <!-- <label for="confirm-password"></label> -->
                   <div class="password-wrapper">
-                      <input class="input-field password" type="password" id="cpassword" name="confirm-password" onkeyup="validatePassword()" oninput="toggleEye()" placeholder="Confirm Password" required />
-                      <i class="toggle-password fas fa-eye-slash" style="display: none;" onclick="togglePW('cpassword')"></i>
+                      <input class="password" type="password" id="cpassword" name="confirm-password" onkeyup="validatePassword()" oninput="CtoggleEye()" placeholder="Confirm Password" required />
+                      <i class="toggle-password fas fa-eye-slash" id="cpassword-toggle" style="display: none;" onclick="toggleCPW()"></i>
                   </div>
-
-                  
-
-
-                  <!-- <br />  -->
                   <span id="password-error"></span> 
               </div>
 
