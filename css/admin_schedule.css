@@ -1,4 +1,40 @@
 .schedule-dates-view {
     display: flex;
     flex-direction: row;
+    gap: 100px;
+    justify-content: end;
+    margin-bottom: 20px;
+    /* align-items:end; */
+    justify-content: space-between;
+}
+
+.day-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    /* margin-right: 20px; */
+}
+
+.startEnd{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.days{
+    justify-content: center;
+}
+
+.start-from{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.ends-on{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
 }

@@ -19,8 +19,8 @@ async function createJourneys() {
                 let row = document.getElementById("schedule_table").insertRow(-1);
                 row.insertCell(0).innerHTML = journey.scheduleId;
                 row.insertCell(1).innerHTML = journey.schedule.trainId;
-                row.insertCell(2).innerHTML = journey.schedule.startStation;
-                row.insertCell(3).innerHTML = journey.schedule.endStation;
+                row.insertCell(2).innerHTML = journey.schedule.startStationName;
+                row.insertCell(3).innerHTML = journey.schedule.endStationName;
                 row.insertCell(4).innerHTML = journey.schedule.trainType;
                 row.insertCell(5).innerHTML = `<a href="/html/sm/sm-update.html?scheduleId=${journey.scheduleId}"><button class="view-button">
                 Update <i class="fa-solid fa-pen-to-square"></i></button>

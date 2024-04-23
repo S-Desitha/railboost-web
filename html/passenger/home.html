@@ -12,32 +12,40 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
 
     <!-- jquery -->
-    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
     integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
     crossorigin="anonymous"></script>
 
     <!-- charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
     
     <!-- icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 
     <!-- css imports -->
     <link rel="stylesheet" href="/css/notifications.css">
+    
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/passSch.css">
+    <link rel="stylesheet" href="/css/passSearch.css">
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- js -->
     <script src="/js/notification.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/auth.js"></script>
+    <script src="/js/charts.js"></script>
+    <!-- <script src="/js/stations.js"></script> -->
+    <script src="/js/passenger.js"></script>
     
     <title>RailBoost - Railway Service Enhancement</title>
 </head>
-<body> 
+<body style="background-color:#fdfdfd ;" > 
             <nav class="navbar" >
                 <script>createNavBar("passenger")</script>
             </nav>
@@ -59,52 +67,97 @@
                         <li><a href="home.html" class="active">Passenger Dashboard</a></li>
                     </ul> 
                     <div class="info-data">
+                        <div class="card sm" onclick="popupAddPage('.dialog-modal')">
+                            
+                                <div class="head">
+                                    <div>                                   
+                                        <p>Train Schedule</p>                                   
+                                    </div>                                                          
+                                    <i class="fas fa-train"> </i>                                    
+                                </div>
+                            
+                            
+                        </div>
+                        <dialog class="dialog-modal">
+                            
+                            
+                            <div class="adding-form">
+                                <button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
+                                
+                                <div class="table_header" style="display: inline;">
+                                    <h1 id="add-heading">Search For A Schedule</h1>
+                                </div>
+                                <div class="wrapper" id="from" style="width: 90%; border:0px solid #ffffff;">
+                                    <div class="select-btn">
+                                        <span>Select Starting Station</span>
+                                        <i class="uil uil-angle-down"></i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="search">
+                                            <!-- <i class="uil uil-search"></i> -->
+                                            <input spellcheck="false" type="text" placeholder="Search">
+                                        </div>
+                                        <ul class="options"></ul>
+                                    </div>
+                                </div>
+            
+                                <div class="wrapper" id="to" style="width: 90%;border:0px solid #ffffff;">
+                                    <div class="select-btn">
+                                        <span>Select Ending Station</span>
+                                        <i class="uil uil-angle-down"></i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="search">
+                                            <!-- <i class="uil uil-search"></i> -->
+                                            <input spellcheck="false" type="text" placeholder="Search">
+                                        </div>
+                                        <ul class="options"></ul>
+                                    </div>
+                                </div>
+            
+                                <div class="date" >
+                                    <label for="date"></label>
+                                    <input type="date" style="border: 1px solid #ccc;width: 90%;margin-left: 20px;" id="date" name="date" placeholder="Date:" required><br />   
+                                </div>
+            
+                                <button class="login-button form-button" style="width: 90%;" onclick="showSchedules()">Search</button>
+            
+                            </div>
+                            <script>
+                                function getCurrentDate() {
+                            const now = new Date();
+                            const year = now.getFullYear();
+                            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+                            const day = now.getDate().toString().padStart(2, '0');
+                            return `${year}-${month}-${day}`;
+                        }
+                                document.getElementById('date').value = getCurrentDate();
+                            </script>
+                            <script src="/js/stations.js"></script>
+                        </dialog>
                         <div class="card sm">
-                            <div class="head">
-                                <div>
-                                    <a href="passSearch.html" >
-                                        <p>Train Schedule</p>
-                                    </a>
+                            <a href="buyticket.html">
+                                <div class="head">
+                                    <div>                            
+                                        <p>Buy E ticket </p>                                   
+                                    </div>                              
+                                    <i class="fas fa-ticket-alt"> </i>                                                             
                                 </div>
-                                
-                                <!-- icon for live update -->
-                                <i class="fas fa-train"> </i>
-        
-                                
-                            </div>
-                            
+                            </a>  
                         </div>
-                        <div class="card sm"><a href="buyticket.html">
-                            <div class="head">
-                                <div>
-                                    <!-- <h2 class="count"data-target="392">0</h2> -->
-                                    <p>Buy E ticket </p>
-                                    <!-- <small class="text-muted">Last 24 hours</small> -->
+                        <div class="card sm">
+                            <a href="seasonticket.html">
+                                <div class="head">
+                                    <div>                                   
+                                        <p>Buy Season Ticket </p>                                  
+                                    </div>                              
+                                    <i class="fas fa-file-alt"> </i>                                  
                                 </div>
-                                <!-- e ticket icon -->
-                                <i class="fas fa-ticket-alt"> </i>
-                                <!-- <i class="fas fa-box"> </i> -->
-                                <!-- <i class="fas fa-train"> </i> -->
-                                
-                            </div>
-                        </a>  
-                        </div>
-                        <div class="card sm"><a href="seasonticket.html">
-                            <div class="head">
-                                <div>
-                                    <!-- <h2 class="count"data-target="21340">0</h2> -->
-                                    <p>Buy Season Ticket </p>
-                                    <!-- <small class="text-muted">Last 24 hours</small> -->
-                                </div>
-                                <!-- application icon -->
-                                <i class="fas fa-file-alt"> </i>
-        
-                            
-                            </div>
-                        </a>
-                            
+                            </a>                          
                         </div>
         
+
+
                         <div class="card sm"><a href="parcelBooking.html">
                             <div class="head">
                                 <div>
@@ -118,156 +171,98 @@
                                 <!-- <i class="fas fa-money-bill-wave"> </i> -->
                                 
                             </div>
+
                             </a>
                         </div>
                     </div>
-                    <div class="table-data">
-                        <div class="recent-trains">
-                            <div class="head">
-                                <h3>Inbound Train Updates</h3>
-                                <a href="sm/sm-live.html">View All</a>
+                    <div class="anns-bar">
+                        <div class="anns">
+                            <h3>Delay Announcement</h3>
+                            <div class="ann-body">
+                                <p style="overflow: hidden;">Attention passengers, we apologize for the delay. The Express train to Matara is experiencing a delay of approximately 30 minutes due to technical failure. We appreciate your patience and understanding.</p>
                             </div>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Train No</th>
-                                        <th>Estimated Arrival Time</th>
-                                        <th>Estimated Departure Time</th>
-                                        <th>Actions</th>
-                                    </tr>
-        
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>12345</td>
-                                        <td>12:00</td>
-                                        <td>12:30</td>
-                                        <td><a href="sm/sm-live.html" class="update">Update Time</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>12345</td>
-                                        <td>12:00</td>
-                                        <td>12:30</td>
-                                        <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>12345</td>
-                                        <td>12:00</td>
-                                        <td>12:30</td>
-                                        <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>12345</td>
-                                        <td>12:00</td>
-                                        <td>12:30</td>
-                                        <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>12345</td>
-                                        <td>12:00</td>
-                                        <td>12:30</td>
-                                        <td><a href="sm/sm-live.html" class="update">Update Time</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="duration">5 minutes ago</div>
                         </div>
-                        <div class="parcels">
-                            <div class="head">
-                                <h3>    Incoming Parcels Today</h3>
-                                <!-- <a href="sm/approve-parcels.html">View All</a> -->
+
+                        <div class="anns">
+                            <h3>Railway Strike Announcement</h3>
+                            <div class="ann-body">
+                                <p>Attention passengers, we regret to inform you that due to a scheduled railway strike, all train services will be suspended starting from today until further notice. We apologize for the inconvenience caused by this industrial action.</p>
                             </div>
-                            <ul class="parcel-list">
-                                <li>
-                                    <div class="parcel-train">
-                                        <h4>Train No: 8513 </h4>
-                                    </div>
-                                    <div class="No-of-parcels">
-                                        <h4>21 Parcels</h4>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="parcel-train">
-                                        <h4>Train No: 1077 </h4>
-                                    </div>
-                                    <div class="No-of-parcels">
-                                        <h4>10 Parcels</h4>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="parcel-train">
-                                        <h4>Train No: 8355 </h4>
-                                    </div>
-                                    <div class="No-of-parcels">
-                                        <h4>10 Parcels</h4>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="parcel-train">
-                                        <h4>Train No: 8321 </h4>
-                                    </div>
-                                    <div class="No-of-parcels">
-                                        <h4>15 Parcels</h4>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="parcel-train">
-                                        <h4>Train No: 12345 </h4>
-                                    </div>
-                                    <div class="No-of-parcels">
-                                        <h4>10 Parcels</h4>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="parcel-train">
-                                        <h4>Train No: 12345 </h4>
-                                    </div>
-                                    <div class="No-of-parcels">
-                                        <h4>10 Parcels</h4>
-                                    </div>
-                                </li>
-                            </ul>
-        
+                            <div class="duration">5 minutes ago</div>
                         </div>
+                        
+                        
                     </div>
+                    <div class="stat">
+                        <div class="table-data">
+                            <div class="recent-trains">
+                                <div class="head">
+                                    <h3>Inbound Train Updates</h3>
+                                    <a href="sm/sm-live.html">View All</a>
+                                </div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th>Destination</th>
+                                            <th>Service Category</th>
+                                            <th>Estimated Arrival Time</th>
+                                            <th>Estimated Departure Time</th>
+                                            <th>Actions</th>
+                                        </tr>
             
-
-            <!-- <div class="box-container">
-                <a href="/html/passenger/passSearch.html" class="box">
-                    <i class="fas fa-train"></i> 
-                    <h2>Train Schedule</h2>
-                    <p>View all the train schedules here.</p>
-                </a>
-        
-                <a href="/html/passenger/live-up.html" class="box">
-                    <i class="fa-solid fa-map-location-dot"></i> 
-                    <h2>Train Live Update</h2>
-                    <p>Get real-time updates on train status.</p>
-                </a>
-        
-                <a href="/html/passenger/buyticket.html" class="box">
-                    <i class="fas fa-ticket-alt"></i> 
-                    <h2>Buy E-Ticket</h2>
-                    <p>Purchase your train tickets online.</p>
-                </a>
-        
-                <a href="/html/passenger/parcelBooking.html" class="box">
-                    <i class="fas fa-box"></i> 
-                    <h2>Register Parcels</h2>
-                    <p>Register parcels for shipping.</p>
-                </a>
-        
-                <a href="/html/passenger/contact-details.html" class="box">
-                    <i class="fas fa-phone"></i> 
-                    <h2>Station Contact Details</h2>
-                    <p>Find contact information for stations.</p>
-                </a>
-
-                <a href="#" onclick="seatReserve();" class="box">
-                    <i class="fa-solid fa-ticket"></i> 
-                    <h2>Seat Reservation</h2>
-                    <p>Reserve your train seats here.</p>
-                </a>
-     
-            </div> -->
-</body>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            
+                                            <td>Matara</td>
+                                            <td>Express</td>
+                                            <td>12:00</td>
+                                            <td>12:30</td>
+                                            <td><a href="sm/sm-live.html" class="update">Stopping Stations</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kandy</td>
+                                            <td>Intercity</td>
+                                            <td>12:00</td>
+                                            <td>12:30</td>
+                                            <td><a href="sm/sm-live.html"class="update">Stopping Stations</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Panadura</td>
+                                            <td>Slow</td>
+                                            <td>12:00</td>
+                                            <td>12:30</td>
+                                            <td><a href="sm/sm-live.html"class="update">Stopping Stations</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ratmalana</td>
+                                            <td>Slow</td>
+                                            <td>12:00</td>
+                                            <td>12:30</td>
+                                            <td><a href="sm/sm-live.html"class="update">Stopping Stations</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jaffna</td>
+                                            <td>Intercity</td>
+                                            <td>12:00</td>
+                                            <td>12:30</td>
+                                            <td><a href="sm/sm-live.html" class="update">Stopping Stations</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                         
+                        </div> 
+                        
+                            <!-- <canvas class="chart" id="chart"></canvas> -->
+                            <canvas class="donut-chart" id="dchart"></canvas>
+                        
+                    </div>
+                    
+                </main>
+            </div>
+    </body>
 </html>
+        

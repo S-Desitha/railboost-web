@@ -17,8 +17,8 @@
     <div class="menu">
         <p class="title">Main</p>
         <ul>
-            <li class="">
-                <a href="#" id="dashboard">
+            <li class="" id="dashboard">
+                <a href="#" >
                     <i class="icon ph-bold ph-house-simple"></i>
                     <span class="text">Dashboard  </span>
                 </a>
@@ -75,13 +75,13 @@
 
                     <section id="sm-sidebar">
                         <li>
-                            <a href="/sm-live.html">
+                            <a href="sm-live.html">
                                 <i class="fa-solid fa-map-location-dot"></i>
                                 <span class="text">Train Live Update</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/seasonvalid.html">
+                            <a href="sm/sm-season.html">
                                 <i class="fa-solid fa-clipboard-list"></i>
                                 <span class="text">Validate Season Applications</span>
                             </a>
@@ -99,18 +99,14 @@
                             </a>
                         </li>
                         
-                        <li>
-                            <a href="sm/staff.html">
-                                <i class="fa-solid fa-user-gear"></i>
-                                <span class="text">Assign duties to staff</span>
-                            </a>
-                        </li>
+                       
                     </section>
 
                     <section id="passenger-sidebar">
+                        
                         <li>
                             <a href="buyticket.html">
-                                <i class="fa-solid fa-map-location-dot"></i>
+                                <i class="fa-solid fa-ticket"></i>
                                 <span class="text">Buy E ticket</span>
                             </a>
                         </li>
@@ -121,24 +117,26 @@
                             </a>
                         </li>
                         <li>
-                            <a href="sm/approve-parcels.html">
+                            <a href="parcelBooking.html">
                                 <i class="fa-solid fa-box"></i>
-                                <span class="text">Parcel Approval</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="sm/emcontact.html">
-                                <i class="fa-solid fa-address-book"></i>
-                                <span class="text">Emergency Contact</span>
+                                <span class="text">Register Parcels</span>
                             </a>
                         </li>
                         
                         <li>
-                            <a href="sm/staff.html">
-                                <i class="fa-solid fa-user-gear"></i>
-                                <span class="text">Assign duties to staff</span>
+                            <a href="#" onclick="seatReserve();">
+                                <i class="fas fa-train"></i>
+                                <span class="text">Seat Reservation</span>
                             </a>
                         </li>
+
+                        <li>
+                            <a href="">
+                                <i class="fa-solid fa-clipboard-list"></i>
+                                <span class="text">Railway Station Contacts</span>
+                            </a>
+                        </li>
+                        
                     </section>
 
 
@@ -146,13 +144,13 @@
 
                 </ul>
             </li>
-            <li class="">
+            <li class="" id="reports">
                 <a href="#">
                     <i class="fas fa-chart-bar"></i>
                     <span class="text">Reports </span>
                 </a>
             </li>
-            <li class="">
+            <li class="" id="anns">
                 <a href="#">
                     <i class="fa-solid fa-bullhorn"></i>
                     <span class="text">Announcements </span>
@@ -165,7 +163,7 @@
 <div class="menu">
         <p class="title">Account</p>
         <ul>
-            <li class="">
+            <li class="" id="profile">
                 <a href="#">
                     <i class="fas fa-user-cog"></i>
                     <span class="text">Profile </span>

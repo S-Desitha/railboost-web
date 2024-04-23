@@ -1,5 +1,6 @@
 // const url = "http://localhost:8080/railboost_backend_war_exploded/stations";
 const endpoint = "stations";
+console.log("stations.js");
 
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -27,10 +28,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         let row = document.getElementById("station_table").insertRow(-1);
         row.insertCell(0).innerHTML = station.stationCode;
         row.insertCell(1).innerHTML = station.stationName;
-        row.insertCell(2).innerHTML = station.address;
-        row.insertCell(3).innerHTML = station.line;
-        row.insertCell(4).innerHTML = station.contactNo;
-        row.insertCell(5).append(editButton, deleteButton);
+        // row.insertCell(2).innerHTML = station.address;
+        row.insertCell(2).innerHTML = station.line;
+        row.insertCell(3).innerHTML = station.prevStationName;
+        row.insertCell(4).innerHTML = station.nextStationName;
+        row.insertCell(5).innerHTML = station.contactNo;
+        row.insertCell(6).append(editButton, deleteButton);
       });
   
     }
@@ -252,8 +255,11 @@ function addStation(selectedStation,  wrapper) {
 
 
 function createList() {
+    console.log("created station List");
     wrappers.forEach(wrapper => {
+      console.log("wrapper");
     const selectBtn = wrapper.querySelector(".select-btn");
+    console.log("selectBtn");
     const searchInp = wrapper.querySelector("input");
     const options = wrapper.querySelector(".options");
 

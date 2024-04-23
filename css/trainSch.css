@@ -164,8 +164,9 @@ margin-top: 10px;
     background-color: #fffb;
     margin: .8rem auto;
     border-radius: .6rem;
-    overflow: auto;
-    overflow: overlay;
+    /* overflow-y: scroll; */
+    /* overflow: auto;*/
+    /* overflow: overlay; */
 }
 
 
@@ -440,4 +441,22 @@ thead th.active,tbody td.active {
   background: #fff;
   border-top: 1px solid #ccc;
   z-index: 999;
+}
+.scheduleadd{
+  /* display: flex; */
+  /* flex-direction: column; */
+  width: min-content;
+  gap: 10px;
+  justify-content: center;
+  justify-self: center;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+
+.repetition{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 10px;
+  margin-left: 20px;
 }

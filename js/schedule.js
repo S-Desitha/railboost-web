@@ -39,6 +39,7 @@ function addStoppingStation() {
         row.cells[0].innerHTML = station.stationName;
         row.cells[1].innerHTML = station.scheduledArrivalTime;
         row.cells[2].innerHTML = station.scheduledDepartureTime;
+        
 
         row.removeAttribute("tag");
         button.setAttribute("context", "");
@@ -172,7 +173,7 @@ function editStation() {
     button.value = "Update Station";
     button.setAttribute("context", "edit");
     
-    let station = JSON.parse(localStorage.getItem("schedule")).stations
+    let station = JSON.parse(localStorage.getItem("NewscheduleCache")).stations
     .find((elmnt) => elmnt.station==stationCode);
     
     button.setAttribute("stIndex", station.stIndex);
@@ -203,13 +204,13 @@ function deleteStation() {
 function viewStations(scheduleId) {
     let schedule = JSON.parse(localStorage.getItem("scheduleList")).find(sch => sch.scheduleId==scheduleId);
     let stations = schedule.stations;
-    let dialog = document.querySelector(".stations-data-modal");
+    let dialog = document.querySelector(".dialog-modal");
 
     document.getElementById("start-from-date").innerHTML = schedule.startDate;
     if (schedule.endDate!=null)
         document.getElementById("ends-on-date").innerHTML = schedule.endDate;
     else
-    document.getElementById("ends-on-date").innerHTML = "--";
+    document.getElementById("ends-on-date").innerHTML = "Continuous";
 
 
     document.querySelectorAll(".cat.day input[type='checkbox']").forEach(checkBox => {
@@ -295,7 +296,7 @@ async function createSchedulesPage() {
             row.insertCell(1).innerHTML = sch.trainId;
             row.insertCell(2).innerHTML = sch.startStationName;
             row.insertCell(3).innerHTML = sch.endStationName;
-            row.insertCell(4).innerHTML = sch.trainType;
+            row.insertCell(4).innerHTML = sch.speed;
             // row.insertCell(5).innerHTML = `<a href="/html/admin/trainSch.html?scheduleId=${sch.scheduleId}"><button class="view-button">
             //                                     View <i class="fa-regular fa-eye"></i></button>
             //                                 </a>`;
@@ -342,7 +343,7 @@ function createSpecificSchPage() {
         document.getElementById("sch-id").disabled = true;
 
 
-        localStorage.setItem("schedule", JSON.stringify(serialSchedule));
+        localStorage.setItem("NewscheduleCache", JSON.stringify(serialSchedule));
     }
     else {
         if (localStorage.getItem("scheduleType")==null)
@@ -350,7 +351,7 @@ function createSpecificSchPage() {
         else
             setAddSchPriority();
 
-        let schedule = localStorage.getItem("schedule");
+        let schedule = localStorage.getItem("NewscheduleCache");
         if (schedule!=null) {
             schedule = JSON.parse(schedule);
             schedule.stations.forEach(station => insertStationToPage(station));
@@ -597,7 +598,7 @@ function popupDatePicker(classname) {
 
 
 function getSchedule() {
-    let schedule = localStorage.getItem("schedule");
+    let schedule = localStorage.getItem("NewscheduleCache");
     if (schedule==null)
         schedule = {nStations: 0, stations: new LinkedList()};
     else {
@@ -613,10 +614,10 @@ function setAddSchPriority() {
     let scheduleType = localStorage.getItem("scheduleType");
 
     if (scheduleType == "edit") {   
-        let schedule = localStorage.getItem("schedule");
+        let schedule = localStorage.getItem("NewscheduleCache");
         let otherSchedule = localStorage.getItem("otherSchedule");
 
-        localStorage.setItem("schedule", otherSchedule);
+        localStorage.setItem("NewscheduleCache", otherSchedule);
         localStorage.setItem("otherSchedule", schedule);
         localStorage.setItem("scheduleType", "add");
     }
@@ -629,10 +630,10 @@ function setEditSchPriority() {
     let scheduleType = localStorage.getItem("scheduleType");
 
     if (scheduleType == "add") {   
-        let schedule = localStorage.getItem("schedule");
+        let schedule = localStorage.getItem("NewscheduleCache");
         let otherSchedule = localStorage.getItem("otherSchedule");
 
-        localStorage.setItem("schedule", otherSchedule);
+        localStorage.setItem("NewscheduleCache", otherSchedule);
         localStorage.setItem("otherSchedule", schedule);
         localStorage.setItem("scheduleType", "edit");
     }
@@ -642,7 +643,7 @@ function setEditSchPriority() {
 function saveSchedule(schedule) {
     let serializedSchedule = schedule;
     serializedSchedule.stations = schedule.stations.toArray();
-    localStorage.setItem("schedule", JSON.stringify(serializedSchedule));
+    localStorage.setItem("NewscheduleCache", JSON.stringify(serializedSchedule));
 }
 
 

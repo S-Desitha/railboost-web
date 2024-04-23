@@ -1,4 +1,5 @@
 
+
 .notification-bar {
     background: #fff;
       border: 1px solid #e1e1e1;
@@ -10,6 +11,7 @@
       right: 20px;
       display: none;
       height: 500px;
+      /* overflow-y: scroll; */
       /* z-index: 1000; */
   }
   .notification-bar::after {
@@ -25,6 +27,7 @@
     transform: rotate(45deg);
     top: -8px;
     left: 345px;
+    z-index: 1;
   }
   .notification-item {
     padding: 10px;
