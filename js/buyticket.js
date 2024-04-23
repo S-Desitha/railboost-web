@@ -6,12 +6,36 @@ const bookingEndpoint = "booking";
 const ticketPriceEndpoint = "ticketPrice";
 
 const urlParams = new URLSearchParams(window.location.search);
-const paymentSuccess = urlParams.has('payment_success');
+const paymentSuccess = urlParams.get('payment_success');
+console.log(paymentSuccess);
+// type of paymentSuccess
+console.log(typeof paymentSuccess);
 
 // If the 'payment_success' parameter is present, call buyETicket function
-if (paymentSuccess) {
+if (paymentSuccess=="successful") {
   console.log("Payment successful!");
   buyETicket();
+}
+
+if (paymentSuccess=="unsuccessful") {
+  console.log("Payment unsuccessful!");
+  showPaymentError();
+}
+
+function showPaymentError() {
+  Swal.fire({
+    icon: 'error',
+    title: 'Payment Unsuccessful',
+    text: 'Payment processing was unsuccessful. Please try again.',
+    confirmButtonText: 'OK'
+  }).then(() => {
+    // Reload the page after the user clicks OK
+    // redirect to buytickets.html page
+
+
+    window.location.href = 'http://localhost:5500/html/passenger/buyticket.html';
+  });
+  
 }
 function validateNoOfTicket(){
     var Field=document.getElementById("no-of-tickets");
@@ -47,10 +71,13 @@ function buyETicket() {
 
   booking["startStation"] = localStorage.getItem("Sstationcode");
   booking["endStation"] = localStorage.getItem("Estationcode");
-  booking["date"] = localStorage.getItem("date");
+  booking["date"] = booking["date"] = new Date(localStorage.getItem("date")).toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"});
   booking["trainClass"] = localStorage.getItem("class");
   booking["numberOfTickets"] = localStorage.getItem("no-of-tickets");
   booking["totalPrice"] = localStorage.getItem("amount");
+  console.log(booking["date"]);
+  // type of date
+  console.log(typeof booking["date"]);
 
   console.log("Booking details:", booking);
 
