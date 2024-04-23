@@ -35,8 +35,12 @@ function generateOrderID() {
 function prepareBilling(){
     // add sationname attribute from the id with "from" and store it in localstorage
     localStorage.setItem("Sstation", document.getElementById("from").getAttribute("stationname"));
+    // add stationcode attribute from the id with "from" and store it in localstorage
+    localStorage.setItem("Sstationcode", document.getElementById("from").getAttribute("stationcode"));
     // add stationcode attribute from the id with "to" and store it in localstorage
     localStorage.setItem("Estation", document.getElementById("to").getAttribute("stationname"));
+    // add stationcode attribute from the id with "to" and store it in localstorage
+    localStorage.setItem("Estationcode", document.getElementById("to").getAttribute("stationcode"));
     // add value from the id with "date" and store it in localstorage
     localStorage.setItem("date", document.getElementById("date").value);
     // add value from the id with "class" and store it in localstorage

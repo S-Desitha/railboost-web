@@ -1,9 +1,18 @@
 // const url1 = "http://localhost:8080/railboost_backend_war_exploded/booking";
 // const url= "http://localhost:8080/railboost_backend_war_exploded/ticketPrice";
 
+
 const bookingEndpoint = "booking";
 const ticketPriceEndpoint = "ticketPrice";
 
+const urlParams = new URLSearchParams(window.location.search);
+const paymentSuccess = urlParams.has('payment_success');
+
+// If the 'payment_success' parameter is present, call buyETicket function
+if (paymentSuccess) {
+  console.log("Payment successful!");
+  buyETicket();
+}
 function validateNoOfTicket(){
     var Field=document.getElementById("no-of-tickets");
     var Error=document.getElementById("error");
@@ -34,14 +43,16 @@ function validateStation(){
 }
 
 function buyETicket() {
-  booking = {};
+  const booking = {};
 
-  booking["startStation"] = document.getElementById("from").getAttribute("stationCode");
-  booking["endStation"] = document.getElementById("to").getAttribute("stationCode");
-  booking["date"] = new Date(document.getElementById("date").value).toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"})
-  booking["trainClass"] = document.getElementById("class").value;
-  booking["numberOfTickets"] = document.getElementById("no-of-tickets").value;
-  booking["totalPrice"] = document.getElementById("amount").value;
+  booking["startStation"] = localStorage.getItem("Sstationcode");
+  booking["endStation"] = localStorage.getItem("Estationcode");
+  booking["date"] = localStorage.getItem("date");
+  booking["trainClass"] = localStorage.getItem("class");
+  booking["numberOfTickets"] = localStorage.getItem("no-of-tickets");
+  booking["totalPrice"] = localStorage.getItem("amount");
+
+  console.log("Booking details:", booking);
 
   const body = booking;
   const params = {
@@ -54,26 +65,27 @@ function buyETicket() {
   };
 
   customFetch(bookingEndpoint, params)
-    .then(() => window.location.reload())
+    .then(() => {
+      // Show SweetAlert notification for successful payment
+      Swal.fire({
+        icon: 'success',
+        title: 'Payment Successful!',
+        text: 'Check your email for the E-Ticket.',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        // Reload the page after the user clicks OK
+        // redirect to buytickets.html page
+
+
+        window.location.href = 'http://localhost:5500/html/passenger/buyticket.html';
+      });
+    })
     .catch ((error) => {
-      if (error=="login-redirected")
-          localStorage.setItem("last_url", window.location.pathname);
+      if (error == "login-redirected")
+        localStorage.setItem("last_url", window.location.pathname);
     });
-
-  // fetch(url1, params)
-  //   .then(res => {
-  //     if (res.ok) {
-  //       window.location.reload();
-  //     }
-  //   });
-
-  console.log(booking);
-  alert("Check your email for E-Ticket.");
-  window.location.reload();
-  // window.onbeforeunload = function{
-  //   return true;
-  // }
 }
+
 
 function getPrice(){
   var Start=document.getElementById("from").getAttribute("stationCode");
