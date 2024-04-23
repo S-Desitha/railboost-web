@@ -923,3 +923,12 @@ input {
   align-items: center;
 }
 
+#trainIdError{
+  text-align: left;
+  top: 100%;
+  left: 2px;
+  font-size: 14px;
+  font-weight: 400;
+  color: red;
+  margin-left: 10px;
+}

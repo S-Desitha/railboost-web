@@ -323,7 +323,7 @@ function deleteStaff() {
         confirmButtonColor: "#5271FF",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then(async (result) => {
         if (result.isConfirmed) {
             const body = member;
             const params = {
@@ -334,8 +334,10 @@ function deleteStaff() {
                 method: "DELETE",
             };
   
-            customFetch(endpoint2, params)
-                .then(() => {
+            const res=await customFetch(endpoint2, params)
+            
+                .then((res) => {
+                    console.log(res);
                 Swal.fire({
                   title: "Staff Member Deleted",
                   text: "The Staff Member has been successfully deleted!",

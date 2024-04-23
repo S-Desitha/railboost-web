@@ -39,6 +39,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
 function editTrain() {
+  var Iderror = document.getElementById('trainIdError');
+  Iderror.innerHTML='';
   const dialogModal = document.querySelector('.dialog-modal');
     dialogModal.showModal();
   train = JSON.parse(this.getAttribute("train"));
@@ -147,11 +149,17 @@ function deleteTrain() {
 }
 
 
-function addNewTrain() {
+async function addNewTrain() {
   train = {};
 
   train["trainId"] = document.getElementById("trainId").value;
   train["trainType"] = document.getElementById("trainType").value;
+
+  if (!train["trainId"] || !train["trainType"]) {
+    return; 
+}
+  var Iderror = document.getElementById('trainIdError');
+  Iderror.innerHTML='';
 
   const body = train;
   const params = {
@@ -161,20 +169,19 @@ function addNewTrain() {
       body: JSON.stringify(body),
       method: "POST"
   };
-  closeDialog();
-  customFetch(endpoint, params)
-      .then(() => {
+  const response=await customFetch(endpoint, params)
+      if (response.isSuccessful) {
+        closeDialog();
           Swal.fire({
               title: "Success!",
               text: "New Train has been successfully added!",
               icon: "success"
           }).then(() => window.location.reload());
-      })
-      .catch((error) => {
-          if (error == "login-redirected") {
-              localStorage.setItem("last_url", window.location.pathname);
-          }
-      });
+      }else{
+        var Iderror = document.getElementById('trainIdError');
+        Iderror.innerHTML='Existing Train ID';
+        document.getElementById('trainId').value = '';
+      }
 
   console.log(train);
 }
