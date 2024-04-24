@@ -123,7 +123,7 @@
 			<form onsubmit="return false" id="staff_form">
 				<!-- <h2 class="adding-form-heading" id="add-staff-heading">Add a new staff member</h2> -->
 				<label for="staffId"></label>
-				<input type="text" id="staffId" placeholder="Staff ID:" name="staffId" onchange="updateUsername()" required><br>
+				<input type="text" id="staffId" placeholder="Staff ID:" name="staffId" onchange="updateUsername()" onkeyup="validateStaffId()"  required><br>
 				<span id="staffIDError"></span>
 
 				<label for="fName"></label>
@@ -140,7 +140,22 @@
 				</select>
 		
 				<label for="railwayStation"></label>
-				<input type="text" id="railwayStation" placeholder="Railway Station:" name="railwayStation" required><br>
+				<!-- <input type="text" id="railwayStation" placeholder="Railway Station:" name="railwayStation" required><br> -->
+
+				<div class="wrapper" font-size="1px" id="railwayStation">
+					<div class="select-btn">
+						<span id="rst-edit">Railway Station:</span> 
+						<i font-size="3px" class="fa fa-angle-down"></i>
+					</div>
+					<div class="content">
+						<div class="search">
+							
+							<input spellcheck="false" type="text" placeholder="Search">
+							<!-- <i class="fas fa-search"></i> -->
+						</div>
+						<ul onclick="validateStation();" class="options"></ul>
+					</div>
+				</div>
 		
 				
 					<label id="email-label"></label>

@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async function() {
             let roleCell = row.insertCell(4);
             roleCell.innerHTML = staffMember.user.role.role;
             roleCell.setAttribute("roleId", staffMember.user.role.roleId);
-            row.insertCell(5).innerHTML = staffMember.station;
+            row.insertCell(5).innerHTML = staffMember.stationName;
             row.insertCell(6).append(editButton, deleteButton);
     
         });
@@ -72,7 +72,11 @@ function editStaff() {
     // document.getElementById('role').value = member.user["role"]=="sm"? "SM" : "TCO";
     document.getElementById('role').value = member.user.role.roleId;
     document.getElementById('role').dispatchEvent(new Event("change"));
-    document.getElementById('railwayStation').value = member["station"];
+    document.getElementById("rst-edit").innerHTML = member["stationName"];
+    const ST = document.getElementById('railwayStation');
+    ST.setAttribute('stationcode',  member["station"]);
+    ST.setAttribute('stationcode',  member["stationName"]);
+    // document.getElementById('railwayStation').innerHTML = member["station"];
     document.getElementById('email-field').value = member.user["email"];
     document.getElementById('phone-field').value = member.user["telNo"]
     document.getElementById('username').value = member.user["username"];
@@ -81,6 +85,7 @@ function editStaff() {
     document.getElementById('email-field').disabled = true;
     document.getElementById('phone-field').disabled = true;
     document.getElementById('username').disabled = true;
+    document.getElementById('role').disabled=true;
 
     button.setAttribute("member", JSON.stringify(member));
     button.onclick = updateStaff;
@@ -91,15 +96,20 @@ function editStaff() {
 function updateStaff() {
     const dialogModal = document.querySelector('.dialog-modal');
     dialogModal.close();
-    staffMember = {user: {}};
+    // staffMember = {user: {}};
+    staffMember = {
+        user: {
+            role: {}
+        }
+    };
 
     staffMember["staffId"] = document.getElementById('staffId').value;
-    staffMember["station"] = document.getElementById('railwayStation').value;
-    staffMember.user["role"] = document.getElementById("role").value;
+    staffMember["station"] = document.getElementById("railwayStation").getAttribute("stationCode");
+    staffMember.user.role["roleId"] = document.getElementById("role").value;
     // staffMember.user["email"] = document.getElementById('email-field').value;
     // staffMember.user["telNo"] = document.getElementById('phone-field').value;
     // staffMember.user["username"] = document.getElementById('username').value;
-
+    console.log(staffMember);
 
     const body = staffMember;
     const params = {
@@ -180,7 +190,7 @@ async function addStaff() {
     const username = document.getElementById('username').value;
 
     staffMember["staffId"] = document.getElementById('staffId').value;
-    staffMember["station"] = document.getElementById('railwayStation').value;
+    staffMember["station"] = document.getElementById("railwayStation").getAttribute("stationCode");
     staffMember.user["fName"] = document.getElementById("fName").value;
     staffMember.user["lName"] = document.getElementById("lName").value;
     staffMember.user.role["roleId"] = document.getElementById("role").value;
@@ -358,4 +368,16 @@ function deleteStaff() {
         
     });
   }
-  
+function validateStaffId() {
+    const staffIdInput = document.getElementById('staffId');
+    const staffIdError = document.getElementById('staffIDError');
+    const staffId = staffIdInput.value.trim();
+
+    if (/^0+$/.test(staffId)) {
+        staffIdError.textContent = 'Staff ID cannot consist of only zeros';
+        return;
+    }else{
+        staffIdError.textContent = '';
+        return;
+    }
+}

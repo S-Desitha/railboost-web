@@ -923,7 +923,7 @@ input {
   align-items: center;
 }
 
-#trainIdError{
+#trainIdError,#contactNumberError{
   text-align: left;
   top: 100%;
   left: 2px;

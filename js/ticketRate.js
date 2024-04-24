@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   function updateRate() {
     // close any opened dilalogs
     const dialogModal = document.querySelector('.dialog-modal');
-    dialogModal.close();
+    
     rate = {};
     rate["startCode"] = document.getElementById("from").getAttribute("stationCode");
     rate["endCode"] = document.getElementById("to").getAttribute("stationCode");
@@ -95,6 +95,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     rate["firstClass"] = document.getElementById("1class-price").value;
     rate["secondClass"] = document.getElementById("2class-price").value;
     rate["thirdClass"] = document.getElementById("3class-price").value;
+
+    if (!rate["startCode"] || !rate["endCode"] || !rate["firstClass"] || !rate["secondClass"] || !rate["thirdClass"]) {
+        return;
+    }
+    dialogModal.close();
 
     Swal.fire({
         title: "Are you sure?",
@@ -208,7 +213,7 @@ function deleteRate() {
   
   
   
-  function addNewRate() {
+  async function addNewRate() {
     rate = {};
     console.log("hi from rate")
     rate["startCode"] =document.getElementById("from").getAttribute("stationCode");
@@ -216,6 +221,10 @@ function deleteRate() {
     rate["firstClass"] = document.getElementById("1class-price").value;
     rate["secondClass"] = document.getElementById("2class-price").value;
     rate["thirdClass"] = document.getElementById("3class-price").value;
+
+    if (!rate["startCode"] || !rate["endCode"] || !rate["firstClass"] || !rate["secondClass"] || !rate["thirdClass"]) {
+        return;
+    }
   
     const body = rate;
     const params = {
@@ -227,8 +236,9 @@ function deleteRate() {
     };
   
     
-    customFetch(endpoint3, params)
-        .then(()=> {
+    const response=await customFetch(endpoint3, params)
+        if (response.isSuccessful) {
+            closeDialog();
             Swal.fire({
                 title: "New Rate Added",
                 text: "A  new rate has been successfully added!",
@@ -236,13 +246,23 @@ function deleteRate() {
             }).then((result) => {
                 if (result.isConfirmed) window.location.reload();
             
-            })
+            });
             
-        })
-        .catch((error) => {
-            if (error=="login-redirected")
-                localStorage.setItem("last_url", window.location.pathname);
-        });
+        }else{
+            closeDialog();
+            Swal.fire({
+                title: "Error!",
+                text: "Rates are available for provided stations.",
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "OK"
+            }).then((result) => {
+                if (result.isConfirmed) window.location.reload();
+            
+            });
+
+        }
 
   
     console.log(rate);

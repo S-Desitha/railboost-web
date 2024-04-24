@@ -49,10 +49,38 @@
                     <section class="table_header">
                         <h1>Station Details</h1>
                         <div class="input-group " >
-                            <input type="search"style="margin:0" placeholder="Search Trains...">
+                            <input type="search"style="margin:0" placeholder="Search Station...">
                             <img src="/Images/search.png" alt="">
                         </div>
                     </section>
+
+                    <script>
+						const searchInput = document.querySelector('.table_header input[type="search"]');
+						searchInput.addEventListener('input', filterTable);
+
+						function filterTable() {
+							const searchTerm = searchInput.value.toLowerCase();
+							const tableRows = document.querySelectorAll('#station_table tr');
+
+							tableRows.forEach(row => {
+								let rowVisible = false;
+
+								for (let i = 0; i < row.cells.length; i++) {
+									const cellText = row.cells[i].textContent.toLowerCase();
+									if (cellText.includes(searchTerm)) {
+										rowVisible = true;
+										break;
+									}
+								}
+
+								if (rowVisible) {
+									row.style.display = 'table-row';
+								} else {
+									row.style.display = 'none';
+								}
+							});
+						}
+					</script>
 
                     <section class="table_body">
                         <table>
@@ -99,17 +127,9 @@
                 <label for="Line"></label>
                 <!-- select lines are Coastal,Main,Nothern,Batticalo,Kelani Valley,Mannar,Mathale,Puttalam and Trincomalee -->
 
-                <select id="selectLine" name="selectLine">
+                <select id="selectLine" name="selectLine"required>
                     <option value="" disabled selected>Line</option>
-                    <option value="COASTAL">COASTAL</option>
-                    <option value="MAIN">MAIN</option>
-                    <option value="NOTHERN">NOTHERN</option>
-                    <option value="BATTICALOA">BATTICALOA</option>
-                    <option value="KELANI VALLEY">KELANI VALLEY</option>
-                    <option value="MANNAR">MANNAR</option>
-                    <option value="MATHALE">MATHALE</option>
-                    <option value="PUTTALAM">PUTTALAM</option>
-                    <option value="TRINCOMALEE">TRINCOMALEE</option>
+                    
 
                     <!-- <option value="addNewLine">Add New Line</option> -->
                 </select>
@@ -121,14 +141,15 @@
                 <input type="text" id="NextStation" placeholder="Next Station">
 
                 <label for="contactNumber"></label>
-                <input type="text" id="contactNumber" name="contactNumber" placeholder="Contact Number" required>
+                <input type="text" id="contactNumber" name="contactNumber" placeholder="Contact Number" onkeyup="validatePhoneNo();" required>
+                <span id="contactNumberError"></span>
 
                 <!-- <div id="option1Elements" class="hidden">
                     <label for="addNewLine"></label>
                     <input type="text" id="addNewLine" name="addNewLine" placeholder="Add New Line">
                 </div> -->
 
-                <button class="form-button" id="add-station-button" style="width: 100%;"onclick="addNewStation()">Add a new station </button>
+                <button class="form-button" id="add-station-button" style="width: 100%;"onclick="addNewStation()">Add A New Station </button>
             </form>
         </div>
     </dialog>
