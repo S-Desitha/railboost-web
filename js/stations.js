@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   
 
     document.getElementById("station-form").reset();
+    setLines();
   
     try {
       let data = await customFetch(endpoint, {});
@@ -179,7 +180,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   
   
-  function addNewStation() {
+  async function addNewStation() {
   
     // first of all clear the form
     // document.getElementById("station-form").reset();
@@ -192,6 +193,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     station["prevStation"] = document.getElementById("PrevStation").value;
     station["nextStation"] = document.getElementById("NextStation").value;
     station["contactNo"] = document.getElementById("contactNumber").value;
+
+    if (!station["stationCode"] || !station["stationName"] || !station["address"] || !station["line"]|| !station["contactNo"]) {
+      return; 
+    }
   
     const body = station;
     const params = {
@@ -202,19 +207,22 @@ document.addEventListener("DOMContentLoaded", async function () {
         method: "POST"
     };
     closeDialog();
-    customFetch(endpoint, params)
-        .then(() => {
+    var res = await customFetch(endpoint, params)
+        if(res.isSuccessful) {
             Swal.fire({
                 title: "Success!",
                 text: "New Station has been successfully added!",
                 icon: "success"
             }).then(() => window.location.reload());
-        })
-        .catch((error) => {
-            if (error == "login-redirected") {
-                localStorage.setItem("last_url", window.location.pathname);
-            }
-        });
+        }else{
+          console.log(res.error);
+          Swal.fire({
+            title: "Error!",
+            text: "An error occurred while adding the Station. Check the provided data again.",
+            icon: "error"
+        }).then(() => window.location.reload());
+          
+        }
   
     console.log(station);
   }
@@ -313,4 +321,49 @@ function showSchedules() {
     };
 
     window.location.href = "/html/passenger/passSch.html?schedule="+encodeURIComponent(JSON.stringify(params));
+}
+
+function validatePhoneNo(){
+  var contactNumber=document.getElementById("contactNumber");
+  var contactNumberError=document.getElementById("contactNumberError");
+  if(!contactNumber.value.match(/^\d{10}$/)){
+      contactNumberError.innerHTML = "<div>Please enter a valid contact number</div>";
+      return false;
+  }
+      contactNumberError.innerHTML = "";
+      return true;
+}
+
+
+async function setLines() {
+  let LEndpoint = "lines";
+
+  // document.getElementById("selectLine")
+      // .addEventListener("change", (e) => {
+      //     if (e.target.value == 4) {
+      //         document.getElementById("railwayStation").style.display = "none";
+      //     }
+      //     else
+      //     document.getElementById("railwayStation").style.display = "block";
+      // });
+
+
+  try {
+      
+      let data = await customFetch(LEndpoint, {});
+      let lineParent = document.getElementById("selectLine");
+      
+      for (line of data) {
+          
+              let option = document.createElement("option");
+              option.innerHTML = line.lineName;
+              option.value = line.lineName;
+              lineParent.appendChild(option);
+      }
+  }
+  catch(error) {
+      if (error=="login-redirected")
+          localStorage.setItem("last_url", window.location.pathname);
+  }
+
 }

@@ -737,7 +737,7 @@ h3{
   border-radius: 8px; 
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
   padding: 20px; /* Padding */
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 
@@ -923,3 +923,12 @@ input {
   align-items: center;
 }
 
+#trainIdError,#contactNumberError{
+  text-align: left;
+  top: 100%;
+  left: 2px;
+  font-size: 14px;
+  font-weight: 400;
+  color: red;
+  margin-left: 10px;
+}
