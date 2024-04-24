@@ -1,9 +1,42 @@
 // const url1 = "http://localhost:8080/railboost_backend_war_exploded/booking";
 // const url= "http://localhost:8080/railboost_backend_war_exploded/ticketPrice";
 
+
 const bookingEndpoint = "booking";
 const ticketPriceEndpoint = "ticketPrice";
 
+const urlParams = new URLSearchParams(window.location.search);
+const paymentSuccess = urlParams.get('payment_success');
+console.log(paymentSuccess);
+// type of paymentSuccess
+console.log(typeof paymentSuccess);
+
+// If the 'payment_success' parameter is present, call buyETicket function
+if (paymentSuccess=="successful") {
+  console.log("Payment successful!");
+  buyETicket();
+}
+
+if (paymentSuccess=="unsuccessful") {
+  console.log("Payment unsuccessful!");
+  showPaymentError();
+}
+
+function showPaymentError() {
+  Swal.fire({
+    icon: 'error',
+    title: 'Payment Unsuccessful',
+    text: 'Payment processing was unsuccessful. Please try again.',
+    confirmButtonText: 'OK'
+  }).then(() => {
+    // Reload the page after the user clicks OK
+    // redirect to buytickets.html page
+
+
+    window.location.href = 'http://localhost:5500/html/passenger/buyticket.html';
+  });
+  
+}
 function validateNoOfTicket(){
     var Field=document.getElementById("no-of-tickets");
     var Error=document.getElementById("error");
@@ -34,15 +67,15 @@ function validateStation(){
 }
 
 function buyETicket() {
-  booking = {};
+  const booking = {};
 
-  booking["startStation"] = document.getElementById("from").getAttribute("stationCode");
-  booking["endStation"] = document.getElementById("to").getAttribute("stationCode");
-  booking["date"] = new Date(document.getElementById("date").value).toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"})
-  booking["trainClass"] = document.getElementById("class").value;
-  booking["numberOfTickets"] = document.getElementById("no-of-tickets").value;
-  booking["totalPrice"] = document.getElementById("total-price").value;
-
+  booking["startStation"] = localStorage.getItem("Sstationcode");
+  booking["endStation"] = localStorage.getItem("Estationcode");
+  booking["date"] = new Date(localStorage.getItem("date")).toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"});
+  booking["trainClass"] = localStorage.getItem("class");
+  booking["numberOfTickets"] = localStorage.getItem("no-of-tickets");
+  booking["totalPrice"] = localStorage.getItem("amount");
+  
   const body = booking;
   const params = {
     headers: {
@@ -53,26 +86,21 @@ function buyETicket() {
     credentials: "include"
   };
 
-  customFetch(bookingEndpoint, params)
-    .then(() => window.location.reload())
-    .catch ((error) => {
-      if (error=="login-redirected")
-          localStorage.setItem("last_url", window.location.pathname);
-    });
+ 
+  showSuccessNotification();
+  return customFetch(bookingEndpoint, params);
+}
 
-  // fetch(url1, params)
-  //   .then(res => {
-  //     if (res.ok) {
-  //       window.location.reload();
-  //     }
-  //   });
-
-  console.log(booking);
-  alert("Check your email for E-Ticket.");
-  window.location.reload();
-  // window.onbeforeunload = function{
-  //   return true;
-  // }
+// Function to show success notification using SweetAlert
+function showSuccessNotification() {
+  Swal.fire({
+    icon: 'success',
+    title: 'Payment Successful!',
+    text: 'Check your email for the E-Ticket.',
+    confirmButtonText: 'OK'
+  }).then(() => {
+    window.location.href = 'http://localhost:5500/html/passenger/buyticket.html';
+  });
 }
 
 function getPrice(){
@@ -108,13 +136,13 @@ async function getTicketPrices(Class,Count) {
     console.log(urlQuery);
     if (Class == "1st Class"){
       // PriceOfOne.innerHTML = "Price of one ticket is "+data.firstClass+".";
-      document.getElementById("total-price").value = data.firstClass*Count;
+      document.getElementById("amount").value = data.firstClass*Count;
     }else if(Class == "2nd Class"){
       // PriceOfOne.innerHTML = "Price of one ticket is "+data.secondClass+".";
-      document.getElementById("total-price").value = data.secondClass*Count;
+      document.getElementById("amount").value = data.secondClass*Count;
     }else if(Class == "3rd Class"){
       // PriceOfOne.innerHTML = "Price of one ticket is "+data.thirdClass+".";
-      document.getElementById("total-price").value = data.thirdClass*Count;
+      document.getElementById("amount").value = data.thirdClass*Count;
     }
   }
   catch (error) {

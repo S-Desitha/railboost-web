@@ -4,39 +4,166 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment method</title>
-    <link rel="stylesheet" href="/css/style_payment_method.css">
+
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- sweet alert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+
+    <!-- icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
+    <!-- css imports -->
+    <link rel="stylesheet" href="/css/notifications.css">
+    
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/payment.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/payment.css">
+    <link rel="stylesheet" href="/css/buttons.css">
+
+
+
+
+
+    <script src="/js/hash.js" ></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/notification.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/charts.js"></script>
 </head>
 <body>
-    <div class="payment_method">
-        <div class="tital">
-            <h4>select a <span id="payment">Payment</span> method </h4>
+    <nav class="navbar" >
+        <script>createNavBar("passenger")</script>
+    </nav>
+
+    <div class="container">
+        <div class="sidebar active">
+            <script>createSideBar("passenger")</script>
         </div>
+        <div class="service-view">
+			<!-- <div class="service-container"> -->
 
-        <form action="#">
-            <div class="category">
-                <input type="radio" name="payment" id="visa">
-                <label for="visa">
-                    <div class="imgName">
-                        <div class="imgContainer">
-                            <img src="Images/visa.png" alt="">
-                        </div>
-                        <span>VISA</span>
-                    </div>
-                    <span class="radio" style="color: var(--theme-color);"></span>
-                </label>
+                <div class="fcontainer">
+                    
+                        <form method="post" action="https://sandbox.payhere.lk/pay/checkout" class="form-container">
+                            <input type="hidden" name="merchant_id" value="1226549">    
+                            <input type="hidden" name="return_url" value="http://localhost:5500/html/passenger/buyticket.html?payment_success=successful">
+                            <input type="hidden" name="cancel_url" value="http://localhost:5500/html/passenger/buyticket.html?payment_success=unsuccessful">
+                            <input type="hidden" name="notify_url" value="http://sample.com/notify"> 
+                                <div class="journey-details">
+                                    <div class="headers">
+                                    <h2 style="justify-self: center;">Journey Details</h2>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Sstation">Starting Station:</label>
+                                        <input type="text" id="Sstation" name="Sstation" value="" readonly >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Estation">Ending Station:</label>
+                                        <input type="text" id="Estation" name="Estation"value=""  readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="date">Date:</label>
+                                        <input type="date" class="date" id="date" name="travelDate" value="" readonly>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="class">Class:</label>
+                                        <input type="text" class="class" id="class" value="" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="number-of-tickets">Number of Tickets:</label>
+                                        <input type="text" id="number-of-tickets" name="numTickets" min="1" readonly>
+                                    </div>
+                                    
+                                </div>
+                                <div class="billing-details">
+                                    <div class="headers">
+                                        <h2>Billing Details</h2>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="order_id">Payment ID:</label>
+                                        <input type="text" name="order_id" id="order_id" value="ItemNo12345"  readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="first_name">First Name:</label>
+                                        <input type="text" name="first_name" id="first_name" value="Saman" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="last_name">Last Name:</label>
+                                        <input type="text" name="last_name" id="last_name" value="Perera" readonly>
+                                    </div>
+                                    
+                                    
+                                    <input type="hidden" name="items" value="RailBoost E-Ticket">
+                                
+                                    <div class="form-group">
+                                        <label for="currency">Currency:</label>
+                                        <input type="text" name="currency" id="currency" value="LKR" readonly>
+                                    </div>
+                                    <input type="hidden" name="recurrence" value="1 Day">
+                                    <input type="hidden" name="duration" value="Forever">
+                                    <div class="form-group">
+                                        <label for="amount">Full Amount:</label>
+                                        <input type="text" name="amount" id="amount" value="1000"  readonly>  
+                                    </div>
+                                
+                                    
+                                </div>
+                                <input type="hidden" name="email" value="samanp@gmail.com">
+                                <input type="hidden" name="phone" value="0771234567"><br>
+                                <input type="hidden" name="address" value="No.1, Galle Road">
+                                <input type="hidden" name="city" value="Colombo">
+                                <input type="hidden" name="country" value="Sri Lanka">
+                                <input type="hidden" name="hash" id="hash" value="">     
+                                <input type="submit"   class="form-button" id="buy-ticket-button" value="Pay Now" style="margin: 0px;position: absolute;left: 43%;top: 82%;">
+                        </form>
+                    
+                </div>
 
-                <input type="radio" name="payment" id="master">
-                <label for="master">
-                    <div class="imgName">
-                        <div class="imgContainer">
-                            <img src="Images/mcCard.png" alt="">
-                        </div>
-                        <span>Master Card</span>
-                    </div>
-                    <span class="radio" style="color: var(--theme-color);"></span>
-                </label>
-            </div>
-        </form>
+                <!-- <form method="post" action="https://sandbox.payhere.lk/pay/checkout">   
+                    <input type="hidden" name="merchant_id" value="1226549">    
+                    <input type="hidden" name="return_url" value="http://sample.com/return">
+                    <input type="hidden" name="cancel_url" value="http://sample.com/cancel">
+                    <input type="hidden" name="notify_url" value="http://sample.com/notify">  
+                    <br><br>Journey Details<br>
+                    <input type="text"name="Sstation" id="Sstation" value="Colombo Fort">
+                    <input type="text" name="Estation" id="Estation" value="Kandy"><br>
+                    <input type="date" class="date" id="date" value="">
+                    <input type="text" class="time" id="class" value=""><br>
+                    <input type="number" name="tickets" id="number-of-tickets" value="1">
+                    <input type="text" name="order_id" id="order_id" value="ItemNo12345">
+                    <input type="hidden" name="items" value="RailBoost E-Ticket"><br>
+                    <input type="text" name="currency" id="currency" value="LKR">
+                    <input type="hidden" name="recurrence" value="1 Day">
+                    <input type="hidden" name="duration" value="Forever">
+                    <input type="text" name="amount" id="amount" value="1000">  
+                    <br><br>Customer Details<br>
+                    <input type="text" name="first_name" id="first_name" value="Saman">
+                    <input type="text" name="last_name" id="last_name" value="Perera"><br>
+                    <input type="hidden" name="email" value="samanp@gmail.com">
+                    <input type="hidden" name="phone" value="0771234567"><br>
+                    <input type="hidden" name="address" value="No.1, Galle Road">
+                    <input type="hidden" name="city" value="Colombo">
+                    <input type="hidden" name="country" value="Sri Lanka">
+                    <input type="hidden" name="hash" id="hash" value="">     
+                    <input type="submit" value="Buy Now">   
+                </form> -->
+            <!-- </div> -->
+        </div>
     </div>
 </body>
 </html>

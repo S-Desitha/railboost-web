@@ -390,7 +390,16 @@ thead th.active,tbody td.active {
     /* border-radius: 5px; */
     background: #f2f2f2;
   }
-
+.trainID{
+  border:none;
+  border-bottom:1px solid #a9a9a9 ;
+  margin: 15px 0px;
+  text-decoration-color: #6e6b6b;
+  border-radius: 0px;
+  font-size: 14px;
+  color: #6e6b6b;
+  padding-left:0px ;
+}
 
 #speed {
   width: 20vw;

@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     let urlQuery = `${endpoint2}?${queryString}`;
     
         let data = await customFetch(urlQuery, {credentials: "include"});
-        // console.log(data);
+        console.log(data);
         // console.log(data.fName);
 
         let editButton = document.getElementById("edit-btn");

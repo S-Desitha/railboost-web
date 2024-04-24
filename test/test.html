@@ -1,29 +1,121 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Form</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-<script src="/js/hash.js" ></script>
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+        }
+
+        .journey-details,
+        .billing-details {
+            flex: 1;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
 <body>
-<form method="post" action="https://sandbox.payhere.lk/pay/checkout">   
-    <input type="hidden" name="merchant_id" value="1226549">    <!-- Replace your Merchant ID -->
-    <input type="hidden" name="return_url" value="http://sample.com/return">
-    <input type="hidden" name="cancel_url" value="http://sample.com/cancel">
-    <input type="hidden" name="notify_url" value="http://sample.com/notify">  
-    <br><br>Item Details<br>
-    <input type="text" name="order_id" value="ItemNo12345">
-    <input type="text" name="items" value="Door bell wireless"><br>
-    <input type="text" name="currency" value="LKR">
-    <input type="text" name="recurrence" value="1 Month">
-    <input type="text" name="duration" value="Forever">
-    <input type="text" name="amount" value="1000">  
-    <br><br>Customer Details<br>
-    <input type="text" name="first_name" value="Saman">
-    <input type="text" name="last_name" value="Perera"><br>
-    <input type="text" name="email" value="samanp@gmail.com">
-    <input type="text" name="phone" value="0771234567"><br>
-    <input type="text" name="address" value="No.1, Galle Road">
-    <input type="text" name="city" value="Colombo">
-    <input type="hidden" name="country" value="Sri Lanka">
-    <input type="hidden" name="hash" value="">     <!-- Replace with generated hash -->
-    <input type="submit" value="Buy Now">   
-</form>
+    <div class="container">
+        <div class="form-container">
+            <div class="journey-details">
+                <h2>Journey Details</h2>
+                <div class="form-group">
+                    <label for="startingStation">Starting Station:</label>
+                    <input type="text" id="startingStation" name="startingStation">
+                </div>
+                <div class="form-group">
+                    <label for="endingStation">Ending Station:</label>
+                    <input type="text" id="endingStation" name="endingStation">
+                </div>
+                <div class="form-group">
+                    <label for="travelDate">Date:</label>
+                    <input type="date" id="travelDate" name="travelDate">
+                </div>
+                <div class="form-group">
+                    <label for="ticketClass">Class:</label>
+                    <select id="ticketClass" name="ticketClass">
+                        <option value="economy">Economy</option>
+                        <option value="business">Business</option>
+                        <option value="first">First Class</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="numTickets">Number of Tickets:</label>
+                    <input type="text" id="numTickets" name="numTickets" min="1">
+                </div>
+            </div>
+            <div class="billing-details">
+                <h2>Billing Details</h2>
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName">
+                </div>
+                <div class="form-group">
+                    <label for="paymentID">Payment ID:</label>
+                    <input type="text" id="paymentID" name="paymentID">
+                </div>
+                <div class="form-group">
+                    <label for="currency">Currency:</label>
+                    <select id="currency" name="currency">
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="GBP">GBP</option>
+                        <option value="JPY">JPY</option>
+                        <!-- Add more currencies as needed -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Full Amount:</label>
+                    <input type="text" id="amount" name="amount">
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

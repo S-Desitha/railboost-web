@@ -10,6 +10,33 @@ document.addEventListener("DOMContentLoaded", async function() {
     else if (window.location.pathname.includes("trainSch.html")) {
         createSpecificSchPage();
         dynamicDraggableTable();
+
+        const endpoint = "train";
+    const selectElement = document.getElementById("train-id");
+
+    try {
+        // Fetch train IDs from the backend
+        const data = await customFetch(endpoint, {});
+        console.log(data);
+
+        // Clear existing options
+        selectElement.innerHTML = "";
+        const defaultOption = document.createElement("option");
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        defaultOption.textContent = "Select Train ID";
+        selectElement.appendChild(defaultOption);
+
+        // Populate dropdown with fetched train IDs
+        data.forEach(train => {
+            const option = document.createElement("option");
+            option.value = train.trainId;
+            option.textContent = train.trainId;
+            selectElement.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error fetching train IDs:", error);
+    }
     }
 
 });
@@ -62,13 +89,55 @@ function addStoppingStation() {
 
 
 
+// function addNewSchedule() {
+//     let schedule = getSchedule();
+//     let serialSchedule = schedule;
+    
+//     let [startDate, days, endDate] = getDates();
+//     startDate = startDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+//     endDate = endDate!=null? endDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }) : endDate;
+    
+//     serialSchedule.stations = schedule.stations.toArray();
+//     serialSchedule.startDate = startDate;
+//     serialSchedule.endDate = endDate;
+//     serialSchedule.days = days;
+    
+//     serialSchedule.startStation = document.getElementById("from").getAttribute("stationCode");
+//     serialSchedule.endStation = document.getElementById("to").getAttribute("stationCode");
+//     serialSchedule.scheduleId = document.getElementById("sch-id").value;
+//     serialSchedule.trainId = document.getElementById("train-id").value;
+//     serialSchedule.speed = document.getElementById("speed").value;
+
+//     // serialSchedule.stations.forEach(st => {
+//     //     st.scheduleId = serialSchedule.scheduleId;
+//     // });    
+
+//     const params = {
+//         headers : {
+//             "Content-type": "application/json; charset=UTF-8"
+//         },
+//         body : JSON.stringify(serialSchedule),
+//         method : "POST"
+//     };
+
+//     customFetch(scheduleEndpoint, params)
+//         .then(()=> {
+//             localStorage.removeItem("NewscheduleCache");
+//             window.location.replace("/html/admin/schedule.html");
+//         })
+//         .catch((error) => {
+//             if (error=="login-redirected")
+//                 localStorage.setItem("last_url", window.location.pathname);
+//         });
+// }
+
 function addNewSchedule() {
     let schedule = getSchedule();
     let serialSchedule = schedule;
     
     let [startDate, days, endDate] = getDates();
     startDate = startDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
-    endDate = endDate!=null? endDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }) : endDate;
+    endDate = endDate != null ? endDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }) : endDate;
     
     serialSchedule.stations = schedule.stations.toArray();
     serialSchedule.startDate = startDate;
@@ -78,28 +147,32 @@ function addNewSchedule() {
     serialSchedule.startStation = document.getElementById("from").getAttribute("stationCode");
     serialSchedule.endStation = document.getElementById("to").getAttribute("stationCode");
     serialSchedule.scheduleId = document.getElementById("sch-id").value;
-    serialSchedule.trainId = document.getElementById("tr-id").value;
+    serialSchedule.trainId = document.getElementById("train-id").value;
     serialSchedule.speed = document.getElementById("speed").value;
 
-    // serialSchedule.stations.forEach(st => {
-    //     st.scheduleId = serialSchedule.scheduleId;
-    // });    
-
     const params = {
-        headers : {
+        headers: {
             "Content-type": "application/json; charset=UTF-8"
         },
-        body : JSON.stringify(serialSchedule),
-        method : "POST"
+        body: JSON.stringify(serialSchedule),
+        method: "POST"
     };
 
     customFetch(scheduleEndpoint, params)
-        .then(()=> {
-            localStorage.removeItem("schedule");
-            window.location.replace("/html/admin/schedule.html");
+        .then(() => {
+            // Display SweetAlert notification
+            Swal.fire({
+                icon: 'success',
+                title: 'Schedule Added!',
+                text: `New schedule added from ${document.getElementById("from").getAttribute("stationName")} to ${document.getElementById("to").getAttribute("stationName")}.`,
+                confirmButtonText: 'OK'
+            }).then(() => {
+                localStorage.removeItem("NewscheduleCache");
+                window.location.replace("/html/admin/schedule.html");
+            });
         })
         .catch((error) => {
-            if (error=="login-redirected")
+            if (error == "login-redirected")
                 localStorage.setItem("last_url", window.location.pathname);
         });
 }

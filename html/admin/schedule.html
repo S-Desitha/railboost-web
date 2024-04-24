@@ -40,8 +40,13 @@
 
 		<div class="service-view">
 			<div class="service-container train-table">
-				<button type="submit" class="add-new-btn" > <a href="/html/admin/trainSch.html">Add New</a></button>
+				<button type="submit" class="add-new-btn" onclick="redirectToPage()" > Add New</button>
 				
+				<script>
+					function redirectToPage() {
+						window.location.href = "/html/admin/trainSch.html";
+					}
+				</script>
 				<div class="table-container">
 					<section class="table_header">
 						<h1>Train Schedule Details</h1>
@@ -107,13 +112,40 @@
 	<dialog class="dialog-modal" style="width: fit-content;overflow-y: scroll;">
 		<button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
 			
-		<section class="table_header" style="display: flex;">
+		<section class="table_header station_header" style="display: flex;">
 			<h1>Train stopping stations</h1>
 			<div class="input-group">
 				<input type="search" placeholder="Search Station...">
 				<img src="/Images/search.png" alt="">
 			</div>
 		</section>
+		<script>
+			const searchInput2 = document.querySelector('.station_header input[type="search"]');
+			searchInput2.addEventListener('input', filterScheduleStationsTable);
+
+			function filterScheduleStationsTable() {
+				const searchTerm = searchInput2.value.toLowerCase();
+				const tableRows = document.querySelectorAll('#schedule_stations tr');
+
+				tableRows.forEach(row => {
+					let rowVisible = false;
+
+					for (let i = 0; i < row.cells.length; i++) {
+						const cellText = row.cells[i].textContent.toLowerCase();
+						if (cellText.includes(searchTerm)) {
+							rowVisible = true;
+							break;
+						}
+					}
+
+					if (rowVisible) {
+						row.style.display = 'table-row';
+					} else {
+						row.style.display = 'none';
+					}
+				});
+			}
+		</script>
 
 		<section class="schedule-dates-view" >
 			

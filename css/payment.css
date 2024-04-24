@@ -1,0 +1,64 @@
+.fcontainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.headers{
+    text-align: center;
+    /* font-size: 1rem; */
+    margin-bottom: 20px;
+
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    height: 70%;
+    background-color: #f0f0f0;
+    border-radius: 1.6rem;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+.journey-details,
+.billing-details {
+    flex: 1;
+    padding: 20px;
+    margin: 0px 20px 0px 20px;
+    border-radius: 5px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group select {
+    margin: 0px 0px 0px 10px;
+    width: 100%;
+    padding: 8px;
+    /* background-color: #f7f7f7; */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.form-group input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
