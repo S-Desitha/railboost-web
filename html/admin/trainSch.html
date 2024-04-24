@@ -62,10 +62,13 @@
 					<h2 class="add-train-heading" >Add a new train schedule </h2>
 						<label for="Schedule-ID"></label>
 						<input type="text" id="sch-id" placeholder="Schedule ID" required><br>
-	
-						<label for="Train-ID"></label>
-						<input type="text" id="tr-id" placeholder="Train ID" required><br>
-	
+
+						
+							<select class="trainID" id="train-id" required >
+								<!-- add disabled trainID option -->
+								
+								<!-- Options will be dynamically added here -->
+							</select><br>
 						<div class="wrapper" id="from" style="margin-left:0px ;margin-right:0px ;">
 							<div class="select-btn">
 								<span>Select Starting Station</span>
@@ -188,7 +191,7 @@
                 <label for="repeat-every"><b>Repeat every</b>   </label>
                 <input type="number" id="repeat-every" min="1" value="1">
 
-                <select id="repeat-unit" name="repeat-unit">
+                <select id="repeat-unit" style="border: none;border-bottom: 1px solid #a9a9a9; border-radius: 0px;" name="repeat-unit">
 					<option value=null selected disabled>--Select--</option>
                     <option value="day">Day</option>
                     <option value="week">Week</option>
@@ -198,14 +201,14 @@
             </div><br>
             
             <div id="start-from" class="start-from">
-                <label for="start-from">Start from</label>
+                <label for="start-from"><b>Start from</b></label>
                 <div class="start-from">
                     <input type="date" id="start-from-date">
                 </div>
             </div>
             
             <div id="repeat-on" class="repeat-on" style="margin-bottom: 10px;">
-                <label for="repeat-on">Repeat on</label><br>
+                <label for="repeat-on"><b>Repeat on</b></label><br>
             </div>
                 <div id="m-container" class="m-container">
                     <label>Date   </label>
@@ -215,7 +218,7 @@
                 <div id="y-container" class="y-container">
                     
                     <label>Month   <br></label>
-                    <select id="repeat-unit" style="margin-top:10px ;" name="repeat-unit" onchange="setRU();">
+                    <select id="repeat-unit" style="border: none;border-bottom: 1px solid #a9a9a9; border-radius: 0px;margin-top:10px ;" name="repeat-unit" onchange="setRU();">
                         <option value="1">January</option>
                         <option value="2">February</option>
                         <option value="3">March</option>
@@ -229,57 +232,58 @@
                         <option value="11">November</option>
                         <option value="12">December</option>
                     </select><br><br>
-                    <label>Date      </label>
+                    <label>Date       </label>
                     <input type="number" style="margin-top:0px ;" id="repeat-every" min="1" max="31" value="1">
+					<label style="font-size: 15px;">(Eg: 10th of the month)</label>
                     <br><br>
                 </div>
                 
 
                 <div id="container" class="days-container">
-                    <div class="cat day">
+                    <div class="cat day" style="margin-right:15px ;">
                        <label>
                           <input id="sun" type="checkbox" value="SUNDAY"><span>S</span>
                        </label>
                     </div>
                     
-                    <div class="cat day">
+                    <div class="cat day" style="margin-right:15px ;">
                        <label>
                           <input id="mon" type="checkbox" value="MONDAY"><span>M</span>
                        </label>
                     </div>
                     
-                    <div class="cat day">
+                    <div class="cat day" style="margin-right:15px ;">
                        <label>
                           <input id="tue" type="checkbox" value="TUESDAY"><span>T</span>
                        </label>
                     </div>
                     
-                    <div class="cat day">
+                    <div class="cat day" style="margin-right:15px ;">
                        <label>
                           <input id="wed" type="checkbox" value="WEDNESDAY"><span>W</span>
                        </label>
                     </div>
                     
-                    <div class="cat day">
+                    <div class="cat day" style="margin-right:15px ;">
                        <label>
                           <input id="thu" type="checkbox" value="THURSDAY"><span>T</span>
                        </label>
                     </div>
                     
-                    <div class="cat day">
+                    <div class="cat day" style="margin-right:15px ;">
                        <label>
                           <input id="fri" type="checkbox" value="FRIDAY"><span>F</span>
                        </label>
                     </div>
                     
-                    <div class="cat day">
+                    <div class="cat day" style="margin-right:15px ;">
                        <label>
                           <input id="sat" type="checkbox" value="SATURDAY"><span>S</span>
                        </label>
                     </div><br><br><br>
                 </div>
         <div class="ends">
-            <label for="ends">Ends</label><br>
+            <label for="ends"><b>Ends</b></label><br>
             <div class="repetition" >
                 <div>
 					<label for="never">Never</label>
@@ -305,7 +309,7 @@
                 </div>
             </div>
         </div>
-		<button class="form-button" onclick="this.closest('dialog').close()">Done</button>
+		<button class="form-button" style="width: 100%;" onclick="this.closest('dialog').close()">Done</button>
 		
 	</dialog>
 
