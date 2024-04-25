@@ -932,3 +932,13 @@ input {
   color: red;
   margin-left: 10px;
 }
+
+#station-error,#error2{
+  font-size: 14px;
+  font-weight: 400;
+  color: red;
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+  display: block;
+}

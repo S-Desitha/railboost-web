@@ -102,7 +102,7 @@
                                             <!-- <i class="uil uil-search"></i> -->
                                             <input spellcheck="false" type="text" placeholder="Search">
                                         </div>
-                                        <ul class="options"></ul>
+                                        <ul onclick="validateStation();" class="options"></ul>
                                     </div>
                                 </div>
             
@@ -116,14 +116,16 @@
                                             <!-- <i class="uil uil-search"></i> -->
                                             <input spellcheck="false" type="text" placeholder="Search">
                                         </div>
-                                        <ul class="options"></ul>
+                                        <ul onclick="validateStation();" class="options"></ul>
                                     </div>
                                 </div>
+                                <span id="station-error"></span>
             
                                 <div class="date" >
                                     <label for="date"></label>
                                     <input type="date" style="border: 1px solid #ccc;width: 90%;margin-left: 20px;" id="date" name="date" placeholder="Date:" required><br />   
                                 </div>
+                                <span id="error2"></span>
             
                                 <button class="login-button form-button" style="width: 90%;" onclick="showSchedules()">Search</button>
             

@@ -314,6 +314,12 @@ function showSchedules() {
     let endStation = document.getElementById("to").getAttribute("stationCode");
     let date = new Date(document.getElementById("date").value).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
+    if(!startStation || !endStation || !date){
+      let Error2=document.getElementById("error2");
+      Error2.innerHTML = "Please fill in all required fields."
+      return;
+    }
+
     const params = {
         startStation : startStation,
         endStation : endStation,
@@ -327,7 +333,7 @@ function validatePhoneNo(){
   var contactNumber=document.getElementById("contactNumber");
   var contactNumberError=document.getElementById("contactNumberError");
   if(!contactNumber.value.match(/^\d{10}$/)){
-      contactNumberError.innerHTML = "<div>Please enter a valid contact number</div>";
+      contactNumberError.innerHTML = "Please enter a valid contact number.";
       return false;
   }
       contactNumberError.innerHTML = "";
@@ -367,3 +373,30 @@ async function setLines() {
   }
 
 }
+
+function validateStationCode() {
+  const stationCodeInput = document.getElementById('stationId');
+  const stationCodeRegex = /^[A-Z]{3}$/;
+  const errorSpan = document.getElementById('stcode-error');
+
+  if (!stationCodeRegex.test(stationCodeInput.value.trim())) {
+    errorSpan.textContent = 'Station code must be 3 uppercase English letters.';
+    return false;
+  } else {
+    errorSpan.textContent = '';
+    return true;
+  }
+}
+
+function validateStation(){
+  
+  let Start=document.getElementById("from").getAttribute("stationCode");
+  let End=document.getElementById("to").getAttribute("stationCode");
+  let StationError=document.getElementById("station-error");
+  if(Start==End){
+      StationError.innerHTML = "Both start and end stations can't be same.";
+      return false;
+  }
+      StationError.innerHTML = "";
+      return true;
+  }

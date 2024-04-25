@@ -93,7 +93,7 @@
 
 
 
-#email-error,#staffIDError {
+#email-error,#staffIDError,#stcode-error {
     text-align: left;
     top: 100%;
     left: 2px;

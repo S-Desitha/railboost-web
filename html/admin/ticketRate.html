@@ -140,13 +140,16 @@
 				
 
 				<label for="1class-price"></label>
-				<input type="Double" id="1class-price" name="1class-pricee" placeholder="1st Class Price:" required><br>
+				<input type="Double" id="1class-price" name="1class-pricee" placeholder="1st Class Price:" oninput="validatePrice('1class-price')" required>
+				<span id="1class-price-error" class="error"></span>
 
 				<label for="2class-price"></label>
-				<input type="Double" id="2class-price" name="2class-pricee" placeholder="2nd Class Price:" required><br>
+				<input type="Double" id="2class-price" name="2class-pricee" placeholder="2nd Class Price:" oninput="validatePrice('2class-price')" required>
+				<span id="2class-price-error" class="error"></span>
 
 				<label for="3class-price"></label>
-				<input type="Double" id="3class-price" name="3class-pricee" placeholder="3rd Class Price:" required><br>
+				<input type="Double" id="3class-price" name="3class-pricee" placeholder="3rd Class Price:" oninput="validatePrice('3class-price')" required>
+				<span id="3class-price-error" class="error"></span>
 		
 				<button class="form-button" id="add-new-price-rate" onclick="addNewRate()" style="width: 100%;">Add A New Price Rate </button>
 

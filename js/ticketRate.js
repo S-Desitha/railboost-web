@@ -269,7 +269,18 @@ function deleteRate() {
   }
   
   
-  
+function validatePrice(inputId) {
+    const inputElement = document.getElementById(inputId);
+    const priceError = document.getElementById(inputId + "-error");
+
+    const inputValue = inputElement.value;
+
+    if (!isNaN(inputValue) && inputValue > 0) {
+        priceError.textContent = "";
+    } else {
+        priceError.textContent = "Please enter a valid number greater than 0.";
+    }
+}
 
   
 
