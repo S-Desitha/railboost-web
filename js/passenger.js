@@ -117,9 +117,19 @@ async function getSchedules() {
 
             // Handle button click event
             let stopButton = trainContainer.querySelector(".stopping-stations-button");
-            stopButton.onclick = function() {
-                window.location.href = `/html/passenger/traintimes.html?scheduleId=${sch.scheduleId}&date=${schParams.date}`;
-            };
+            // stopButton.onclick = function() {
+            //     window.location.href = `/html/passenger/traintimes.html?scheduleId=${sch.scheduleId}&date=${schParams.date}`;
+            // };
+
+            // let infoButton = document.createElement("button");
+            // infoButton.classList.add("edit-button");
+            // infoButton.classList.add("data-open-modal");
+            // infoButton.innerHTML = "<i class='fa-solid fa-circle-info'></i>";
+            // stopButton.setAttribute("stations", JSON.stringify(sch.stations));
+            stopButton.setAttribute("schedules", JSON.stringify(sch));
+            
+            // stopButton.appendChild(infoButton);
+            stopButton.onclick = function(){ getSchedule(sch.scheduleId,schParams.date);}
             // Get the dialog modal
            // Get the dialog modal
             // var dialogModal = document.querySelector(".dialog-modal");
@@ -157,10 +167,17 @@ async function getSchedules() {
 
 
 
-async function getSchedule() {
-    let queryParams = new URLSearchParams(window.location.search);
-    let scheduleId = queryParams.get("scheduleId");
-    let date = queryParams.get("date");
+async function getSchedule(scheduleID, Date) {
+    console.log("Getting schedule in passneger.js");
+    // let queryParams = new URLSearchParams(window.location.search)
+    // let queryParams = new URLSearchParams(window.location.search);
+    // let schParams = JSON.parse(queryParams.get("schedule"));;
+    let scheduleId = scheduleID;
+    let date = Date;
+    console.log(scheduleId);
+    console.log(date);
+    // display
+
     let endpoint;
     let params = {scheduleId : scheduleId};
 
@@ -189,6 +206,11 @@ async function getSchedule() {
 
         try {
             let data = await customFetch(urlQuery, {}, false);
+
+           
+
+
+            console.log("trainschedule data "+ data);
             createStoppingStations(data, "");
         } catch(error) {
             if (error=="login-redirected")
@@ -197,6 +219,51 @@ async function getSchedule() {
     }
 
 }
+function viewStations(scheduleId) {
+    let schedule = JSON.parse(localStorage.getItem("scheduleList")).find(sch => sch.scheduleId==scheduleId);
+    let stations = schedule.stations;
+    let dialog = document.querySelector(".dialog-modal");
+
+    document.getElementById("start-from-date").innerHTML = schedule.startDate;
+    if (schedule.endDate!=null)
+        document.getElementById("ends-on-date").innerHTML = schedule.endDate;
+    else
+    document.getElementById("ends-on-date").innerHTML = "Continuous";
+
+
+    document.querySelectorAll(".cat.day input[type='checkbox']").forEach(checkBox => {
+        checkBox.checked = false;
+        checkBox.disabled = true;
+    });
+
+    schedule.days.forEach(day => {
+        let prefix = day.day.substring(0,3).toLowerCase();
+        console.log(prefix);
+        document.getElementById(prefix).checked = true;
+    })
+    
+    stations.forEach(station => {
+        let row = document.getElementById("schedule_stations").insertRow(-1);
+        row.insertCell(0).innerHTML = station.stationName;
+        row.insertCell(1).innerHTML = station.scheduledArrivalTime;
+        row.insertCell(2).innerHTML = station.scheduledDepartureTime;
+    });
+
+    dialog.showModal();
+
+    dialog.addEventListener("click", e => {
+        const dialogDimensions = dialog.getBoundingClientRect()
+        if (
+          e.clientX < dialogDimensions.left ||
+          e.clientX > dialogDimensions.right ||
+          e.clientY < dialogDimensions.top ||
+          e.clientY > dialogDimensions.bottom
+        ) {
+          dialog.close()
+        }
+    });
+}
+
 
 
 

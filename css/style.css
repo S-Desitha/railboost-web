@@ -559,6 +559,7 @@ canvas#chart{
   width: 180%;
   /* max-width: 60%; */
   max-height:50%;
+  min-height: 400px;
   margin-top: 3rem;
   border-radius: 1.6rem;
   padding: 1.6em; 

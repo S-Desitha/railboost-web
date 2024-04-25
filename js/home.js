@@ -20,52 +20,54 @@ document.addEventListener("DOMContentLoaded", async function () {
             endStation:"FOT",
             date:new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
         };
+        document.getElementById("startStationName").textContent = data.homeStation;
     //    display the schedule
     console.log(schParams);
 
     let urlQuery2 = endpoint + `?json=${encodeURIComponent(JSON.stringify(schParams))}`;
 
     
-    try{
+    try {
         let schedules = await customFetch(urlQuery2, {}, false);
         console.log(schedules);
     
+        const currentTime = new Date();
+        const midnightTime = new Date();
+        midnightTime.setHours(23, 59, 59, 999);
+    
+        schedules = schedules.filter(schedule => {
+            const startStationInfo = getStationInfo(schedule.stations, schParams.startStation);
+            const scheduledArrivalTime = startStationInfo[0].scheduledArrivalTime;
+            const arrivalTime = getTimeInMilliseconds(scheduledArrivalTime);
+    
+            return arrivalTime > currentTime.getTime() && arrivalTime < midnightTime.getTime();
+        });
+    
+        schedules.sort((a, b) => {
+            const timeA = getTimeInMilliseconds(getStationInfo(a.stations, schParams.startStation)[0].scheduledArrivalTime);
+            const timeB = getTimeInMilliseconds(getStationInfo(b.stations, schParams.startStation)[0].scheduledArrivalTime);
+            return timeA - timeB;
+        });
     
         schedules.forEach(schedule => {
-            // let editButton = document.createElement("button");
-            // editButton.classList.add("edit-button");
-            // editButton.innerHTML = "<i class='fas fa-edit'></i>";
-            // editButton.setAttribute("staffMember", JSON.stringify(staffMember));
-            // editButton.onclick = editStaff;
-    
-            // let deleteButton = document.createElement("button");
-            // deleteButton.classList.add("delete-button");
-            // deleteButton.innerHTML = "<i class='fas fa-trash-alt'></i>";
-            // deleteButton.setAttribute("staffMember", JSON.stringify(staffMember));
-            // deleteButton.onclick = deleteStaff;
-    
+            const startStationInfo = getStationInfo(schedule.stations, schParams.startStation);
             let row = document.getElementById("recent_sch__table").insertRow(-1);
             row.insertCell(0).innerHTML = schedule.endStationName;
             row.insertCell(1).innerHTML = schedule.speed;
-            const startStationInfo = getStationInfo(schedule.stations, schParams.startStation);
-            const endStationInfo = getStationInfo(schedule.stations, schParams.endStation);
             row.insertCell(2).innerHTML = startStationInfo[0].scheduledArrivalTime;
-            row.insertCell(3).innerHTML = endStationInfo[0].scheduledArrivalTime;
-            // row.insertCell(1).innerHTML = staffMember.user.fName + " " + staffMember.user.lName;
-            // // row.insertCell(2).innerHTML = staffMember.user.username;
-            // row.insertCell(2).innerHTML = staffMember.user.email;
-            // row.insertCell(3).innerHTML = staffMember.user.telNo;
-            // let roleCell = row.insertCell(4);
-            // roleCell.innerHTML = staffMember.user.role.role;
-            // roleCell.setAttribute("roleId", staffMember.user.role.roleId);
-            // row.insertCell(5).innerHTML = staffMember.stationName;
-            // row.insertCell(6).append(editButton, deleteButton);
-    
+            row.insertCell(3).innerHTML = getStationInfo(schedule.stations, schParams.endStation)[0].scheduledArrivalTime;
         });
-    } catch(error) {
-        if (error=="login-redirected")
+    } catch (error) {
+        if (error == "login-redirected")
             localStorage.setItem("last_url", window.location.pathname);
     }
+    
+    function getTimeInMilliseconds(timeString) {
+        const [hours, minutes] = timeString.split(':').map(Number);
+        return new Date().setHours(hours, minutes, 0, 0);
+    }
+    
+    
 
     
   });
