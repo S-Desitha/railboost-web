@@ -55,6 +55,16 @@
 
                     <!-- <label for="dob"></label> -->
                     <input type="text" id="dob" name="dob" placeholder="Date of Birth:" onclick="(this.type='date')"  required><br />   
+                    <script>
+                      const dobInput = document.getElementById('dob');
+
+                      dobInput.addEventListener('focus', () => {
+                        dobInput.type = 'date';
+                        const today = new Date();
+                        const maxDate = today.toISOString().split('T')[0];
+                        dobInput.setAttribute('max', maxDate);
+                      });
+                    </script>
 
                     <!-- <label for="gender"></label> -->
                     <select id="gender" name="gender">

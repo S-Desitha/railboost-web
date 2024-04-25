@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/table.css">
 	<link rel="stylesheet" href="/css/buttons.css">
-
+    
     <!-- axios -->
 	 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -117,7 +117,8 @@
                 
                 
                 <label for="stationCode"></label>
-                <input type="text" id="stationId" placeholder="Station Code:" name="trainId" required><br>
+                <input type="text" id="stationId" placeholder="Station Code:" name="trainId" oninput="validateStationCode()" required><br>
+                <span id="stcode-error"></span>
 
                 <label for="station-name"></label>
                 <input type="text" id="stationName" name="stationName" placeholder="Station Name" required><br>
