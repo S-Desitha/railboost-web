@@ -556,9 +556,10 @@ canvas#chart{
 .recent-trains{
   box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
   background: white;
-  width: 180%;
+  width: 50vw;
   /* max-width: 60%; */
-  max-height:50%;
+  max-height:100%;
+  height: 500px;
   margin-top: 3rem;
   border-radius: 1.6rem;
   padding: 1.6em; 
@@ -566,6 +567,7 @@ canvas#chart{
 
 .anns-bar {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   /* height: 180px; */
@@ -584,7 +586,7 @@ canvas#chart{
   box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
   border-radius:1.6rem ;
   padding: 1.6rem;
-  width: 50%;
+  width: 100%;
   max-height: 170px;
   justify-content: space-between;
 ;
@@ -762,6 +764,8 @@ h3{
 .dialog-modal form {
   /* Add additional styling for the form if needed */
 }
+
+
 
 .dialog-modal input[type="text"],
 .dialog-modal input[type="double"],

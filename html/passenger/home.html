@@ -174,7 +174,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="anns-bar">
+                    <!-- <div class="anns-bar">
                         <div class="anns">
                             <h3>Delay Announcement</h3>
                             <div class="ann-body">
@@ -192,12 +192,13 @@
                         </div>
                         
                         
-                    </div>
+                    </div> -->
                     <div class="stat">
                         <div class="table-data">
                             <div class="recent-trains">
                                 <div class="head">
-                                    <h3>Inbound Train Updates to Colombo Fort</h3>
+                                    <h3>Inbound Train Updates to Colombo Fort</h3><br>
+                                    <p style="font-size: 10px;">*ETA- Estimated Time of Arrival </p>
                                     <!-- <a href="sm/sm-live.html">View All</a> -->
                                 </div>
                                 <table>
@@ -205,58 +206,43 @@
                                         <tr>
                                             
                                             <th>Destination</th>
-                                            <th>Service Category</th>
-                                            <th>Estimated Arrival Time</th>
-                                            <th>Estimated Departure Time</th>
-                                            <th>Actions</th>
+                                            <th>Speed</th>
+                                            <th style="text-transform: none;">ETA* at <br><span id="startStationName"></span></th>
+                                            <th style="text-transform: none;">ETA* at Colombo Fort</th>
+                                            <!-- <th>Actions</th> -->
                                         </tr>
             
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            
-                                            <td>Matara</td>
-                                            <td>Express</td>
-                                            <td>12:00</td>
-                                            <td>12:30</td>
-                                            <td><a href="sm/sm-live.html" class="update">Stopping Stations</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Kandy</td>
-                                            <td>Intercity</td>
-                                            <td>12:00</td>
-                                            <td>12:30</td>
-                                            <td><a href="sm/sm-live.html"class="update">Stopping Stations</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Panadura</td>
-                                            <td>Slow</td>
-                                            <td>12:00</td>
-                                            <td>12:30</td>
-                                            <td><a href="sm/sm-live.html"class="update">Stopping Stations</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ratmalana</td>
-                                            <td>Slow</td>
-                                            <td>12:00</td>
-                                            <td>12:30</td>
-                                            <td><a href="sm/sm-live.html"class="update">Stopping Stations</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jaffna</td>
-                                            <td>Intercity</td>
-                                            <td>12:00</td>
-                                            <td>12:30</td>
-                                            <td><a href="sm/sm-live.html" class="update">Stopping Stations</a></td>
-                                        </tr>
-                                    </tbody>
+                                    
+                                        <tbody id="recent_sch__table"></tbody>
+                                        
                                 </table>
                             </div>
+
+                            
                          
                         </div> 
                         
                             <!-- <canvas class="chart" id="chart"></canvas> -->
-                            <canvas class="donut-chart" id="dchart"></canvas>
+                            <div class="anns-bar">
+                                <!-- <div class="anns">
+                                    <h3></h3>
+                                    <div class="ann-body">
+                                        <p style="overflow: hidden;"></p>
+                                    </div>
+                                    <div class="duration"></div>
+                                </div>
+        
+                                <div class="anns">
+                                    <h3></h3>
+                                    <div class="ann-body">
+                                        <p></p>
+                                    </div>
+                                    <div class="duration"></div>
+                                </div> -->
+                                
+                                
+                            </div>
                         
                     </div>
                     

@@ -84,7 +84,7 @@
 							</div>
 						</div><br>
 	
-						<div class="wrapper" id="to" style="margin-left:0px ;margin-right:0px ;">
+						<div class="wrapper" id="to" style="margin-left:0px ;margin-right:0px ;margin-top: 0px;">
 							<div class="select-btn">
 								<span>Select Ending Station</span>
 								<i class="uil uil-angle-down"></i>
@@ -99,7 +99,7 @@
 						</div>
 	
 						<label for="speed"></label>
-						<select name="speed" id="speed">
+						<select name="speed" id="speed" style="border-radius: none;">
 							<option value="" disabled>--Select Speed--</option>
 							<option value="Slow">Slow</option>
 							<option value="Semi-Empress">Semi-Express</option>
@@ -107,14 +107,18 @@
 							<option value="Intercity">Intercity</option>
 						</select><br>
 	
-						<input type="button" onclick="popupDatePicker('.datepicker-modal')" value="Add Recurrence">
-	
+						<div class="recurrence-button">
+							<button id="rec-button" onclick="popupDatePicker('.datepicker-modal')">
+								<i class="fas fa-sync-alt"></i>&nbsp; Add Recurrence
+							</button>
+						</div>
+						
 						<button type="submit" class="form-button" style="width: 19rem;" id="submit-schedule-btn" onclick="addNewSchedule()">Add Schedule</button>
 				</form>
 		
 			</div>
 			<div >
-			<button class="add-new-btn" onclick="popupAddPage('.dialog-modal')" >Add New Stopping</button>
+			<button class="add-new-btn" style="margin-left: 450px;margin-right: 0px;" onclick="popupAddPage('.dialog-modal')" >Add New Stopping</button>
 
 
 			<section class="table_header">
@@ -145,21 +149,21 @@
 	</div>
 	</div>
 
-	<dialog class="dialog-modal">
+	<dialog class="dialog-modal" style="width: fit-content;">
 		<div class="adding-form">
 			<button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
 		<form class="train-form" id="station-form" onsubmit="addStoppingStation(this); return false">
 			<!-- <fieldset> -->
-				<legend>Stopping Stations: </legend>
-				<div class="wrapper" id="stopping">
-				<div class="select-btn">
+				<p style="margin-top: 20px;margin-left: 20px;">Stopping Station: </p>
+				<div class="wrapper" id="stopping" style="border: none;margin-bottom: 0px;">
+				<div class="select-btn" style="margin-bottom:0px">
 					<span>Station</span>
 					<i class="uil uil-angle-down"></i>
 				</div>
 				<div class="content">
 					<div class="search">
-						<i class="uil uil-search"></i>
-						<input spellcheck="false" type="text" placeholder="Search">
+						<!-- <i class="uil uil-search"></i> -->
+						<input spellcheck="false" type="text"style="margin-bottom:0px" placeholder="Search">
 					</div>
 					<ul class="options">
 					</ul>
@@ -174,7 +178,7 @@
 					<button class="form-button" id="add_update-sch_station" onclick="addStoppingStation(this)">Add a new stopping </button>
 					<button type="submit" class="form-button" id="done" onclick="addNewSchedule()">Done </button>
 				</div> -->
-				<input type="submit" class="form-button" id="add_update-sch_station" value="Add a new stopping">
+				<input type="submit" style="width:20vw;margin-left: 20px;" class="form-button" id="add_update-sch_station" value="Add a new stopping">
 			<!-- </fieldset> -->
 		</form>
 	</div>
@@ -213,6 +217,7 @@
                 <div id="m-container" class="m-container">
                     <label>Date   </label>
                     <input type="number" id="repeat-every" min="1" max="31" value="1">
+					<label style="font-size: 15px;">(Eg:10-10th of every month)</label>
                     <br><br>
                 </div>
                 <div id="y-container" class="y-container">
@@ -234,7 +239,7 @@
                     </select><br><br>
                     <label>Date       </label>
                     <input type="number" style="margin-top:0px ;" id="repeat-every" min="1" max="31" value="1">
-					<label style="font-size: 15px;">(Eg: 10th of the month)</label>
+					<label style="font-size: 15px;">(Eg:10-10th of the month)</label>
                     <br><br>
                 </div>
                 

@@ -93,10 +93,25 @@
     color: #6e6b6b;
     
   }
+
   
   .train-form input {
     width: 20vw;
     font-size: 14px;
+  }
+
+  #rec-button{
+    border: none;
+    color:black;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+  }
+  /* hover for rec-buttton */
+  #rec-button:hover{
+    background-color: #d5d1defe;
   }
 
   .train-left {
@@ -108,7 +123,17 @@
 	margin-left: 40px;
 	width: calc(100% - 80px);
 }
+#SAT{
+  width: 310px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
 
+#SDT{
+  width: 310px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
 #SAT::before {
     content: "Scheduled Arrival Time:   "; 
     color: #a9a9a9;
@@ -322,8 +347,8 @@ thead th.active,tbody td.active {
       z-index: 100;
       background: white;
     display: none;
-    padding: 10px;
-    margin-top:10px;
+    /* padding: 10px; */
+    /* margin-top:10px; */
     background: #fff;
     border-radius: 7px;
     /* box-shadow: 0 10px 25px rgba(0,0,0,0.1); */
@@ -409,6 +434,8 @@ thead th.active,tbody td.active {
 	color: #6e6b6b;
 	padding: 7px 0;
 	margin: 20px 0;
+  margin-top: 0px;
+  border-radius: none;
 }
 
 

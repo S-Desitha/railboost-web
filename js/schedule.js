@@ -89,47 +89,7 @@ function addStoppingStation() {
 
 
 
-// function addNewSchedule() {
-//     let schedule = getSchedule();
-//     let serialSchedule = schedule;
-    
-//     let [startDate, days, endDate] = getDates();
-//     startDate = startDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
-//     endDate = endDate!=null? endDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }) : endDate;
-    
-//     serialSchedule.stations = schedule.stations.toArray();
-//     serialSchedule.startDate = startDate;
-//     serialSchedule.endDate = endDate;
-//     serialSchedule.days = days;
-    
-//     serialSchedule.startStation = document.getElementById("from").getAttribute("stationCode");
-//     serialSchedule.endStation = document.getElementById("to").getAttribute("stationCode");
-//     serialSchedule.scheduleId = document.getElementById("sch-id").value;
-//     serialSchedule.trainId = document.getElementById("train-id").value;
-//     serialSchedule.speed = document.getElementById("speed").value;
 
-//     // serialSchedule.stations.forEach(st => {
-//     //     st.scheduleId = serialSchedule.scheduleId;
-//     // });    
-
-//     const params = {
-//         headers : {
-//             "Content-type": "application/json; charset=UTF-8"
-//         },
-//         body : JSON.stringify(serialSchedule),
-//         method : "POST"
-//     };
-
-//     customFetch(scheduleEndpoint, params)
-//         .then(()=> {
-//             localStorage.removeItem("NewscheduleCache");
-//             window.location.replace("/html/admin/schedule.html");
-//         })
-//         .catch((error) => {
-//             if (error=="login-redirected")
-//                 localStorage.setItem("last_url", window.location.pathname);
-//         });
-// }
 
 function addNewSchedule() {
     let schedule = getSchedule();
@@ -197,7 +157,7 @@ function getSchedules() {
                 row.insertCell(2).innerHTML = sch.startStation;
                 row.insertCell(3).innerHTML = sch.endStation;
                 row.insertCell(4).innerHTML = sch.speed;
-                row.insertCell(5).innerHTML = `<a href="/html/admin/trainSch.html?scheduleId=${sch.scheduleId}"><button class="view-button">
+                row.insertCell(5).innerHTML = `<a href="/html/admin/trainSch.html?scheduleId=${sch.scheduleId}"><button class="view-button" >
                                                     View <i class="fa-regular fa-eye"></i></button>
                                                 </a>`;
                 row.insertCell(6).innerHTML = `<a href=""><button class="edit-button"><i class="fas fa-edit"></i> </button></a><a href=""><button class="delete-button"><i class="fas fa-trash"></i> </button></a>`;
@@ -217,12 +177,12 @@ function insertStationToPage(station) {
     let editButton = document.createElement("button");
     editButton.classList.add("edit-button");
     editButton.innerHTML = "<i class='fas fa-edit'></i>";
-    editButton.onclick = editStation;
+    editButton.onclick = editStopStation;
 
     let deleteButton = document.createElement("button");
     deleteButton.classList.add("delete-button");
     deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
-    deleteButton.onclick = deleteStation;
+    deleteButton.onclick = deleteStopStation;
 
     row.insertCell(0).innerHTML = station.stationName;
     row.insertCell(1).innerHTML = station.scheduledArrivalTime;
@@ -233,7 +193,7 @@ function insertStationToPage(station) {
 
 
 
-function editStation() {
+function editStopStation() {
     this.closest("tr").setAttribute("tag", "edit");
     
     let stationCode = this.closest("tr").getAttribute("stationCode");
@@ -243,7 +203,7 @@ function editStation() {
     saveSchedule(schedule);
 
     let button = document.getElementById("add_update-sch_station")
-    button.value = "Update Station";
+    button.value = "Update Station Times";
     button.setAttribute("context", "edit");
     
     let station = JSON.parse(localStorage.getItem("NewscheduleCache")).stations
@@ -257,12 +217,12 @@ function editStation() {
     document.getElementById("SAT").value = station.scheduledArrivalTime;
     document.getElementById("SDT").value = station.scheduledDepartureTime; 
 
-    popupAddPage('.add-station-modal')
+    popupAddPage('.dialog-modal')
 }
 
 
 
-function deleteStation() {
+function deleteStopStation() {
     let stationCode = this.closest("tr").getAttribute("stationCode");
     let schedule = getSchedule();
 
@@ -296,8 +256,9 @@ function viewStations(scheduleId) {
         console.log(prefix);
         document.getElementById(prefix).checked = true;
     })
-    
+    clearTable();
     stations.forEach(station => {
+        
         let row = document.getElementById("schedule_stations").insertRow(-1);
         row.insertCell(0).innerHTML = station.stationName;
         row.insertCell(1).innerHTML = station.scheduledArrivalTime;
@@ -318,7 +279,12 @@ function viewStations(scheduleId) {
         }
     });
 }
-
+function clearTable() {
+    let table = document.getElementById("schedule_stations");
+    while (table.rows.length > 0) { // Remove all rows
+        table.deleteRow(0);
+    }
+}
 
 
 async function createSchedulesPage() {
@@ -385,7 +351,7 @@ async function createSchedulesPage() {
 
 
 
-function createSpecificSchPage() {
+async function createSpecificSchPage() {
     const scheduleId = new URLSearchParams(window.location.search).get('scheduleId');
 
     if (scheduleId!=null) {
@@ -409,12 +375,15 @@ function createSpecificSchPage() {
         // form.setAttribute("onsubmit", "updateSchedule");
         document.getElementById("submit-schedule-btn").value = "Update Schedule"
         document.getElementById("sch-id").value = serialSchedule.scheduleId;
-        document.getElementById("tr-id").value = serialSchedule.trainId;
+        document.getElementById("train-id").value = serialSchedule.trainId;
+
         document.getElementById("from").setAttribute("stationCode", serialSchedule.startStation);
         document.getElementById("to").setAttribute("stationCode", serialSchedule.endStation);
         document.getElementById("speed").value = serialSchedule.speed;
         document.getElementById("sch-id").disabled = true;
 
+        document.getElementById("from").getElementsByTagName("span")[0].innerHTML = serialSchedule.startStationName;
+     document.getElementById("to").getElementsByTagName("span")[0].innerHTML= serialSchedule.endStationName;
 
         localStorage.setItem("NewscheduleCache", JSON.stringify(serialSchedule));
     }
@@ -450,43 +419,57 @@ function editSchedule() {
 
     document.getElementById("add_update-schedule-header").innerHTML = "Update Schedule";
     button.innerHTML = "Update";
-
+    console.log(schedule);
     document.getElementById("scheduleId").value = schedule["scheduleId"];
-    document.getElementById("trainId").value = schedule["trainId"];
-    document.getElementById("start-station").value = schedule["startStation"];
-    document.getElementById("end-station").value = schedule["endStation"];
+    document.getElementById("train-id").value = schedule["trainId"];
+     
+     document.getElementById("from").getElementsByTagName("span")[0].innerHTML = schedule["startStation"];
+     document.getElementById("to").getElementsByTagName("span")[0].innerHTML= schedule["endStation"];
 
     button.onclick = updateSchedule;
 }
 
 
 function deleteSchedule() {
-    console.log("Delete Schedule");
     const scheduleId = JSON.parse(this.getAttribute("scheduleId"));
-    const url_query = scheduleEndpoint+"?scheduleId="+scheduleId;
+    
+    // Show confirmation dialog
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You will not be able to recover this schedule!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // If confirmed, proceed with deletion
+            const url_query = scheduleEndpoint + "?scheduleId=" + scheduleId;
+            const params = {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                },
+                method: "DELETE"
+            };
 
-    const params = {
-        headers : {
-            "Content-type": "application/json; charset=UTF-8"
-        },
-        method : "DELETE"
-    };
-
-    // fetch(url+"?scheduleId="+scheduleId, params)
-    // .then(res => {
-    //     if(res.ok){
-    //         window.location.reload();
-    //     }
-    // });
-
-    customFetch(url_query, params)
-        .then(() => window.location.reload())
-        .catch ((error) => {
-            if (error=="login-redirected")
-                localStorage.setItem("last_url", window.location.pathname);
-        });
+            customFetch(url_query, params)
+                .then(() => {
+                    // Show success message after deletion
+                    Swal.fire('Deleted!', 'The schedule has been deleted.', 'success').then(() => {
+                        window.location.reload();
+                    });
+                })
+                .catch((error) => {
+                    if (error == "login-redirected")
+                        localStorage.setItem("last_url", window.location.pathname);
+                });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            // If canceled, show a message
+            Swal.fire('Cancelled', 'Your schedule is safe :)', 'error');
+        }
+    });
 }
-
 
 
 function updateSchedule() {
@@ -516,7 +499,7 @@ function updateSchedule() {
     updated.startStation = document.getElementById("from").getAttribute("stationCode");
     updated.endStation = document.getElementById("to").getAttribute("stationCode");
     // updated.scheduleId = document.getElementById("sch-id").value;
-    updated.trainId = document.getElementById("tr-id").value;
+    updated.trainId = document.getElementById("train-id").value;
     updated.speed = document.getElementById("speed").value;
 
     const body = [original, updated];
