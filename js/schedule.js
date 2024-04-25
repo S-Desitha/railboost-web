@@ -256,8 +256,9 @@ function viewStations(scheduleId) {
         console.log(prefix);
         document.getElementById(prefix).checked = true;
     })
-    
+    clearTable();
     stations.forEach(station => {
+        
         let row = document.getElementById("schedule_stations").insertRow(-1);
         row.insertCell(0).innerHTML = station.stationName;
         row.insertCell(1).innerHTML = station.scheduledArrivalTime;
@@ -278,7 +279,12 @@ function viewStations(scheduleId) {
         }
     });
 }
-
+function clearTable() {
+    let table = document.getElementById("schedule_stations");
+    while (table.rows.length > 0) { // Remove all rows
+        table.deleteRow(0);
+    }
+}
 
 
 async function createSchedulesPage() {
