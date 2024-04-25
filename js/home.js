@@ -73,6 +73,84 @@ document.addEventListener("DOMContentLoaded", async function () {
             localStorage.setItem("last_url", window.location.pathname);
     }
     
+
+    const endpoint4 = "announcement"
+    let params2 = {
+        view: "1",
+    };
+    let queryString2 = Object.keys(params2).map(key => key + '=' + encodeURIComponent(params2[key])).join('&');
+    let urlQuery3 = `${endpoint4}?${queryString2}`;
+    
+    let annsBar = document.querySelector(".anns-bar");
+
+let data2 = await customFetch(urlQuery3, { credentials: "include" });
+console.log(data2);
+
+data2.forEach(item => {
+    if (item.recivers === "All") {
+        // Create elements
+        let annsContainer = document.createElement("div");
+        annsContainer.classList.add("anns");
+
+        let titleElement = document.createElement("h3");
+        titleElement.textContent = item.title;
+
+        let annBody = document.createElement("div");
+        annBody.classList.add("ann-body");
+        let bodyParagraph = document.createElement("p");
+        bodyParagraph.textContent = item.body;
+        annBody.appendChild(bodyParagraph);
+
+        let durationElement = document.createElement("div");
+        durationElement.classList.add("duration");
+        durationElement.textContent = "12 hours ago";
+
+        // Append elements to container
+        annsContainer.appendChild(titleElement);
+        annsContainer.appendChild(annBody);
+        annsContainer.appendChild(durationElement);
+
+        // Append container to annsBar
+        annsBar.appendChild(annsContainer);
+    }
+});
+
+    
+        
+        // data.forEach(announcement=> {
+        //     if (data.length === 0) {
+        //         document.querySelector(".empty_msg").style.display = "block";
+        //         return;
+        //     }else{
+        //         document.querySelector(".empty_msg").style.display = "none";
+        //         const container = document.getElementById("table-container");
+    
+        //         const div = document.createElement("div");
+        //         div.classList.add("announcement");
+
+        //         const title = document.createElement("h3");
+        //         title.textContent = announcement.title;
+
+        //         const date = document.createElement("h5");
+        //         date.textContent = announcement.date;
+        //         date.style.textAlign = "right";
+        //         date.style.fontWeight = "100";
+
+        //         const body = document.createElement("p");
+        //         body.textContent = announcement.body;
+
+        //         div.appendChild(title);
+        //         div.appendChild(date);
+        //         div.appendChild(body);
+
+        //         container.appendChild(div);
+        //     }
+        // });
+  
+    
+    
+});
+
     function getTimeInMilliseconds(timeString) {
         const [hours, minutes] = timeString.split(':').map(Number);
         return new Date().setHours(hours, minutes, 0, 0);
@@ -81,7 +159,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     
 
     
-  });
+  
 
   function getStationInfo(array, selectedStation) {
     const stationInfo = [];
