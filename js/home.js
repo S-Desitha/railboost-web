@@ -50,12 +50,23 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
     
         schedules.forEach(schedule => {
+
+
+
+            // let infoButton = document.createElement("button");
+            // infoButton.classList.add("edit-button");
+            // infoButton.classList.add("data-open-modal");
+            // infoButton.innerHTML = "<i class='fa-solid fa-circle-info'></i>";
+            // infoButton.setAttribute("stations", JSON.stringify(schedule.stations));
+
+            // infoButton.onclick = function(){ getSchedule(schedule.scheduleId,schParams.date);}
             const startStationInfo = getStationInfo(schedule.stations, schParams.startStation);
             let row = document.getElementById("recent_sch__table").insertRow(-1);
             row.insertCell(0).innerHTML = schedule.endStationName;
             row.insertCell(1).innerHTML = schedule.speed;
             row.insertCell(2).innerHTML = startStationInfo[0].scheduledArrivalTime;
             row.insertCell(3).innerHTML = getStationInfo(schedule.stations, schParams.endStation)[0].scheduledArrivalTime;
+            
         });
     } catch (error) {
         if (error == "login-redirected")

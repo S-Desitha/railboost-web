@@ -201,6 +201,7 @@ async function getSchedule(scheduleID, Cdate) {
     else {
         endpoint = "trainSchedule";
         params.date = date;
+        console.log("Not the current date ");
 
         let urlQuery = endpoint+`?json=${encodeURIComponent(JSON.stringify(params))}`;
 
@@ -315,6 +316,7 @@ function createStoppingStations(data, context) {
             }
             let dialog = document.querySelector(".dialog-modal");
             dialog.showModal();
+            
             
         });
     }
