@@ -17,61 +17,51 @@ document.addEventListener("DOMContentLoaded", async function () {
         const endpoint = "trainSchedule";
         let schParams = {
             startStation: data.homeStCode,
-            endStation:"FOT",
-            date:new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
+            endStation: "FOT",
+            date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
         };
         document.getElementById("startStationName").textContent = data.homeStation;
-    //    display the schedule
-    console.log(schParams);
+        // Display the schedule
+        console.log(schParams);
 
-    let urlQuery2 = endpoint + `?json=${encodeURIComponent(JSON.stringify(schParams))}`;
+        let urlQuery2 = endpoint + `?json=${encodeURIComponent(JSON.stringify(schParams))}`;
 
-    
-    try {
-        let schedules = await customFetch(urlQuery2, {}, false);
-        console.log(schedules);
-    
-        const currentTime = new Date();
-        const midnightTime = new Date();
-        midnightTime.setHours(23, 59, 59, 999);
-    
-        schedules = schedules.filter(schedule => {
-            const startStationInfo = getStationInfo(schedule.stations, schParams.startStation);
-            const scheduledArrivalTime = startStationInfo[0].scheduledArrivalTime;
-            const arrivalTime = getTimeInMilliseconds(scheduledArrivalTime);
-    
-            return arrivalTime > currentTime.getTime() && arrivalTime < midnightTime.getTime();
-        });
-    
-        schedules.sort((a, b) => {
-            const timeA = getTimeInMilliseconds(getStationInfo(a.stations, schParams.startStation)[0].scheduledArrivalTime);
-            const timeB = getTimeInMilliseconds(getStationInfo(b.stations, schParams.startStation)[0].scheduledArrivalTime);
-            return timeA - timeB;
-        });
-    
-        schedules.forEach(schedule => {
+        try {
+            let schedules = await customFetch(urlQuery2, {}, false);
+            console.log(schedules);
 
+            const currentTime = new Date();
+            const midnightTime = new Date();
+            midnightTime.setHours(23, 59, 59, 999);
 
+            schedules = schedules.filter(schedule => {
+                const startStationInfo = getStationInfo(schedule.stations, schParams.startStation);
+                const scheduledArrivalTime = startStationInfo[0].scheduledArrivalTime;
+                const arrivalTime = getTimeInMilliseconds(scheduledArrivalTime);
 
-            // let infoButton = document.createElement("button");
-            // infoButton.classList.add("edit-button");
-            // infoButton.classList.add("data-open-modal");
-            // infoButton.innerHTML = "<i class='fa-solid fa-circle-info'></i>";
-            // infoButton.setAttribute("stations", JSON.stringify(schedule.stations));
+                return arrivalTime > currentTime.getTime() && arrivalTime < midnightTime.getTime();
+            });
 
-            // infoButton.onclick = function(){ getSchedule(schedule.scheduleId,schParams.date);}
-            const startStationInfo = getStationInfo(schedule.stations, schParams.startStation);
-            let row = document.getElementById("recent_sch__table").insertRow(-1);
-            row.insertCell(0).innerHTML = schedule.endStationName;
-            row.insertCell(1).innerHTML = schedule.speed;
-            row.insertCell(2).innerHTML = startStationInfo[0].scheduledArrivalTime;
-            row.insertCell(3).innerHTML = getStationInfo(schedule.stations, schParams.endStation)[0].scheduledArrivalTime;
-            
-        });
-    } catch (error) {
-        if (error == "login-redirected")
-            localStorage.setItem("last_url", window.location.pathname);
-    }
+            schedules.sort((a, b) => {
+                const timeA = getTimeInMilliseconds(getStationInfo(a.stations, schParams.startStation)[0].scheduledArrivalTime);
+                const timeB = getTimeInMilliseconds(getStationInfo(b.stations, schParams.startStation)[0].scheduledArrivalTime);
+                return timeA - timeB;
+            });
+
+            // Display only the first 5 schedules
+            schedules.slice(0, 5).forEach(schedule => {
+                const startStationInfo = getStationInfo(schedule.stations, schParams.startStation);
+                let row = document.getElementById("recent_sch__table").insertRow(-1);
+                row.insertCell(0).innerHTML = schedule.endStationName;
+                row.insertCell(1).innerHTML = schedule.speed;
+                row.insertCell(2).innerHTML = startStationInfo[0].scheduledArrivalTime;
+                row.insertCell(3).innerHTML = getStationInfo(schedule.stations, schParams.endStation)[0].scheduledArrivalTime;
+            });
+        } catch (error) {
+            if (error == "login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
+        }
+
     
 
     const endpoint4 = "announcement"
@@ -86,33 +76,33 @@ document.addEventListener("DOMContentLoaded", async function () {
 let data2 = await customFetch(urlQuery3, { credentials: "include" });
 console.log(data2);
 
-data2.forEach(item => {
-    if (item.recivers === "All") {
-        // Create elements
-        let annsContainer = document.createElement("div");
-        annsContainer.classList.add("anns");
+let sortedData = data2.filter(item => item.recivers === "All").sort((a, b) => a.id - b.id).slice(0, 3);
 
-        let titleElement = document.createElement("h3");
-        titleElement.textContent = item.title;
+sortedData.forEach(item => {
+    // Create elements
+    let annsContainer = document.createElement("div");
+    annsContainer.classList.add("anns");
 
-        let annBody = document.createElement("div");
-        annBody.classList.add("ann-body");
-        let bodyParagraph = document.createElement("p");
-        bodyParagraph.textContent = item.body;
-        annBody.appendChild(bodyParagraph);
+    let titleElement = document.createElement("h3");
+    titleElement.textContent = item.title;
 
-        let durationElement = document.createElement("div");
-        durationElement.classList.add("duration");
-        durationElement.textContent = "12 hours ago";
+    let annBody = document.createElement("div");
+    annBody.classList.add("ann-body");
+    let bodyParagraph = document.createElement("p");
+    bodyParagraph.textContent = item.body;
+    annBody.appendChild(bodyParagraph);
 
-        // Append elements to container
-        annsContainer.appendChild(titleElement);
-        annsContainer.appendChild(annBody);
-        annsContainer.appendChild(durationElement);
+    let durationElement = document.createElement("div");
+    durationElement.classList.add("duration");
+    durationElement.textContent = "12 hours ago";
 
-        // Append container to annsBar
-        annsBar.appendChild(annsContainer);
-    }
+    // Append elements to container
+    annsContainer.appendChild(titleElement);
+    annsContainer.appendChild(annBody);
+    annsContainer.appendChild(durationElement);
+
+    // Append container to annsBar
+    annsBar.appendChild(annsContainer);
 });
 
     
