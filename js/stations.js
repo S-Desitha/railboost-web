@@ -3,48 +3,141 @@ const endpoint = "stations";
 console.log("stations.js");
 
 
-document.addEventListener("DOMContentLoaded", async function () {
+// document.addEventListener("DOMContentLoaded", async function () {
   
 
-    document.getElementById("station-form").reset();
-    setLines();
+//     document.getElementById("station-form").reset();
+//     setLines();
   
-    try {
-      let data = await customFetch(endpoint, {});
-      console.log(data);
-      data.forEach(station => {
-        let editButton = document.createElement("button");
-        editButton.classList.add("edit-button");
-        editButton.innerHTML = "<i class='fas fa-edit'></i>";
-        editButton.setAttribute("station", JSON.stringify(station));
-        editButton.onclick = editStation;
-          // console.log("editButton");
-        let deleteButton = document.createElement("button");
-        deleteButton.classList.add("delete-button");
-        deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
-        deleteButton.setAttribute("station", JSON.stringify(station));
-        deleteButton.onclick = deleteStation;
-      // console.log("deleteButton");
+//     try {
+//       let data = await customFetch(endpoint, {});
+//       console.log(data);
+//       data.forEach(station => {
+//         let editButton = document.createElement("button");
+//         editButton.classList.add("edit-button");
+//         editButton.innerHTML = "<i class='fas fa-edit'></i>";
+//         editButton.setAttribute("station", JSON.stringify(station));
+//         editButton.onclick = editStation;
+//           // console.log("editButton");
+//         let deleteButton = document.createElement("button");
+//         deleteButton.classList.add("delete-button");
+//         deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
+//         deleteButton.setAttribute("station", JSON.stringify(station));
+//         deleteButton.onclick = deleteStation;
+//       // console.log("deleteButton");
   
-        let row = document.getElementById("station_table").insertRow(-1);
-        row.insertCell(0).innerHTML = station.stationCode;
-        row.insertCell(1).innerHTML = station.stationName;
-        // row.insertCell(2).innerHTML = station.address;
-        row.insertCell(2).innerHTML = station.line;
-        row.insertCell(3).innerHTML = station.prevStationName;
-        row.insertCell(4).innerHTML = station.nextStationName;
-        row.insertCell(5).innerHTML = station.contactNo;
-        row.insertCell(6).append(editButton, deleteButton);
-      });
+//         let row = document.getElementById("station_table").insertRow(-1);
+//         row.insertCell(0).innerHTML = station.stationCode;
+//         row.insertCell(1).innerHTML = station.stationName;
+//         // row.insertCell(2).innerHTML = station.address;
+//         row.insertCell(2).innerHTML = station.line;
+//         row.insertCell(3).innerHTML = station.prevStationName;
+//         row.insertCell(4).innerHTML = station.nextStationName;
+//         row.insertCell(5).innerHTML = station.contactNo;
+//         row.insertCell(6).append(editButton, deleteButton);
+//       });
   
+//     }
+//     catch(error) {
+//       if (error=="login-redirected")
+//           localStorage.setItem("last_url", window.location.pathname);
+//     }
+//   });
+  // const url = "http://localhost:8080/railboost_backend_war_exploded/stations";
+// const endpoint = "stations";
+// console.log("stations.js");
+
+const rowsPerPage = 10;
+let currentPage = 1;
+
+document.addEventListener("DOMContentLoaded", async function () {
+  document.getElementById("station-form").reset();
+  setLines();
+
+  try {
+    const data = await getSStations(rowsPerPage, (currentPage - 1) * rowsPerPage);
+    populateTable(data);
+  } catch (error) {
+    if (error == "login-redirected") {
+      localStorage.setItem("last_url", window.location.pathname);
     }
-    catch(error) {
-      if (error=="login-redirected")
-          localStorage.setItem("last_url", window.location.pathname);
-    }
+  }
+});
+
+async function getSStations(limit, offset) {
+  
+  let params = {
+    limit: limit,
+    offset: offset,
+  };
+  let queryString = Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+  let urlQuery = `${endpoint}?${queryString}`;
+
+  const data = await customFetch(urlQuery, {credentials: "include"});
+  console.log("Response from backend:", data);
+  updatePaginationButtons(currentPage);
+  return data;
+}
+
+function populateTable(stations) {
+  const tableBody = document.getElementById("station_table");
+  tableBody.innerHTML = "";
+
+  stations.forEach((station) => {
+    let editButton = document.createElement("button");
+    editButton.classList.add("edit-button");
+    editButton.innerHTML = "<i class='fas fa-edit'></i>";
+    editButton.setAttribute("station", JSON.stringify(station));
+    editButton.onclick = editStation;
+
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-button");
+    deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
+    deleteButton.setAttribute("station", JSON.stringify(station));
+    deleteButton.onclick = deleteStation;
+
+    let row = tableBody.insertRow(-1);
+    row.insertCell(0).innerHTML = station.stationCode;
+    row.insertCell(1).innerHTML = station.stationName;
+    row.insertCell(2).innerHTML = station.line;
+    row.insertCell(3).innerHTML = station.prevStationName;
+    row.insertCell(4).innerHTML = station.nextStationName;
+    row.insertCell(5).innerHTML = station.contactNo;
+    row.insertCell(6).append(editButton, deleteButton);
   });
-  
- 
+}
+
+function updatePaginationButtons(pageNum) {
+  document.getElementById('current-page').textContent = pageNum;
+
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  prevBtn.disabled = pageNum === 1;
+}
+
+// Add event listeners for the pagination buttons
+function goToPrevPage() {
+    currentPage--;
+    getSStations(rowsPerPage, (currentPage - 1) * rowsPerPage)
+      .then(populateTable)
+      .catch((error) => {
+        if (error == "login-redirected") {
+          localStorage.setItem("last_url", window.location.pathname);
+        }
+      });
+}
+
+function goToNextPage() {
+    currentPage++;
+    getSStations(rowsPerPage, (currentPage - 1) * rowsPerPage)
+      .then(populateTable)
+      .catch((error) => {
+        if (error == "login-redirected") {
+          localStorage.setItem("last_url", window.location.pathname);
+        }
+      });
+}
   
   
   function editStation() {

@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/table.css">
 	<link rel="stylesheet" href="/css/buttons.css">
-    
+    <link rel="stylesheet" href="/css/pagination.css">
+
     <!-- axios -->
 	 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -100,10 +101,13 @@
                                 <!-- Populate table body as needed -->
                             </tbody>
                         </table>
+                        <div class="pagination">
+                            <button id="prev-btn" onclick="goToPrevPage()" disabled>Prev</button>
+                            <span id="pageNo">- <span id="current-page">1</span> -</span>
+                            <button id="next-btn" onclick="goToNextPage()" >Next</button>
+                        </div>
                     </section>
                 </div>
-
-                
             </div>
         </div>
     </div>
@@ -119,7 +123,7 @@
                 <label for="stationCode"></label>
                 <input type="text" id="stationId" placeholder="Station Code:" name="trainId" oninput="validateStationCode()" required><br>
                 <span id="stcode-error"></span>
-
+                
                 <label for="station-name"></label>
                 <input type="text" id="stationName" name="stationName" placeholder="Station Name" required><br>
 

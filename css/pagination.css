@@ -1,0 +1,25 @@
+.pagination{
+    text-align-last: center;
+    margin-top: 30px;
+}
+#pageNo{
+    padding: 0 36%;
+    font-size: larger;
+    color: rgba(0, 0, 0, 0.526);
+    font-weight: 700;
+}
+#next-btn,#prev-btn{
+    text-align: center;
+    border: none;
+    font-size: larger;
+    background-color: rgba(53, 84, 236, 0.656);
+    padding: 0.5% 2%;
+    border-radius: 10px;
+    color: white;
+}
+#next-btn:hover,#prev-btn:hover{
+    background-color: rgba(38, 38, 208, 0.848);
+}
+#prev-btn:disabled,#next-btn:disabled{
+    background-color: rgb(203, 203, 203);
+}
