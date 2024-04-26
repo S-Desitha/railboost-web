@@ -2,10 +2,12 @@ const addTrainsEndPoint = "addParcelsToTrain";
 const addedParcelsArray= [];
 
 document.addEventListener("DOMContentLoaded", async function () {
+    
      getSchedule();
     
 });
 async function getSchedule() {
+    // 
     try {
         let qparams = {
             scheduleId: "hello"
@@ -17,18 +19,25 @@ async function getSchedule() {
         console.log(data);
 
         const select = document.getElementById('scheduleDropDown');
+        // let childList = [];
         data.forEach(schedule => {
             const opt = document.createElement('option');
             opt.value = schedule.scheduleId;
             opt.innerHTML = schedule.scheduleId;
+            // childList.push(opt)
             select.appendChild(opt);
         });
+        // select.replaceChildren(childList)
     } catch (error) {
         console.error('Error fetching schedule:', error);
     }
+    // window.location.reload();
+    
+    
 }
 
 async function searchParcels(){
+    
     addParcelendPoint = "addParcelsToTrain";
     var scheduleId = document.getElementById("scheduleDropDown").value;
     console.log(scheduleId)
@@ -44,6 +53,9 @@ async function searchParcels(){
     let urlQuery = `${addParcelendPoint}?${queryString}`;
 
     try{
+        let parcelTable = document.getElementById("addParcels");
+        parcelTable.replaceChildren()
+        parcelTable.removeC
         const data = await customFetch(urlQuery, {});
         data.forEach(sch => {
             const tableContainer = document.querySelector('.table_body');
@@ -103,6 +115,7 @@ async function addParcelSet(){
 }
 
 async function addDileveryStatus(){
+    const addTrainsEndPoint = "addParcelsToTrain";
 
     Swal.fire({
         title: "Are you sure?",
@@ -137,6 +150,7 @@ async function addDileveryStatus(){
             
         }
     });
+    // location.reload()
 
 
 }

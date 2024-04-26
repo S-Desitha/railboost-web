@@ -1,7 +1,21 @@
 
-document.addEventListener('DOMContentLoaded', function () {
+const endpoint = "getRevenue";
+document.addEventListener('DOMContentLoaded',async function () {
         
     const chartCanvas = document.querySelector(".chart");
+
+    let parcelRevenueList = [];
+    let ticketrevenueList = [];
+    let month = [];
+    try{
+        let data = await customFetch(endpoint, {});
+        parcelRevenueList = data.monthlyParcelRevenueList;
+        ticketrevenueList = data.monthlyTicketRevenueList;
+        month  = data.monthList;
+        console.log(month);
+    }catch{
+        
+    }
 
     // Check if the canvas element exists
     if (chartCanvas) {
@@ -9,11 +23,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const chart = new Chart(chartCanvas.getContext("2d"), {
             type: "line",
             data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: month,
                 datasets: [
                     {
                         label: "Revenue by Tickets",
-                        data: [250000, 150000, 180000, 400000, 220000, 250000, 200000, 500000, 270000, 240000, 210000, 700000],
+                        data: ticketrevenueList,
                         backgroundColor: "rgba(82, 113, 255, 0.2)",
                         borderColor: "rgba(82, 113, 255, 1)",
                         borderWidth: 2,
@@ -22,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: "Revenue by Parcel Delivery",
-                        data: [80000, 90000, 100000, 300000, 120000, 130000, 350000, 150000, 140000, 130000, 600000, 650000],
+                        data: parcelRevenueList,
                         backgroundColor: "rgba(75, 192, 192, 0.2)",
                         borderColor: "rgba(75, 192, 192, 1)",
                         borderWidth: 2,

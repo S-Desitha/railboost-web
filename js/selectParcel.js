@@ -103,7 +103,11 @@ let station = urlParams.get("recoveringStation");
         button.removeAttribute("disabled");
         button.querySelector('span').style.color = 'green';
     });
+    // location.reload();
     this.innerHTML = "<i title='addParcel' style='color:#0047AB; font-weight: bold;'><span> Selected </span></i>";
+    addSchedule.forEach(button => {
+        button.innerHTML = "<i title='addParcel' style='color:#0047AB; font-weight: bold;'><span> Assigned </span></i>";
+    });
     this.style.backgroundColor = "#AED6F1";
     
   }
@@ -133,7 +137,8 @@ let station = urlParams.get("recoveringStation");
             //         if (error=="login-redirected")
             //             localStorage.setItem("last_url", window.location.pathname);
             //     });
-
+            this.innerHTML = "<i title='addParcel' style='color:#0047AB; font-weight: bold;'><span> Assigned </span></i>";
+            this.style.backgroundColor = "#AED6F1";
 
 
   }
