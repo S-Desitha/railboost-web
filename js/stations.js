@@ -1,6 +1,7 @@
 // const url = "http://localhost:8080/railboost_backend_war_exploded/stations";
-const endpoint = "stations";
+const Sendpoint = "stations";
 console.log("stations.js");
+
 
 
 // document.addEventListener("DOMContentLoaded", async function () {
@@ -319,6 +320,7 @@ function goToNextPage() {
   
     console.log(station);
   }
+
   
 const wrappers = document.querySelectorAll(".wrapper");
 
@@ -392,7 +394,7 @@ function createList() {
 
 async function getStations() {
     try {
-        stations = await customFetch(endpoint, {}, false);
+        stations = await customFetch(Sendpoint, {}, false);
         createList();
     } catch(error) {
         if (error=="login-redirected")

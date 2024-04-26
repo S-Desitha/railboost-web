@@ -17,35 +17,149 @@ document.addEventListener("DOMContentLoaded", async function () {
         const endpoint = "trainSchedule";
         let schParams = {
             startStation: data.homeStCode,
-            endStation:"FOT",
-            date:new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
+            endStation: "FOT",
+            date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
         };
-    //    display the schedule
-    console.log(schParams);
+        document.getElementById("startStationName").textContent = data.homeStation;
+        // Display the schedule
+        console.log(schParams);
 
-    let urlQuery2 = endpoint + `?json=${encodeURIComponent(JSON.stringify(schParams))}`;
+        let urlQuery2 = endpoint + `?json=${encodeURIComponent(JSON.stringify(schParams))}`;
+
+        try {
+            let schedules = await customFetch(urlQuery2, {}, false);
+            console.log(schedules);
+
+            const currentTime = new Date();
+            const midnightTime = new Date();
+            midnightTime.setHours(23, 59, 59, 999);
+
+            schedules = schedules.filter(schedule => {
+                const startStationInfo = getStationInfo(schedule.stations, schParams.startStation);
+                const scheduledArrivalTime = startStationInfo[0].scheduledArrivalTime;
+                const arrivalTime = getTimeInMilliseconds(scheduledArrivalTime);
+
+                return arrivalTime > currentTime.getTime() && arrivalTime < midnightTime.getTime();
+            });
+
+            schedules.sort((a, b) => {
+                const timeA = getTimeInMilliseconds(getStationInfo(a.stations, schParams.startStation)[0].scheduledArrivalTime);
+                const timeB = getTimeInMilliseconds(getStationInfo(b.stations, schParams.startStation)[0].scheduledArrivalTime);
+                return timeA - timeB;
+            });
+
+            // Display only the first 5 schedules
+            schedules.slice(0, 5).forEach(schedule => {
+                const startStationInfo = getStationInfo(schedule.stations, schParams.startStation);
+                let row = document.getElementById("recent_sch__table").insertRow(-1);
+                row.insertCell(0).innerHTML = schedule.endStationName;
+                row.insertCell(1).innerHTML = schedule.speed;
+                row.insertCell(2).innerHTML = startStationInfo[0].scheduledArrivalTime;
+                row.insertCell(3).innerHTML = getStationInfo(schedule.stations, schParams.endStation)[0].scheduledArrivalTime;
+            });
+        } catch (error) {
+            if (error == "login-redirected")
+                localStorage.setItem("last_url", window.location.pathname);
+        }
 
     
 
-        let schedules = await customFetch(urlQuery2, {}, false);
-        console.log(schedules);
+    const endpoint4 = "announcement"
+    let params2 = {
+        view: "1",
+    };
+    let queryString2 = Object.keys(params2).map(key => key + '=' + encodeURIComponent(params2[key])).join('&');
+    let urlQuery3 = `${endpoint4}?${queryString2}`;
+    
+    let annsBar = document.querySelector(".anns-bar");
+
+let data2 = await customFetch(urlQuery3, { credentials: "include" });
+console.log(data2);
+
+let sortedData = data2.filter(item => item.recivers === "All").sort((a, b) => a.id - b.id).slice(0, 3);
+
+sortedData.forEach(item => {
+    // Create elements
+    let annsContainer = document.createElement("div");
+    annsContainer.classList.add("anns");
+
+    let titleElement = document.createElement("h3");
+    titleElement.textContent = item.title;
+
+    let annBody = document.createElement("div");
+    annBody.classList.add("ann-body");
+    let bodyParagraph = document.createElement("p");
+    bodyParagraph.textContent = item.body;
+    annBody.appendChild(bodyParagraph);
+
+    let durationElement = document.createElement("div");
+    durationElement.classList.add("duration");
+    durationElement.textContent = "12 hours ago";
+
+    // Append elements to container
+    annsContainer.appendChild(titleElement);
+    annsContainer.appendChild(annBody);
+    annsContainer.appendChild(durationElement);
+
+    // Append container to annsBar
+    annsBar.appendChild(annsContainer);
+});
+
+    
         
+        // data.forEach(announcement=> {
+        //     if (data.length === 0) {
+        //         document.querySelector(".empty_msg").style.display = "block";
+        //         return;
+        //     }else{
+        //         document.querySelector(".empty_msg").style.display = "none";
+        //         const container = document.getElementById("table-container");
+    
+        //         const div = document.createElement("div");
+        //         div.classList.add("announcement");
 
-        // let editButton = document.getElementById("edit-btn");
-        // editButton.setAttribute("details", JSON.stringify(data));
-        // editButton.onclick = editProfile;
+        //         const title = document.createElement("h3");
+        //         title.textContent = announcement.title;
 
-        // document.getElementById("Username").value=data.username;
-        // document.getElementById("email").value=data.email;
-        // document.getElementById("Fname").value=data.fName + " " +data.lName;
-        // document.getElementById("gen").value=data.gender;
-        // document.getElementById("homeStation").value=data.homeStation;
-        // document.getElementById("tel").value=data.telNo;
+        //         const date = document.createElement("h5");
+        //         date.textContent = announcement.date;
+        //         date.style.textAlign = "right";
+        //         date.style.fontWeight = "100";
 
-        // document.getElementById("name-c2").textContent = data.fName + " " +data.lName;
-        // document.getElementById("role-c2").textContent = data.role.role;
+        //         const body = document.createElement("p");
+        //         body.textContent = announcement.body;
 
-        // getdp(data.dp);
+        //         div.appendChild(title);
+        //         div.appendChild(date);
+        //         div.appendChild(body);
+
+        //         container.appendChild(div);
+        //     }
+        // });
+  
+    
+    
+});
+
+    function getTimeInMilliseconds(timeString) {
+        const [hours, minutes] = timeString.split(':').map(Number);
+        return new Date().setHours(hours, minutes, 0, 0);
+    }
+    
+    
 
     
-  });
+  
+
+  function getStationInfo(array, selectedStation) {
+    const stationInfo = [];
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].station === selectedStation) {
+            stationInfo.push({
+                stationName: array[i].stationName,
+                scheduledArrivalTime: array[i].scheduledArrivalTime
+            });
+        }
+    }
+    return stationInfo.length > 0 ? stationInfo : null; // Return the array of station info or null if station is not found
+}

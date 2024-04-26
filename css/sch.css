@@ -17,7 +17,15 @@
     padding: 20px;
 
 }
-
+.schedule-dates-view {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    justify-content: end;
+    margin-bottom: 20px;
+    /* align-items:end; */
+    justify-content: space-between;
+}
 
 .buttons {
     

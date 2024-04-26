@@ -49,7 +49,7 @@
 						<li class="divider">/</li>
 						<li><a href="admin.html" class="active">Staff Management</a></li>
 					</ul> -->
-					<button class="add-new-btn" onclick="popupAddPage('.dialog-modal')" >Add New</button>
+					<button class="add-new-btn" onclick="popupAddPage('.dialog-modal ')" >Add New</button>
 				<!-- </div> -->
 				<div class="table-container">
 
@@ -130,19 +130,19 @@
 				<input type="text" id="fName" name="name" placeholder="First Name:" onchange="updateUsername()"required><br>
 		
 				<label for="lName"></label>
-				<input type="text" id="lName" name="name" placeholder="Last Name:" onchange="updateUsername()"required><br><br>
+				<input type="text" id="lName" name="name" placeholder="Last Name:" onchange="updateUsername()"required><br>
 
 				<label for="role"></label>
 				
-					<select id="role" name="role" onchange="updateUsername()" required>	
+					<select id="role" name="role" style="margin-top: 20px;" onchange="updateUsername()" required>	
 					<option value="" disabled selected>Role</option>
 					
-				</select>
+				</select><br>
 		
 				<label for="railwayStation"></label>
 				<!-- <input type="text" id="railwayStation" placeholder="Railway Station:" name="railwayStation" required><br> -->
 
-				<div class="wrapper" font-size="1px" id="railwayStation">
+				<div class="wrapper" style="margin-top: 20px;" font-size="1px" id="railwayStation">
 					<div class="select-btn">
 						<span id="rst-edit">Railway Station:</span> 
 						<i font-size="3px" class="fa fa-angle-down"></i>
