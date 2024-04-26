@@ -57,6 +57,19 @@ function prepareBilling(){
     
 }
 
+function prepareBillingSeason(season){
+    console.log("prepareBillingSeason")
+    localStorage.setItem("season_id", season.id);
+    localStorage.setItem("season_startStation", season.startStation);
+    localStorage.setItem("season_endStation", season.endStation);
+    localStorage.setItem("season_startDate", season.startDate);
+    localStorage.setItem("season_endDate", season.endDate);
+    localStorage.setItem("season_trainClass", season.trainClass);
+    localStorage.setItem("season_totalPrice", season.totalPrice);
+    
+    window.location.href = "payment.html";
+}
+
   
   
 

@@ -37,6 +37,7 @@
     <script src="/js/script.js"></script>
     <script src="/js/auth.js"></script>
 	<script src="/js/season.js" defer></script>
+    <script src="/js/billing.js"></script>
     
     <title>Buy Season Ticket</title>
 </head>
@@ -210,6 +211,7 @@
 
                     <label for="img" id="Application">
                         <span class="app">Application</span>
+                        <span class="file-types" style="font-size:10px" >(Maximum file size: 5MB in .pdf, .jpg, .jpeg, .png )</span>
                         <input type="file" id="img" name="img" accept=".pdf, .jpg, .jpeg, .png" required>
                     </label>
                     <script>
@@ -217,8 +219,12 @@
 
                         uploadField.onchange = function() {
                             if(this.files[0].size > 5242880){
-                            alert("File is too big!");
-                            this.value = "";
+                                Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'File is too big! Please upload a file less than 5MB.',
+                                    });
+                                    this.value = "";
                             }
                         }
                     </script>
