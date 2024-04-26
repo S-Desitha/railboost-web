@@ -17,12 +17,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (data.length === 0) {
         document.querySelector(".info").style.display = "block";
         document.querySelector(".table_body").style.display = "none";
-        document.querySelector(".train-right").style.display = "block";
+        // document.querySelector(".train-right").style.display = "block";
         return;
       }else{
         document.querySelector(".info").style.display = "none";
         document.querySelector(".table_body").style.display = "block";
-        document.querySelector(".train-right").style.display = "block";
+        // document.querySelector(".train-right").style.display = "block";
       }
       
       data.forEach(season => {
@@ -143,6 +143,7 @@ function appplySeasonTicket() {
       });
 
     console.log(season);
+    closeDialog();
     Swal.fire({
       icon: 'success',
       title: 'Success!',
@@ -224,7 +225,8 @@ async function getTicketPrices(Class,Duration) {
       price = Math.ceil(((price/100)*3)/100)*100;
     }
     
-    document.getElementById("total-price").value = price;
+    var totalPrice = "Total Price of the season ticket:" + price;
+document.getElementById("total-price").value = totalPrice;
    
   }
   catch (error) {
