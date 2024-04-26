@@ -66,6 +66,7 @@ function prepareBillingSeason(season){
     localStorage.setItem("season_endDate", season.endDate);
     localStorage.setItem("season_trainClass", season.trainClass);
     localStorage.setItem("season_totalPrice", season.totalPrice);
+    localStorage.setItem("paymentType", "season");
     
     window.location.href = "payment.html";
 }

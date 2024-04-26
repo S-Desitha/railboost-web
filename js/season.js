@@ -31,7 +31,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         BuyButton.classList.add("Buy-button");
         BuyButton.innerHTML = "<i class='fa-solid fa-coins' title='Pay' style='color:#0047AB'><span>  Pay </span></i>";
         BuyButton.setAttribute("season", JSON.stringify(season));
-        BuyButton.onclick = prepareBillingSeason(season);
+        BuyButton.onclick = () => {
+          generateOrderID();
+          prepareBillingSeason(season);
+      };
+      
+
         
         let row = document.getElementById("season_table").insertRow(0);
         row.insertCell(0).innerHTML = season.id;
