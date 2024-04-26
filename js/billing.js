@@ -70,7 +70,7 @@ function prepareBillingSeason(season){
     localStorage.setItem("season_totalPrice", season.totalPrice);
     localStorage.setItem("paymentType", "season");
     
-    window.location.href = "payment.html";
+    window.location.href = "payment.html?context=season";
 }
 
   

@@ -221,6 +221,9 @@
 
                         uploadField.onchange = function() {
                             if(this.files[0].size > 5242880){
+                                // close the current opened dialog
+                                const dialogModal = document.querySelector('.dialog-modal');
+                                dialogModal.close();
                                 Swal.fire({
                                         icon: 'error',
                                         title: 'Oops...',

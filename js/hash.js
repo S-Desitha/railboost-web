@@ -77,6 +77,7 @@ async function generateHash() {
 
         document.querySelector('input[name="return_url"]').value = "http://localhost:5500/html/passenger/seasonticket.html?payment_success=successful";
         document.querySelector('input[name="cancel_url"]').value = "http://localhost:5500/html/passenger/seasonticket.html?payment_success=unsuccessful";
+        document.querySelector('input[name="items"]').value = "RailBoost Season Ticket"
    
     } else {
         // For other payment types (e.g., e-ticket), update fields as before
