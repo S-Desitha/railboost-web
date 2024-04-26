@@ -51,7 +51,7 @@ function prepareBilling(){
     localStorage.setItem("amount", document.getElementById("amount").value);
 
     // proceed to payment.html page
-    window.location.href = "payment.html";
+    window.location.href = "payment.html?context=eticket";
 
 
     
@@ -59,6 +59,8 @@ function prepareBilling(){
 
 function prepareBillingSeason(season){
     console.log("prepareBillingSeason")
+    // store season json object in local storage 
+    localStorage.setItem("season", JSON.stringify(season));
     localStorage.setItem("season_id", season.id);
     localStorage.setItem("season_startStation", season.startStation);
     localStorage.setItem("season_endStation", season.endStation);

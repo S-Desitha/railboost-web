@@ -2,6 +2,42 @@
 
 const seasonEndpoint = "season";
 const ticketPriceEndpoint = "ticketPrice";
+
+
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const paymentSuccess = urlParams.get('payment_success');
+console.log(paymentSuccess);
+// type of paymentSuccess
+console.log(typeof paymentSuccess);
+
+// If the 'payment_success' parameter is present, call buyETicket function
+if (paymentSuccess=="successful") {
+  console.log("Payment successful!");
+  BuySeason();
+}
+
+if (paymentSuccess=="unsuccessful") {
+  console.log("Payment unsuccessful!");
+  showPaymentError();
+}
+
+function showPaymentError() {
+  Swal.fire({
+    icon: 'error',
+    title: 'Payment Unsuccessful',
+    text: 'Payment processing was unsuccessful. Please try again.',
+    confirmButtonText: 'OK'
+  }).then(() => {
+    // Reload the page after the user clicks OK
+    // redirect to buytickets.html page
+
+
+    window.location.href = 'http://localhost:5500/html/passenger/seasonticket.html';
+  });
+  
+}
 let endDate;
 let VSDate = new Date();
 
@@ -70,7 +106,10 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
 
   function BuySeason(){
-    season = JSON.parse(this.getAttribute("season"));
+
+    // season = JSON.parse(this.getAttribute("season"));
+    //get season JSON object from local storage
+    season = JSON.parse(localStorage.getItem("season"));
     console.log(season);
     season["status"] = "Paid";
     const body = season;
@@ -81,18 +120,21 @@ document.addEventListener("DOMContentLoaded", async function () {
         body: JSON.stringify(body),
         method: "PUT",
     };
-
-    customFetch(seasonEndpoint, params)
-    .then(() => window.location.reload())
-
-    .catch((error) => {
-        if (error == "login-redirected")
-            localStorage.setItem("last_url", window.location.pathname);
-    });
-  console.log(season);
-  alert("Check your email for Season Ticket.");
-  window.location.reload();
+    showSuccessNotification();
+    return customFetch(seasonEndpoint, params);
+   
 }
+function showSuccessNotification() {
+  Swal.fire({
+    icon: 'success',
+    title: 'Payment Successful!',
+    text: 'Check your email for the Season Ticket.',
+    confirmButtonText: 'OK'
+  }).then(() => {
+    window.location.href = 'http://localhost:5500/html/passenger/seasonticket.html';
+  });
+}
+
   
 
 function validateStation(){

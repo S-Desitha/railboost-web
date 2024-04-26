@@ -2,9 +2,10 @@ async function generateHash() {
     console.log("Generating hash...");
 
     // Check paymentType
-    const paymentType = localStorage.getItem("paymentType");
+    const urlParams = new URLSearchParams(window.location.search);
+    const context = urlParams.get('context');
 
-    if (paymentType === "season") {
+    if (context === "season") {
         // Update fields with season details
         document.getElementById("order_id").value = localStorage.getItem("orderID");
         document.getElementById("amount").value = localStorage.getItem("season_totalPrice");
@@ -15,14 +16,44 @@ async function generateHash() {
         document.getElementById("last_name").value = name[1];
         document.getElementById("Sstation").value = localStorage.getItem("season_startStation");
         document.getElementById("Estation").value = localStorage.getItem("season_endStation");
-        document.getElementById("date").value = localStorage.getItem("season_startDate");
         document.getElementById("class").value = localStorage.getItem("season_trainClass");
+
+
+        // remove date field from the form
+        const dateField = document.getElementById("date");
+        const dateLabel = document.getElementById("dateL");
+        dateField.parentElement.removeChild(dateField);
+        dateLabel.parentElement.removeChild(dateLabel);
 
         // Remove the number of tickets field
         const ticketsField = document.getElementById("number-of-tickets");
         const ticketsLabel = document.getElementById("numt");
         ticketsField.parentElement.removeChild(ticketsField);
         ticketsLabel.parentElement.removeChild(ticketsLabel);
+
+        // Add season start date field
+        const seasonStartDate = localStorage.getItem("season_startDate");
+        const seasonStartDateInput = document.createElement("input");
+        seasonStartDateInput.type = "text";
+        seasonStartDateInput.id = "season-start-date";
+        seasonStartDateInput.name = "seasonStartDate";
+        seasonStartDateInput.value = seasonStartDate;
+        seasonStartDateInput.readOnly = true;
+        // label for start date
+        const seasonStartDateLabel = document.createElement("label");
+        seasonStartDateLabel.htmlFor = "season-start-date";
+        seasonStartDateLabel.textContent = "Season Start Date:";
+
+        // create div
+        const formGroup1 = document.createElement("div");
+        formGroup1.classList.add("form-group");
+        formGroup1.appendChild(seasonStartDateLabel);
+        formGroup1.appendChild(seasonStartDateInput);
+
+        // append the div to the journey details
+        document.querySelector(".journey-details").appendChild(formGroup1);
+
+        
 
         // Add season end date field
         const seasonEndDate = localStorage.getItem("season_endDate");
@@ -43,6 +74,10 @@ async function generateHash() {
         formGroup.appendChild(seasonEndDateInput);
 
         document.querySelector(".journey-details").appendChild(formGroup);
+
+        document.querySelector('input[name="return_url"]').value = "http://localhost:5500/html/passenger/seasonticket.html?payment_success=successful";
+        document.querySelector('input[name="cancel_url"]').value = "http://localhost:5500/html/passenger/seasonticket.html?payment_success=unsuccessful";
+   
     } else {
         // For other payment types (e.g., e-ticket), update fields as before
         document.getElementById("order_id").value = localStorage.getItem("orderID");
