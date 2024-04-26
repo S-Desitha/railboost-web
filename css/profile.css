@@ -165,7 +165,8 @@ body{
   padding: 20px; /* Padding */
   overflow: hidden;
 }
-/* #edit-fname,#edit-lname,#editgender,#edit-email,#edit-telno, #current-pw, #password , #cpassword, #existing-pw{
+/* #edit-fname,#edit-lname,#editgender,#edit-email,#edit-telno,*/ 
+#current-pw, #password , #cpassword, #existing-pw{
     border: none;
     border-bottom: 1px solid #a9a9a9;
     color: #484848;
@@ -173,12 +174,13 @@ body{
     margin: 15px 0;
     font-size: medium;
 } */
-/* #edit-fname:focus, #edit-lname:focus, #edit-email:focus, #edit-telno:focus, #current-pw:focus,#password:focus, #cpassword:focus, #existing-pw:focus{
+/* #edit-fname:focus, #edit-lname:focus, #edit-email:focus, #edit-telno:focus,
+ #current-pw:focus,#password:focus, #cpassword:focus, #existing-pw:focus{
     border-bottom: 2px solid black;
 } */
-#editgender:focus {
+/* #editgender:focus {
     border-bottom: 2px solid black;
-}
+} */
 input::placeholder {
     color: #6e6b6b;
 }

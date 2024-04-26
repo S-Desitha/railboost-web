@@ -120,7 +120,13 @@
 				<span id="trainIdError"></span><br>
 
 				<label for="train-type"></label>
-				<input type="text" id="trainType" name="name" placeholder="Train Type:" required><br>
+				<!-- <input type="text" id="trainType" name="name" placeholder="Train Type:" required> -->
+				<select id="trainType" name="name" placeholder="Train Type:"  required>
+					<option value="" disabled selected>Train Type:</option>
+					<option value="Power Set" style="color: #484848">Power Set</option>
+					<option value="Engine Set" style="color: #484848">Engine Set</option>
+				</select><br>
+
 		
 				<div class="dialog-buttons">
 					<button class="form-button form-clear-btn" onclick="document.getElementById('train-form').reset()">Clear</button>

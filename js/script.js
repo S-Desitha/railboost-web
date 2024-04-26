@@ -162,6 +162,15 @@ async function customFetch(endpoint, options, sendJWT) {
                     window.alert("Session expired. Please login again.");
                     window.location.href="/html/signin.html";
                     return Promise.reject("login-redirected");
+                }else{
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Invalid username or password. Try again.",
+                        icon: "error",
+                        showCancelButton: false,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK"
+                    });
                 }
             }
             else{
@@ -179,7 +188,13 @@ async function customFetch(endpoint, options, sendJWT) {
                     let data = await resp.json();
                     let error_msg = data.detailMessage;
                     if (error_msg=="signup-expired"){
-                        window.alert("Your session has expired. Please contact administrator.");
+                        // window.alert("Your session has expired. Please contact administrator.");
+                        Swal.fire({
+                            title: "Session Expired",
+                            text: "Your session has expired. Please contact administrator.",
+                            icon: "error",
+                            confirmButtonText: "OK"
+                        });
                     }
                     window.location.href="/index.html";
                     return Promise.reject(data.detailMessage);
