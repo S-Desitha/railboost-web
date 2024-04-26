@@ -44,61 +44,66 @@
         <script>createNavBar("passenger")</script>
     </nav>
 
-	<div class="train-container">
-        
-        <!-- <div style="position: relative;">
-            
-            <div class="sidebar active" style="position: absolute; top: 0; left: 0;">
-                <script>createSideBar("passenger")</script>
-            </div>
-        </div> -->
-        
-
-        <div class="table">
-            <section class="table_header"></section>
-                
-                <div class="info" style="margin-top: 100px;">
-                    <h1>Season Ticket</h1></n></br>
-                <p style="font-weight:550; font-size: large; margin-left: 60px;">
-                    Follow the instructions below for purchasing a season ticket.</p>
-
-                    <p style="margin-left: 90px;">   <br> - Obtain the application form from your workplace, university, or railway station. <br>
-                        <br> - Fill out the online application form provided.<br>
-                        <br> - Upload a photo or PDF of the completed application form.<br>
-                        <br> - Ensure that the size of the uploaded file (photo or PDF) is less than 5MB.<br>
-                        <br> - Submit the application form.<br>
-                        <br> - The station master at your designated start station will review the application.<br>
-                        <br> - Depending on its validity, the application will be either approved or rejected and notification will be sent to inform you of the outcome.<br>
-                        <br> - If your application is approved, proceed to make the payment for the season ticket.<br>
-                        <br> - Upon successful payment, you will receive the season ticket via email.<br>
-                        <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
-                
-                </div>
-            
-            <section class="table_body" style="margin-top: 140px;">
-                <h1>Season Ticket</h1></n></br>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                                <th>Start Station</th>
-								<th>End Station</th>
-								<th>Start Date</th>
-								<th>End Date</th>
-								<th>Train Class</th>
-								<th>Total Price</th>
-								<th>Status</th>
-								<th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="season_table"></tbody>
-                </table>
-            </section>
+	<div class="container">
+          
+        <div class="sidebar active" >
+            <script>createSideBar("passenger")</script>
         </div>
+        
+        <div class="service-view">
+			<div class="service-container">
+        
+
+                <div class="table">
+                    <section class="table_header"></section>
+                        
+                        <div class="info" style="margin-top: 100px;">
+                            <h1>Season Ticket</h1></n></br>
+                        <p style="font-weight:550; font-size: large; margin-left: 60px;">
+                            Follow the instructions below for purchasing a season ticket.</p>
+
+                            <p style="margin-left: 90px;">   <br> - Obtain the application form from your workplace, university, or railway station. <br>
+                                <br> - Fill out the online application form provided.<br>
+                                <br> - Upload a photo or PDF of the completed application form.<br>
+                                <br> - Ensure that the size of the uploaded file (photo or PDF) is less than 5MB.<br>
+                                <br> - Submit the application form.<br>
+                                <br> - The station master at your designated start station will review the application.<br>
+                                <br> - Depending on its validity, the application will be either approved or rejected and notification will be sent to inform you of the outcome.<br>
+                                <br> - If your application is approved, proceed to make the payment for the season ticket.<br>
+                                <br> - Upon successful payment, you will receive the season ticket via email.<br>
+                                <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+                        
+                        </div>
+            
+                    <section class="table_body" style="margin-top: 140px;">
+                        <h1>Season Ticket</h1></n></br>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                        <th>Start Station</th>
+                                        <th>End Station</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Train Class</th>
+                                        <th>Total Price</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="season_table"></tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
 				
-		<div class="train-right">
+		
             <!-- <dialog class="Season-modal"> -->
-		    <div class="train-form">
+
+            <dialog class="dialog-modal">
+		        <div class="train-form">
 							
 				<form onsubmit="return false">
 					<!-- <h2 class="add-train-heading" id="add_update-schedule-header"></n></br>Buy Season Ticket </h2> -->
@@ -204,9 +209,10 @@
 					<button class="form-button" id="buy-ticket-button" onclick="appplySeasonTicket()">Apply</button>
 				</form>
 	    	</div>
-            <!-- </dialog> -->
-		</div>
-	</div>
+        </dialog>
+           
+		
+	
 
 <script src="/js/stations.js">
 </script>
