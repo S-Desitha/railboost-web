@@ -18,6 +18,8 @@
   --secondary-color: #29499c;
   --secondary-text-color: #7c7c7c;
   --text-color: #ffffff;
+  --cancel-color: #f05637;
+  --accept-color: #05d142;
 }
 
 a:hover {

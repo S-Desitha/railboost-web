@@ -23,7 +23,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
     integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
     crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <script src="/js/script.js"></script>
@@ -43,7 +43,7 @@
 
 		<div class="service-view">
 			<div class="service-container train-table">
-				<button type="submit" class="add-new-btn" onclick="redirectToPage()" > Add New</button>
+				<button type="submit" id="schedule_button" class="add-new-btn" > Add New</button>
 				
 				<script>
 					function redirectToPage() {
@@ -54,8 +54,8 @@
 					<section class="table_header">
 						<h1>Train Schedule Details</h1>
 						<div class="input-group" >
-							<input type="search" style="margin: 0;"placeholder="Search Schedule...">
-							<img src="/Images/search.png" alt="">
+							<input type="search" style="margin: 0;"placeholder="Search Schedule..."/>
+							<img src="/Images/search.png" alt=""/>
 						</div>
 					</section>
 
@@ -99,6 +99,12 @@
 								<th>Speed</th>
 								<!-- <th>Stopping Stations</th> -->
 								<th>Actions</th>
+								<th>
+									<div>
+										<label>Cancel</label>
+										<input type="checkbox" id="main-cancel-checkbox" onchange="mainCheckboxClick(this)" />
+									</div>
+								</th>
 
 							</tr>
 						</thead>
@@ -112,14 +118,15 @@
 			</div>
 		</div>
 	</div>	
+
 	<dialog class="dialog-modal" style="width: fit-content;overflow-y: scroll;">
 		<button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
 			
 		<section class="table_header station_header" style="display: flex;">
 			<h1>Train stopping stations</h1>
 			<div class="input-group">
-				<input type="search" placeholder="Search Station...">
-				<img src="/Images/search.png" alt="">
+				<input type="search" placeholder="Search Station..."/>
+				<img src="/Images/search.png" alt=""/>
 			</div>
 		</section>
 		<script>
@@ -179,45 +186,45 @@
 					
 						<div class="cat day">
 						<label>
-							<input id="sun" type="checkbox" value="SUNDAY"><span>S</span>
+							<input id="sun" type="checkbox" value="SUNDAY"/><span>S</span>
 						</label>
 						</div>
 						
 						<div class="cat day">
 						<label>
-							<input id="mon" type="checkbox" value="MONDAY"><span>M</span>
+							<input id="mon" type="checkbox" value="MONDAY"/><span>M</span>
 						</label>
 						</div>
 						
 						<div class="cat day">
 						<label>
-							<input id="tue" type="checkbox" value="TUESDAY"><span>T</span>
+							<input id="tue" type="checkbox" value="TUESDAY"/><span>T</span>
 						</label>
 						</div>
 						
 						<div class="cat day">
 						<label>
-							<input id="wed" type="checkbox" value="WEDNESDAY"><span>W</span>
+							<input id="wed" type="checkbox" value="WEDNESDAY"/><span>W</span>
 						</label>
 						</div>
 						
 						<div class="cat day">
 						<label>
-							<input id="thu" type="checkbox" value="THURSDAY"><span>T</span>
+							<input id="thu" type="checkbox" value="THURSDAY"/><span>T</span>
 						</label>
 						</div>
 						
 						<div class="cat day">
 						<label>
-							<input id="fri" type="checkbox" value="FRIDAY"><span>F</span>
+							<input id="fri" type="checkbox" value="FRIDAY"/><span>F</span>
 						</label>
 						</div>
 						
 						<div class="cat day">
 						<label>
-							<input id="sat" type="checkbox" value="SATURDAY"><span>S</span>
+							<input id="sat" type="checkbox" value="SATURDAY"/><span>S</span>
 						</label>
-						</div><br><br><br>
+						</div><br/><br/><br/>
 					</div>
 				</div>
 		</section>
@@ -234,7 +241,47 @@
 			</thead>
 			<tbody id="schedule_stations">
 			</tbody>
+			</table>
 		</section>
+	</dialog>
+
+
+	<dialog class="dialog-modal schedule-cancel-popup">
+		<div class="adding-form">
+			
+			<form onsubmit="return false" id="schedule-cancel-form">
+				<button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
+				<section class="table_header">
+					<h1 id="cancel-schedules-heading">Cancel Schedules</h1>
+				</section>
+
+				<select id="actionType" name="actionType" placeholder="Action Type"  required>
+					<option value="cancel" style="color: #ea1313" selected>Cancel Schedules</option>
+					<option value="activate" style="color: #08eb1a">Activate Schedules</option>
+				</select><br/>
+			
+
+				<div id="cancel-dates" style="display: flex; gap: 1rem;">
+					<label for="cancel-statr">From</label>
+					<input id="cancel-start" type="date"/>
+
+					<label for="cancel-end">To</label>
+					<input id="cancel-end" type="date"/>
+				</div>
+
+				<div id="activate-dates" style="display: none; gap: 1rem;">
+					<label for="cancel-statr">From</label>
+					<input id="activate-date" type="date"/>
+				</div>
+
+		
+				<div class="dialog-buttons">
+					<button class="form-button form-clear-btn" onclick="document.getElementById('train-form').reset()">Clear</button>
+					<button type="submit" class="form-button" id="schedule-cancel-btn" style="background-color: var(--cancel-color);">Done</button>
+				</div>
+
+			</form>
+		</div>
 	</dialog>
 
 				
