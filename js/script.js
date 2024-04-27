@@ -553,6 +553,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 return await resp.blob();
             }else if(resp.headers.get('content-type').includes('application/pdf')){
                 return await resp.blob();
+            }else if (resp.headers.get('content-type').includes('application/vnd.ms-excel') ||
+                resp.headers.get('content-type').includes('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) {
+                return await resp.blob();
             } else {
                 try {
                     return await resp.json();
