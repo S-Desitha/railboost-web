@@ -47,9 +47,9 @@
         <script>createNavBar("passenger")</script>
     </nav>
     <div class="container">
-    <div class="sidebar active" >
-        <script>createSideBar("passenger")</script>
-    </div>
+        <div class="sidebar active" >
+            <script>createSideBar("passenger")</script>
+        </div>
     
 
     <!-- <div class="service-view" id="hasDataDiv"> -->
@@ -122,7 +122,7 @@
             </div>
         </div>
     </div>
-</div>
+
     <div class="service-view" id="noDataDiv">
         <div class="service-container">
 
@@ -196,7 +196,7 @@
                 <!-- <h3 class="adding-form-heading" id="add-staff-heading">Receiver Details</h3> -->
 
                 <label for="sendingStaion"></label>
-                <div class="wrapper" id="from" name="sendingStaion">
+                <div class="wrapper" id="from" name="sendingStaion" style="border-bottom: none;">
                     <div class="select-btn">
                         <span>Select Starting Station</span>
                         <i class="uil uil-angle-down"></i>
@@ -206,10 +206,10 @@
                             <i class="uil uil-search"></i>
                             <input spellcheck="false" type="text" placeholder="Search">
                         </div>
-                        <ul class="options">
+                        <ul onclick="validateStation()" class="options">
                         </ul>
                     </div>
-                </div><br>
+                </div>
 
                 <label for="senderAddress"></label>
                 <input type="text" id="senderAddress" placeholder=" Sender's Address:" name="senderAddress"
@@ -217,11 +217,12 @@
 
 
                 <label for="senderNIC"></label>
-                <input type="text" id="senderNIC" name="senderNIC" placeholder="Sender's NIC" required><br><br>
+                <input type="text" id="senderNIC" name="senderNIC" placeholder="Sender's NIC" onkeyup="validateNIC1();sameNIC();" required>
+                <span id="NICS-error"></span><br><br>
 
 
                 <label for="railwayStation"></label>
-                <div class="wrapper" id="to">
+                <div class="wrapper" id="to" style="border-bottom: none;">
                     <div class="select-btn">
                         <span>Select Ending Station</span>
                         <i class="uil uil-angle-down"></i>
@@ -231,15 +232,17 @@
                             <i class="uil uil-search"></i>
                             <input spellcheck="false" type="text" placeholder="Search">
                         </div>
-                        <ul class="options"></ul>
+                        <ul onclick="validateStation()" class="options"></ul>
                     </div>
-                </div><br>
+                </div>
+                <span id="station-error"></span>
 
                 <label for="receiverName"></label>
                 <input type="text" id="receiverName" name="receiverName" placeholder="Receiver Name" required>
 
                 <label for="receiverNIC"></label>
-                <input type="text" id="receiverNIC" name="receiverNIC" placeholder="Reveiver's NIC" required><br>
+                <input type="text" id="receiverNIC" name="receiverNIC" placeholder="Reveiver's NIC" onkeyup="validateNIC2();sameNIC();">
+                <span id="NIC-error"></span><br>
 
                 <label for="receiverAddress"></label>
                 <input type="text" id="receiverAddress" name="receiverAddress" placeholder="Receiver Address" required>
@@ -262,7 +265,6 @@
 
                     <label for="item"></label>
                     <input type="text" id="item" name="item" placeholder="Item:"><br>
-                    
                     
                     <!-- <label for="Discrption"></label>
 

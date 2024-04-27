@@ -130,4 +130,64 @@ function closeDialog() {
     
   }
 
+  function validateStation(){
   
+    let Start=document.getElementById("from").getAttribute("stationCode");
+    let End=document.getElementById("to").getAttribute("stationCode");
+    let StationError=document.getElementById("station-error");
+    if(Start==End){
+        StationError.innerHTML = "Both start and end stations can't be same.";
+        return false;
+    }
+        StationError.innerHTML = "";
+        return true;
+}
+
+function validateNIC2(){
+  let nic=document.getElementById("receiverNIC").value;
+  let nic1=document.getElementById("senderNIC").value;
+  let error=document.getElementById("NIC-error");
+  const regex = /^[0-9]{9}[vVxX]$|^([0-9]{12})$/;
+
+  if (!regex.test(nic)) {
+    error.innerHTML="Invalid NIC number!!";
+    return false;
+  }else{
+    if (/^0+$/.test(nic)) {
+      error.innerHTML = 'NIC cannot consist of only zeros.';
+      return;
+    }else if(nic==nic1){
+      error.innerHTML="Both NIC number can not be same!!";
+      return false;
+    }else{
+    error.innerHTML="";
+    return true;
+    }
+  }
+}
+
+function validateNIC1(){
+  let nic=document.getElementById("senderNIC").value;
+  let nic2=document.getElementById("receiverNIC").value;
+  let error=document.getElementById("NICS-error");
+  const regex = /^[0-9]{9}[vVxX]$|^([0-9]{12})$/;
+
+  if (!regex.test(nic)) {
+    error.innerHTML="Invalid NIC number!!";
+    return false;
+  }else{
+    if (/^0+$/.test(nic)) {
+      error.innerHTML = 'NIC cannot consist of only zeros.';
+      return;
+    }else if(nic==nic2){
+      error.innerHTML="Both NIC number can not be same!!";
+      return false;
+    }else{
+      error.innerHTML="";
+      return true;
+    }
+  }
+}
+
+
+
