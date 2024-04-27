@@ -929,7 +929,7 @@ input {
   align-items: center;
 }
 
-#trainIdError,#contactNumberError,#lineError{
+#trainIdError,#contactNumberError,#lineError,#NIC-error,#NICS-error{
   text-align: left;
   top: 100%;
   left: 2px;
