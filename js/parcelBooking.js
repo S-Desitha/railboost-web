@@ -45,52 +45,61 @@ document.addEventListener("DOMContentLoaded",async function(){
 
 
 function addNewParcel() {
-    parcel = {};
+  const parcel = {};
 
-    parcel["sendingStation"] = document.getElementById("from").getAttribute("stationCode");
-    parcel["senderAddress"] = document.getElementById("senderAddress").value;
-    parcel["SenderNIC"] = document.getElementById("senderNIC").value;
-    parcel["recoveringStation"] = document.getElementById("to").getAttribute("stationCode");
-    parcel["receiverName"] = document.getElementById("receiverName").value;
-    parcel["receiverAddress"] = document.getElementById("receiverAddress").value;
-    parcel["receiverNIC"] = document.getElementById("receiverNIC").value;
-    parcel["receiverTelNo"] = document.getElementById("phone-field").value;
-    parcel["receiverEmail"] = document.getElementById("email-field").value;
-    parcel["item"] = document.getElementById("item").value;
-    parcel["category"]  = document.getElementById("parcelCategory").value;
-    
-    closeDialog();
-    Swal.fire({
-      title: "Are you sure?",
-      text: `You won't be able to revert this!`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#5271FF",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Assign!",
-      }).then((result) => {
-      if (result.isConfirmed) {
-    const body = parcel;
-    const params = {
+  parcel["sendingStation"] = document.getElementById("from").getAttribute("stationCode");
+  parcel["senderAddress"] = document.getElementById("senderAddress").value;
+  parcel["SenderNIC"] = document.getElementById("senderNIC").value;
+  parcel["recoveringStation"] = document.getElementById("to").getAttribute("stationCode");
+  parcel["receiverName"] = document.getElementById("receiverName").value;
+  parcel["receiverAddress"] = document.getElementById("receiverAddress").value;
+  parcel["receiverNIC"] = document.getElementById("receiverNIC").value;
+  parcel["receiverTelNo"] = document.getElementById("phone-field").value;
+  parcel["receiverEmail"] = document.getElementById("email-field").value;
+  parcel["item"] = document.getElementById("item").value;
+  parcel["category"]  = document.getElementById("parcelCategory").value;
+  
+  closeDialog();
+
+  const body = JSON.stringify(parcel);
+  const params = {
       headers: {
-        "Content-type": "application/json; charset=UTF-8"
+          "Content-type": "application/json; charset=UTF-8"
       },
-      body: JSON.stringify(body),
+      body: body,
       method: "POST"
-    };
-    customFetch(parcelBookingEndpoint, params)
-        .then(()=> window.location.reload())
-        .catch((error) => {
-            if (error=="login-redirected")
-                localStorage.setItem("last_url", window.location.pathname);
-        });
-      } else {
-        Swal.fire("Cancelled", "Your operation has been cancelled", "error");
-        
-    }
-});
+  };
 
-    console.log(parcel);
+  customFetch(parcelBookingEndpoint, params)
+      .then((response) => {
+          if (response.isSuccessful) {
+              // Show SweetAlert prompt if the response is successful
+              Swal.fire({
+                  title: "Are you sure?",
+                  text: `You won't be able to revert this!`,
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#5271FF",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, Assign!"
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      // Reload the page after confirming
+                      window.location.reload();
+                  }
+              });
+          } else {
+              // Handle unsuccessful response here if needed
+              console.log("Operation was not successful");
+          }
+      })
+      .catch((error) => {
+          // Handle fetch error here
+          if (error == "login-redirected") {
+              localStorage.setItem("last_url", window.location.pathname);
+          }
+          console.error("Error:", error);
+      });
 }
 
 

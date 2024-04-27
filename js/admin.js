@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         parcelRevenueList = data.monthlyParcelRevenueList;
         let ticketrevenueList = data.monthlyTicketRevenueList;
         console.log(parcelRevenueList);
+        console
 
         document.getElementById("ticket-revenue").dataset.target= "#totalTicketRevenue"
 
