@@ -21,7 +21,7 @@ async function createJourneys() {
                 row.insertCell(1).innerHTML = journey.schedule.trainId;
                 row.insertCell(2).innerHTML = journey.schedule.startStationName;
                 row.insertCell(3).innerHTML = journey.schedule.endStationName;
-                row.insertCell(4).innerHTML = journey.schedule.trainType;
+                row.insertCell(4).innerHTML = journey.schedule.speed;
                 row.insertCell(5).innerHTML = `<a href="/html/sm/sm-update.html?scheduleId=${journey.scheduleId}"><button class="view-button">
                 Update <i class="fa-solid fa-pen-to-square"></i></button>
                 </a>`;
@@ -46,6 +46,7 @@ async function createJourney() {
     
     try {
         let data = await customFetch(urlQuery, {})
+        console.log(data)
         
         // Create a table row for each journey
         if (Object.keys(data)){
@@ -64,7 +65,7 @@ async function createJourney() {
                 let row = document.getElementById("journey_table").insertRow(-1);
                 row.setAttribute("id", js.station);
                 
-                row.insertCell(0).innerHTML = js.station;
+                row.insertCell(0).innerHTML = js.stationName;
                 row.insertCell(1).innerHTML = new Date('', '', '', js.scheduledArrivalTime.split(":")[0], js.scheduledArrivalTime.split(":")[1], js.scheduledArrivalTime.split(":")[2]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
                 row.insertCell(2).innerHTML = new Date('', '', '', js.scheduledDepartureTime.split(":")[0], js.scheduledDepartureTime.split(":")[1], js.scheduledDepartureTime.split(":")[2]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
                 if (js.arrivalTime==null)
@@ -112,18 +113,23 @@ async function updateTime(scheduleId, station, timeType) {
     try {
         let data = await customFetch(endpoint, params);
         console.log(data.status);
-        if (data.status==200) {
-            if (timeType=="arrival")
-            document.getElementById(station).cells[3].innerHTML = time;
-        else if (timeType=="departure")
-            document.getElementById(station).cells[4].innerHTML = time;
-        }
-        else if (data.status==403) {
-            alert(`You don't have permission to update station: ${station}`);
+        if (data.status == 200) {
+            if (timeType == "arrival")
+                document.getElementById(station).cells[3].innerHTML = time;
+            else if (timeType == "departure")
+                document.getElementById(station).cells[4].innerHTML = time;
+        } else if (data.status == 403) {
+            // Using SweetAlert for displaying error message
+            Swal.fire({
+                icon: 'error',
+                title: 'Permission Denied',
+                text: `You don't have permission to update station: ${station}`,
+            });
         }
     } catch(error) {
-        if (error=="login-redirected")
+        if (error == "login-redirected") {
             localStorage.setItem("last_url", window.location.pathname);
+        }
     }
 }
 

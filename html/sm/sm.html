@@ -18,6 +18,8 @@
     <script src="/js/sm.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/auth.js"></script> 
+    <script src="/js/smD.js"></script>
+
     <link rel="stylesheet" href="/css/notifications.css">
     <link rel="stylesheet" href="/css/table.css">
     <link rel="stylesheet" href="/css/home.css">
@@ -30,7 +32,9 @@
 </head>
 <body style="background-color:#f6f8fa"> 
     
-      
+    <div id="preloader">
+        <img src="/Images/train.gif" alt="Loading...">
+    </div>
     <nav class="navbar" >
         <script>createNavBar("sm")</script>
     </nav>
@@ -49,12 +53,12 @@
             
 
             <ul class="breadcrumbs">
-                <li><a href="admin.html">Home</a></li>
+                <li><a href="sm.html">Home</a></li>
                 <li class="divider">/</li>
-                <li><a href="admin.html" class="active">Station Master Dashboard</a></li>
+                <li><a href="sm.html" class="active">Station Master Dashboard</a></li>
             </ul> 
             <div class="info-data">
-                <div class="card sm">
+                <div class="card sm"><a href="sm-live.html">
                     <div class="head">
                         <div>
                             <!-- <h2 class="count"data-target="490">0</h2> -->
@@ -67,7 +71,7 @@
 
                         
                     </div>
-                    
+                </a>
                 </div>
                 <div class="card sm"><a href="parcelApprove.html">
                     <div class="head">
@@ -98,7 +102,7 @@
                 </a>  
                 </div>
 
-                <div class="card sm">
+                <div class="card sm"><a href="sm-season.html"></a>
                     <div class="head">
                         <div>
                             <!-- <h2 class="count revenue"data-target="653400">$</h2> -->
@@ -116,7 +120,7 @@
                 <div class="recent-trains">
                     <div class="head">
                         <h3>Inbound Train Updates</h3>
-                        <a href="sm/sm-live.html">View All</a>
+                        <a href="sm-live.html">View All</a>
                     </div>
                     <table>
                         <thead>

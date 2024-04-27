@@ -12,10 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
 
     <!-- jquery -->
-    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="/js/jquery3.7.1.js"></script>
 
     <!-- charts -->
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
@@ -30,102 +28,129 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/season.css">  
     <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/buttons.css">
 
     <!-- js imports -->
     <script src="/js/notification.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/auth.js"></script>
 	<script src="/js/season.js" defer></script>
+    <script src="/js/billing.js"></script>
     
     <title>Buy Season Ticket</title>
 </head>
 <body> 
+    <div id="preloader">
+        <img src="/Images/train.gif" alt="Loading...">
+    </div>
+    
     <nav class="navbar" >
         <script>createNavBar("passenger")</script>
     </nav>
 
-	<div class="train-container">
-        
-        <!-- <div style="position: relative;">
-            
-            <div class="sidebar active" style="position: absolute; top: 0; left: 0;">
-                <script>createSideBar("passenger")</script>
-            </div>
-        </div> -->
-        
-
-        <div class="table">
-            <section class="table_header"></section>
-                
-                <div class="info" style="margin-top: 100px;">
-                    <h1>Season Ticket</h1></n></br>
-                <p style="font-weight:550; font-size: large; margin-left: 60px;">
-                    Follow the instructions below for purchasing a season ticket.</p>
-
-                    <p style="margin-left: 90px;">   <br> - Obtain the application form from your workplace, university, or railway station. <br>
-                        <br> - Fill out the online application form provided.<br>
-                        <br> - Upload a photo or PDF of the completed application form.<br>
-                        <br> - Ensure that the size of the uploaded file (photo or PDF) is less than 5MB.<br>
-                        <br> - Submit the application form.<br>
-                        <br> - The station master at your designated start station will review the application.<br>
-                        <br> - Depending on its validity, the application will be either approved or rejected and notification will be sent to inform you of the outcome.<br>
-                        <br> - If your application is approved, proceed to make the payment for the season ticket.<br>
-                        <br> - Upon successful payment, you will receive the season ticket via email.<br>
-                        <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
-                
-                </div>
-            
-            <section class="table_body" style="margin-top: 140px;">
-                <h1>Season Ticket</h1></n></br>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                                <th>Start Station</th>
-								<th>End Station</th>
-								<th>Start Date</th>
-								<th>End Date</th>
-								<th>Train Class</th>
-								<th>Total Price</th>
-								<th>Status</th>
-								<th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="season_table"></tbody>
-                </table>
-            </section>
+	<div class="container">
+          
+        <div class="sidebar active" >
+            <script>createSideBar("passenger")</script>
         </div>
+        
+        <div class="service-view">
+			<div class="service-container">
+                
+                <button class="add-new-btn" onclick="popupAddPage('.dialog-modal ')" >Add New</button>
+
+                <div class="table-container" style="margin-top: 0px;">
+                    <section class="table_header"></section>
+                        
+                        <div class="info" >
+                            <h1>Season Ticket</h1></n></br>
+                        <p style="font-weight:550; font-size: large; margin-left: 60px;">
+                            Follow the instructions below for purchasing a season ticket.</p>
+
+                            <p style="margin-left: 90px;">   <br> - Obtain the application form from your workplace, university, or railway station. <br>
+                                <br> - Fill out the online application form provided.<br>
+                                <br> - Upload a photo or PDF of the completed application form.<br>
+                                <br> - Ensure that the size of the uploaded file (photo or PDF) is less than 5MB.<br>
+                                <br> - Submit the application form.<br>
+                                <br> - The station master at your designated start station will review the application.<br>
+                                <br> - Depending on its validity, the application will be either approved or rejected and notification will be sent to inform you of the outcome.<br>
+                                <br> - If your application is approved, proceed to make the payment for the season ticket.<br>
+                                <br> - Upon successful payment, you will receive the season ticket via email.<br>
+                                <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+                        
+                        </div>
+            
+                    
+                    
+                    <div class="table_body" >
+
+                        <section class="table_header">
+                                <h1>Season Tickets Details</h1>
+                                <div class="input-group" >
+                                    <input type="search" style="margin: 0;" placeholder="Search Staff...">
+                                    <!-- <img src="/Images/filter.png" class="filter" alt="" onclick="toggleFilterBox()"> -->
+                                    <img src="/Images/search.png" alt="">
+                                    
+                                </div>
+                        </section>
+                        
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                        <th>Start Station</th>
+                                        <th>End Station</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Train Class</th>
+                                        <th>Total Price</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="season_table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 				
-		<div class="train-right">
+		
             <!-- <dialog class="Season-modal"> -->
-		    <div class="train-form">
-							
+
+            <dialog class="dialog-modal">
+		        <div class="train-form">
+                    <button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
+                    <div class="table_header" >
+                        <h1 id="add-staff-heading">Apply for Season Ticket</h1>
+                    </div>			
 				<form onsubmit="return false">
 					<!-- <h2 class="add-train-heading" id="add_update-schedule-header"></n></br>Buy Season Ticket </h2> -->
                     <label for="start-station"></label>
                   
-					            <div class="wrapper" font-size="1px" id="from">
-                        <div class="select-btn">
-                            <span>Start Station:</span> 
-                            <i font-size="3px" class="fa fa-angle-down"></i>
-                        </div>
-                        <div class="content">
-                            <div class="search">
-                                <i class="fas fa-search"></i>
-                                <input spellcheck="false" type="text" placeholder="Search">
+					    <div class="wrapper" font-size="1px" style="margin: 15px 0px;margin-top: 25px;" id="from">
+                            <div class="select-btn">
+                                <span>Start Station:</span> 
+                                <i font-size="3px" class="fa fa-angle-down"></i>
                             </div>
-                            <ul onclick="getPrice(); validateStation();" class="options"></ul>
+                            <div class="content">
+                                <div class="search">
+                                    <!-- <i class="fas fa-search"></i> -->
+                                    <input spellcheck="false" type="text" placeholder="Search">
+                                </div>
+                                <ul onclick="getPrice(); validateStation();" class="options"></ul>
+                            </div>
                         </div>
-                    </div>
                 
-                    <div class="wrapper" font-size="1px" id="to">
+                    <div class="wrapper" font-size="1px" style="margin: 15px 0px;" id="to">
                       <div class="select-btn">
                           <span>End Station:</span> 
                           <i font-size="3px" class="fa fa-angle-down"></i>
                       </div>
                       <div class="content">
                           <div class="search">
-                              <i class="fas fa-search"></i>
+                              <!-- <i class="fas fa-search"></i> -->
                               <input spellcheck="false" type="text" placeholder="Search">
                           </div>
                           <ul onclick="getPrice(); validateStation();" class="options"></ul>
@@ -134,7 +159,7 @@
                     <span id="station-error"></span>
 
                     <label for="passenger-type"></label>
-                    <select id="passenger-type" name="passenger-type" onchange="getPrice(); updateEndDate();" required>
+                    <select id="passenger-type" name="passenger-type" style="margin: 15px 0px;"onchange="getPrice(); updateEndDate();" required>
                         <option value="" disabled selected>Passenger Type:</option>
                         <option value="Normal Passenger" style="color: #484848">Normal Passenger</option>
                         <option value="Government Servant" style="color: #484848">Government Servant</option>
@@ -144,7 +169,7 @@
                     </select>
 								
                     <label for="Start-date"></label>
-                    <input type="date" id="Start-date" name="Start-date" placeholder=" Start Date: " onchange="getPrice(); updateEndDate(); validateSDate();" max="" required><br /> 
+                    <input type="date" id="Start-date"style="margin: 15px 0px;" name="Start-date" placeholder=" Start Date: " onchange="getPrice(); updateEndDate(); validateSDate();" max="" required><br /> 
                     <span id="date-error"></span>  
                                 
                     <script>
@@ -160,7 +185,7 @@
                     </script>
 
                     <label for="duration"></label>
-                    <select id="duration" name="duration" onchange="getPrice(); updateEndDate();" required>
+                    <select id="duration" name="duration" style="margin: 15px 0px;" onchange="getPrice(); updateEndDate();" required>
                         <option value="" disabled selected>Duration:</option>
                         <option value="1 Week" style="color: #484848">1 Week</option>
                         <option value="1 Month" style="color: #484848">1 Month</option>
@@ -169,11 +194,11 @@
                     </select>
 
                     <label for="End-date"></label>
-                    <input type="text" id="End-date" name="End-date" placeholder=" End Date:" disabled><br /> 
+                    <input type="text" id="End-date" style="margin: 15px 0px;" name="End-date" placeholder=" End Date:" disabled><br /> 
                     
 
                     <label for="class"></label>
-                    <select id="class" name="class" onchange="getPrice()" required>
+                    <select id="class" name="class" onchange="getPrice()" style="margin: 15px 0px; margin-bottom: 0px;" required>
                         <option value="" disabled selected>Class:</option>
                         <!-- <option value="1st Class" style="color: #484848">1st Class</option> -->
                         <option value="2nd Class" style="color: #484848">2nd Class</option>
@@ -182,12 +207,13 @@
 
                     <div class="price-of-1"> <span id="price-of-one"></span></div>
                     <label for="total-price"></label>
-                    <input disabled value="" type="Double" id="total-price" name="total-price" placeholder=" Total Price:"><br>
+                    <input disabled value="" type="Double" id="total-price" style="margin: 15px 0px;" name="total-price" placeholder=" Total Price:"><br>
                     <span id="total-price-text"></span>
 
 
                     <label for="img" id="Application">
                         <span class="app">Application</span>
+                        <span class="file-types" style="font-size:10px" >(Maximum file size: 5MB in .pdf, .jpg, .jpeg, .png )</span>
                         <input type="file" id="img" name="img" accept=".pdf, .jpg, .jpeg, .png" required>
                     </label>
                     <script>
@@ -195,18 +221,26 @@
 
                         uploadField.onchange = function() {
                             if(this.files[0].size > 5242880){
-                            alert("File is too big!");
-                            this.value = "";
+                                // close the current opened dialog
+                                const dialogModal = document.querySelector('.dialog-modal');
+                                dialogModal.close();
+                                Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'File is too big! Please upload a file less than 5MB.',
+                                    });
+                                    this.value = "";
                             }
                         }
                     </script>
 
-					<button class="form-button" id="buy-ticket-button" onclick="appplySeasonTicket()">Apply</button>
+					<button class="form-button" id="buy-ticket-button" style="width: 100%;" onclick="appplySeasonTicket()">Apply</button>
 				</form>
 	    	</div>
-            <!-- </dialog> -->
-		</div>
-	</div>
+        </dialog>
+           
+		
+	
 
 <script src="/js/stations.js">
 </script>

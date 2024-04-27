@@ -14,9 +14,7 @@
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-        crossorigin="anonymous"></script>
+    <script src="/js/jquery3.7.1.js"></script>
 
     <!-- charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"
@@ -40,33 +38,82 @@
 </head>
 
 <body>
+    <div id="preloader">
+        <img src="/Images/train.gif" alt="Loading...">
+    </div>
+    
 
-    <nav class="navbar">
+    <nav class="navbar" >
         <script>createNavBar("passenger")</script>
     </nav>
+    <div class="container">
+    <div class="sidebar active" >
+        <script>createSideBar("passenger")</script>
+    </div>
+    
+
+    <!-- <div class="service-view" id="hasDataDiv"> -->
 
 
-    <div class="service-view" id="hasDataDiv">
-
-        <div class="service-container">
-            <button class="add-new-btn" type="button" onclick="popupAddPage('.staff-add_edit-modal')">ParcelBooking
-                Form</button>
-            <div class="table-container">
+            <!-- <div class="table-container">
 
                 <section class="table_header">
                     <h1>Parcel Details</h1>
-                </section>
+                </section> -->
+                <div class="service-view" id="hasDataDiv">
+                    <div class="service-container">
+                        
+                            <button class="add-new-btn" type="button" onclick="popupAddPage('.dialog-modal')">ParcelBooking
+                                Form</button>
+                        
+                        <div class="table-container">
+        
+                            <section class="table_header">
+                                <h1>Parcel Details</h1>
+                                <div class="input-group">
+                                    <input type="search" style="margin:0" placeholder="Search Parcel Application...">
+                                    <img src="/Images/search.png" alt="">
+                                </div>
+                            </section>
+                            <script>
+                                const searchInput = document.querySelector('.table_header input[type="search"]');
+                                searchInput.addEventListener('input', filterParcelTable);
+        
+                                function filterParcelTable() {
+                                    const searchTerm = searchInput.value.toLowerCase();
+                                    const tableRows = document.querySelectorAll('#parcelApprove_table tr');
+        
+                                    tableRows.forEach(row => {
+                                        let rowVisible = false;
+        
+                                        for (let i = 0; i < row.cells.length; i++) {
+                                            const cellText = row.cells[i].textContent.toLowerCase();
+                                            if (cellText.includes(searchTerm)) {
+                                                rowVisible = true;
+                                                break;
+                                            }
+                                        }
+        
+                                        if (rowVisible) {
+                                            row.style.display = 'table-row';
+                                        } else {
+                                            row.style.display = 'none';
+                                        }
+                                    });
+                                }
+                            </script>
 
                 <div class="table_body">
                     <table>
                         <thead>
                             <tr>
-                 <th>Receiver Name</th>
+                                <th>Receiver Name</th>
                                 <th>Booking ID</th>
                                 <th>Receiver Address</th>
                                 <th>Receiver Email</th>
                                 <th>Item</th>
-                                <th>Status</th>
+                                <th>Approvel Status</th>
+                                <th>Delivery Status</th>
                             </tr>
                         </thead>
                         <tbody id="parcelBooking_table"></tbody>
@@ -75,12 +122,13 @@
             </div>
         </div>
     </div>
+</div>
     <div class="service-view" id="noDataDiv">
         <div class="service-container">
 
 
 
-            <button class="add-new-btn" type="button" onclick="popupAddPage('.staff-add_edit-modal')">ParcelBooking
+            <button class="add-new-btn" type="button" onclick="popupAddPage('.dialog-modal')">ParcelBooking
                 Form</button>
 
             <div id="pBookinginstructions">
@@ -136,8 +184,11 @@
 
 
 
-    <dialog class="staff-add_edit-modal" id="myDialog">
+    <dialog class="dialog-modal" style="overflow-y: scroll;">
+                            
+                            
         <div class="adding-form">
+            <button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
             <section class="table_header">
                 <h1 id="add-staff-heading">Parcel Booking Form</h1>
             </section>
@@ -206,6 +257,7 @@
 
 
                     <h3 class="adding-form-heading" id="add-staff-heading">Parcel Details</h3>
+                    
                     <select name="parcelCategory" id="parcelCategory"></select>
 
                     <label for="item"></label>
@@ -218,8 +270,7 @@
 
                 <div class="dialog-buttons">
                     <button class="form-button form-clear-btn">Clear</button>
-                    <button type="submit" class="form-button" id="add-staff-button" onclick="addNewParcel()">Add
-                        Parcel</button>
+                    <button type="submit" class="form-button" id="add-staff-button" onclick="addNewParcel()">AddParcel</button>
                 </div>
             </form>
         </div>

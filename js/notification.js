@@ -46,15 +46,18 @@ function fetchNotifications() {
 
             // Create the notification content using the timestamp
             const notificationContent = `
-                <div class="notifycontent">
-                    <p class="notification-title"><strong>${notification.title}</strong></p>
-                    <p class="notification-message">${notification.message}</p>
-                    <span class="notification-time">${timestamp.toLocaleString()}</span>
-                </div>
-                <div>
-                    <button class="view-notification">View</button>
-                </div>
-            `;
+            <div class="notifycontent">
+                <p class="notification-title"><strong>${notification.title}</strong></p>
+                <p class="notification-message">${notification.message}</p>
+                <span class="notification-time">${timestamp.toLocaleString()}</span>
+            </div>
+            <div>
+                <button class="view-notification" onclick="redirectToPage()">View</button>
+            </div>
+        `;
+
+        
+
 
             // Set the inner HTML of the notification item
             notificationItem.innerHTML = notificationContent;
@@ -65,6 +68,18 @@ function fetchNotifications() {
     .catch(error => {
         console.error('Error fetching notifications:', error);
     });
+}
+function redirectToPage() {
+    const roleId = localStorage.getItem("roleId");
+    let url;
+    if (roleId === "5") {
+        url = "http://localhost:5500/html/passenger/seasonticket.html";
+    } else if (roleId === "3") {
+        url = "http://localhost:5500/html/sm/sm-season.html";
+    }
+    if (url) {
+        window.location.href = url;
+    }
 }
 
 // Call the fetchNotifications function when the page loads
