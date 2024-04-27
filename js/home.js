@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         let data = await customFetch(urlQuery, {credentials: "include"});
         console.log(data);
         document.querySelector('.homeStation p').textContent=data.homeStation;
+        // add data.role.roleId to the local storage
+        localStorage.setItem("roleId", data.role.roleId);
         console.log(data.homeStation);
 
         const endpoint = "trainSchedule";

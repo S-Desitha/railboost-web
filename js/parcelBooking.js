@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded",async function(){
     hasDataDiv.style.display = "none";
     noDataDiv.style.display = "none";
 
+    getCategory();
+
     let data = await customFetch(parcelBookingEndpoint, {});
 
     if (Array.isArray(data) && data.length !== 0) {
@@ -32,7 +34,8 @@ document.addEventListener("DOMContentLoaded",async function(){
             row.insertCell(2).innerHTML = parcel.receiverAddress; 
             row.insertCell(3).innerHTML = parcel.receiverEmail;
             row.insertCell(4).innerHTML = parcel.item;   
-            row.insertCell(5).innerHTML = parcel.status;        
+            row.insertCell(5).innerHTML = parcel.status;     
+            row.insertCell(6).innerHTML = parcel.deliver_status;   
             
         });
     }catch(error){
@@ -57,8 +60,17 @@ function addNewParcel() {
     parcel["item"] = document.getElementById("item").value;
     parcel["category"]  = document.getElementById("parcelCategory").value;
     
-
-
+    closeDialog();
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You won't be able to revert this!`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#5271FF",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Assign!",
+      }).then((result) => {
+      if (result.isConfirmed) {
     const body = parcel;
     const params = {
       headers: {
@@ -73,6 +85,11 @@ function addNewParcel() {
             if (error=="login-redirected")
                 localStorage.setItem("last_url", window.location.pathname);
         });
+      } else {
+        Swal.fire("Cancelled", "Your operation has been cancelled", "error");
+        
+    }
+});
 
     console.log(parcel);
 }

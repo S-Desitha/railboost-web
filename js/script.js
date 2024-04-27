@@ -1,4 +1,9 @@
 // Wait for the DOM to be ready
+window.addEventListener('load', function () {
+    const preloader = document.getElementById('preloader');
+    preloader.style.display = 'none';
+        });
+
 document.addEventListener('DOMContentLoaded', function () {
 
    
@@ -552,6 +557,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (resp.headers.get('content-type').includes('image')) {
                 return await resp.blob();
             }else if(resp.headers.get('content-type').includes('application/pdf')){
+                return await resp.blob();
+            }else if (resp.headers.get('content-type').includes('application/vnd.ms-excel') ||
+                resp.headers.get('content-type').includes('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) {
                 return await resp.blob();
             } else {
                 try {
