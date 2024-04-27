@@ -307,3 +307,8 @@ nav ul li:hover ul.dropdown{
     outline: none;
     border-bottom: 1.5px solid var(--secondary-color);
   }
+  .parcels .head a:hover {
+    background-color: var(--theme-color);
+    color: #ffffff;
+    transition: all 0.1s ease;
+}
