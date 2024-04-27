@@ -46,52 +46,64 @@ document.addEventListener("DOMContentLoaded",async function(){
 
 
 function addNewParcel() {
-    parcel = {};
+  const parcel = {};
 
-    parcel["sendingStation"] = document.getElementById("from").getAttribute("stationCode");
-    parcel["senderAddress"] = document.getElementById("senderAddress").value;
-    parcel["SenderNIC"] = document.getElementById("senderNIC").value;
-    parcel["recoveringStation"] = document.getElementById("to").getAttribute("stationCode");
-    parcel["receiverName"] = document.getElementById("receiverName").value;
-    parcel["receiverAddress"] = document.getElementById("receiverAddress").value;
-    parcel["receiverNIC"] = document.getElementById("receiverNIC").value;
-    parcel["receiverTelNo"] = document.getElementById("phone-field").value;
-    parcel["receiverEmail"] = document.getElementById("email-field").value;
-    parcel["item"] = document.getElementById("item").value;
-    parcel["category"]  = document.getElementById("parcelCategory").value;
-    
-    closeDialog();
-    Swal.fire({
-      title: "Are you sure?",
-      text: `You won't be able to revert this!`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#5271FF",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Assign!",
-      }).then((result) => {
-      if (result.isConfirmed) {
-    const body = parcel;
-    const params = {
+  parcel["sendingStation"] = document.getElementById("from").getAttribute("stationCode");
+  parcel["senderAddress"] = document.getElementById("senderAddress").value;
+  parcel["SenderNIC"] = document.getElementById("senderNIC").value;
+  parcel["recoveringStation"] = document.getElementById("to").getAttribute("stationCode");
+  parcel["receiverName"] = document.getElementById("receiverName").value;
+  parcel["receiverAddress"] = document.getElementById("receiverAddress").value;
+  parcel["receiverNIC"] = document.getElementById("receiverNIC").value;
+  parcel["receiverTelNo"] = document.getElementById("phone-field").value;
+  parcel["receiverEmail"] = document.getElementById("email-field").value;
+  parcel["item"] = document.getElementById("item").value;
+  parcel["category"] = document.getElementById("parcelCategory").value;
+
+  closeDialog();
+
+  const body = JSON.stringify(parcel);
+  const params = {
       headers: {
-        "Content-type": "application/json; charset=UTF-8"
+          "Content-type": "application/json; charset=UTF-8"
       },
-      body: JSON.stringify(body),
+      body: body,
       method: "POST"
-    };
-    customFetch(parcelBookingEndpoint, params)
-        .then(()=> window.location.reload())
-        .catch((error) => {
-            if (error=="login-redirected")
-                localStorage.setItem("last_url", window.location.pathname);
-        });
-      } else {
-        Swal.fire("Cancelled", "Your operation has been cancelled", "error");
-        
-    }
-});
+  };
 
-    console.log(parcel);
+  customFetch(parcelBookingEndpoint, params)
+      .then((response) => {
+        console.log(response)
+          if (response.status == 200) {
+              // Show SweetAlert for success
+              Swal.fire({
+                  title: "Success!",
+                  text: "Your parcel booking application has been submitted successfully.",
+                  icon: "success",
+                  confirmButtonColor: "#5271FF",
+                  confirmButtonText: "OK"
+              }).then(() => {
+                  // Optionally, reload the page or redirect to another page
+                  window.location.reload();
+              });
+          } else {
+              // Show error message if needed
+              Swal.fire({
+                  title: "Error!",
+                  text: "There was an error submitting your parcel booking application. Please try again.",
+                  icon: "error",
+                  confirmButtonColor: "#5271FF",
+                  confirmButtonText: "OK"
+              });
+          }
+      })
+      .catch((error) => {
+          // Handle fetch error here
+          if (error == "login-redirected") {
+              localStorage.setItem("last_url", window.location.pathname);
+          }
+          console.error("Error:", error);
+      });
 }
 
 

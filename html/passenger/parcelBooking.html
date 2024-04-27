@@ -37,7 +37,7 @@
     <title>parcelbookingForm</title>
 </head>
 
-<body>
+<body style="overflow: scroll;">
     <div id="preloader">
         <img src="/Images/train.gif" alt="Loading...">
     </div>
@@ -112,7 +112,9 @@
                                 <th>Receiver Address</th>
                                 <th>Receiver Email</th>
                                 <th>Item</th>
-                                <th>Approvel Status</th>
+
+                                <th>Approval Status</th>
+
                                 <th>Delivery Status</th>
                             </tr>
                         </thead>
@@ -217,8 +219,10 @@
 
 
                 <label for="senderNIC"></label>
+
                 <input type="text" id="senderNIC" name="senderNIC" placeholder="Sender's NIC" onkeyup="validateNIC1();sameNIC();" required>
                 <span id="NICS-error"></span><br><br>
+
 
 
                 <label for="railwayStation"></label>
@@ -235,6 +239,7 @@
                         <ul onclick="validateStation()" class="options"></ul>
                     </div>
                 </div>
+
                 <span id="station-error"></span>
 
                 <label for="receiverName"></label>
