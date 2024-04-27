@@ -18,6 +18,8 @@
   --secondary-color: #29499c;
   --secondary-text-color: #7c7c7c;
   --text-color: #ffffff;
+  --cancel-color: #f05637;
+  --accept-color: #05d142;
 }
 
 a:hover {
@@ -667,7 +669,7 @@ h3{
 
 .parcels .parcel-list li{
   border: #0000001b;
-  width: 500px;
+  width: 550px;
   background-color: #7c7c7c1b;
   padding: 14px 20px;
   border-left: 10px solid #5271FF;
@@ -927,7 +929,7 @@ input {
   align-items: center;
 }
 
-#trainIdError,#contactNumberError{
+#trainIdError,#contactNumberError,#lineError,#NIC-error,#NICS-error{
   text-align: left;
   top: 100%;
   left: 2px;

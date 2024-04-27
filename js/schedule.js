@@ -2,6 +2,7 @@
 
 
 const scheduleEndpoint = "trainSchedule";
+const cancelEndpoint = "cancelSchedules";
 
 document.addEventListener("DOMContentLoaded", async function() {
 
@@ -39,6 +40,18 @@ document.addEventListener("DOMContentLoaded", async function() {
     }
     }
 
+    document.getElementById("schedule_button").addEventListener("click", redirectToPage);
+    document.getElementById("actionType").addEventListener("change", cancelOptionChanged);
+    document.getElementById("schedule-cancel-btn").addEventListener("click", cancelSchedules);
+
+    document.getElementById("cancel-start").min = new Date().toISOString().split("T")[0]
+    document.getElementById("cancel-start").valueAsDate = new Date();
+    
+    document.getElementById("cancel-end").valueAsDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+    document.getElementById("cancel-end").min = new Date().toISOString().split("T")[0];
+    
+    document.getElementById("activate-date").min = new Date().toISOString().split("T")[0]
+    document.getElementById("activate-date").valueAsDate = new Date();
 });
 
 
@@ -330,6 +343,12 @@ async function createSchedulesPage() {
             deleteButton.setAttribute("scheduleId", sch.scheduleId);
             deleteButton.onclick = deleteSchedule;
 
+            let cancelCheckbox = document.createElement("input");
+            cancelCheckbox.setAttribute("type", "checkbox");
+            cancelCheckbox.classList.add("cancel-checkbox");
+            // cancelCheckbox.onchange = function(){checkboxChanged(this, sch.scheduleId);}
+            cancelCheckbox.addEventListener("click", function(){checkboxChanged(this, sch.scheduleId);})
+
             let row = document.getElementById("schedule_table").insertRow(-1);
             row.insertCell(0).innerHTML = sch.scheduleId;
             row.insertCell(1).innerHTML = sch.trainId;
@@ -341,6 +360,7 @@ async function createSchedulesPage() {
             //                                 </a>`;
             // row.insertCell(6).innerHTML = `<a href=""><button class="edit-button"><i class="fas fa-edit"></i> </button></a><a href=""><button class="delete-button"><i class="fas fa-trash"></i> </button></a>`;
             row.insertCell(5).append(infoButton, editButton, deleteButton);
+            row.insertCell(6).append(cancelCheckbox);
         })
     }
     catch(error) {
@@ -745,6 +765,174 @@ function validateStations() {
 
 
 
+class CancelledSchedules {
+    static idList = [];
+    static scheduleList = [];
+
+    static getIdList(){return this.idList;}
+    static setIdList(idList){this.idList=idList;}
+
+    static getScheduleList(){return this.scheduleList;}
+    static setScheduleList(scheduleList) {this.scheduleList=scheduleList;}
+}
+
+
+async function cancelSchedules() {
+    console.log("Cancel the selected Schedules");
+
+    let scheduleList = [];
+    let idList = CancelledSchedules.getIdList();
+    let idStr = "";
+    let fromDate = new Date(document.getElementById("cancel-start").value).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    let toDate = new Date(document.getElementById("cancel-end").value).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+
+    idList.forEach(id =>  {
+        scheduleList.push({
+            scheduleId : id,
+            fromDate : fromDate,
+            toDate : toDate
+        });
+        idStr += `${id}, `;
+    });
+
+    let body = {cancelledScheduleList: scheduleList};
+    const params = {
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify(body),
+        method: "POST"
+    };
+
+    let resp = await customFetch(cancelEndpoint, params);
+
+    closeDialog();
+    if (resp.isSuccessful==true) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Schedules Cancelled',
+            text: `Schedules with the IDs ${idStr} are cancelled from ${fromDate} to ${toDate}`,
+            confirmButtonText: 'OK'
+        }).then(() => window.location.reload());
+        
+    }
+    else if (resp.isSuccessful==false) {
+        Swal.fire({
+            icon: 'failure',
+            title: 'Schedule Cancel Failure',
+            text: resp.error,
+            confirmButtonText: 'OK'
+        });
+    }
+
+}
+
+
+function activateSchedules() {
+    console.log("Activate the schedules");
+}
+
+
+
+function mainCheckboxClick(e) {
+    document.querySelectorAll(".cancel-checkbox").forEach(box => {
+        box.checked = e.checked;
+    })
+}
+
+
+
+function checkboxChanged(e, scheduleId) {
+    if (e.checked==false) {
+        document.getElementById("main-cancel-checkbox").checked = false;
+        let idList = CancelledSchedules.getIdList();
+        let index = idList.indexOf(scheduleId);
+        if (index!==-1){
+            idList.splice(index, 1);
+            CancelledSchedules.setIdList(idList);
+        }
+        if (idList.length==0)
+            updateButton("add");
+    }
+    else if (e.checked==true) {
+        let idList = CancelledSchedules.getIdList();
+        if (idList.indexOf(scheduleId)==-1) {
+            idList.push(scheduleId);
+            CancelledSchedules.setIdList(idList);
+        }
+        updateButton("cancel");
+    }
+}
+
+
+
+// cancel/activate
+function cancelOptionChanged(e) {
+    let el = document.getElementById("actionType");
+    let btn = document.getElementById("schedule-cancel-btn");
+    if(el.value=="activate") {
+        document.getElementById("cancel-dates").style.display = "none";
+        document.getElementById("activate-dates").style.display = "flex";
+        btn.innerHTML = "Activate";
+        btn.style.backgroundColor = "var(--accept-color)"; 
+        btn.removeEventListener("click", cancelSchedules);
+        btn.addEventListener("click", activateSchedules);
+    }
+    if(el.value=="cancel") {
+        document.getElementById("activate-dates").style.display = "none";
+        document.getElementById("cancel-dates").style.display = "flex";
+        btn.innerHTML = "Done";
+        btn.style.backgroundColor = "var(--cancel-color)";
+        btn.removeEventListener("click", activateSchedules);
+        btn.addEventListener("click", cancelSchedules);
+    }
+}
+
+
+// action = add/cancel
+function updateButton(action) {
+    let button = document.getElementById("schedule_button");
+    if (action=="add") {
+        button.innerHTML = "Add New";
+        button.className = "add-new-btn";
+        button.removeEventListener("click", popupCancelDialog);
+        button.addEventListener("click", redirectToPage);
+    }
+    else if (action=="cancel") {
+        button.innerHTML = "Cancel Schedules";
+        button.className = "cancel-btn";
+        button.removeEventListener("click", redirectToPage);
+        button.addEventListener("click", popupCancelDialog);
+    }
+}
+
+
+
+function popupCancelDialog() {
+    console.log("popup dialog");
+    popupAddPage(".schedule-cancel-popup");
+}
+
+
+
+
+// class CancelSchedules {
+//     static mainCheckboxClick(e) {
+//         document.querySelectorAll(".cancel-checkbox").forEach(box => {
+//             box.checked = e.checked;
+//         })
+//     }
+
+//     static checkboxChanged(e, scheduleId) {
+//         if (e.checked==false) {
+//             document.getElementById("main-cancel-checkbox").checked = false;
+//         }
+//         console.log(e);
+//         console.log(scheduleId);
+//     }
+// }
+
+
 
 // ########################### Table row drag & drop functionalities ##############################
 
@@ -955,5 +1143,3 @@ function dynamicDraggableTable() {
         firstCell.addEventListener('mousedown', mouseDownHandler);
     });
 }
-
-
