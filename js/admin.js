@@ -1,7 +1,7 @@
-const endpoint = "getRevenue";
+const endpoint7 = "getRevenue";
 document.addEventListener("DOMContentLoaded", async function () {
     try{
-        let data = await customFetch(endpoint, {});
+        let data = await customFetch(endpoint7, {});
         var totalTicketRevenue = data.totalTicketRevenue;
         var totalParcelRevenue = data.totalParcelBookingRevenue
         let parcelRevenueList = [];
