@@ -34,7 +34,8 @@ document.addEventListener("DOMContentLoaded",async function(){
             row.insertCell(2).innerHTML = parcel.receiverAddress; 
             row.insertCell(3).innerHTML = parcel.receiverEmail;
             row.insertCell(4).innerHTML = parcel.item;   
-            row.insertCell(5).innerHTML = parcel.status;        
+            row.insertCell(5).innerHTML = parcel.status;     
+            row.insertCell(6).innerHTML = parcel.deliver_status;   
             
         });
     }catch(error){
@@ -57,8 +58,8 @@ function addNewParcel() {
   parcel["receiverTelNo"] = document.getElementById("phone-field").value;
   parcel["receiverEmail"] = document.getElementById("email-field").value;
   parcel["item"] = document.getElementById("item").value;
-  parcel["category"]  = document.getElementById("parcelCategory").value;
-  
+  parcel["category"] = document.getElementById("parcelCategory").value;
+
   closeDialog();
 
   const body = JSON.stringify(parcel);
@@ -72,25 +73,28 @@ function addNewParcel() {
 
   customFetch(parcelBookingEndpoint, params)
       .then((response) => {
-          if (response.isSuccessful) {
-              // Show SweetAlert prompt if the response is successful
+        console.log(response)
+          if (response.status == 200) {
+              // Show SweetAlert for success
               Swal.fire({
-                  title: "Are you sure?",
-                  text: `You won't be able to revert this!`,
-                  icon: "warning",
-                  showCancelButton: true,
+                  title: "Success!",
+                  text: "Your parcel booking application has been submitted successfully.",
+                  icon: "success",
                   confirmButtonColor: "#5271FF",
-                  cancelButtonColor: "#d33",
-                  confirmButtonText: "Yes, Assign!"
-              }).then((result) => {
-                  if (result.isConfirmed) {
-                      // Reload the page after confirming
-                      window.location.reload();
-                  }
+                  confirmButtonText: "OK"
+              }).then(() => {
+                  // Optionally, reload the page or redirect to another page
+                  window.location.reload();
               });
           } else {
-              // Handle unsuccessful response here if needed
-              console.log("Operation was not successful");
+              // Show error message if needed
+              Swal.fire({
+                  title: "Error!",
+                  text: "There was an error submitting your parcel booking application. Please try again.",
+                  icon: "error",
+                  confirmButtonColor: "#5271FF",
+                  confirmButtonText: "OK"
+              });
           }
       })
       .catch((error) => {
