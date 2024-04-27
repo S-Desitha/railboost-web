@@ -34,7 +34,8 @@ document.addEventListener("DOMContentLoaded",async function(){
             row.insertCell(2).innerHTML = parcel.receiverAddress; 
             row.insertCell(3).innerHTML = parcel.receiverEmail;
             row.insertCell(4).innerHTML = parcel.item;   
-            row.insertCell(5).innerHTML = parcel.status;        
+            row.insertCell(5).innerHTML = parcel.status;     
+            row.insertCell(6).innerHTML = parcel.deliver_status;   
             
         });
     }catch(error){
