@@ -48,7 +48,7 @@
         <main>
             <div class="heading">
                 <h1 class="title">Station Master Dashboard -  </h1>
-                <h1 class="station" id="hisstation"><b> Colombo Fort</b></h1>
+                <h1 class="hisstation" id="hisstation"><p></p></h1>
             </div>
             
 
@@ -122,50 +122,20 @@
             <div class="table-data">
                 <div class="recent-trains">
                     <div class="head">
-                        <h3>Inbound Train Updates</h3>
+                        <h3>Train Live Update</h3>
                         <a href="sm-live.html">View All</a>
                     </div>
                     <table>
                         <thead>
                             <tr>
-                                <th>Train No</th>
-                                <th>Estimated Arrival Time</th>
-                                <th>Estimated Departure Time</th>
-                                <th>Actions</th>
+                                <th>Schedule ID</th>
+                                <th>Train ID</th>
+                                <th>Start Station</th>
+                                <th>End Station</th>
                             </tr>
 
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>12345</td>
-                                <td>12:00</td>
-                                <td>12:30</td>
-                                <td><a href="sm/sm-live.html" class="update">Update Time</a></td>
-                            </tr>
-                            <tr>
-                                <td>12345</td>
-                                <td>12:00</td>
-                                <td>12:30</td>
-                                <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
-                            </tr>
-                            <tr>
-                                <td>12345</td>
-                                <td>12:00</td>
-                                <td>12:30</td>
-                                <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
-                            </tr>
-                            <tr>
-                                <td>12345</td>
-                                <td>12:00</td>
-                                <td>12:30</td>
-                                <td><a href="sm/sm-live.html"class="update">Update Time</a></td>
-                            </tr>
-                            <tr>
-                                <td>12345</td>
-                                <td>12:00</td>
-                                <td>12:30</td>
-                                <td><a href="sm/sm-live.html" class="update">Update Time</a></td>
-                            </tr>
+                        <tbody id="trainLive_table" style="overflow: hidden;">
                         </tbody>
                     </table>
                 </div>

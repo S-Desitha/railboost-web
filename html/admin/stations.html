@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/table.css">
 	<link rel="stylesheet" href="/css/buttons.css">
     <link rel="stylesheet" href="/css/pagination.css">
+    <link rel="stylesheet" href="/css/ticketRate.css">
 
     <!-- axios -->
 	 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -28,7 +29,7 @@
 
     <script src="/js/jquery3.7.1.js"></script>
     <script src="/js/script.js"></script>
-    <script src="/js/stations.js"></script>
+    <!-- <script src="/js/stations.js"></script> -->
     <script src="/js/manageStations.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <title>Railway Stations Management</title>
@@ -145,12 +146,43 @@
 
                     <!-- <option value="addNewLine">Add New Line</option> -->
                 </select>
-
+                
                 <label for="Previous Station"></label>
-                <input type="text"id="PrevStation" placeholder="Previous Station">
+                
+                <!-- <input type="text"id="PrevStation" placeholder="Previous Station"> -->
+                <div class="wrapper" font-size="1px" id="PrevStation">
+					<div class="select-btn">
+						<span>Previous Station:</span> 
+						<i font-size="3px" class="fa fa-angle-down"></i>
+					</div>
+					<div class="content">
+						<div class="search">
+							
+							<input spellcheck="false" type="text" placeholder="Search">
+							<!-- <i class="fas fa-search"></i> -->
+						</div>
+						<ul onclick="validateSameStation();" class="options"></ul>
+					</div>
+				</div>
+                
 
                 <label for="Next Station"></label>
-                <input type="text" id="NextStation" placeholder="Next Station">
+                <!-- <input type="text" id="NextStation" placeholder="Next Station"> -->
+                <div class="wrapper" font-size="1px" id="NextStation">
+					<div class="select-btn">
+						<span>Next Station:</span> 
+						<i font-size="3px" class="fa fa-angle-down"></i>
+					</div>
+					<div class="content">
+						<div class="search">
+							
+							<input spellcheck="false" type="text" placeholder="Search">
+							<!-- <i class="fas fa-search"></i> -->
+						</div>
+						<ul onclick="validateSameStation();" class="options"></ul>
+					</div>
+				</div>
+                <span id="sameStation-error"></span>
 
                 <label for="contactNumber"></label>
                 <input type="text" id="contactNumber" name="contactNumber" placeholder="Contact Number" onkeyup="validatePhoneNo();" required>
@@ -184,4 +216,6 @@
         });
     </script> -->
 </body>
+<script src="/js/stations.js">
+</script>
 </html>

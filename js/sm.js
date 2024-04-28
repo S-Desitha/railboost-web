@@ -144,6 +144,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     
     const parcelList = document.querySelector(".parcel-list");
     parcelList.innerHTML = "";
+    let count = 0;
   
     try {
       let data = await customFetch(urlQuery, {credentials: "include"});
@@ -153,6 +154,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             document.querySelector(".empty_msg").style.display = "block";
             return;
         }else{
+            if (count!=6){
+            count=count+1;
             document.querySelector(".empty_msg").style.display = "none";
             const listItem = document.createElement("li");
             const trainNoDiv = document.createElement("div");
@@ -167,6 +170,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             listItem.appendChild(noOfParcelsDiv); 
 
             parcelList.appendChild(listItem); 
+            }
 
         }
 

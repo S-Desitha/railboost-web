@@ -240,7 +240,7 @@ thead th.active,tbody td.active {
     border: none;
     outline: none;
 }
-#station-error{
+#station-error,#stcode-error,#sameStation-error{
     text-align: left;
     top: 100%;
     left: 2px;
