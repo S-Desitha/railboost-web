@@ -22,9 +22,9 @@ async function createJourneys() {
                 row.insertCell(2).innerHTML = journey.schedule.startStationName;
                 row.insertCell(3).innerHTML = journey.schedule.endStationName;
                 row.insertCell(4).innerHTML = journey.schedule.speed;
-                row.insertCell(5).innerHTML = `<a href="/html/sm/sm-update.html?scheduleId=${journey.scheduleId}"><button class="view-button">
+                row.insertCell(5).innerHTML = `<button class="view-button" onclick="createJourney('${journey.scheduleId}')">
                 Update <i class="fa-solid fa-pen-to-square"></i></button>
-                </a>`;
+                `;
             });
         }           
     } catch(error) {
@@ -35,10 +35,11 @@ async function createJourneys() {
 
 
 
-async function createJourney() {
+async function createJourney(id) {
+    console.log("createJourney CALLED");
     let param = {
         date: new Date().toLocaleDateString("en-US", {year:"numeric", month:"2-digit", day:"2-digit"}),
-        scheduleId: new URLSearchParams(window.location.search).get("scheduleId")
+        scheduleId: id
         // scheduleId: 8710
     }
 
@@ -47,20 +48,43 @@ async function createJourney() {
     try {
         let data = await customFetch(urlQuery, {})
         console.log(data)
+
+        clearTable();
         
         // Create a table row for each journey
         if (Object.keys(data)){
+
+                document.getElementById('sstation').textContent = data.schedule.startStationName;
+            document.getElementById('dstation').textContent = data.schedule.endStationName;
+            document.getElementById('tnum').textContent = data.schedule.scheduleId;
+            document.getElementById('tspeed').textContent = data.schedule.speed;
+        //     if (data.schedule.endDate!=null)
+        //      document.getElementById("ends-on-date").innerHTML = data.schedule.endDate;
+        //     else
+        // document.getElementById("ends-on-date").innerHTML = "Continuous";
+
+
+        document.querySelectorAll(".cat.day input[type='checkbox']").forEach(checkBox => {
+            checkBox.checked = false;
+            checkBox.disabled = true;
+        });
+
+        data.schedule.days.forEach(day => {
+            let prefix = day.day.substring(0,3).toLowerCase();
+            console.log(prefix);
+            document.getElementById(prefix).checked = true;
+        });
             data.stations.forEach(js => {
                 
                 let arrivalButton = document.createElement("button");
                 arrivalButton.classList.add("view-button");
                 arrivalButton.innerHTML = "Arrived <i class='fa-solid fa-arrow-down'></i>";
-                arrivalButton.onclick = function() {updateTime(js.scheduleId, js.station, "arrival");}
+                arrivalButton.onclick = function() {updateTime(js.scheduleId, js.station,js.stationName, "arrival");}
                 
                 let departureButton = document.createElement("button");
                 departureButton.classList.add("view-button");
                 departureButton.innerHTML = "Departured <i class='fa-solid fa-arrow-up'></i>";
-                departureButton.onclick = function() {updateTime(js.scheduleId, js.station, "departure");}
+                departureButton.onclick = function() {updateTime(js.scheduleId, js.station,js.stationName, "departure");}
                 
                 let row = document.getElementById("journey_table").insertRow(-1);
                 row.setAttribute("id", js.station);
@@ -78,16 +102,23 @@ async function createJourney() {
                     row.insertCell(4).innerHTML = new Date('', '', '', js.departureTime.split(":")[0], js.departureTime.split(":")[1], js.departureTime.split(":")[2]).toLocaleTimeString(navigator.language||navigator.languages[0], {hour12: false});
 
             });
+            let dialog = document.querySelector(".dialog-modal");
+            dialog.showModal();
         }
     } catch(error) {
         if (error=="login-redirected")
             localStorage.setItem("last_url", window.location.pathname);
     }       
 }
+function clearTable() {
+    let table = document.getElementById("journey_table");
+    while (table.rows.length > 0) { // Remove all rows
+        table.deleteRow(0);
+    }
+}
 
 
-
-async function updateTime(scheduleId, station, timeType) {
+async function updateTime(scheduleId, station,stationName, timeType) {
     let body = {
         scheduleId: scheduleId,
         station: station
@@ -119,11 +150,19 @@ async function updateTime(scheduleId, station, timeType) {
             else if (timeType == "departure")
                 document.getElementById(station).cells[4].innerHTML = time;
         } else if (data.status == 403) {
+            // close existing dialog
+
+            let dialog = document.querySelector(".dialog-modal");
+            dialog.close();
+
+            // view the sweet alert on top of dialog modal
+
+            
             // Using SweetAlert for displaying error message
             Swal.fire({
                 icon: 'error',
                 title: 'Permission Denied',
-                text: `You don't have permission to update station: ${station}`,
+                text: `You don't have permission to update station: ${stationName}`,
             });
         }
     } catch(error) {
