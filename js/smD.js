@@ -22,7 +22,16 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.log(data.homeStation);
 });
 
+const parcelItems = document.querySelectorAll('.parcel-list li');
 
+    parcelItems.forEach(item => {
+        const parcelCount = parseInt(item.querySelector('.No-of-parcels h4').innerText);
+        console.log(parcelCount);
+        // Check if parcel count is more than 10
+        if (parcelCount > 10) {
+            item.classList.add('high-parcels');
+        }
+    });
 
 
 async function createJourneys() {

@@ -35,7 +35,14 @@ document.addEventListener("DOMContentLoaded",async function(){
             row.insertCell(3).innerHTML = parcel.receiverEmail;
             row.insertCell(4).innerHTML = parcel.item;   
             row.insertCell(5).innerHTML = parcel.status;     
-            row.insertCell(6).innerHTML = parcel.deliver_status;   
+            row.insertCell(6).innerHTML = parcel.deliver_status; 
+            if (parcel.status === "Rejected") {
+              row.style.border = "3px solid rgba(255, 0, 0, 0.5)";
+            }
+            if (parcel.status == "Approved"){
+              row.style.border = "3px solid rgba(3,148,135,1.00)";
+              
+            }  
             
         });
     }catch(error){
