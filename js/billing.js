@@ -51,10 +51,26 @@ function prepareBilling(){
     localStorage.setItem("amount", document.getElementById("amount").value);
 
     // proceed to payment.html page
-    window.location.href = "payment.html";
+    window.location.href = "payment.html?context=eticket";
 
 
     
+}
+
+function prepareBillingSeason(season){
+    console.log("prepareBillingSeason")
+    // store season json object in local storage 
+    localStorage.setItem("season", JSON.stringify(season));
+    localStorage.setItem("season_id", season.id);
+    localStorage.setItem("season_startStation", season.startStation);
+    localStorage.setItem("season_endStation", season.endStation);
+    localStorage.setItem("season_startDate", season.startDate);
+    localStorage.setItem("season_endDate", season.endDate);
+    localStorage.setItem("season_trainClass", season.trainClass);
+    localStorage.setItem("season_totalPrice", season.totalPrice);
+    localStorage.setItem("paymentType", "season");
+    
+    window.location.href = "payment.html?context=season";
 }
 
   

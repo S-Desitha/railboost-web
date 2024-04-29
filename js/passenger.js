@@ -273,11 +273,14 @@ function createStoppingStations(data, context) {
     console.log(data);
     if (Object.keys(data)) {
 
-    document.getElementById("start-from-date").innerHTML = data.schedule.startDate;
-        if (data.schedule.endDate!=null)
-         document.getElementById("ends-on-date").innerHTML = data.schedule.endDate;
-        else
-    document.getElementById("ends-on-date").innerHTML = "Continuous";
+        document.getElementById('sstation').textContent = data.schedule.startStationName;
+        document.getElementById('dstation').textContent = data.schedule.endStationName;
+        document.getElementById('tnum').textContent = data.schedule.scheduleId;
+        document.getElementById('tspeed').textContent = data.schedule.speed;
+    //     if (data.schedule.endDate!=null)
+    //      document.getElementById("ends-on-date").innerHTML = data.schedule.endDate;
+    //     else
+    // document.getElementById("ends-on-date").innerHTML = "Continuous";
 
 
     document.querySelectorAll(".cat.day input[type='checkbox']").forEach(checkBox => {

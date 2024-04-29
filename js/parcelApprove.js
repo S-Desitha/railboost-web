@@ -126,7 +126,7 @@ function approveParcelF() {
     parcelStatus = JSON.parse(this.getAttribute("approveParcel"));
     Swal.fire({
         title: "Are you sure?",
-        text: "You won't be able to revert this'!",
+        text: "Payment recieved and the parcel is good to go?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#5271FF",

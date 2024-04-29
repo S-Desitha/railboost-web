@@ -12,23 +12,23 @@ document.addEventListener("DOMContentLoaded", async function () {
       data.forEach(line => {
         let editButton = document.createElement("button");
         editButton.classList.add("edit-button");
-        editButton.innerHTML = "<i class='fas fa-edit'></i>";
+        editButton.innerHTML = "<i class='fa fa-info-circle' aria-hidden='true'></i>";
         editButton.setAttribute("line", JSON.stringify(line));
-        editButton.onclick = editLine;
+        editButton.onclick = viewlines;
           // console.log("editButton");
-        let deleteButton = document.createElement("button");
-        deleteButton.classList.add("delete-button");
-        deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
-        deleteButton.setAttribute("line", JSON.stringify(line));
-        deleteButton.onclick = deleteLine;
+        // let deleteButton = document.createElement("button");
+        // deleteButton.classList.add("delete-button");
+        // deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
+        // deleteButton.setAttribute("line", JSON.stringify(line));
+        // deleteButton.onclick = deleteLine;
       // console.log("deleteButton");
   
         let row = document.getElementById("line_table").insertRow(-1);
-        row.insertCell(0).innerHTML = line.lineId;
-        row.insertCell(1).innerHTML = line.lineName;
-        row.insertCell(2).innerHTML = line.lineStartStation;
-        row.insertCell(3).innerHTML = line.lineEndStation;
-        row.insertCell(4).append(editButton);
+        // row.insertCell(0).innerHTML = line.lineId;
+        row.insertCell(0).innerHTML = line.lineName;
+        // row.insertCell(2).innerHTML = line.lineStartStation;
+        // row.insertCell(3).innerHTML = line.lineEndStation;
+        row.insertCell(1).append(editButton);
       });
   
     }
@@ -38,6 +38,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
   
+  function viewlines(){
+
+  }
  
   
   
@@ -172,10 +175,10 @@ document.addEventListener("DOMContentLoaded", async function () {
    
     line = {};
   
-    line["lineId"] = document.getElementById("lineId").value;
+    // line["lineId"] = document.getElementById("lineId").value;
     line["lineName"] = document.getElementById("lineName").value;
-    line["lineStartStation"] = document.getElementById("lineStartStation").value;
-    line["lineEndStation"] = document.getElementById("lineEndStation").value;
+    // line["lineStartStation"] = document.getElementById("lineStartStation").value;
+    // line["lineEndStation"] = document.getElementById("lineEndStation").value;
 
     const body = line;
     const params = {

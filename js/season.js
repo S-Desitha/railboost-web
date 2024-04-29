@@ -2,6 +2,42 @@
 
 const seasonEndpoint = "season";
 const ticketPriceEndpoint = "ticketPrice";
+
+
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const paymentSuccess = urlParams.get('payment_success');
+console.log(paymentSuccess);
+// type of paymentSuccess
+console.log(typeof paymentSuccess);
+
+// If the 'payment_success' parameter is present, call buyETicket function
+if (paymentSuccess=="successful") {
+  console.log("Payment successful!");
+  BuySeason();
+}
+
+if (paymentSuccess=="unsuccessful") {
+  console.log("Payment unsuccessful!");
+  showPaymentError();
+}
+
+function showPaymentError() {
+  Swal.fire({
+    icon: 'error',
+    title: 'Payment Unsuccessful',
+    text: 'Payment processing was unsuccessful. Please try again.',
+    confirmButtonText: 'OK'
+  }).then(() => {
+    // Reload the page after the user clicks OK
+    // redirect to buytickets.html page
+
+
+    window.location.href = 'http://localhost:5500/html/passenger/seasonticket.html';
+  });
+  
+}
 let endDate;
 let VSDate = new Date();
 
@@ -17,12 +53,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (data.length === 0) {
         document.querySelector(".info").style.display = "block";
         document.querySelector(".table_body").style.display = "none";
-        document.querySelector(".train-right").style.display = "block";
+        // document.querySelector(".train-right").style.display = "block";
         return;
       }else{
         document.querySelector(".info").style.display = "none";
         document.querySelector(".table_body").style.display = "block";
-        document.querySelector(".train-right").style.display = "block";
+        // document.querySelector(".train-right").style.display = "block";
       }
       
       data.forEach(season => {
@@ -31,7 +67,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         BuyButton.classList.add("Buy-button");
         BuyButton.innerHTML = "<i class='fa-solid fa-coins' title='Pay' style='color:#0047AB'><span>  Pay </span></i>";
         BuyButton.setAttribute("season", JSON.stringify(season));
-        BuyButton.onclick = BuySeason;
+        BuyButton.onclick = () => {
+          generateOrderID();
+          prepareBillingSeason(season);
+      };
+      
+
         
         let row = document.getElementById("season_table").insertRow(0);
         row.insertCell(0).innerHTML = season.id;
@@ -65,7 +106,10 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
 
   function BuySeason(){
-    season = JSON.parse(this.getAttribute("season"));
+
+    // season = JSON.parse(this.getAttribute("season"));
+    //get season JSON object from local storage
+    season = JSON.parse(localStorage.getItem("season"));
     console.log(season);
     season["status"] = "Paid";
     const body = season;
@@ -76,18 +120,21 @@ document.addEventListener("DOMContentLoaded", async function () {
         body: JSON.stringify(body),
         method: "PUT",
     };
-
-    customFetch(seasonEndpoint, params)
-    .then(() => window.location.reload())
-
-    .catch((error) => {
-        if (error == "login-redirected")
-            localStorage.setItem("last_url", window.location.pathname);
-    });
-  console.log(season);
-  alert("Check your email for Season Ticket.");
-  window.location.reload();
+    showSuccessNotification();
+    return customFetch(seasonEndpoint, params);
+   
 }
+function showSuccessNotification() {
+  Swal.fire({
+    icon: 'success',
+    title: 'Payment Successful!',
+    text: 'Check your email for the Season Ticket.',
+    confirmButtonText: 'OK'
+  }).then(() => {
+    window.location.href = 'http://localhost:5500/html/passenger/seasonticket.html';
+  });
+}
+
   
 
 function validateStation(){
@@ -143,6 +190,7 @@ function appplySeasonTicket() {
       });
 
     console.log(season);
+    closeDialog();
     Swal.fire({
       icon: 'success',
       title: 'Success!',
@@ -224,7 +272,8 @@ async function getTicketPrices(Class,Duration) {
       price = Math.ceil(((price/100)*3)/100)*100;
     }
     
-    document.getElementById("total-price").value = price;
+    
+document.getElementById("total-price").value = price;
    
   }
   catch (error) {

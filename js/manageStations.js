@@ -283,8 +283,8 @@ function goToNextPage() {
     station["stationName"] = document.getElementById("stationName").value;
     station["address"] = document.getElementById("address").value;
     station["line"] = document.getElementById("selectLine").value;
-    station["prevStation"] = document.getElementById("PrevStation").value;
-    station["nextStation"] = document.getElementById("NextStation").value;
+    station["prevStation"] = document.getElementById("PrevStation").getAttribute("stationCode");
+    station["nextStation"] = document.getElementById("NextStation").getAttribute("stationCode");
     station["contactNo"] = document.getElementById("contactNumber").value;
 
     if (!station["stationCode"] || !station["stationName"] || !station["address"] || !station["line"]|| !station["contactNo"]) {
@@ -319,3 +319,16 @@ function goToNextPage() {
   
     console.log(station);
   }
+
+  function validateSameStation(){
+  
+    let Start=document.getElementById("PrevStation").getAttribute("stationCode");
+    let End=document.getElementById("NextStation").getAttribute("stationCode");
+    let StationError=document.getElementById("sameStation-error");
+    if(Start==End){
+        StationError.innerHTML = "Both previous and next stations can't be same.";
+        return false;
+    }
+        StationError.innerHTML = "";
+        return true;
+    }

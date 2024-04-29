@@ -3,7 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+     <!-- axios -->
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+     <!-- sweet alert -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
+ 
+     <!-- jquery -->
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+     <script src="/js/jquery3.7.1.js"></script>
+ 
+
+    
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="/js/script.js"></script>
@@ -11,11 +24,17 @@
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/passSch.css">
+    <link rel="stylesheet" href="/css/sch.css">
+    <link rel="stylesheet" href="/css/datepicker.css">
     <script src="/js/sm.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
     <title>Train Schedule Management</title>
 </head>
 <body> 
+    <div id="preloader">
+        <img src="/Images/train.gif" alt="Loading...">
+    </div>
     <nav class="navbar">
         <script>createNavBar("sm")</script>
     </nav>
@@ -30,7 +49,7 @@
                 <div class="table-container">
                             <section class="table_header">
                                 <h1>Train Schedule Details</h1>
-                                <div class="input-group">
+                                <div class="input-group" style="padding: 0 0.8rem;">
                                     <input type="search" placeholder="Search Train Schedule...">
                                     <img src="/Images/search.png" alt="">
                                 </div>
@@ -54,7 +73,140 @@
                                 </tbody>
                             </section>
                             </table>
-                    </div>
+                </div>
+
+                <dialog class="dialog-modal" style="width: fit-content;overflow-y: scroll;">
+                    <button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
+                        
+                    <section class="table_header station_header" style="display: flex;">
+                        <h1>Train stopping stations</h1>
+                        <div class="input-group" style="padding: 0 0.8rem;">
+                            <input type="search" placeholder="Search Station...">
+                            <img src="/Images/search.png" alt="">
+                        </div>
+                    </section>
+                    <script>
+                        const searchInput2 = document.querySelector('.station_header input[type="search"]');
+                        searchInput2.addEventListener('input', filterScheduleStationsTable);
+            
+                        function filterScheduleStationsTable() {
+                            const searchTerm = searchInput2.value.toLowerCase();
+                            const tableRows = document.querySelectorAll('#schedule_stations tr');
+            
+                            tableRows.forEach(row => {
+                                let rowVisible = false;
+            
+                                for (let i = 0; i < row.cells.length; i++) {
+                                    const cellText = row.cells[i].textContent.toLowerCase();
+                                    if (cellText.includes(searchTerm)) {
+                                        rowVisible = true;
+                                        break;
+                                    }
+                                }
+            
+                                if (rowVisible) {
+                                    row.style.display = 'table-row';
+                                } else {
+                                    row.style.display = 'none';
+                                }
+                            });
+                        }
+                    </script>
+                    
+            
+                    <section class="schedule-dates-view" >
+                        
+                        <div class="train-heading" style="font-size: 20px; margin-left: 20px;">
+                            <i class="fas fa-train"></i>
+                            <div class="train-info">
+                                <div class="SnE-stations">
+                                    <div class="sstation" >
+                                        <p> <b id="sstation"></b> <i class="fa-solid fa-play"></i> </p>
+                                    </div>
+                                    <div class="dstation" >
+                                        <p style="margin-left:10px"> <b id="dstation"></b> </p>
+                                    </div>
+                                </div>
+                                <div class="tnum-speed">
+                                    <div class="train-number" >
+                                        <p> <b id="tnum"></b> </p>
+                                    </div>
+                                    <div class="speed"  >
+                                        <p> <b id="tspeed"></b> </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                            <div id="day-container" class="day-container" >
+                                <div class="days" >
+                                    <p style="justify-content: center;"><b> Operating Days </b></p>	
+                                </div>
+                                <div>
+            
+                                
+                                    <div class="cat day">
+                                    <label>
+                                        <input id="sun" type="checkbox" value="SUNDAY"><span>S</span>
+                                    </label>
+                                    </div>
+                                    
+                                    <div class="cat day">
+                                    <label>
+                                        <input id="mon" type="checkbox" value="MONDAY"><span>M</span>
+                                    </label>
+                                    </div>
+                                    
+                                    <div class="cat day">
+                                    <label>
+                                        <input id="tue" type="checkbox" value="TUESDAY"><span>T</span>
+                                    </label>
+                                    </div>
+                                    
+                                    <div class="cat day">
+                                    <label>
+                                        <input id="wed" type="checkbox" value="WEDNESDAY"><span>W</span>
+                                    </label>
+                                    </div>
+                                    
+                                    <div class="cat day">
+                                    <label>
+                                        <input id="thu" type="checkbox" value="THURSDAY"><span>T</span>
+                                    </label>
+                                    </div>
+                                    
+                                    <div class="cat day">
+                                    <label>
+                                        <input id="fri" type="checkbox" value="FRIDAY"><span>F</span>
+                                    </label>
+                                    </div>
+                                    
+                                    <div class="cat day">
+                                    <label>
+                                        <input id="sat" type="checkbox" value="SATURDAY"><span>S</span>
+                                    </label>
+                                    </div><br><br><br>
+                                </div>
+                            </div>
+                    </section>
+            
+                    <section class="table_body">
+                        <table>
+                        <thead>
+                            <tr>
+                                <th>Station Name</th>
+                                <th>Scheduled Arrival Time</th>
+                                <th>Scheduled Departure Time</th>
+                                <th>Actual Arrival Time</th>
+								<th>Actual Departure Time</th>
+                            </tr>
+                        <tbody id="journey_table">
+                            <script>createJourney()</script>
+                            
+                        </tbody>
+                    </section>
+                </dialog>
                     
             </div>
         </div>

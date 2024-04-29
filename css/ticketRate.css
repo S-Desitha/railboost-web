@@ -240,7 +240,7 @@ thead th.active,tbody td.active {
     border: none;
     outline: none;
 }
-#station-error{
+#station-error,#stcode-error,#sameStation-error{
     text-align: left;
     top: 100%;
     left: 2px;
@@ -375,7 +375,13 @@ thead th.active,tbody td.active {
   .select-btn span {
       margin-left: 4px;
   }
-                          
+     
+  .app{
+    text-align: left;
+    /* margin-left: 10px; */
+    color:#0d45a5;
+    font-weight: 900;
+}
 
 @media (max-width: 900px) {
     .container {
@@ -415,3 +421,46 @@ thead th.active,tbody td.active {
   color: red;
   margin-left: 10px;
 }
+
+#download-btn,#upload-btn{
+  height:40px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--theme-color);
+  margin-top: 10px;
+  color: white;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  width: 40%;
+}
+#download-btn:disabled,#upload-btn:disabled{
+  background-color: #a4a4a5;
+}
+#download-btn{
+  margin-right: 20%;
+}
+input[type=file] {
+  display:grid;
+  margin-top:0px;
+}
+input[type=file]::file-selector-button {
+  /* margin-right: 20px; */
+  border: none;
+  background: #084cdf;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease-in-out;
+  }
+  input[type=file]:disabled::file-selector-button {
+    background: #a4a4a5;
+    }
+
+  input[type=file]::file-selector-button:hover {
+  background: #0d45a5;
+  }
+
+  #download-btn:hover:enabled,#upload-btn:hover:enabled{
+    background-color:rgb(23, 27, 145) ;
+  }

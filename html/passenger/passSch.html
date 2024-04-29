@@ -13,9 +13,7 @@
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-    crossorigin="anonymous"></script>
+    <script src="/js/jquery3.7.1.js"></script>
 
     <!-- charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -40,6 +38,10 @@
     <title>Train Schedule Management</title>
 </head>
 <body> 
+    <div id="preloader">
+        <img src="/Images/train.gif" alt="Loading...">
+    </div>
+    
     <nav class="navbar" >
         <script>createNavBar("passenger")</script>
     </nav>
@@ -107,30 +109,36 @@
                             });
                         }
                     </script>
+                    
             
                     <section class="schedule-dates-view" >
                         
-                            <div id="start-from2" class="start-from" >
-                                <div class="starts" style="justify-content: center;width: max-content;">
-                                    <p>Starts From</p>	
+                        <div class="train-heading" style="font-size: 20px; margin-left: 20px;">
+                            <i class="fas fa-train"></i>
+                            <div class="train-info">
+                                <div class="SnE-stations">
+                                    <div class="sstation" >
+                                        <p> <b id="sstation"></b> <i class="fa-solid fa-play"></i> </p>
+                                    </div>
+                                    <div class="dstation" >
+                                        <p style="margin-left:10px"> <b id="dstation"></b> </p>
+                                    </div>
                                 </div>
-                                <div class="start-from">
-                                    <b><span id="start-from-date"></span></b>
+                                <div class="tnum-speed">
+                                    <div class="train-number" >
+                                        <p> <b id="tnum"></b> </p>
+                                    </div>
+                                    <div class="speed"  >
+                                        <p> <b id="tspeed"></b> </p>
+                                    </div>
                                 </div>
                             </div>
-            
-                            <div id="ends-on" class="ends-on"style="display: flex;flex-direction: column;">
-                                <div class="starts" style="justify-content: center;width: max-content;">
-                                    <p>Ends On</p>	
-                                </div>
-                                <div class="start-from">
-                                    <b><span id="ends-on-date"></span></b>
-                                </div>
-                            </div>
+                            
+                        </div>
                         
                             <div id="day-container" class="day-container" >
                                 <div class="days" >
-                                    <p style="justify-content: center;">Operating Days</p>	
+                                    <p style="justify-content: center;"><b> Operating Days </b></p>	
                                 </div>
                                 <div>
             
@@ -182,15 +190,15 @@
             
                     <section class="table_body">
                         <table>
-                        <thead>
-                            <tr>
-                                <th>Station Name</th>
-                                <th>Scheduled Arrival Time</th>
-                                <th>Scheduled Departure Time</th>
-                                <th>Actual Arrival Time</th>
-								<th>Actual Departure Time</th>
-                            </tr>
-                        </thead>
+                            <thead>
+								<tr>
+                                    <th>Station Name</th>
+									<th>Scheduled Arrival Time</th>
+									<th>Scheduled Departure Time</th>
+									<th>Actual Arrival Time</th>
+                                    <th>Actual Departure Time</th>
+								</tr>
+							</thead>
                         <tbody id="schedule_stops">
                             
                         </tbody>

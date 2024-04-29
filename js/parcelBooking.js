@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded",async function(){
     hasDataDiv.style.display = "none";
     noDataDiv.style.display = "none";
 
+    getCategory();
+
     let data = await customFetch(parcelBookingEndpoint, {});
 
     if (Array.isArray(data) && data.length !== 0) {
@@ -32,7 +34,8 @@ document.addEventListener("DOMContentLoaded",async function(){
             row.insertCell(2).innerHTML = parcel.receiverAddress; 
             row.insertCell(3).innerHTML = parcel.receiverEmail;
             row.insertCell(4).innerHTML = parcel.item;   
-            row.insertCell(5).innerHTML = parcel.status;        
+            row.insertCell(5).innerHTML = parcel.status;     
+            row.insertCell(6).innerHTML = parcel.deliver_status;   
             
         });
     }catch(error){
@@ -43,38 +46,64 @@ document.addEventListener("DOMContentLoaded",async function(){
 
 
 function addNewParcel() {
-    parcel = {};
+  const parcel = {};
 
-    parcel["sendingStation"] = document.getElementById("from").getAttribute("stationCode");
-    parcel["senderAddress"] = document.getElementById("senderAddress").value;
-    parcel["SenderNIC"] = document.getElementById("senderNIC").value;
-    parcel["recoveringStation"] = document.getElementById("to").getAttribute("stationCode");
-    parcel["receiverName"] = document.getElementById("receiverName").value;
-    parcel["receiverAddress"] = document.getElementById("receiverAddress").value;
-    parcel["receiverNIC"] = document.getElementById("receiverNIC").value;
-    parcel["receiverTelNo"] = document.getElementById("phone-field").value;
-    parcel["receiverEmail"] = document.getElementById("email-field").value;
-    parcel["item"] = document.getElementById("item").value;
-    parcel["category"]  = document.getElementById("parcelCategory").value;
-    
+  parcel["sendingStation"] = document.getElementById("from").getAttribute("stationCode");
+  parcel["senderAddress"] = document.getElementById("senderAddress").value;
+  parcel["SenderNIC"] = document.getElementById("senderNIC").value;
+  parcel["recoveringStation"] = document.getElementById("to").getAttribute("stationCode");
+  parcel["receiverName"] = document.getElementById("receiverName").value;
+  parcel["receiverAddress"] = document.getElementById("receiverAddress").value;
+  parcel["receiverNIC"] = document.getElementById("receiverNIC").value;
+  parcel["receiverTelNo"] = document.getElementById("phone-field").value;
+  parcel["receiverEmail"] = document.getElementById("email-field").value;
+  parcel["item"] = document.getElementById("item").value;
+  parcel["category"] = document.getElementById("parcelCategory").value;
 
+  closeDialog();
 
-    const body = parcel;
-    const params = {
+  const body = JSON.stringify(parcel);
+  const params = {
       headers: {
-        "Content-type": "application/json; charset=UTF-8"
+          "Content-type": "application/json; charset=UTF-8"
       },
-      body: JSON.stringify(body),
+      body: body,
       method: "POST"
-    };
-    customFetch(parcelBookingEndpoint, params)
-        .then(()=> window.location.reload())
-        .catch((error) => {
-            if (error=="login-redirected")
-                localStorage.setItem("last_url", window.location.pathname);
-        });
+  };
 
-    console.log(parcel);
+  customFetch(parcelBookingEndpoint, params)
+      .then((response) => {
+        console.log(response)
+          if (response.status == 200) {
+              // Show SweetAlert for success
+              Swal.fire({
+                  title: "Success!",
+                  text: "Your parcel booking application has been submitted successfully.",
+                  icon: "success",
+                  confirmButtonColor: "#5271FF",
+                  confirmButtonText: "OK"
+              }).then(() => {
+                  // Optionally, reload the page or redirect to another page
+                  window.location.reload();
+              });
+          } else {
+              // Show error message if needed
+              Swal.fire({
+                  title: "Error!",
+                  text: "There was an error submitting your parcel booking application. Please try again.",
+                  icon: "error",
+                  confirmButtonColor: "#5271FF",
+                  confirmButtonText: "OK"
+              });
+          }
+      })
+      .catch((error) => {
+          // Handle fetch error here
+          if (error == "login-redirected") {
+              localStorage.setItem("last_url", window.location.pathname);
+          }
+          console.error("Error:", error);
+      });
 }
 
 
@@ -113,4 +142,64 @@ function closeDialog() {
     
   }
 
+  function validateStation(){
   
+    let Start=document.getElementById("from").getAttribute("stationCode");
+    let End=document.getElementById("to").getAttribute("stationCode");
+    let StationError=document.getElementById("station-error");
+    if(Start==End){
+        StationError.innerHTML = "Both start and end stations can't be same.";
+        return false;
+    }
+        StationError.innerHTML = "";
+        return true;
+}
+
+function validateNIC2(){
+  let nic=document.getElementById("receiverNIC").value;
+  let nic1=document.getElementById("senderNIC").value;
+  let error=document.getElementById("NIC-error");
+  const regex = /^[0-9]{9}[vVxX]$|^([0-9]{12})$/;
+
+  if (!regex.test(nic)) {
+    error.innerHTML="Invalid NIC number!!";
+    return false;
+  }else{
+    if (/^0+$/.test(nic)) {
+      error.innerHTML = 'NIC cannot consist of only zeros.';
+      return;
+    }else if(nic==nic1){
+      error.innerHTML="Both NIC number can not be same!!";
+      return false;
+    }else{
+    error.innerHTML="";
+    return true;
+    }
+  }
+}
+
+function validateNIC1(){
+  let nic=document.getElementById("senderNIC").value;
+  let nic2=document.getElementById("receiverNIC").value;
+  let error=document.getElementById("NICS-error");
+  const regex = /^[0-9]{9}[vVxX]$|^([0-9]{12})$/;
+
+  if (!regex.test(nic)) {
+    error.innerHTML="Invalid NIC number!!";
+    return false;
+  }else{
+    if (/^0+$/.test(nic)) {
+      error.innerHTML = 'NIC cannot consist of only zeros.';
+      return;
+    }else if(nic==nic2){
+      error.innerHTML="Both NIC number can not be same!!";
+      return false;
+    }else{
+      error.innerHTML="";
+      return true;
+    }
+  }
+}
+
+
+

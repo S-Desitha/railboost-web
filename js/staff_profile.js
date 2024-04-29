@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         let data = await customFetch(urlQuery, {credentials: "include"});
         console.log(data);
         // console.log(data.fName);
+        localStorage.setItem("roleId", data.role.roleId);
 
         let editButton = document.getElementById("edit-btn");
         editButton.setAttribute("details", JSON.stringify(data));
