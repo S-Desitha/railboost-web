@@ -55,8 +55,25 @@
 					<section class="table_header">
 						<h1>Ticket Price Details</h1>
 						<div class="input-group" >
-							<input type="search" style="margin:0" placeholder="Search Ticket Rates...">
-							<img src="/Images/search.png" alt="">
+							<select id="filtering-type">
+								<option value="start">start:</option>
+								<option value="end">end:</option>	
+							</select>
+							<div class="wrapper" font-size="1px" id="filtering-station">
+								<div class="select-btn">
+									<span>Start Station:</span> 
+									<i font-size="3px" class="fa fa-angle-down"></i>
+								</div>
+								<div class="content">
+									<div class="search">
+										
+										<input spellcheck="false" type="text" placeholder="Search"/>
+										<i class="fas fa-search"></i>
+									</div>
+									<ul onclick="validateStation();" class="options"></ul>
+								</div>
+							</div>
+							<img src="/Images/search.png" onclick="filterRates(10,0)" alt=""/>
 						</div>
 					</section>
 					<script>
@@ -127,7 +144,7 @@
 					<div class="content">
 						<div class="search">
 							
-							<input spellcheck="false" type="text" placeholder="Search">
+							<input spellcheck="false" type="text" placeholder="Search"/>
 							<i class="fas fa-search"></i>
 						</div>
 						<ul onclick="validateStation();" class="options"></ul>
