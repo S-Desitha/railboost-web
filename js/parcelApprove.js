@@ -65,8 +65,8 @@ function openDialog() {
       });
   }
 
-  function closeDialog() {
-    var myDialog = document.getElementById('addWeightId');
+  function closeDialogw() {
+    var myDialog = document.getElementById('dialog-modal');
     myDialog.close();
   }
 

@@ -52,7 +52,12 @@ async function  verifyCode(bookingId){
     // var bookingId1 = verifyParcel.bookingId;
 
     endpoint4 = "checkOTP"
-    var OTP = document.getElementById("verifyParcel").value;
+    var otp = '';
+        for (var i = 1; i <= 6; i++) {
+            var input = document.getElementById('otp-box' + i);
+            otp += input.value;
+        }
+    var OTP = otp;
     console.log(OTP);
     const body = {
         bookingId:bookingId,
