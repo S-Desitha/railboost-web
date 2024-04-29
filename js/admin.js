@@ -1,5 +1,6 @@
 const endpoint7 = "getRevenue";
 document.addEventListener("DOMContentLoaded", async function () {
+    getDashDetails();
     try{
         let data = await customFetch(endpoint7, {});
         var totalTicketRevenue = data.totalTicketRevenue;
@@ -21,3 +22,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
 });
+
+async function getDashDetails(){
+    const endpointDash="dashboard";
+    
+        let data = await customFetch(endpointDash, {credentials: "include"});
+        console.log(data);
+}

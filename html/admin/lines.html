@@ -106,5 +106,32 @@
             </form>
         </div>
     </dialog>
+
+    <dialog class="allLine-modal dialog-modal" style="overflow-y: scroll;">
+		<button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
+
+		<section class="table_header station_header" style="display: flex;">
+			<h1>All Stations Of Line</h1>
+			<div class="input-group">
+				<input type="search" placeholder="Search Station..."/>
+				<img src="/Images/search.png" alt=""/>
+			</div>
+		</section>
+
+		<section class="table_body">
+			<table>
+			<thead>
+				<tr>
+					<th>Index</th>
+					<th>Station Name</th>
+					<!-- <th>Scheduled Departure Time</th> -->
+					<!-- <th>Actions</th> -->
+				</tr>
+			</thead>
+			<tbody id="line_stations">
+			</tbody>
+			</table>
+		</section>
+	</dialog>
 </body>
 </html>
