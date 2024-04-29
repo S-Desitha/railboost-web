@@ -39,7 +39,23 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
   
   function viewlines(){
-
+    let StationList = JSON.parse(this.getAttribute("line"));
+    let Linetable = document.getElementById("line_stations");
+    Linetable.innerHTML="";
+    console.log(StationList);
+    let index=0;
+    StationList.stationList.forEach(station => {
+      let row = document.getElementById("line_stations").insertRow(-1);
+      index = index + 1 ;
+      if(station==""){
+        return;
+      }
+        row.insertCell(0).innerHTML = index;
+        row.insertCell(1).innerHTML = station;
+      });
+    // let dialog = document.querySelector(".allLine-modall");
+    popupAddPage('.allLine-modal');
+    // dialog.showModal();
   }
  
   
