@@ -133,7 +133,7 @@ body{
     display: flex;
     justify-content: space-between;
     font-size: 20px;
-    margin: 40px 60px;;
+    /* margin: 40px 60px;; */
      
     display: flex;
     /* justify-content: center; */

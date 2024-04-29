@@ -20,7 +20,7 @@
 .schedule-dates-view {
     display: flex;
     flex-direction: row;
-    gap: 100px;
+    gap: 40px;
     justify-content: end;
     margin-bottom: 20px;
     /* align-items:end; */
