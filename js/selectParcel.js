@@ -1,5 +1,5 @@
-const selectParcelString = localStorage.getItem("stationParcels1234");
-const selectParcel = JSON.parse(selectParcelString)
+const selectParcel = localStorage.getItem("stationParcels1234");
+// const selectParcel = JSON.parse(selectParcelString)
 const stationsForSchecdul =[];
 const addedParcelsArray= [];
 var scheduleId = 0;
@@ -7,27 +7,34 @@ console.log(selectParcel);
 let urlParams = new URLSearchParams(window.location.search);
 let station = urlParams.get("recoveringStation");
 
-    try{       
-        selectParcel.forEach(parcel => {
-            if(parcel.recoveringStation==station){
-                for (let index = 0; index < parcel.bookingId.length; index++) {
+
+document.addEventListener("DOMContentLoaded", async function () {
+    endpoint3 = "parcelTracking";
+
+    let params = {
+        view: "2",
+        recoveringStation: station
+    };
+    let queryString = Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+    let urlQuery = `${endpoint3}?${queryString}`;
+
+    try{   
+        let data = await customFetch(urlQuery, {credentials: "include"});    
+        data.forEach(parcel => {
 
                     let addToTrain = document.createElement("button");
 
                     addToTrain.classList.add("set-station-button");
                     addToTrain.innerHTML = "<i title='addParcel' style='color:grey; font-weight: bold;' ><span> Assign</span></i>";
-                    addToTrain.setAttribute("parcelBookingId", JSON.stringify(parcel.bookingId[index]));
+                    addToTrain.setAttribute("parcelBookingId", JSON.stringify(parcel.bookingId));
                     addToTrain.setAttribute("disabled", true);
                     addToTrain.onclick = addParcelsToTrain;
         
         
                     let row = document.getElementById("myParcels2").insertRow(-1);
-                    row.insertCell(0).innerHTML = parcel.bookingId[index];
-                    row.insertCell(1).innerHTML = parcel.item[index];
+                    row.insertCell(0).innerHTML = parcel.bookingId;
+                    row.insertCell(1).innerHTML = parcel.item;
                     row.insertCell(2).append(addToTrain);             
-                }                  
-                
-            }
             
         });
         // for (let index = 0; index < selectParcel.bookingId.length; index++) {
@@ -51,11 +58,13 @@ let station = urlParams.get("recoveringStation");
     }catch(error){
         console.error("Error occurred:", error);
     }
+    
+});
 
     async function showSchedules() {
         const endpoint = "trainSchedule";       
         
-        let startStation = selectParcel[0].sendingStation.toString();
+        let startStation = selectParcel;
         let endStation = station;
 
     
