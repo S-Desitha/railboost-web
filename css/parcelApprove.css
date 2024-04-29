@@ -29,15 +29,15 @@
   margin-top: 30px;
   } */
 
-  #addWeightId{
+  /* #addWeightId{
 
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 10px;
+    padding: 20px;
     border-color: white;
-}
+} */
  
   dialog::backdrop {
     background-color: rgba(41, 40, 40, 0.533);

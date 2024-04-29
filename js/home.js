@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             console.log(schedules);
 
             // Display only the first 5 schedules
-            schedules.slice(0, 5).forEach(schedule => {
+            schedules.slice(0, 4).forEach(schedule => {
                 const startStationInfo = getStationInfo(schedule.stations, schParams.startStation);
                 let row = document.getElementById("recent_sch__table").insertRow(-1);
                 row.insertCell(0).innerHTML = schedule.endStationName;

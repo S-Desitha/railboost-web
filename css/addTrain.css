@@ -25,19 +25,37 @@ background: rgb(210, 210, 210);
 #addDileveryStatus {
     display: none;
 }
-#scheduleDropDown{
-    width: 110px;
-    height: 30px;
-    border-color: #9f9292;
-    border-width: 3px;
-    border-radius: 3px;
-}
+
+    #scheduleDropDown{
+        width: 110px;
+        height: 30px;
+        border-color: #9f9292;
+        border-width: 3px;
+        border-radius: 3px;
+        background-color: white; /* Adjust background color as needed */
+        padding: 5px; /* Adjust padding as needed */
+    }
+    
+    #scheduleDropDown select {
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        background-color: transparent; /* Transparent background for select box */
+        font-size: inherit; /* Inherit font size from parent */
+        border-radius: inherit; /* Inherit border-radius from parent */
+        padding: 0; /* Reset padding */
+        appearance: none; /* Remove default dropdown arrow */
+        -webkit-appearance: none; /* Remove default dropdown arrow for WebKit browsers */
+    }
+    
 #addDileveryStatus{
     color: rgb(255, 255, 255);
     background-color: rgba(45, 45, 228, 0.749);
     height: 30px;
     border-radius: 5px;
     border: none;
+    cursor: pointer;
 }
 #searchParcels{
     width: 50px;

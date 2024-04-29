@@ -93,9 +93,9 @@
                                     <th>Receiver Name</th>
                                     <th>Receiving Station</th>
                                     <th>Item</th>
-                                    <th>Weight</th>
+                                    <th>Weight(Kg)</th>
                                     <th></th>
-                                    <th>Total</th>
+                                    <th>Total (LKR)</th>
                                     <!-- <th>Status</th> -->
                                     <th>Action</th>
                                 </tr>
@@ -111,9 +111,9 @@
         <div class="service-container"> -->
 
 
-        <dialog class="addWeightClass" id="addWeightId">
-            <h2>Add Weight</h2>
-            <input type="number" id="addWeight" name="addWeight" placeholder="Add weight"required> <br>
+        <dialog class="dialog-modal" style="width: 400px;" id="addWeightId">
+            <h2 style="text-align: center;">Add Weight (In kg)</h2>
+            <input type="number" style="width:330px" id="addWeight" name="addWeight" placeholder="Add weight"required> <br>
             
             <button autofocus id="form-clear-btn" onclick="closeDialog()">Close</button>
             <button type="submit" onclick="addWeight()" id="dialog-submit">Submit</button>
