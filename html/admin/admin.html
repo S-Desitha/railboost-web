@@ -15,6 +15,7 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <script src="/js/jquery3.7.1.js"></script>
+    <script src="/js/admin.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/auth.js"></script> 
     <script src="/js/charts.js"></script>
@@ -51,11 +52,11 @@
                 <div class="card">
                     <div class="head">
                         <div>
-                            <h2 class="count"data-target="490">0</h2>
-                            <p>Site Visits </p>
-                            <small class="text-muted">Last 24 hours</small>
+                            <h2 id="parcel-revenue" class="count revenue"data-target="21340">0</h2>
+                            <p class="revenue">Parcel Revenue </p>
+                            <small class="text-muted">This Month</small>
                         </div>
-                        <i class="fas fa-eye"> </i>
+                        <i class="fas fa-money-bill-wave"> </i>
                         
                     </div>
                     
@@ -63,7 +64,7 @@
                 <div class="card">
                     <div class="head">
                         <div>
-                            <h2 class="count"data-target="392">0</h2>
+                            <h2 class="count" id="trainCount"    data-target="392">0</h2>
                             <p>Trains in Operation </p>
                             <small class="text-muted">Last 24 hours</small>
                         </div>
@@ -75,7 +76,7 @@
                 <div class="card">
                     <div class="head">
                         <div>
-                            <h2 class="count"data-target="21340">0</h2>
+                            <h2 class="count" id="ticket-count" data-target="21340">0</h2>
                             <p>Total Tickets Issued </p>
                             <small class="text-muted">Last 24 hours</small>
                         </div>
@@ -91,7 +92,7 @@
                     <div class="head">
                         <div>
                             <h2 id="ticket-revenue" class="count revenue"data-target="21340">0</h2>
-                            <p class="revenue">Total Revenue by Tickets </p>
+                            <p class="revenue">Ticket Revenue </p>
                             <small class="text-muted">This Month</small>
                         </div>
                         <i class="fas fa-money-bill-wave"> </i>
@@ -110,6 +111,6 @@
         </main>
     </div>
 
-    <script src="/js/admin.js"></script>
+    
 </body>
 </html>

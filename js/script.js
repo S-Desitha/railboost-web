@@ -1,115 +1,13 @@
-// Wait for the DOM to be ready
+// // Wait for the DOM to be ready
+// var totalTicketRevenue;
+// var totalParcelRevenue;
+// var trainCount;
+// var NoTicket;
+
 window.addEventListener('load', function () {
     const preloader = document.getElementById('preloader');
     preloader.style.display = 'none';
         });
-
-document.addEventListener('DOMContentLoaded', function () {
-
-   
-        // const counters1 = document.querySelectorAll('.count');
-      
-        // function startCounter(counter) {
-        //   const target = parseInt(counter.getAttribute('data-target'));
-        //   const increment = target / 50;
-      
-        //   let currentValue = 0;
-      
-        //   function updateCounter() {
-        //     currentValue += increment;
-        //     counter.textContent = Math.floor(currentValue);
-      
-        //     if (currentValue < target) {
-        //       requestAnimationFrame(updateCounter);
-        //     } else {
-        //       counter.textContent = target;
-        //     }
-        //   }
-      
-        //   updateCounter();
-        // }
-      
-        // counters1.forEach(startCounter);
-      
-        // const bellIcon = document.getElementById('bell-notification');
-    //     const notificationBar = document.getElementById('notification-bar');
-    //   console.log("bellIcon",bellIcon);
-    //     bellIcon.addEventListener('click', function () {
-    //         notificationBar.classList.remove('none');
-    //         notificationBar.classList.add('block');
-
-    //     });
-
-         //   make display none removed when the bell icon is clicked
-        
-
-      
-      
-    
-    const parcelItems = document.querySelectorAll('.parcel-list li');
-
-    parcelItems.forEach(item => {
-        const parcelCount = parseInt(item.querySelector('.No-of-parcels h4').innerText);
-        console.log(parcelCount);
-        // Check if parcel count is more than 10
-        if (parcelCount > 10) {
-            item.classList.add('high-parcels');
-        }
-    });
-    // Get all elements with the class 'count'
-    const counters = document.querySelectorAll('.count');
-    
-
-    // Function to start the counter animation
-    function startCounter(counter) {
-        const target = parseInt(counter.getAttribute('data-target'));
-        const increment = target / 50; // Increment value for smooth animation
-
-        // Initial value
-        let currentValue = 0;
-
-        // Function to update the counter value
-        function updateCounter() {
-            currentValue += increment;
-
-            // Check if the counter is for revenue
-            if (counter.classList.contains('revenue')) {
-                // Format the current value with "$" sign and commas
-                counter.textContent = 'Rs ' + formatNumber(Math.floor(currentValue));
-            } else {
-                // For other counters, just display the value
-                counter.textContent = Math.floor(currentValue);
-            }
-
-            // Stop the animation when the target is reached
-            if (currentValue < target) {
-                requestAnimationFrame(updateCounter);
-            } else {
-                // Ensure the final value is exact
-                if (counter.classList.contains('revenue')) {
-                    counter.textContent = 'Rs ' + formatNumber(target);
-                } else {
-                    counter.textContent = target;
-                }
-            }
-        }
-
-        // Start the counter animation
-        updateCounter();
-    }
-
-    // Format a number with commas
-    function formatNumber(number) {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    // Start the counter animation for each element with the class 'count'
-    counters.forEach(startCounter);
-
-        
-});
-
-
 
 
 
