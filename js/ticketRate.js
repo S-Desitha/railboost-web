@@ -49,20 +49,20 @@ console.log("Hi from rates js")
 
 
 
-  const rowsPerPage = 10;
+const rowsPerPage = 10;
 let currentPage = 1;
 
-document.addEventListener("DOMContentLoaded", async function () {
+// document.addEventListener("DOMContentLoaded", async function () {
 
-  try {
-    const data = await getTRates(rowsPerPage, (currentPage - 1) * rowsPerPage);
-    populateTable(data);
-  } catch (error) {
-    if (error == "login-redirected") {
-      localStorage.setItem("last_url", window.location.pathname);
-    }
-  }
-});
+//   try {
+//     const data = await filterRates(rowsPerPage, (currentPage - 1) * rowsPerPage);
+//     populateTable(data);
+//   } catch (error) {
+//     if (error == "login-redirected") {
+//       localStorage.setItem("last_url", window.location.pathname);
+//     }
+//   }
+// });
 
 async function getTRates(limit, offset) {
   
@@ -118,24 +118,24 @@ function updatePaginationButtons(pageNum) {
 // Add event listeners for the pagination buttons
 function goToPrevPage() {
     currentPage--;
-    getTRates(rowsPerPage, (currentPage - 1) * rowsPerPage)
-      .then(populateTable)
-      .catch((error) => {
-        if (error == "login-redirected") {
-          localStorage.setItem("last_url", window.location.pathname);
-        }
-      });
+    filterRates(rowsPerPage, (currentPage - 1) * rowsPerPage)
+      // .then(populateTable)
+      // .catch((error) => {
+      //   if (error == "login-redirected") {
+      //     localStorage.setItem("last_url", window.location.pathname);
+      //   }
+      // });
 }
 
 function goToNextPage() {
     currentPage++;
-    getTRates(rowsPerPage, (currentPage - 1) * rowsPerPage)
-      .then(populateTable)
-      .catch((error) => {
-        if (error == "login-redirected") {
-          localStorage.setItem("last_url", window.location.pathname);
-        }
-      });
+    filterRates(rowsPerPage, (currentPage - 1) * rowsPerPage)
+      // .then(populateTable)
+      // .catch((error) => {
+      //   if (error == "login-redirected") {
+      //     localStorage.setItem("last_url", window.location.pathname);
+      //   }
+      // });
 }
 
   function editRate() {
@@ -480,4 +480,59 @@ async function Upload(){
         //     }
         // });
     }
+}
+
+
+async function filterRates(limit, offset) {
+  let type = document.getElementById("filtering-type").value;
+  let station = document.getElementById("filtering-station").getAttribute("stationCode");
+
+  console.log(type);
+  console.log(station);
+
+  let params = {
+    limit: limit,
+    offset: offset,
+    type:type,
+    stationCode:station
+
+  };
+  let queryString = Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+  let urlQuery = `${endpoint3}?${queryString}`;
+
+  const data = await customFetch(urlQuery, {credentials: "include"});
+  console.log("Response from backend:", data);
+  updatePaginationButtons(currentPage);
+  populateTable(data);
+  // return data;
+}
+
+function populateTable(rates) {
+  const tableBody = document.getElementById("rate_table");
+  tableBody.innerHTML = "";
+
+  rates.forEach((rate) => {
+    let editButton = document.createElement("button");
+    editButton.classList.add("edit-button");
+    editButton.innerHTML = "<i class='fas fa-edit'></i>";
+    editButton.setAttribute("rate", JSON.stringify(rate));
+    editButton.onclick = editRate;
+
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-button");
+    deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
+    deleteButton.setAttribute("rate", JSON.stringify(rate));
+    deleteButton.onclick = deleteRate;
+
+    let row = tableBody.insertRow(-1);
+    row.insertCell(0).innerHTML = rate.startStation;
+    row.insertCell(1).innerHTML = rate.endStation;
+    row.insertCell(2).innerHTML = rate.firstClass;
+    row.insertCell(3).innerHTML = rate.secondClass;
+    row.insertCell(4).innerHTML = rate.thirdClass;
+    row.insertCell(5).append(editButton, deleteButton);
+  });
+
+
+
 }
