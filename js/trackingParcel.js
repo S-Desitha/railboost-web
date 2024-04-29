@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded",async function(){
                     numberOfParcels: 1
                 });
             }
-            var parcel = JSON.stringify(stationParcels)
-            localStorage.setItem("stationParcels1234",parcel);
+            // var parcel = JSON.stringify(stationParcels)
+            localStorage.setItem("stationParcels1234",parcel.sendingStation);
         });
 
         for (let index = 0; index < stationParcels.length; index++) {
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded",async function(){
 
             addParcelsSchedule.classList.add("set-station-button");
             addParcelsSchedule.innerHTML = "<i title='addParcel' style='color:#0047AB; font-weight: bold;' ><span> View</span></i>";
-            addParcelsSchedule.setAttribute("parcelSchedule", JSON.stringify(stationParcels[index]));
+            // addParcelsSchedule.setAttribute("parcelSchedule", JSON.stringify(stationParcels[index]));
             // addParcelsSchedule.onclick = showSelectParcelPage(stationParcels[index].recoveringStation);
             addParcelsSchedule.onclick = showSelectParcelPage.bind(addParcelsSchedule, stationParcels[index].recoveringStation);
             console.log(stationParcels[index]);
