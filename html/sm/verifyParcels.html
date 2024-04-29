@@ -50,6 +50,13 @@
     <div class="service-container">
 
         <div class="table-container">
+            <section class="table_header">
+                <h1>Clear Parcels</h1>
+                <div class="input-group">
+                    <input type="search" style="margin:0" placeholder="Search Station...">
+                    <img src="/Images/search.png" alt="">
+                </div>
+            </section>
 
             <div class="table_body">
                 <table>
@@ -66,6 +73,7 @@
                     </thead>
                     <tbody id="verifyTable"></tbody>
                 </table>
+                <div class="empty_msg" style="text-align: center; color: grey; font-size: large;"><p><br>No Parcels to verify.</p></div>
             </div>
         </div>
     </div>
@@ -89,8 +97,9 @@
     font-size: 20px;" onclick="verifyCode()">Verify</button> -->
 
     <dialog class="dialog-modal" id="verifiID">
+        <button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
         <h2>Enter Verification Code</h2>
-        <input id="verifyParcel" type="number" name="verifyParcel">
+        <input id="verifyParcel" type="number" name="verifyParcel" placeholder="Verification Code:" style="margin-top: 30px; margin-bottom: 10px;">
         <button class="dialog-buttons" id="verify-parcel-btn">Verify</button>
     
   </dialog>
