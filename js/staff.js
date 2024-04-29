@@ -199,9 +199,9 @@ async function addStaff() {
     staffMember.user["isStaff"] = true;
     staffMember.user["username"] = document.getElementById("username").value;
 
-    if (!staffMember["staffId"] || !staffMember["station"] || !staffMember.user["fName"] || !staffMember.user["lName"] || !staffMember.user.role["roleId"] || !staffMember.user["email"] || !staffMember.user["telNo"]) {
-        return; // Prevent form submission
-    }
+    // if (!staffMember["staffId"] || !staffMember["station"] || !staffMember.user["fName"] || !staffMember.user["lName"] || !staffMember.user.role["roleId"] || !staffMember.user["email"] || !staffMember.user["telNo"]) {
+    //     return; // Prevent form submission
+    // }
 
     console.log(staffMember);
     var Iderror = document.getElementById('staffIDError');
