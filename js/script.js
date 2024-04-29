@@ -167,7 +167,7 @@ async function customFetch(endpoint, options, sendJWT) {
                     window.alert("Session expired. Please login again.");
                     window.location.href="/html/signin.html";
                     return Promise.reject("login-redirected");
-                }else{
+                }else if(document.URL == "http://localhost/html/signin.html"){
                     Swal.fire({
                         title: "Error!",
                         text: "Invalid username or password. Try again.",
