@@ -350,6 +350,10 @@ async function createSchedulesPage() {
             cancelCheckbox.addEventListener("click", function(){checkboxChanged(this, sch.scheduleId);})
 
             let row = document.getElementById("schedule_table").insertRow(-1);
+            if (sch.isCancelled === true) {
+                row.style.border = "3px solid rgba(255, 0, 0, 0.5)";
+            }
+
             row.insertCell(0).innerHTML = sch.scheduleId;
             row.insertCell(1).innerHTML = sch.trainId;
             row.insertCell(2).innerHTML = sch.startStationName;
