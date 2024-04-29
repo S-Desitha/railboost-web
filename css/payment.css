@@ -12,12 +12,33 @@
     margin-bottom: 20px;
 
 }
+#termsLink {
+    color: #5271FF; /* Change the color of the text */
+    text-decoration: underline; /* Add underline to the text */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+#termsLink:hover {
+    color: #29499c; /* Change color on hover */
+}
+.dialog-content{
+    /* display: flex;
+    flex-direction: column;
+    gap: 20px; */
+    padding: 0px 20px;
+    /* border-radius: 10px;
+    background-color: #f0f0f0;
+    width: 50%;
+    height: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+
+}
 
 .form-container {
     display: flex;
     justify-content: space-between;
     width: 75%;
-    height: 70%;
+    height: 80%;
     background-color: #f0f0f0;
     border-radius: 1.6rem;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */

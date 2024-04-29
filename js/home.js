@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 const timeB = getTimeInMilliseconds(getStationInfo(b.stations, schParams.startStation)[0].scheduledArrivalTime);
                 return timeA - timeB;
             });
+            console.log(schedules);
 
             // Display only the first 5 schedules
             schedules.slice(0, 5).forEach(schedule => {
@@ -59,6 +60,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 row.insertCell(2).innerHTML = startStationInfo[0].scheduledArrivalTime;
                 row.insertCell(3).innerHTML = getStationInfo(schedule.stations, schParams.endStation)[0].scheduledArrivalTime;
             });
+            console.log(schedules);
         } catch (error) {
             if (error == "login-redirected")
                 localStorage.setItem("last_url", window.location.pathname);
