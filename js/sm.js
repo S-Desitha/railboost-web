@@ -173,5 +173,47 @@ async function updateTime(scheduleId, station,stationName, timeType) {
 }
 
 
+document.addEventListener("DOMContentLoaded", async function () {
+    const endpoint3 = "parcelReceiving"
+    let params = {
+        view: "1",
+    };
+    let queryString = Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+    let urlQuery = `${endpoint3}?${queryString}`;
+    
+    const parcelList = document.querySelector(".parcel-list");
+    parcelList.innerHTML = "";
+  
+    try {
+      let data = await customFetch(urlQuery, {credentials: "include"});
+      
+      data.forEach(parcelReceiving => {
+        if (data.length === 0) {
+            document.querySelector(".empty_msg").style.display = "block";
+            return;
+        }else{
+            document.querySelector(".empty_msg").style.display = "none";
+            const listItem = document.createElement("li");
+            const trainNoDiv = document.createElement("div");
+            trainNoDiv.classList.add("parcel-train");
+            trainNoDiv.innerHTML = `<h4>Schedule ID: ${parcelReceiving.scheduleId}</h4>`;
 
+            const noOfParcelsDiv = document.createElement("div");
+            noOfParcelsDiv.classList.add("No-of-parcels");
+            noOfParcelsDiv.innerHTML = `<h4>${parcelReceiving.pCount} Parcels</h4>`;
 
+            listItem.appendChild(trainNoDiv); 
+            listItem.appendChild(noOfParcelsDiv); 
+
+            parcelList.appendChild(listItem); 
+
+        }
+
+      });
+  
+    }
+    catch(error) {
+      if (error=="login-redirected")
+          localStorage.setItem("last_url", window.location.pathname);
+    }
+});

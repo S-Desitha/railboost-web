@@ -10,6 +10,21 @@
     font-size: 15px;
     align-self: flex-end;
   }
+
+
+.cancel-btn {
+color: var(--text-color);
+background-color: var(--cancel-color);
+border-radius: 6px;
+border: none;
+padding: 10px;
+margin: 2rem 1.5rem 0.5rem;
+cursor: pointer;
+width: 20vw;
+font-size: 15px;
+align-self: flex-end;
+}
+
 /* .form-button.table{
     
     margin: 0;

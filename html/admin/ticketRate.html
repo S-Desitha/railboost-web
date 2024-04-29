@@ -22,6 +22,7 @@
 	<link rel="stylesheet" href="/css/buttons.css">
 	<link rel="stylesheet" href="/css/validations.css">
 	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/pagination.css">
 
 	<script src="/js/ticketRate.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
@@ -48,7 +49,7 @@
 
 		<div class="service-view">
 			<div class="service-container">
-				<button class="add-new-btn" onclick="popupAddPage('.dialog-modal')" >Add New</button>
+				<button class="add-new-btn" onclick="popupAddPage('.add_new-modal')" >Add New</button>
 				
 				<div class="table-container">
 					<section class="table_header">
@@ -100,6 +101,11 @@
 							</thead>
 							<tbody id="rate_table"></tbody>
 						</table>
+						<div class="pagination">
+                            <button id="prev-btn" onclick="goToPrevPage()" disabled>Prev</button>
+                            <span id="pageNo">- <span id="current-page">1</span> -</span>
+                            <button id="next-btn" onclick="goToNextPage()" >Next</button>
+                        </div>
 					</section>
 				</div>
 			</div>
@@ -158,6 +164,55 @@
 		
 				<button class="form-button" id="add-new-price-rate" onclick="addNewRate()" style="width: 100%;">Add A New Price Rate </button>
 
+			</form>
+		</div>
+
+	</dialog>
+
+	<dialog class="add_new-modal dialog-modal" style="width: 400px;">
+		<div class="rate-form">
+			
+			<form onsubmit="return false">
+				<button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
+				<div class="table_header">
+				<h1 class="add-price-heading" id="add-new-price-header">Add A New Price Rate</h1>
+				</div>
+				<div class="wrapper" font-size="1px" id="addingStation">
+					<div class="select-btn">
+						<span>Start Station:</span> 
+						<i font-size="3px" class="fa fa-angle-down"></i>
+					</div>
+					<div class="content">
+						<div class="search">
+							
+							<input spellcheck="false" type="text" placeholder="Search">
+							<!-- <i class="fas fa-search"></i> -->
+						</div>
+						<ul onclick="EnableBtn1()" class="options"></ul>
+					</div>
+				</div>
+				<!-- <span id="station-error"></span> -->
+				
+
+				<label for="img" id="Application">
+					<span class="app">Select Exel File</span>
+					<input type="file" id="exel" name="exel" accept=".xls" oninput="EnableSubmit();" disabled>
+				</label>
+				<script>
+					const uploadField = document.getElementById("exel");
+
+					uploadField.onchange = function() {
+						if(this.files[0].size > 5242880){
+						alert("File is too big!");
+						this.value = "";
+						}
+					}
+				</script>
+				<div style="display: flex;">
+				<button id="download-btn" class="download-btn" onclick="DownloadExel()" disabled><i class="fa fa-download" aria-hidden="true"></i>    Download Exel</button>
+
+				<button class="upload-btn" id="upload-btn" onclick="Upload()" disabled><i class="fa fa-upload" aria-hidden="true"></i>    Upload</button>
+				</div>
 			</form>
 		</div>
 

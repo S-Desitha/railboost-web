@@ -1,50 +1,142 @@
 const endpoint3 = "rates"
 console.log("Hi from rates js")
 
-document.addEventListener("DOMContentLoaded", async function () {
-  const endpoint3 = "rates"
+// document.addEventListener("DOMContentLoaded", async function () {
+//   const endpoint3 = "rates"
   
-    // document.getElementById("rate-form").reset();
+//     // document.getElementById("rate-form").reset();
   
-    try {
-      let data = await customFetch(endpoint3, {});
+//     try {
+//       let data = await customFetch(endpoint3, {});
       
-      data.forEach(rate => {
-        // console.log(data);
-        // console.log("Processing rate:", rate);
-        let editButton = document.createElement("button");
-        editButton.classList.add("edit-button");
-        editButton.innerHTML = "<i class='fas fa-edit'></i>";
-        editButton.setAttribute("rate", JSON.stringify(rate));
-        editButton.onclick = editRate;
-        // console.log(editButton);
+//       data.forEach(rate => {
+//         // console.log(data);
+//         // console.log("Processing rate:", rate);
+//         let editButton = document.createElement("button");
+//         editButton.classList.add("edit-button");
+//         editButton.innerHTML = "<i class='fas fa-edit'></i>";
+//         editButton.setAttribute("rate", JSON.stringify(rate));
+//         editButton.onclick = editRate;
+//         // console.log(editButton);
   
-        let deleteButton = document.createElement("button");
-        deleteButton.classList.add("delete-button");
-        deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
-        deleteButton.setAttribute("rate", JSON.stringify(rate));
-        deleteButton.onclick = deleteRate;
-        // console.log(deleteButton);
+//         let deleteButton = document.createElement("button");
+//         deleteButton.classList.add("delete-button");
+//         deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
+//         deleteButton.setAttribute("rate", JSON.stringify(rate));
+//         deleteButton.onclick = deleteRate;
+//         // console.log(deleteButton);
 
 
         
-        let row = document.getElementById("rate_table").insertRow(-1);
-        row.insertCell(0).innerHTML = rate.startStation;
-        row.insertCell(1).innerHTML = rate.endStation;
-        row.insertCell(2).innerHTML = rate.firstClass;
-        row.insertCell(3).innerHTML = rate.secondClass;
-        row.insertCell(4).innerHTML = rate.thirdClass;
-        row.insertCell(5).append(editButton, deleteButton);
+//         let row = document.getElementById("rate_table").insertRow(-1);
+//         row.insertCell(0).innerHTML = rate.startStation;
+//         row.insertCell(1).innerHTML = rate.endStation;
+//         row.insertCell(2).innerHTML = rate.firstClass;
+//         row.insertCell(3).innerHTML = rate.secondClass;
+//         row.insertCell(4).innerHTML = rate.thirdClass;
+//         row.insertCell(5).append(editButton, deleteButton);
 
-        // console.log("Row added successfully.");
-      });
+//         // console.log("Row added successfully.");
+//       });
   
+//     }
+//     catch(error) {
+//       if (error=="login-redirected")
+//           localStorage.setItem("last_url", window.location.pathname);
+//     }
+//   });
+
+
+
+
+  const rowsPerPage = 10;
+let currentPage = 1;
+
+document.addEventListener("DOMContentLoaded", async function () {
+
+  try {
+    const data = await getTRates(rowsPerPage, (currentPage - 1) * rowsPerPage);
+    populateTable(data);
+  } catch (error) {
+    if (error == "login-redirected") {
+      localStorage.setItem("last_url", window.location.pathname);
     }
-    catch(error) {
-      if (error=="login-redirected")
-          localStorage.setItem("last_url", window.location.pathname);
-    }
+  }
+});
+
+async function getTRates(limit, offset) {
+  
+  let params = {
+    limit: limit,
+    offset: offset,
+  };
+  let queryString = Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+  let urlQuery = `${endpoint3}?${queryString}`;
+
+  const data = await customFetch(urlQuery, {credentials: "include"});
+  console.log("Response from backend:", data);
+  updatePaginationButtons(currentPage);
+  return data;
+}
+
+function populateTable(rates) {
+  const tableBody = document.getElementById("rate_table");
+  tableBody.innerHTML = "";
+
+  rates.forEach((rate) => {
+    let editButton = document.createElement("button");
+    editButton.classList.add("edit-button");
+    editButton.innerHTML = "<i class='fas fa-edit'></i>";
+    editButton.setAttribute("rate", JSON.stringify(rate));
+    editButton.onclick = editRate;
+
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-button");
+    deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
+    deleteButton.setAttribute("rate", JSON.stringify(rate));
+    deleteButton.onclick = deleteRate;
+
+    let row = tableBody.insertRow(-1);
+    row.insertCell(0).innerHTML = rate.startStation;
+    row.insertCell(1).innerHTML = rate.endStation;
+    row.insertCell(2).innerHTML = rate.firstClass;
+    row.insertCell(3).innerHTML = rate.secondClass;
+    row.insertCell(4).innerHTML = rate.thirdClass;
+    row.insertCell(5).append(editButton, deleteButton);
   });
+}
+
+function updatePaginationButtons(pageNum) {
+  document.getElementById('current-page').textContent = pageNum;
+
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  prevBtn.disabled = pageNum === 1;
+}
+
+// Add event listeners for the pagination buttons
+function goToPrevPage() {
+    currentPage--;
+    getTRates(rowsPerPage, (currentPage - 1) * rowsPerPage)
+      .then(populateTable)
+      .catch((error) => {
+        if (error == "login-redirected") {
+          localStorage.setItem("last_url", window.location.pathname);
+        }
+      });
+}
+
+function goToNextPage() {
+    currentPage++;
+    getTRates(rowsPerPage, (currentPage - 1) * rowsPerPage)
+      .then(populateTable)
+      .catch((error) => {
+        if (error == "login-redirected") {
+          localStorage.setItem("last_url", window.location.pathname);
+        }
+      });
+}
 
   function editRate() {
     rate = JSON.parse(this.getAttribute("rate"));
@@ -297,3 +389,95 @@ function validateStation(){
         return true;
 }
 
+
+async function DownloadExel(){
+    let  stationCode= document.getElementById("addingStation").getAttribute("stationCode");
+    let params = {
+        isTemplate: true,
+        stationCode: stationCode,
+      };
+      let queryString = Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+      let urlQuery = `${endpoint3}?${queryString}`;
+      console.log(urlQuery);
+      
+      await customFetch1(urlQuery, {credentials: "include"})
+      .then((blob) => {
+        const aElement = document.createElement("a");
+        const currentDate = new Date();
+        let formattedDate = (currentDate.getMonth() + 1).toString().padStart(2, '0') + '/' + currentDate.getDate().toString().padStart(2, '0') + '/' + currentDate.getFullYear();
+
+
+        const fileName = stationCode+"-"+formattedDate;
+        aElement.setAttribute("download", fileName);
+        const href = URL.createObjectURL(blob);
+        aElement.href = href;
+        aElement.setAttribute("target", "_blank");
+        aElement.click();
+        URL.revokeObjectURL(href);
+      });
+
+}
+
+function EnableBtn1(){
+    document.getElementById("download-btn").disabled = false;
+    document.getElementById("exel").disabled = false;
+}
+
+function EnableSubmit(){
+    document.getElementById("upload-btn").disabled = false;
+}
+
+async function Upload(){
+    rate = {};
+    rate["startCode"] = document.getElementById("addingStation").getAttribute("stationCode");
+
+    const fileInput = document.getElementById("exel");
+    const file = fileInput.files[0];
+
+    let formData = new FormData(); 
+
+    const body = JSON.stringify(rate);
+    formData.append("jsonObj",body);
+    formData.append("file",file);
+
+    if (rate["startCode"] && file) {
+        const params = {
+            headers: {
+              "Content-type": "application/json; charset=UTF-8"
+            },
+            body: formData,
+            method: "POST",
+            credentials: "include"
+          };
+    
+
+          const response = await customFetch(endpoint3, params)
+          console.log(response);
+          if (response.isSuccessful) {
+            closeDialog();
+              Swal.fire({
+                  title: "Success!",
+                  text: "New Rates Added.",
+                  icon: "success"
+              }).then(() => window.location.reload());
+          }else{
+            closeDialog();
+              Swal.fire({
+                  title: "Error!",
+                  text: "Task is failed. Try again later!! ",
+                  icon: "succeserrors"
+              }).then(() => window.location.reload());
+          }
+
+
+        data=console.log(rate);
+        // Swal.fire({
+        // icon: 'success',
+        // title: 'Success!',
+        // text: 'Exel file is received.',
+        // onClose: () => {
+        //     location.reload();
+        //     }
+        // });
+    }
+}
