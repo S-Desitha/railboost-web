@@ -11,8 +11,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.log(ticketrevenueList);
         console.log(totalTicketRevenue);
         console.log(totalParcelRevenue);
+        let countElement = document.querySelector('.count revenue');
+        countElement.setAttribute('data-target', totalTicketRevenue);
 
-        document.getElementById("ticket-revenue").dataset.target= "#totalTicketRevenue"
+        // document.getElementById("ticket-revenue").dataset.target= "#totalTicketRevenue"
 
     }catch{
         
