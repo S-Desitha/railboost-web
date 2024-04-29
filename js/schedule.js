@@ -817,8 +817,9 @@ async function cancelSchedules() {
         
     }
     else if (resp.isSuccessful==false) {
+        console.log(resp);
         Swal.fire({
-            icon: 'failure',
+            icon: 'error',
             title: 'Schedule Cancel Failure',
             text: resp.error,
             confirmButtonText: 'OK'
