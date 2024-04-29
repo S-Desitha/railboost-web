@@ -54,14 +54,14 @@
 				<div class="table-container">
 					<section class="table_header">
 						<h1>Ticket Price Details</h1>
-						<div class="input-group" >
+						<div class="input-group" style="padding: 0;" >
 							<select id="filtering-type">
 								<option value="start">start:</option>
 								<option value="end">end:</option>	
 							</select>
 							<div class="wrapper" font-size="1px" id="filtering-station">
-								<div class="select-btn">
-									<span>Start Station:</span> 
+								<div class="select-btn" style="width: 0px; border-bottom: none;">
+									<span>Station:</span> 
 									<i font-size="3px" class="fa fa-angle-down"></i>
 								</div>
 								<div class="content">
@@ -73,8 +73,7 @@
 									<ul onclick="validateStation();" class="options"></ul>
 								</div>
 							</div>
-							<img src="/Images/search.png" onclick="filterRates(10,0)" alt=""/>
-						</div>
+							<img src="/Images/search.png" onclick="filterRates(10,0)" style="margin-right:30px;"alt=""/>
 					</section>
 					<script>
 						const searchInput = document.querySelector('.table_header input[type="search"]');
