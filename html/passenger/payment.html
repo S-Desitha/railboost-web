@@ -130,8 +130,64 @@
                                 <input type="hidden" name="address" value="No.1, Galle Road">
                                 <input type="hidden" name="city" value="Colombo">
                                 <input type="hidden" name="country" value="Sri Lanka">
-                                <input type="hidden" name="hash" id="hash" value="">     
-                                <input type="submit"   class="form-button" id="buy-ticket-button" value="Pay Now" style="margin: 0px;position: absolute;left: 43%;top: 82%;">
+                                <input type="hidden" name="hash" id="hash" value="">    
+                                <div class="form-group form-check" style="margin: 0px;position: absolute;left: 43%;top: 80%;display: -webkit-box;gap: 10px;width: 20rem; align-items: center;">
+                                    <input type="checkbox" class="form-check-input" style="text-align: left;" id="agreeCheckbox" required>
+                                    <label class="form-check-label" for="agreeCheckbox" style="font-size: 12px;">By clicking this, I agree to the <a href="#" id="termsLink">terms and conditions</a></label>
+                                </div> 
+                                
+                                <div id="termsDialog" class="dialog-modal" style="display: none; position: absolute; left: 53%;">
+                                    <button class="close-button" id="closeDialog" onclick="closeDialog()"><i class="fas fa-times"></i></button>
+                                    <div class="dialog-content">
+                                        <h2>Terms and Conditions</h2><br>
+                                            <!-- <p>Please read the following terms and conditions carefully before proceeding:</p> -->
+                                            <ol>
+                                                <li>By using our website and purchasing e-tickets, you agree to comply with these terms and conditions.</li>
+                                                <li>All transactions are final, and we have a strict <b> No refund policy.</b></li>
+                                                <li>It is your responsibility to check the train schedule before purchasing an e-ticket. We are not responsible for any missed trains due to incorrect scheduling.</li>
+                                                <li>E-tickets purchased through our website are for personal use only and may not be resold or transferred to another person without our consent.</li>
+                                                <li>We reserve the right to refuse service or cancel transactions at our discretion, without providing a reason.</li>
+                                                <!-- <li>We take your privacy seriously. Please review our <a href="privacy_policy.html" target="_blank">privacy policy</a> for information on how we collect, use, and protect your personal data.</li> -->
+                                                <li>While we strive to provide accurate and up-to-date information, we do not guarantee the accuracy, completeness, or reliability of any content on our website.</li>
+                                                <li>We reserve the right to update or modify these terms and conditions at any time without prior notice. It is your responsibility to review them periodically for any changes.</li>
+                                            </ol>
+                                        
+                                    </div>
+                                </div>
+                                <script>
+                                    // Function to show the terms and conditions dialog
+                                    function showTermsDialog() {
+                                        document.getElementById("termsDialog").style.display = "block";
+                                    }
+                                
+                                    // Function to hide the terms and conditions dialog
+                                    function hideTermsDialog() {
+                                        document.getElementById("termsDialog").style.display = "none";
+                                    }
+                                
+                                    // Event listener for terms and conditions link
+                                    document.getElementById("termsLink").addEventListener("click", function(event) {
+                                        event.preventDefault(); // Prevent the default link behavior
+                                        showTermsDialog(); // Show the terms and conditions dialog
+                                    });
+                                
+                                    // Event listener for close button in the dialog
+                                    document.getElementById("closeDialog").addEventListener("click", hideTermsDialog);
+                                </script>
+                                <script>
+                                    // Function to enable/disable the "Pay Now" button based on the checkbox state
+                                    function togglePayNowButton() {
+                                        var agreeCheckbox = document.getElementById("agreeCheckbox");
+                                        var payNowButton = document.getElementById("buy-ticket-button");
+                                
+                                        payNowButton.disabled = !agreeCheckbox.checked;
+                                    }
+                                
+                                    // Attach an event listener to the checkbox to toggle the button state
+                                    document.getElementById("agreeCheckbox").addEventListener("change", togglePayNowButton);
+                                </script>
+                                <input type="submit"   class="form-button" id="buy-ticket-button" value="Pay Now" style="margin: 0px;position: absolute;left: 43%;top: 84%;">
+
                         </form>
                     
                 </div>
