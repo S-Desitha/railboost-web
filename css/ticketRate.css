@@ -464,3 +464,10 @@ input[type=file]::file-selector-button {
   #download-btn:hover:enabled,#upload-btn:hover:enabled{
     background-color:rgb(23, 27, 145) ;
   }
+  #filtering-type {
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    /* background-color: var(--theme-color); */
+    margin-left: 20px;
+}
