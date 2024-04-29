@@ -163,11 +163,7 @@ async function customFetch(endpoint, options, sendJWT) {
             console.log(resp);
             if (resp.status==401) {
                 let msg = await resp.text();
-                if (msg=="expired") {
-                    window.alert("Session expired. Please login again.");
-                    window.location.href="/html/signin.html";
-                    return Promise.reject("login-redirected");
-                }else if(document.URL == "http://localhost/html/signin.html"){
+                if(document.URL == "http://localhost/html/signin.html"){
                     Swal.fire({
                         title: "Error!",
                         text: "Invalid username or password. Try again.",
@@ -177,38 +173,80 @@ async function customFetch(endpoint, options, sendJWT) {
                         confirmButtonText: "OK"
                     });
                 }
-            }
-            else{
-                console.log("Invalid response");
-                console.log(resp);
-                if (resp.status==401) {
-                    let msg = await resp.text();
-                    if (msg=="expired") {
-                        window.alert("Session expired. Please login again.");
-                        window.location.href="/html/signin.html";
-                        return Promise.reject("login-redirected");
-                    }
+                else if (msg=="expired") {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Session expired. Please login again.",
+                        icon: "error",
+                        showCancelButton: false,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK"
+                    }).then(()=>window.location.href="/html/signin.html");
+
+                    // window.alert("Session expired. Please login again.");
+                    // window.location.href="/html/signin.html";
+                    // return Promise.reject("login-redirected");
                 }
-                else if (resp.status==400) {
-                    let data = await resp.json();
-                    let error_msg = data.detailMessage;
-                    if (error_msg=="signup-expired"){
-                        // window.alert("Your session has expired. Please contact administrator.");
-                        Swal.fire({
-                            title: "Session Expired",
-                            text: "Your session has expired. Please contact administrator.",
-                            icon: "error",
-                            confirmButtonText: "OK"
-                        });
-                    }
-                    window.location.href="/index.html";
-                    return Promise.reject(data.detailMessage);
-                }
-                return {
-                    isSuccessful: false,
-                    status: resp.status
+                if (msg=="invalid") {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Invalid JWT. Please login again",
+                        icon: "error",
+                        showCancelButton: false,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK"
+                    }).then(()=>window.location.href="/html/signin.html");
+                    // window.alert("Invalid JWT. Please Login Again");
+                    // window.location.href="/html/signin.html";
+                    // return Promise.reject("login-redirected");
                 }
             }
+            else if (resp.status==400) {
+                let data = await resp.json();
+                let error_msg = data.detailMessage;
+                if (error_msg=="signup-expired"){
+                    // window.alert("Your session has expired. Please contact administrator.");
+                    Swal.fire({
+                        title: "Session Expired",
+                        text: "Your session has expired. Please contact administrator to signup again",
+                        icon: "error",
+                        confirmButtonText: "OK"
+                    });
+                }
+                // window.location.href="/index.html";
+                return Promise.reject(data.detailMessage);
+            }
+            // else{
+            //     console.log("Invalid response");
+            //     console.log(resp);
+            //     if (resp.status==401) {
+            //         let msg = await resp.text();
+            //         if (msg=="expired") {
+            //             window.alert("Session expired. Please login again.");
+            //             window.location.href="/html/signin.html";
+            //             return Promise.reject("login-redirected");
+            //         }
+            //     }
+            //     else if (resp.status==400) {
+            //         let data = await resp.json();
+            //         let error_msg = data.detailMessage;
+            //         if (error_msg=="signup-expired"){
+            //             // window.alert("Your session has expired. Please contact administrator.");
+            //             Swal.fire({
+            //                 title: "Session Expired",
+            //                 text: "Your session has expired. Please contact administrator.",
+            //                 icon: "error",
+            //                 confirmButtonText: "OK"
+            //             });
+            //         }
+            //         window.location.href="/index.html";
+            //         return Promise.reject(data.detailMessage);
+            //     }
+            //     return {
+            //         isSuccessful: false,
+            //         status: resp.status
+            //     }
+            // }
         }
     } catch (error) {
         console.log(error);
