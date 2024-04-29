@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded",async function(){
 
         data.forEach(verifyParcel => {
         let veributton = document.createElement("button");
-        veributton.classList.add("approve-button");
-        veributton.innerHTML = "<i title='verify' ><span> Verify </span></i>";
+        veributton.classList.add("verify-button");
+        veributton.innerHTML = "<i class='fa-solid fa-check' style='color:white;' title='verify' ><span>  Verify </span></i>";
         veributton.setAttribute("verifyParcel", JSON.stringify(verifyParcel));
         veributton.onclick = function() {openDialog(verifyParcel.bookingId);}
         // let verifyButton = document.createElement("button");
@@ -22,7 +22,11 @@ document.addEventListener("DOMContentLoaded",async function(){
         // verifyButton.onclick = openDialog;
 
         
-
+        if (data.length === 0) {
+            document.querySelector(".empty_msg").style.display = "block";
+            return;
+        }else{
+            document.querySelector(".empty_msg").style.display = "none";
         let row = document.getElementById("verifyTable").insertRow(-1);
         row.insertCell(0).innerHTML = verifyParcel.receiverName;
         row.insertCell(1).innerHTML = verifyParcel.bookingId;
@@ -31,7 +35,7 @@ document.addEventListener("DOMContentLoaded",async function(){
         row.insertCell(4).innerHTML = verifyParcel.receiverNIC;
         row.insertCell(5).innerHTML = verifyParcel.item;
         row.insertCell(6).append(veributton);
-        
+        }
     });
 }catch(error){
         if (error=="login-redirected")
