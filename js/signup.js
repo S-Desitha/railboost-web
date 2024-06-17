@@ -74,6 +74,7 @@ async function signUp() {
     user["lName"] = document.getElementById("lName").value;
     user["dob"] = new Date(document.getElementById("dob").value).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
     user["gender"] = document.getElementById("gender").value;
+    user["telNo"] = document.getElementById("phone-field").value;
     user["email"] = document.getElementById("email-field").value;
     user["role"] = {roleId: 5};
 
@@ -89,8 +90,28 @@ async function signUp() {
     };
 
     let data = await customFetch(endpoint, params, false);
-    if (data.role.roleId==5)
-        window.location.replace("/html/passenger/home.html");
+    console.log(data);
+    if (data.role.roleId==5) {
+
+    let swalPromise = Swal.fire({
+        icon: 'success',
+        title: 'Signup Successful!',
+        text: 'You will be automatically logged in and redirected to the dashboard.',
+        showConfirmButton: true // Show the "OK" button
+    });
+    
+    // Wait for the user to click "OK"
+    await swalPromise;
+
+    // Automatically log in after the user clicks "OK"
+    // await login();
+    localStorage.setItem("userId",data["userId"]);
+    localStorage.setItem("username", data["username"]);
+    localStorage.setItem("access_token", data.jwt);
+    localStorage.setItem("userId", data["userId"]);
+    localStorage.setItem("name", data["name"]);
+    localStorage.setItem("loggedIn", data["isSuccessful"]);
+    window.location.replace("/html/passenger/home.html");
 
     // fetch(url, params)
     // .then(res => {
@@ -98,6 +119,7 @@ async function signUp() {
     //         window.location.replace("home.html");
     //     }
     // });
+    }
 }
 
 

@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	 <!-- axios -->
+	 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+	 <!-- sweet alert -->
+	 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+	 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
+ 
+	 
+	 
 	<script src="/js/auth.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
@@ -12,11 +22,12 @@
 
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
     integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+	<script src="/js/jquery3.7.1.js"></script>
 
     <script src="/js/script.js"></script>
 	<script src="/js/train.js"></script>
@@ -24,6 +35,10 @@
     <title>Train Management</title>
 </head>
 <body> 
+	<div id="preloader">
+        <img src="/Images/train.gif" alt="Loading...">
+    </div>
+    
 	<nav class="navbar" >
 		<script>createNavBar("admin")</script>
 	</nav>	
@@ -35,17 +50,47 @@
 
 		<div class="service-view">
 			<div class="service-container">
-				<button class="add-new-btn" onclick="popupAddPage('.train-add_edit-modal')" >Add New</button>
+				<button class="add-new-btn" style="margin-right: 10px;" onclick="popupAddPage('.dialog-modal')" >Add New</button>
 
 				<div class="table-container">
 					
 					<section class="table_header">
 						<h1>Train Details</h1>
 						<div class="input-group">
-							<input type="search" placeholder="Search Trains...">
+							<input type="search" style="margin: 0;" placeholder="Search Trains...">
+							<!-- <img src="/Images/filter.png" class="filter" alt="" onclick="toggleFilterBox()"> -->
 							<img src="/Images/search.png" alt="">
+							
 						</div>
 					</section>
+
+					<script>
+						const searchInput = document.querySelector('.table_header input[type="search"]');
+						searchInput.addEventListener('input', filterTrainTable);
+
+						function filterTrainTable() {
+							const searchTerm = searchInput.value.toLowerCase();
+							const tableRows = document.querySelectorAll('#train_table tr');
+
+							tableRows.forEach(row => {
+								let rowVisible = false;
+
+								for (let i = 0; i < row.cells.length; i++) {
+									const cellText = row.cells[i].textContent.toLowerCase();
+									if (cellText.includes(searchTerm)) {
+										rowVisible = true;
+										break;
+									}
+								}
+
+								if (rowVisible) {
+									row.style.display = 'table-row';
+								} else {
+									row.style.display = 'none';
+								}
+							});
+						}
+					</script>
 
 					<section class="table_body">
 						<table>
@@ -63,18 +108,31 @@
 			</div>
 		</div>
 	</div>
-	<dialog class="train-add_edit-modal">
+	<dialog class="dialog-modal">
 		<div class="adding-form">
 			
 			<form onsubmit="return false" id="train-form">
-				<h2 class="add-train-heading" id="add-new-train-header">Add a new train </h2>
+				<button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
+			<section class="table_header">
+				<h1 id="add-train-heading">Add a New Train</h1>
+			</section>
 				<label for="trainId"></label>
 				<input type="text" id="trainId" placeholder="Train ID:" name="trainId" required><br>
+				<span id="trainIdError"></span><br>
 
 				<label for="train-type"></label>
-				<input type="text" id="trainType" name="name" placeholder="Train Type:" required><br>
+				<!-- <input type="text" id="trainType" name="name" placeholder="Train Type:" required> -->
+				<select id="trainType" name="name" placeholder="Train Type:"  required>
+					<option value="" disabled selected>Train Type:</option>
+					<option value="Power Set" style="color: #484848">Power Set</option>
+					<option value="Engine Set" style="color: #484848">Engine Set</option>
+				</select><br>
+
 		
-				<button class="form-button" id="add-new-train-button" onclick="addNewTrain()">Add a new train </button>
+				<div class="dialog-buttons">
+					<button class="form-button form-clear-btn" onclick="document.getElementById('train-form').reset()">Clear</button>
+					<button type="submit" class="form-button" id="add-train-button" onclick="addNewTrain()">Add a new train</button>
+				</div>
 
 			</form>
 		</div>

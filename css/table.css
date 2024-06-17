@@ -12,8 +12,8 @@
 .table_header {
     width: 100%;
     height: 10%;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,8 +22,8 @@
 
 
 .table_body {
-    width: 100%;
-    max-height: calc(89% - 1.6rem);
+    /* width: 100%; */
+    /* max-height: calc(89% - 1.6rem); */
     background-color: #fffb;
     margin: 5px auto;
     border-radius: .6rem;
@@ -37,14 +37,14 @@
 }
 
 
-#role {
+/* #role {
 	height: 2.5rem;
 	border: none;
 	border-bottom: 1px solid #a9a9a9;
 	color: #6e6b6b;
 	padding: 7px 0;
 	margin: 20px 0;
-}
+} */
 
 
 table {
@@ -157,12 +157,12 @@ thead th.active,tbody td.active {
     width: 45%;
     height: 100%;
     background-color: #fff5;
-    padding: 0 .8rem;
+    padding: .8rem;
     border-radius: 2rem;
     box-shadow: 0 .005rem .1rem #0002;
   
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
   
     transition: .2s;
@@ -171,7 +171,7 @@ thead th.active,tbody td.active {
 
 .table_header .input-group input {
     width: 100%;
-    padding: 0 .5rem 0 .3rem;
+    padding: 0 0.8rem ;
     background-color: transparent;
     border: none;
     outline: none;

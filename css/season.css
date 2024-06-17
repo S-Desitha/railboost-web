@@ -3,43 +3,33 @@
     display: flex;
     margin-left: 3%;
     margin-right: 3%;
-    gap: 7%;
+    gap: 5%;
     /* justify-content: center; */
     /* margin-left: 36%; */
     align-items: center;
     /* gap: 22%; */
-    width: 49%;
+    width: 90%;
     height: 80vh; 
   margin-top: 30px;/*
     margin-left: 10%;
     margin-right: 10%; */
   
   }
+  .info , .table_body{
+    display: none; 
+  }
   .train-form{
-    margin-top: 30px;
+    /* margin-top: 150px; */
+    /* margin-right: 10px;
     display:flex;
-    gap: 12%;
+    gap: 12%; */
+    justify-self: center;
 
   }  
 
-  .train-left {
-    flex: 1;
-    /* text-align: left; */
-  align-items: center;
-  /* margin-left: 10%;
-    margin-right: 10%; */
-  }
   
+
   
-  .train-right {
-  flex: 1; 
-  /* text-align: center; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content:center;
-  /* margin-right: 10%; */
-  }
 
   .Buy-button{
     background: #eeeded;
@@ -92,10 +82,9 @@
   } */
   #class {
   cursor: pointer;
-  width: 20rem;
+  width: 100%;
   height: 2.5rem;
-  border: none;
-  border-bottom: 1px solid #a9a9a9;
+  border: 1px solid #a9a9a9;
   color: #484848;
   padding: 7px 0;
   margin: 1px 0;}
@@ -104,19 +93,17 @@
   }
   #passenger-type{
     cursor: pointer;
-    width: 20rem;
+    width: 100%;
     height: 2.5rem;
-    border: none;
-    border-bottom: 1px solid #a9a9a9;
+    border: 1px solid #a9a9a9;
     color: #484848;
     padding: 7px 0;
     margin: 1px 0;}
   #duration {
     cursor: pointer;
-    width: 20rem;
+    width: 100%;
     height: 2.5rem;
-    border: none;
-    border-bottom: 1px solid #a9a9a9;
+    border: 1px solid #a9a9a9;
     color: #484848;
     padding: 7px 0;
     margin: 1px 0;}
@@ -124,21 +111,20 @@
       border-color: #09c372;
     }
   #Start-date{
-  /* cursor: pointer; */
-    width: 20rem;
+  
+    width: 100%;
   height: 2.5rem;
-  border: none;
-  border-bottom: 1px solid #a9a9a9;
+  border: 1px solid #a9a9a9;
   color: #484848;
-  padding: 7px 0;
+  padding: 3px ;
   margin: 15px 0;
+  border-radius: 4px;
 }
 #End-date{
-  /* cursor: pointer; */
-    width: 20rem;
+  
+    width: 100%;
   height: 2.5rem;
-  border: none;
-  border-bottom: 1px solid #a9a9a9;
+  border: 1px solid #a9a9a9;
   color: #484848;
   padding: 7px 0;
   margin: 15px 0;
@@ -147,17 +133,16 @@
     border-color: #09c372;
   }
   #no-of-tickets{
-    width: 20rem;
+    width: 100%;
   height: 2.5rem;
-  border: none;
-  border-bottom: 1px solid #a9a9a9;
+  border: 1px solid #a9a9a9;
   color: #484848;
   padding: 7px 0;
   margin: 15px 0;}
   .input-control.success input {
     border-color: #09c372;
   }
-  #error, #station-error{
+  #error, #station-error, #date-error{
     text-align: left;
     top: 100%;
     left: 2px;
@@ -184,10 +169,10 @@
     color: rgb(24, 80, 211);
   }
   #total-price{
-    width: 20rem;
+    width: 100%;
   height: 2.5rem;
-  border: none;
-  border-bottom: 1px solid #a9a9a9;
+  /* border: none; */
+  border: 1px solid #a9a9a9;
   color: #484848;
   /* padding: 7px 0; */
   margin: 15px 0;
@@ -209,7 +194,7 @@
   }
   
   .train-form input {
-    width: 20rem;
+    width: 100%;
   }
   input[type="date"]::before {
     color: #484848;
@@ -372,9 +357,9 @@ input[type="date"]:valid::before {
                         
   .app{
     text-align: left;
-    margin-left: 10px;
-    color:#0d45a5;
-    font-weight: 900;
+    margin-left: 0px;
+    /* color:#0d45a5; */
+    font-weight: 500;
 }
 
 input[type=file] {
@@ -384,7 +369,7 @@ input[type=file]::file-selector-button {
     /* margin-right: 20px; */
     border: none;
     background: #084cdf;
-    padding: 10px 20px;
+    padding: 10px ;
     border-radius: 10px;
     color: #fff;
     cursor: pointer;

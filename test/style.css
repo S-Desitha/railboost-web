@@ -1,0 +1,38 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.timeline-content {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.timeline-content h3 {
+  margin-top: 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 2px;
+  height: 100%;
+  background-color: #ccc;
+}
+
+.timeline-item:last-child .timeline::before {
+  display: none;
+}

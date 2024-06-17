@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+	<script src="/js/jquery3.7.1.js"></script>
+	<script src="/js/script.js"></script>
+	<script src="/js/auth.js"></script>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/table.css">
+	<link rel="stylesheet" href="/css/buttons.css">
+	<link rel="stylesheet" href="/css/validations.css">
+    <link rel="stylesheet" href="/css/announcement.css">
+	<script src="/js/announcement.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <title>Announcement Management</title>
+</head>
+<body> 
+	<div id="preloader">
+        <img src="/Images/train.gif" alt="Loading...">
+    </div>
+    
+	<nav class="navbar" >
+		<script>createNavBar("admin")</script>
+	</nav>
+	<div class="container">
+        <div class="sidebar active">
+            <script>createSideBar("admin")</script>
+
+        </div>
+
+		<div class="service-view">
+			<div class="service-container">
+	
+				<div class="table-container" id="table-container">
+
+					<section class="table_header">
+						<h1>Manage Announcements</h1>
+						<button class="add-new-btn" style="justify-content: end;" onclick="popupAddPage('.anns-modal')" >Add New</button>
+					</section>
+                    <div class="empty_msg" style="text-align: center; color: grey; font-size: large; display: none;"><p><br>No Announcement yet.</p></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<dialog class="anns-modal">
+		<div class="adding-form">
+			<section class="table_header">
+				<h1 id="anns-heading">Add a New Announcement</h1>
+			</section>
+			<form onsubmit="return false" id="anss_form">
+				<label for="Announcement-title"></label>
+                <input type="text" id="Announcement-title" name="Announcement-title" placeholder="Announcement Title" required><br>
+
+                <label for="category"></label>
+                    <select id="category" name="category" required>
+                        <option value="" disabled style="color: #484848" selected>Category</option>
+                        <option value="Train Cancellations" style="color: #484848">Train Cancellations</option>
+                        <option value="Train Delay" style="color: #484848">Train Delay</option>
+						<option value="Special Trains" style="color: #484848">Special Trains</option>
+                        <option value="Schedule Changes" style="color: #484848">Schedule Changes</option>
+						<option value="Special Announcements" style="color: #484848">Special Announcements</option>
+                    </select>
+
+				<label for="recivers"></label>
+					<select id="recivers" name="recivers" required>
+						<option value="" disabled style="color: #484848" selected>Reciver</option>
+						<option value="All" style="color: #484848">All Users</option>
+						<option value="SM" style="color: #484848">Station Masters</option>
+					</select>
+
+                <label for="Announcement-body"></label>
+                <textarea cols="30" rows="10" type="text" id="Announcement-body" name="Announcement-body" placeholder="Announcement Body" required></textarea><br>
+		
+				<div class="dialog-buttons">
+					<button class="form-clear-button" onclick="document.getElementById('anss_form').reset()">Clear</button>
+					<button type="submit" class="form-submit-button" id="add-anns-button" onclick="addAnns()">Submit</button>
+				</div>
+			</form>
+		</div>
+	</dialog>
+
+    <dialog class="edit-modal">
+		<div class="adding-form">
+			<section class="table_header">
+				<h1 id="anns-heading">Update Announcement</h1>
+			</section>
+			<form onsubmit="return false" id="edit_form">
+				<label for="editAnnouncement-title"></label>
+                <input type="text" id="editAnnouncement-title" name="editAnnouncement-title" placeholder="Announcement Title" required><br>
+
+                <label for="editcategory"></label>
+                    <select id="editcategory" name="editcategory" required>
+                        <option value="" disabled style="color: #484848" selected>Category</option>
+                        <option value="Train Cancellations" style="color: #484848">Train Cancellations</option>
+                        <option value="Train Delay" style="color: #484848">Train Delay</option>
+						<option value="Special Trains" style="color: #484848">Special Trains</option>
+                        <option value="Schedule Changes" style="color: #484848">Schedule Changes</option>
+						<option value="Special Announcements" style="color: #484848">Special Announcements</option>
+                    </select>
+
+				<label for="editrecivers"></label>
+					<select id="editrecivers" name="editrecivers" required>
+						<option value="" disabled style="color: #484848" selected>Reciver</option>
+						<option value="All" style="color: #484848">All Users</option>
+						<option value="SM" style="color: #484848">Station Masters</option>
+					</select>
+
+                <label for="editAnnouncement-body"></label>
+                <textarea cols="30" rows="10" type="text" id="editAnnouncement-body" name="editAnnouncement-body" placeholder="Announcement Body" required></textarea><br>
+		
+				<div class="dialog-buttons">
+					<button class="form-clear-button" onclick="document.getElementById('edit_form').reset()">Clear</button>
+					<button type="submit" class="editform-submit-button" id="editform-submit-button">Update</button>
+				</div>
+			</form>
+		</div>
+	</dialog>
+				
+	<script src="/js/stations.js"></script>
+</body>

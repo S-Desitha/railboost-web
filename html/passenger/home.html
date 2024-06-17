@@ -3,54 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/home.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/script.js"></script>
+    
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- sweet alert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="/js/jquery3.7.1.js"></script>
+
+    <!-- charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    
+    <!-- icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
+    <!-- css imports -->
+    <link rel="stylesheet" href="/css/notifications.css">
+    
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/passSch.css">
+    <link rel="stylesheet" href="/css/passSearch.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- js -->
+    <script src="/js/notification.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/charts.js"></script>
+    <!-- <script src="/js/stations.js"></script> -->
+    <script src="/js/passenger.js"></script>
+    <script src="/js/home.js"></script>
+    
     <title>RailBoost - Railway Service Enhancement</title>
 </head>
-<body> 
+<body style="background-color:#fdfdfd ;" > 
+            <div id="preloader">
+                <img src="/Images/train.gif" alt="Loading...">
+            </div>
+    
             <nav class="navbar" >
                 <script>createNavBar("passenger")</script>
             </nav>
 
-            <div class="box-container">
-                <a href="/html/passenger/passSearch.html" class="box">
-                    <i class="fas fa-train"></i> 
-                    <h2>Train Schedule</h2>
-                    <p>View all the train schedules here.</p>
-                </a>
+            <div class="container">
+                <div class="sidebar active">
+                    <script>createSideBar("passenger")</script>
+                </div>
+            
+                <main>
+                    <div class="heading">
+                        <h1 class="title">Passenger Dashboard -  </h1>
+                    <h1><div class="homeStation">
+                        <p></p>
+                        
+                    </div></h1>
+                        
+                    </div>
+                    
+                    <ul class="breadcrumbs">
+                        <li><a href="home.html">Home</a></li>
+                        <li class="divider">/</li>
+                        <li><a href="home.html" class="active">Passenger Dashboard</a></li>
+                    </ul> 
+                    <div class="info-data">
+                        <div class="card sm" onclick="popupAddPage('.dialog-modal')">
+                            
+                                <div class="head">
+                                    <div>                                   
+                                        <p>Train Schedule</p>                                   
+                                    </div>                                                          
+                                    <i class="fas fa-train"> </i>                                    
+                                </div>
+                            
+                            
+                        </div>
+                        <dialog class="dialog-modal">
+                            
+                            
+                            <div class="adding-form">
+                                <button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
+                                
+                                <div class="table_header" style="display: inline;">
+                                    <h1 id="add-heading">Search For A Schedule</h1>
+                                </div>
+                                <div class="wrapper" id="from" style="width: 90%; border:0px solid #ffffff;">
+                                    <div class="select-btn">
+                                        <span>Select Starting Station</span>
+                                        <i class="uil uil-angle-down"></i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="search">
+                                            <!-- <i class="uil uil-search"></i> -->
+                                            <input spellcheck="false" type="text" placeholder="Search">
+                                        </div>
+                                        <ul onclick="validateStation();" class="options"></ul>
+                                    </div>
+                                </div>
+            
+                                <div class="wrapper" id="to" style="width: 90%;border:0px solid #ffffff;">
+                                    <div class="select-btn">
+                                        <span>Select Ending Station</span>
+                                        <i class="uil uil-angle-down"></i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="search">
+                                            <!-- <i class="uil uil-search"></i> -->
+                                            <input spellcheck="false" type="text" placeholder="Search">
+                                        </div>
+                                        <ul onclick="validateStation();" class="options"></ul>
+                                    </div>
+                                </div>
+                                <span id="station-error"></span>
+            
+                                <div class="date" >
+                                    <label for="date"></label>
+                                    <input type="date" style="border: 1px solid #ccc;width: 90%;margin-left: 20px;" id="date" name="date" placeholder="Date:" required><br />   
+                                </div>
+                                <span id="error2"></span>
+            
+                                <button class="login-button form-button" style="width: 90%;" onclick="showSchedules()">Search</button>
+            
+                            </div>
+                            <script>
+                                function getCurrentDate() {
+                            const now = new Date();
+                            const year = now.getFullYear();
+                            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+                            const day = now.getDate().toString().padStart(2, '0');
+                            return `${year}-${month}-${day}`;
+                        }
+                                document.getElementById('date').value = getCurrentDate();
+                            </script>
+                            <script src="/js/stations.js"></script>
+                        </dialog>
+                        <div class="card sm">
+                            <a href="buyticket.html">
+                                <div class="head">
+                                    <div>                            
+                                        <p>Buy E ticket </p>                                   
+                                    </div>                              
+                                    <i class="fas fa-ticket-alt"> </i>                                                             
+                                </div>
+                            </a>  
+                        </div>
+                        <div class="card sm">
+                            <a href="seasonticket.html">
+                                <div class="head">
+                                    <div>                                   
+                                        <p>Buy Season Ticket </p>                                  
+                                    </div>                              
+                                    <i class="fas fa-file-alt"> </i>                                  
+                                </div>
+                            </a>                          
+                        </div>
         
-                <a href="/html/passenger/live-up.html" class="box">
-                    <i class="fa-solid fa-map-location-dot"></i> 
-                    <h2>Train Live Update</h2>
-                    <p>Get real-time updates on train status.</p>
-                </a>
-        
-                <a href="/html/passenger/buyticket.html" class="box">
-                    <i class="fas fa-ticket-alt"></i> 
-                    <h2>Buy E-Ticket</h2>
-                    <p>Purchase your train tickets online.</p>
-                </a>
-        
-                <a href="/html/passenger/register-parcels.html" class="box">
-                    <i class="fas fa-box"></i> 
-                    <h2>Register Parcels</h2>
-                    <p>Register parcels for shipping.</p>
-                </a>
-        
-                <a href="/html/passenger/contact-details.html" class="box">
-                    <i class="fas fa-phone"></i> 
-                    <h2>Station Contact Details</h2>
-                    <p>Find contact information for stations.</p>
-                </a>
+                        <div class="card sm">
+                            <a href="parcelBooking.html">
+                                <div class="head">
+                                    <div>                                   
+                                        <p>Register Parcels </p>                                   
+                                    </div>                              
+                                    <i class="fas fa-box"> </i>                                                                                           
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- <div class="anns-bar">
+                        <div class="anns">
+                            <h3>Delay Announcement</h3>
+                            <div class="ann-body">
+                                <p style="overflow: hidden;">Attention passengers, we apologize for the delay. The Express train to Matara is experiencing a delay of approximately 30 minutes due to technical failure. We appreciate your patience and understanding.</p>
+                            </div>
+                            <div class="duration">5 minutes ago</div>
+                        </div>
 
-                <a href="#" onclick="seatReserve();" class="box">
-                    <i class="fa-solid fa-ticket"></i> 
-                    <h2>Seat Reservation</h2>
-                    <p>Reserve your train seats here.</p>
-                </a>
-     
+                        <div class="anns">
+                            <h3>Railway Strike Announcement</h3>
+                            <div class="ann-body">
+                                <p>Attention passengers, we regret to inform you that due to a scheduled railway strike, all train services will be suspended starting from today until further notice. We apologize for the inconvenience caused by this industrial action.</p>
+                            </div>
+                            <div class="duration">5 minutes ago</div>
+                        </div>
+                        
+                        
+                    </div> -->
+                    <div class="stat">
+                        <div class="table-data">
+                            <div class="recent-trains">
+                                <div class="head">
+                                    <h3>Inbound Train Updates to Colombo Fort</h3><br>
+                                    <p style="font-size: 10px;">*ETA- Estimated Time of Arrival </p>
+                                    <!-- <a href="sm/sm-live.html">View All</a> -->
+                                </div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th>Destination</th>
+                                            <th>Speed</th>
+                                            <th style="text-transform: none;">ETA* at <br><span id="startStationName"></span></th>
+                                            <th style="text-transform: none;">ETA* at Colombo Fort</th>
+                                            <!-- <th>Actions</th> -->
+                                        </tr>
+            
+                                    </thead>
+                                    
+                                        <tbody id="recent_sch__table"></tbody>
+                                        
+                                </table>
+                            </div>
+
+                            
+                         
+                        </div> 
+                        
+                            <!-- <canvas class="chart" id="chart"></canvas> -->
+                            <div class="anns-bar">
+                                <!-- <div class="anns">
+                                    <h3></h3>
+                                    <div class="ann-body">
+                                        <p style="overflow: hidden;"></p>
+                                    </div>
+                                    <div class="duration"></div>
+                                </div>
+        
+                                <div class="anns">
+                                    <h3></h3>
+                                    <div class="ann-body">
+                                        <p></p>
+                                    </div>
+                                    <div class="duration"></div>
+                                </div> -->
+                                
+                                
+                            </div>
+                        
+                    </div>
+                    
+                </main>
             </div>
-</body>
+    </body>
 </html>
+        

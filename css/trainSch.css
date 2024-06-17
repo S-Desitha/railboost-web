@@ -93,21 +93,47 @@
     color: #6e6b6b;
     
   }
+
   
   .train-form input {
     width: 20vw;
     font-size: 14px;
   }
 
+  #rec-button{
+    border: none;
+    color:black;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+  }
+  /* hover for rec-buttton */
+  #rec-button:hover{
+    background-color: #d5d1defe;
+  }
+
   .train-left {
     margin-top: 20px;
+    flex-direction: column;
     flex: 1;
     text-align: left;
 	align-items: left;
 	margin-left: 40px;
 	width: calc(100% - 80px);
 }
+#SAT{
+  width: 310px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
 
+#SDT{
+  width: 310px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
 #SAT::before {
     content: "Scheduled Arrival Time:   "; 
     color: #a9a9a9;
@@ -121,7 +147,7 @@
   }
 .train-right {
 margin-top: 10px;
-  flex: 1; 
+  /* flex: 1;  */
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -163,8 +189,9 @@ margin-top: 10px;
     background-color: #fffb;
     margin: .8rem auto;
     border-radius: .6rem;
-    overflow: auto;
-    overflow: overlay;
+    /* overflow-y: scroll; */
+    /* overflow: auto;*/
+    /* overflow: overlay; */
 }
 
 
@@ -320,8 +347,8 @@ thead th.active,tbody td.active {
       z-index: 100;
       background: white;
     display: none;
-    padding: 10px;
-    margin-top:10px;
+    /* padding: 10px; */
+    /* margin-top:10px; */
     background: #fff;
     border-radius: 7px;
     /* box-shadow: 0 10px 25px rgba(0,0,0,0.1); */
@@ -388,7 +415,16 @@ thead th.active,tbody td.active {
     /* border-radius: 5px; */
     background: #f2f2f2;
   }
-
+.trainID{
+  border:none;
+  border-bottom:1px solid #a9a9a9 ;
+  margin: 15px 0px;
+  text-decoration-color: #6e6b6b;
+  border-radius: 0px;
+  font-size: 14px;
+  color: #6e6b6b;
+  padding-left:0px ;
+}
 
 #speed {
   width: 20vw;
@@ -398,6 +434,8 @@ thead th.active,tbody td.active {
 	color: #6e6b6b;
 	padding: 7px 0;
 	margin: 20px 0;
+  margin-top: 0px;
+  border-radius: none;
 }
 
 
@@ -439,4 +477,22 @@ thead th.active,tbody td.active {
   background: #fff;
   border-top: 1px solid #ccc;
   z-index: 999;
+}
+.scheduleadd{
+  /* display: flex; */
+  /* flex-direction: column; */
+  width: min-content;
+  gap: 10px;
+  justify-content: center;
+  justify-self: center;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+
+.repetition{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 10px;
+  margin-left: 20px;
 }

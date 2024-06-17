@@ -28,12 +28,15 @@ async function processLoginResp(response) {
     console.log("processLoginResp function called");
     console.log(response)
     if (response["isSuccessful"]==true){
+        localStorage.setItem("userId",response.userId);
+        localStorage.setItem("username", response["username"]);
         localStorage.setItem("access_token", response.jwt);
+        localStorage.setItem("userId", response["userId"]);
         localStorage.setItem("name", response["name"]);
         localStorage.setItem("loggedIn", response["isSuccessful"]);
         const role = response["role"].roleId;
         const username = response["username"];
-
+        
         if (role==1){
             window.location.replace("/html/admin/admin.html");
         }
@@ -50,4 +53,57 @@ async function processLoginResp(response) {
         window.alert("Username or password incorrect. Please try again!");
         document.getElementById("signin-form").reset();
     }
+}
+// function called "guest" to clear the local storage and riderect to home.html
+function guest() {
+    localStorage.clear();
+    window.location.replace("/html/passenger/home.html");
+}
+
+async function checkUaname() {
+    popupAddPage('.getUname-modal')
+    const endpoint = "forgetPW";
+    
+    let username = document.getElementById("uname").value;
+
+    const body = {
+        username : username,
+    };
+
+    const params = {
+        headers : {
+            "Content-Type": "application/json; charset=UTF-8"
+        },
+        body : JSON.stringify(body),
+        method : "POST"
+    };
+
+    var checkUnameerror = document.getElementById("checkUname-error");
+        checkUnameerror.innerHTML = "Wait...";
+
+    let response = await customFetch(endpoint, params,false);
+    console.log(response);
+    if (response.isSuccessful){
+        var checkUnameerror = document.getElementById("checkUname-error");
+        checkUnameerror.innerHTML = "";
+        console.log("ok")
+        let dialog = document.getElementById("getUname-modal");
+        dialog.close();
+        // popupAddPage('.Chng-modal');
+        Swal.fire({
+            icon: "success",
+            title: "Username is valid!!",
+            text: "Check your mail to reset the password.",
+          });
+
+
+    }
+    else {
+        var checkUnameerror = document.getElementById("checkUname-error");
+    
+        checkUnameerror.innerHTML = "Invalid username. Please try again!";
+        // window.alert("password is incorrect. Please try again!");
+        document.getElementById("checkUname_form").reset();
+    }
+    
 }

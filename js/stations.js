@@ -1,30 +1,11 @@
-const url = "http://localhost:8080/railboost_backend_war_exploded/stations";
-const endpoint = "stations";
-
+// // const url = "http://localhost:8080/railboost_backend_war_exploded/stations";
+const Stationendpoint = "stations";
+console.log("stations.js");
+  
 const wrappers = document.querySelectorAll(".wrapper");
-
-//update date with current date as default
-
-
-
-// let stations = ["Colombo Fort", "Maradana", "Dematagoda", "Kelaniya", "Wanawasala", "Hunupitiya", "Ederamulla", "Horape", "Ragama Junction", "Walpola", "Batuwaththa", "Bulugahagoda", "Ganemulla", "Yagoda", "Gampaha", "Daraluwa", "Bemmulla", "Magalegoda", "Heendeniya Pattiyagoda",
-//  "Veyangoda", "Wadurawa", "Keenawala", "Pallewela", "Ganegoda", "Wijaya Rajadahana", "Meerigama", "Wilwatta", "Botale", "Ambepussa", "Yaththalgoda", "Bujjomuwa", "Alawwa", "Walakumbura", "Polgahawela Junction", "Panaliya", "Tismalpola", "Korossa", "Yatagama", "Rambukkana", "Kadigamuwa",
-// "Yatiweldeniya", "Gangoda", "Ihala Kotte", "Bambaragala", "Makehelwala", "Balana", "Weralugolla", "Kadugannawa", "Kotabogolla", "Urapola", "Pilimatalawa", "Barammane", "Kiribathkumbura", "Peradeniya Junction", "Koshinna", "Gelioya", "Polgahaanga", "Weligalla", "Botalapitiya",
-// "Gangathilaka", "Kahatapitiya", "Gampola", "Wallahagoda", "Tembiligala", "Warakapitiya", "Ulapane", "Pallegama", "Warakawa", "Nawalapitiya", "Selam", "Hieghtenford", "Inguruoya", "Penrose", "Galboda", "Dekinda", "Wewelthalawa", "Watawala", "Ihala Watawala", "Rozella", "Hatton", 
-// "Galkandawatta", "Kotagala", "St. Clair", "Thalawakelle", "Watagoda", "Great Western", "Radella", "Nanu Oya", "Perakumpura", "Ambewela", "Pattipola", "Ohiya", "Idalgashinna", "Glenanore", "Haputale", "Diyatalawa", "Bandarawela", "Kinigama", "Heeloya", "Kitalella", "Ella",
-// "Demodara", "Uduwara", "Hali-Ela", "Badulla","Colombo Fort", "Secretariat Halt", "Kompanna Veediya", "Kollupitiya", "Bambalapitiya", "Wellawatte", "Dehiwela", "Mount Lavinia", "Ratmalana", "Angulana", "Lunawa", "Moratuwa", "Koralawella", "Egoda Uyana", "Panadura", "Pinwatte", 
-// "Wadduwa", "Train Halt 01", "Kalutara North", "Kalutara South", "Katukurunda", "Payagala North", "Payagala South", "Maggona", "Beruwala", "Hettimulla", "Aluthgama", "Bentota", "Induruwa", "Maha Induruwa", "Kosgoda", "Piyagama", "Ahungalla", "Patagamgoda", "Balapitiya", "Andadola",
-// "Kandegoda", "Ambalangoda", "Madampagama", "Akurala", "Kahawe", "Telwatte", "Sinigama", "Hikkaduwa", "Thiranagama", "Kumarakanda", "Dodanduwa", "Rathgama", "Boossa", "Ginthota", "Piyadigama", "Richmond Hill", "Galle", "Katugoda", "Unawatuna", "Talpe", "Habaraduwa", "Koggala", "Kathaluwa",
-// "Ahangama", "Midigama", "Kubalgama", "Weligama", "Polwathumodara", "Mirissa", "Kamburugamuwa", "Walgama", "Matara", "Piladuwa", "Weherahena", "Kekandura", "Bambarenda", "Wewurukannala", "Nakulugamuwa", "Beliatta"];
-
 
 let stations;
 getStations();
-
-
-
-
-
 
 
 function updateName(selectedLi) {
@@ -56,13 +37,12 @@ function addStation(selectedStation,  wrapper) {
 }
 
 
-
-
-
-
 function createList() {
+    console.log("created station List");
     wrappers.forEach(wrapper => {
+      console.log("wrapper");
     const selectBtn = wrapper.querySelector(".select-btn");
+    console.log("selectBtn");
     const searchInp = wrapper.querySelector("input");
     const options = wrapper.querySelector(".options");
 
@@ -94,7 +74,7 @@ function createList() {
 
 async function getStations() {
     try {
-        stations = await customFetch(endpoint, {}, false);
+        stations = await customFetch(Stationendpoint, {}, false);
         createList();
     } catch(error) {
         if (error=="login-redirected")
@@ -109,6 +89,12 @@ function showSchedules() {
     let endStation = document.getElementById("to").getAttribute("stationCode");
     let date = new Date(document.getElementById("date").value).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
+    if(!startStation || !endStation || !date){
+      let Error2=document.getElementById("error2");
+      Error2.innerHTML = "Please fill in all required fields."
+      return;
+    }
+
     const params = {
         startStation : startStation,
         endStation : endStation,
@@ -117,3 +103,75 @@ function showSchedules() {
 
     window.location.href = "/html/passenger/passSch.html?schedule="+encodeURIComponent(JSON.stringify(params));
 }
+
+function validatePhoneNo(){
+  var contactNumber=document.getElementById("contactNumber");
+  var contactNumberError=document.getElementById("contactNumberError");
+  if(!contactNumber.value.match(/^\d{10}$/)){
+      contactNumberError.innerHTML = "Please enter a valid contact number.";
+      return false;
+  }
+      contactNumberError.innerHTML = "";
+      return true;
+}
+
+
+async function setLines() {
+  let LEndpoint = "lines";
+
+  // document.getElementById("selectLine")
+      // .addEventListener("change", (e) => {
+      //     if (e.target.value == 4) {
+      //         document.getElementById("railwayStation").style.display = "none";
+      //     }
+      //     else
+      //     document.getElementById("railwayStation").style.display = "block";
+      // });
+
+
+  try {
+      
+      let data = await customFetch(LEndpoint, {});
+      let lineParent = document.getElementById("selectLine");
+      
+      for (line of data) {
+          
+              let option = document.createElement("option");
+              option.innerHTML = line.lineName;
+              option.value = line.lineName;
+              lineParent.appendChild(option);
+      }
+  }
+  catch(error) {
+      if (error=="login-redirected")
+          localStorage.setItem("last_url", window.location.pathname);
+  }
+
+}
+
+function validateStationCode() {
+  const stationCodeInput = document.getElementById('stationId');
+  const stationCodeRegex = /^[A-Z]{3}$/;
+  const errorSpan = document.getElementById('stcode-error');
+
+  if (!stationCodeRegex.test(stationCodeInput.value.trim())) {
+    errorSpan.textContent = 'Station code must be 3 uppercase English letters.';
+    return false;
+  } else {
+    errorSpan.textContent = '';
+    return true;
+  }
+}
+
+function validateStation(){
+  
+  let Start=document.getElementById("from").getAttribute("stationCode");
+  let End=document.getElementById("to").getAttribute("stationCode");
+  let StationError=document.getElementById("station-error");
+  if(Start==End){
+      StationError.innerHTML = "Both start and end stations can't be same.";
+      return false;
+  }
+      StationError.innerHTML = "";
+      return true;
+  }

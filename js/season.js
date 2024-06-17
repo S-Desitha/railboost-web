@@ -2,7 +2,44 @@
 
 const seasonEndpoint = "season";
 const ticketPriceEndpoint = "ticketPrice";
+
+
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const paymentSuccess = urlParams.get('payment_success');
+console.log(paymentSuccess);
+// type of paymentSuccess
+console.log(typeof paymentSuccess);
+
+// If the 'payment_success' parameter is present, call buyETicket function
+if (paymentSuccess=="successful") {
+  console.log("Payment successful!");
+  BuySeason();
+}
+
+if (paymentSuccess=="unsuccessful") {
+  console.log("Payment unsuccessful!");
+  showPaymentError();
+}
+
+function showPaymentError() {
+  Swal.fire({
+    icon: 'error',
+    title: 'Payment Unsuccessful',
+    text: 'Payment processing was unsuccessful. Please try again.',
+    confirmButtonText: 'OK'
+  }).then(() => {
+    // Reload the page after the user clicks OK
+    // redirect to buytickets.html page
+
+
+    window.location.href = 'http://localhost:5500/html/passenger/seasonticket.html';
+  });
+  
+}
 let endDate;
+let VSDate = new Date();
 
 document.addEventListener("DOMContentLoaded", async function () {
   let params = {
@@ -13,6 +50,16 @@ document.addEventListener("DOMContentLoaded", async function () {
   
     try {
       let data = await customFetch(urlQuery, {credentials: "include"});
+      if (data.length === 0) {
+        document.querySelector(".info").style.display = "block";
+        document.querySelector(".table_body").style.display = "none";
+        // document.querySelector(".train-right").style.display = "block";
+        return;
+      }else{
+        document.querySelector(".info").style.display = "none";
+        document.querySelector(".table_body").style.display = "block";
+        // document.querySelector(".train-right").style.display = "block";
+      }
       
       data.forEach(season => {
 
@@ -20,7 +67,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         BuyButton.classList.add("Buy-button");
         BuyButton.innerHTML = "<i class='fa-solid fa-coins' title='Pay' style='color:#0047AB'><span>  Pay </span></i>";
         BuyButton.setAttribute("season", JSON.stringify(season));
-        BuyButton.onclick = ByuSeason;
+        BuyButton.onclick = () => {
+          generateOrderID();
+          prepareBillingSeason(season);
+      };
+      
+
         
         let row = document.getElementById("season_table").insertRow(0);
         row.insertCell(0).innerHTML = season.id;
@@ -31,12 +83,20 @@ document.addEventListener("DOMContentLoaded", async function () {
         row.insertCell(5).innerHTML = season.trainClass;
         row.insertCell(6).innerHTML = season.totalPrice;
         row.insertCell(7).innerHTML = season.status;
+        if (season.status === "Rejected") {
+          row.style.border = "3px solid rgba(255, 0, 0, 0.5)";
+        }
         if (season.status == "Approved"){
+          row.style.border = "3px solid rgba(3,148,135,1.00)";
           row.insertCell(8).append(BuyButton);
         }else{
           row.insertCell(8).innerHTML = "-";
         }
+        if(season.status != "Rejected" && new Date(season.endDate) > VSDate){
+            VSDate = new Date(season.endDate);
+        }
       });
+      console.log(VSDate);
   
     }
     catch(error) {
@@ -45,8 +105,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 
-  function ByuSeason(){
-    season = JSON.parse(this.getAttribute("season"));
+  function BuySeason(){
+
+    // season = JSON.parse(this.getAttribute("season"));
+    //get season JSON object from local storage
+    season = JSON.parse(localStorage.getItem("season"));
     console.log(season);
     season["status"] = "Paid";
     const body = season;
@@ -57,15 +120,21 @@ document.addEventListener("DOMContentLoaded", async function () {
         body: JSON.stringify(body),
         method: "PUT",
     };
-
-    customFetch(seasonEndpoint, params)
-    .then(() => window.location.reload())
-
-    .catch((error) => {
-        if (error == "login-redirected")
-            localStorage.setItem("last_url", window.location.pathname);
-    });
+    showSuccessNotification();
+    return customFetch(seasonEndpoint, params);
+   
 }
+function showSuccessNotification() {
+  Swal.fire({
+    icon: 'success',
+    title: 'Payment Successful!',
+    text: 'Check your email for the Season Ticket.',
+    confirmButtonText: 'OK'
+  }).then(() => {
+    window.location.href = 'http://localhost:5500/html/passenger/seasonticket.html';
+  });
+}
+
   
 
 function validateStation(){
@@ -121,8 +190,15 @@ function appplySeasonTicket() {
       });
 
     console.log(season);
-    alert("Season application is recieved.");
-    location.reload();
+    closeDialog();
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: 'Season application is received.',
+      onClose: () => {
+          location.reload();
+      }
+  });
 
   }
 
@@ -195,7 +271,10 @@ async function getTicketPrices(Class,Duration) {
     }else if(type == "Railway Servant"){
       price = Math.ceil(((price/100)*3)/100)*100;
     }
-    document.getElementById("total-price").value = price;
+    
+    
+document.getElementById("total-price").value = price;
+   
   }
   catch (error) {
     console.log("Error fetching ticket price: " + error);
@@ -234,4 +313,18 @@ function updateEndDate() {
         
         
     }
+}
+
+function validateSDate() {
+  let startDate = new Date(document.getElementById('Start-date').value);
+  let dateError=document.getElementById("date-error");
+
+  if (startDate <= VSDate) {
+    dateError.innerHTML = "You can not have two season applications/tickets for same date.";
+    return false;
+  }
+
+  dateError.innerHTML = "";
+  return true;
+
 }

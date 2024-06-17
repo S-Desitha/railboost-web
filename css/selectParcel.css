@@ -1,0 +1,70 @@
+.set-station-button{
+    background: #eeeded;
+    border:#9f9292 ;
+    width: 100px;
+    height: 29px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 15px;
+}
+
+.set-station-button:hover {
+background: rgb(210, 210, 210);
+} 
+
+.service-container{
+    padding-left: 80px;
+    padding-right: 80px;
+}
+.verify-button{
+    background: #04904c;
+    border:#929f95 ;
+    width: 80px;
+    height: 29px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 15px;
+  } 
+  .verify-button:hover {
+    background: rgb(2, 87, 42);
+  } 
+
+  #verify-parcel-btn {
+    background: var(--theme-color);
+    padding: 8px;
+    width: 100%;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    /* text-align: center; */
+    color: #eee;
+    /* align-content: center; */
+    /* align-items: unset; */
+    justify-content: center;
+    font-size: 20px;
+}
+#otp-input-container {
+  display: flex;
+  justify-content: space-between;
+  width: 180px; /* Adjust width as needed */
+  margin: 0 10px;
+  gap: 47px; /* Adjust gap as needed */
+}
+
+#otp-input-container input {
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+#otp-input-container input:last-child {
+  margin-right: 0;
+}

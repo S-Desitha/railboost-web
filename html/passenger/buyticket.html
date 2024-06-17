@@ -3,30 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- sweet alert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script> -->
+    <script src="/js/jquery3.7.1.js"></script>
+
+
+    <!-- charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    
+    <!-- icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
     <script src="/js/script.js"></script>
     <script src="/js/auth.js"></script>
+    <script src="/js/billing.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/buyticket.css">  
 	<script src="/js/buyticket.js" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    
     <title>Buy E-Ticket</title>
 </head>
 <body> 
+    <div id="preloader">
+        <img src="/Images/train.gif" alt="Loading...">
+    </div>
     <nav class="navbar" >
         <script>createNavBar("passenger")</script>
     </nav>
+    
 
 	<div class="train-container">
-        <div class="train-left">
-            <img src="../../Images/t33.png" alt="Train Image" class="train-image ">
-		</div>
-				
+         
+        <div style="position: relative;">
+            <div class="train-left">
+                <img src="../../Images/t33.png" alt="Train Image" class="train-image">
+            </div>
+            <div class="sidebar active" style="position: absolute; top: 0; margin-top: 77px;">
+                <script>createSideBar("passenger")</script>
+            </div>
+        </div>
+        
 		<div class="train-right">
 		    <div class="train-form">
 							
 				<form onsubmit="return false">
-					<h2 class="add-train-heading" id="add_update-schedule-header">Buy E-Ticket </h2>
+					<h2 class="add-train-heading" style="margin-bottom: 30px;" id="add_update-schedule-header">Buy E-Ticket </h2>
 
                     <label for="start-station"></label>
                     <!-- <select id="start-station" onchange="validateStation(); getPrice();" name="start-station" required>
@@ -46,7 +81,7 @@
                                 <i class="fas fa-search"></i>
                                 <input spellcheck="false" type="text" placeholder="Search">
                             </div>
-                            <ul onclick="getPrice(); validateStation();" class="options"></ul>
+                            <ul onclick="getPrice(); validateStation(); getPriceList();" class="options"></ul>
                         </div>
                     </div>
                 
@@ -68,10 +103,16 @@
                               <i class="fas fa-search"></i>
                               <input spellcheck="false" type="text" placeholder="Search">
                           </div>
-                          <ul onclick="getPrice(); validateStation();" class="options"></ul>
+                          <ul onclick="getPrice(); validateStation(); getPriceList();" class="options"></ul>
                       </div>
                   </div>
                     <span id="station-error"></span>
+                    <div class="price-list">
+                        </br><span id="price-of-first"></span>
+                        </br><span id="price-of-second"></span>
+                        </br><span id="price-of-third"></span>
+                    </div>
+
 								
                     <label for="date"></label>
                     <input type="date" id="date" name="date" placeholder="Date:" min="" max="" required><br />   
@@ -102,9 +143,11 @@
 
                     <div class="price-of-1"> <span id="price-of-one"></span></div>
                     <label for="total-price"></label>
-					<input disabled value="" type="Double" id="total-price" name="total-price" placeholder=" Total Price:" ><br>
+					<input disabled value="" type="Double" id="amount" name="total-price" placeholder=" Total Price:" ><br>
 
-					<button class="form-button" id="buy-ticket-button" onclick="buyETicket()">Buy</button>
+                   
+
+					<button class="form-button" id="buy-ticket-button" onclick="generateOrderID();prepareBilling()">Buy</button>
 				</form>
 	    	</div>
 				

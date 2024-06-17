@@ -1,8 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+	 <!-- axios -->
+	 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/js/notification.js"></script>
 	<script src="/js/script.js"></script>
 	<script src="/js/auth.js"></script>
     <link rel="stylesheet" href="/css/home.css">
@@ -11,6 +22,7 @@
     <link rel="stylesheet" href="/css/sm-season.css">
 	<link rel="stylesheet" href="/css/buttons.css">
 	<link rel="stylesheet" href="/css/validations.css">
+	<link rel="stylesheet" href="/css/notifications.css">
 
 	<script src="/js/sm-season.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
@@ -18,43 +30,86 @@
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <title>Season Application Management</title>
 </head>
 <body> 
+	<div id="preloader">
+        <img src="/Images/train.gif" alt="Loading...">
+    </div>
 	<nav class="navbar" >
 		<script>createNavBar("sm")</script>
 	</nav>	
+	<div class="container">
+        <div class="sidebar active">
+            <script>createSideBar("sm")</script>
 
-	<div class="service-view">
-		<div class="service-container">
-			<div class="table-container">
-				<section class="table_header">
-					<h1>Season Application</h1>
-					<div class="input-group">
-						<input type="search" placeholder="Search Season Ticket...">
-						<img src="/Images/search.png" alt="">
-					</div>
-				</section>
+        </div>
 
-				<section class="table_body">
-					<table>
-						<thead>
-							<tr>
-								<th>ID</th>
-                                <th>Passenger Type</th>
-								<th>End Station</th>
-								<th>Start Date</th>
-								<th>End Date</th>
-								<th>Application</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody id="season_table"></tbody>
-					</table>
-				</section>
+		<div class="service-view">
+			<div class="service-container">
+				<div class="table-container">
+					<section class="table_header">
+						<h1>Season Application</h1>
+						<div class="input-group">
+							<input type="search" style="margin:0" placeholder="Search Season Ticket...">
+							<img src="/Images/search.png" alt="">
+						</div>
+					</section>
+
+					<script>
+						const searchInput = document.querySelector('.table_header input[type="search"]');
+						searchInput.addEventListener('input', filterSeasonTable);
+
+						function filterSeasonTable() {
+							const searchTerm = searchInput.value.toLowerCase();
+							const tableRows = document.querySelectorAll('#season_table tr');
+
+							tableRows.forEach(row => {
+								let rowVisible = false;
+
+								for (let i = 0; i < row.cells.length; i++) {
+									const cellText = row.cells[i].textContent.toLowerCase();
+									if (cellText.includes(searchTerm)) {
+										rowVisible = true;
+										break;
+									}
+								}
+
+								if (rowVisible) {
+									row.style.display = 'table-row';
+								} else {
+									row.style.display = 'none';
+								}
+							});
+						}
+					</script>
+
+					<section class="table_body">
+						<table class="table_b">
+							<thead>							
+								<tr>
+									<th>ID</th>
+									<th>Passenger Type</th>
+									<th>End Station</th>
+									<th>Start Date</th>
+									<th>End Date</th>
+									<th>Application</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody id="season_table"></tbody>
+						</table>
+						<div class="empty_msg" style="text-align: center; color: grey; font-size: large;"><p><br>No season ticket requests.</p></div>
+					</section>
+				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
+	<dialog id="ilog" style="">
+	</dialog>	
+	<dialog id="plog">
+	</dialog>	
 </body>
 
 </script>

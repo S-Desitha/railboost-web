@@ -209,8 +209,8 @@ nav ul li:hover ul.dropdown{
     top: 21%;
     right: 20%;
     left: 50%;
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background-color:red;
     display: flex;
@@ -289,7 +289,7 @@ nav ul li:hover ul.dropdown{
   }
   
 /* mobile */
-  @media only screen and (max-width: 1250px) {
+  @media only screen and (max-width: 1000px) {
     body {
       /* background-color: lightblue; */
 
@@ -307,3 +307,8 @@ nav ul li:hover ul.dropdown{
     outline: none;
     border-bottom: 1.5px solid var(--secondary-color);
   }
+  .parcels .head a:hover {
+    background-color: var(--theme-color);
+    color: #ffffff;
+    transition: all 0.1s ease;
+}

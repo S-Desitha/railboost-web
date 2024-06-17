@@ -17,8 +17,8 @@
     <div class="menu">
         <p class="title">Main</p>
         <ul>
-            <li class="">
-                <a href="#" id="dashboard">
+            <li class="" id="dashboard">
+                <a href="#" >
                     <i class="icon ph-bold ph-house-simple"></i>
                     <span class="text">Dashboard  </span>
                 </a>
@@ -52,14 +52,14 @@
                             </a>
                         </li>
                         <li>
-                            <a href="addStations.html">
+                            <a href="stations.html">
                                 <i class="fas fa-regular fa-building"></i>
                                 <span class="text">Railway Station Management</span>
                             </a>
                         </li>
                         
                         <li>
-                            <a href="#">
+                            <a href="lines.html">
                                 <i class="fas fa-route"></i>
                                 <span class="text">Train Line Management</span>
                             </a>
@@ -75,23 +75,54 @@
 
                     <section id="sm-sidebar">
                         <li>
-                            <a href="sm/sm-live.html">
+                            <a href="sm-live.html">
                                 <i class="fa-solid fa-map-location-dot"></i>
                                 <span class="text">Train Live Update</span>
                             </a>
                         </li>
                         <li>
-                            <a href="sm/seasonvalid.html">
+                            <a href="sm-season.html">
                                 <i class="fa-solid fa-clipboard-list"></i>
                                 <span class="text">Validate Season Applications</span>
                             </a>
                         </li>
                         <li>
-                            <a href="sm/approve-parcels.html">
+                            <a href="parcelApproval.html">
                                 <i class="fa-solid fa-box"></i>
-                                <span class="text">Parcel Approval</span>
+
+                                <span class="text">Approve Parcels</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="addTrain.html">
+                                <i class="fa-solid fa-box"></i>
+                                <span class="text">Send Parcels</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="receiveParcels.html">
+                                <i class="fa-solid fa-box"></i>
+                                <span class="text">Recieve Parcels</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="trackingParcels.html">
+                                <i class="fa-solid fa-box"></i>
+
+                                <span class="text">Assign Parcels</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="verifyParcels.html">
+                                <i class="fa-solid fa-box"></i>
+
+                                <span class="text">Clear Parcels</span>
+                            </a>
+                        </li>
+
                         <li>
                             <a href="sm/emcontact.html">
                                 <i class="fa-solid fa-address-book"></i>
@@ -99,12 +130,44 @@
                             </a>
                         </li>
                         
+                       
+                    </section>
+
+                    <section id="passenger-sidebar">
+                        
                         <li>
-                            <a href="sm/staff.html">
-                                <i class="fa-solid fa-user-gear"></i>
-                                <span class="text">Assign duties to staff</span>
+                            <a href="buyticket.html">
+                                <i class="fa-solid fa-ticket"></i>
+                                <span class="text">Buy E ticket</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="seasonticket.html">
+                                <i class="fa-solid fa-clipboard-list"></i>
+                                <span class="text">Buy Season Ticket</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="parcelBooking.html">
+                                <i class="fa-solid fa-box"></i>
+                                <span class="text">Register Parcels</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="#" onclick="seatReserve();">
+                                <i class="fas fa-train"></i>
+                                <span class="text">Seat Reservation</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="">
+                                <i class="fa-solid fa-clipboard-list"></i>
+                                <span class="text">Railway Station Contacts</span>
+                            </a>
+                        </li>
+                        
                     </section>
 
 
@@ -112,13 +175,13 @@
 
                 </ul>
             </li>
-            <li class="">
+            <li class="" id="reports">
                 <a href="#">
                     <i class="fas fa-chart-bar"></i>
                     <span class="text">Reports </span>
                 </a>
             </li>
-            <li class="">
+            <li class="" id="anns">
                 <a href="#">
                     <i class="fa-solid fa-bullhorn"></i>
                     <span class="text">Announcements </span>
@@ -131,16 +194,18 @@
 <div class="menu">
         <p class="title">Account</p>
         <ul>
-            <li class="">
+            <li class="" id="profile">
                 <a href="#">
                     <i class="fas fa-user-cog"></i>
                     <span class="text">Profile </span>
                 </a>
             </li>
             <li class="">
-                <a href="#">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span class="text">Logout </span>
+                <a onclick="signout()">
+                    
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="text">Logout </span>
+                    
                 </a>
             </li>
         </ul>
@@ -149,6 +214,7 @@
       integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
       crossorigin="anonymous"
     ></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>

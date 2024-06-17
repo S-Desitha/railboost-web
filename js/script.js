@@ -1,235 +1,31 @@
-// Wait for the DOM to be ready
-document.addEventListener('DOMContentLoaded', function () {
+// // Wait for the DOM to be ready
+// var totalTicketRevenue;
+// var totalParcelRevenue;
+// var trainCount;
+// var NoTicket;
 
-   
-        // const counters1 = document.querySelectorAll('.count');
-      
-        // function startCounter(counter) {
-        //   const target = parseInt(counter.getAttribute('data-target'));
-        //   const increment = target / 50;
-      
-        //   let currentValue = 0;
-      
-        //   function updateCounter() {
-        //     currentValue += increment;
-        //     counter.textContent = Math.floor(currentValue);
-      
-        //     if (currentValue < target) {
-        //       requestAnimationFrame(updateCounter);
-        //     } else {
-        //       counter.textContent = target;
-        //     }
-        //   }
-      
-        //   updateCounter();
-        // }
-      
-        // counters1.forEach(startCounter);
-      
-        // const bellIcon = document.getElementById('bell-notification');
-    //     const notificationBar = document.getElementById('notification-bar');
-    //   console.log("bellIcon",bellIcon);
-    //     bellIcon.addEventListener('click', function () {
-    //         notificationBar.classList.remove('none');
-    //         notificationBar.classList.add('block');
-
-    //     });
-
-         //   make display none removed when the bell icon is clicked
-        
-
-      
-      
-    
-    const parcelItems = document.querySelectorAll('.parcel-list li');
-
-    parcelItems.forEach(item => {
-        const parcelCount = parseInt(item.querySelector('.No-of-parcels h4').innerText);
-        console.log(parcelCount);
-        // Check if parcel count is more than 10
-        if (parcelCount > 10) {
-            item.classList.add('high-parcels');
-        }
-    });
-    // Get all elements with the class 'count'
-    const counters = document.querySelectorAll('.count');
-    
-
-    // Function to start the counter animation
-    function startCounter(counter) {
-        const target = parseInt(counter.getAttribute('data-target'));
-        const increment = target / 50; // Increment value for smooth animation
-
-        // Initial value
-        let currentValue = 0;
-
-        // Function to update the counter value
-        function updateCounter() {
-            currentValue += increment;
-
-            // Check if the counter is for revenue
-            if (counter.classList.contains('revenue')) {
-                // Format the current value with "$" sign and commas
-                counter.textContent = 'Rs ' + formatNumber(Math.floor(currentValue));
-            } else {
-                // For other counters, just display the value
-                counter.textContent = Math.floor(currentValue);
-            }
-
-            // Stop the animation when the target is reached
-            if (currentValue < target) {
-                requestAnimationFrame(updateCounter);
-            } else {
-                // Ensure the final value is exact
-                if (counter.classList.contains('revenue')) {
-                    counter.textContent = 'Rs ' + formatNumber(target);
-                } else {
-                    counter.textContent = target;
-                }
-            }
-        }
-
-        // Start the counter animation
-        updateCounter();
-    }
-
-    // Format a number with commas
-    function formatNumber(number) {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    // Start the counter animation for each element with the class 'count'
-    counters.forEach(startCounter);
-
-    
-        const chartCanvas = document.querySelector(".chart");
-    
-        // Check if the canvas element exists
-        if (!chartCanvas) {
-            console.error("Canvas element with class 'chart' not found.");
-            return;
-        }
-    
-        const chart = new Chart(chartCanvas.getContext("2d"), {
-            type: "line",
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [
-                    {
-                        label: "Revenue by Tickets",
-                        data: [250000, 150000, 180000, 400000, 220000, 250000, 200000, 500000, 270000, 240000, 210000, 700000],
-                        backgroundColor: "rgba(82, 113, 255, 0.2)",
-                        borderColor: "rgba(82, 113, 255, 1)",
-                        borderWidth: 2,
-                        pointRadius: 5,
-                        pointStyle: 'circle'
-                    },
-                    {
-                        label: "Revenue by Parcel Delivery",
-                        data: [80000, 90000, 100000, 300000, 120000, 130000, 350000, 150000, 140000, 130000, 600000, 650000],
-                        backgroundColor: "rgba(75, 192, 192, 0.2)",
-                        borderColor: "rgba(75, 192, 192, 1)",
-                        borderWidth: 2,
-                        pointRadius: 5,
-                        pointStyle: 'rect'
-                    }
-                    // Add more datasets if needed
-                ]
-            },
-            options: {
-                responsive: true,
-    plugins: {
-        tooltip: {
-            mode: 'index',
-            intersect: false,
-        },
-    },
-    scales: {
-        x: {
-            title: {
-                display: true,
-                text: 'Month',
-                font: {
-                    size: 20,
-                    weight: 'bold'
-                }
-            }
-        },
-        y: {
-            title: {
-                display: true,
-                text: 'Revenue (in thousands)',
-                font: {
-                    size: 20,
-                    weight: 'bold'
-                }
-            }
-        }
-    }
-            }
+window.addEventListener('load', function () {
+    const preloader = document.getElementById('preloader');
+    preloader.style.display = 'none';
         });
-    
-        // Your other JavaScript code...
-        
-        const DchartCanvas = document.querySelector(".donut-chart");
-        const dchart = new Chart(DchartCanvas.getContext("2d"), {
-            type: 'doughnut',
-            data: {
-            labels: [
-              'Delayed',
-              'On-Time',
-              'Cancelled'
-            ],
-            datasets: [{
-              label: 'Punctuality Rate of Trains',
-              data: [50, 80, 20],
-              backgroundColor: [
-                '#5271FF',   // Primary Color (Original Theme Color)
-                '#6495ED',   // Secondary Color (Lighter Shade)
-                '#3A50B6' 
-              ],
-              cutout: 100,
-              radius: 140,
-              borderWidth: 4,
-              hoverOffset: 10,
-              title: 'Punctuality Rate of Trains'
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Punctuality Rate of Trains Today',
-                    font: {
-                        size: 20,
-                        weight: 'bold'
-                    }
-                }
-            },
-            
-        }
-          
-        });
-});
 
 
 
-
-$(document).ready(function() {
+$(window).on("pageshow", function() {
+    // Your jQuery code here
     $(".menu > ul > li").click(function(e) {
-    // remove actiive from alreay active li
-    $(this).siblings().removeClass("active");
-    // add active to clicked li
+        // remove actiive from alreay active li
+        $(this).siblings().removeClass("active");
+        // add active to clicked li
         $(this).toggleClass("active");
-    // if has sub menu open it
-    $(this).find("ul").slideToggle();
-    // close all other sub menus if open
-    $(this).siblings().find("ul").slideUp();
-    // remove active click of submenus
-    $(this).siblings().find("ul").find("li").removeClass("active");
-  });
+        // if has sub menu open it
+        $(this).find("ul").slideToggle();
+        // close all other sub menus if open
+        $(this).siblings().find("ul").slideUp();
+        // remove active click of submenus
+        $(this).siblings().find("ul").find("li").removeClass("active");
+    });
+    
     $(".menu-btn").click(function() {
         $(".sidebar").toggleClass("active");
     }); 
@@ -265,37 +61,90 @@ async function customFetch(endpoint, options, sendJWT) {
             console.log(resp);
             if (resp.status==401) {
                 let msg = await resp.text();
-                if (msg=="expired") {
-                    window.alert("Session expired. Please login again.");
-                    window.location.href="/html/signin.html";
-                    return Promise.reject("login-redirected");
+                if(document.URL == "http://localhost/html/signin.html"){
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Invalid username or password. Try again.",
+                        icon: "error",
+                        showCancelButton: false,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK"
+                    });
+                }
+                else if (msg=="expired") {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Session expired. Please login again.",
+                        icon: "error",
+                        showCancelButton: false,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK"
+                    }).then(()=>window.location.href="/html/signin.html");
+
+                    // window.alert("Session expired. Please login again.");
+                    // window.location.href="/html/signin.html";
+                    // return Promise.reject("login-redirected");
+                }
+                if (msg=="invalid") {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Invalid JWT. Please login again",
+                        icon: "error",
+                        showCancelButton: false,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK"
+                    }).then(()=>window.location.href="/html/signin.html");
+                    // window.alert("Invalid JWT. Please Login Again");
+                    // window.location.href="/html/signin.html";
+                    // return Promise.reject("login-redirected");
                 }
             }
-            else{
-                console.log("Invalid response");
-                console.log(resp);
-                if (resp.status==401) {
-                    let msg = await resp.text();
-                    if (msg=="expired") {
-                        window.alert("Session expired. Please login again.");
-                        window.location.href="/html/signin.html";
-                        return Promise.reject("login-redirected");
-                    }
+            else if (resp.status==400) {
+                let data = await resp.json();
+                let error_msg = data.detailMessage;
+                if (error_msg=="signup-expired"){
+                    // window.alert("Your session has expired. Please contact administrator.");
+                    Swal.fire({
+                        title: "Session Expired",
+                        text: "Your session has expired. Please contact administrator to signup again",
+                        icon: "error",
+                        confirmButtonText: "OK"
+                    });
                 }
-                else if (resp.status==400) {
-                    let data = await resp.json();
-                    let error_msg = data.detailMessage;
-                    if (error_msg=="signup-expired"){
-                        window.alert("You signup session has expired. Please contact administrator and signup again.");
-                    }
-                    window.location.href="/index.html";
-                    return Promise.reject(data.detailMessage);
-                }
-                return {
-                    isSuccessful: false,
-                    status: resp.status
-                }
+                // window.location.href="/index.html";
+                return Promise.reject(data.detailMessage);
             }
+            // else{
+            //     console.log("Invalid response");
+            //     console.log(resp);
+            //     if (resp.status==401) {
+            //         let msg = await resp.text();
+            //         if (msg=="expired") {
+            //             window.alert("Session expired. Please login again.");
+            //             window.location.href="/html/signin.html";
+            //             return Promise.reject("login-redirected");
+            //         }
+            //     }
+            //     else if (resp.status==400) {
+            //         let data = await resp.json();
+            //         let error_msg = data.detailMessage;
+            //         if (error_msg=="signup-expired"){
+            //             // window.alert("Your session has expired. Please contact administrator.");
+            //             Swal.fire({
+            //                 title: "Session Expired",
+            //                 text: "Your session has expired. Please contact administrator.",
+            //                 icon: "error",
+            //                 confirmButtonText: "OK"
+            //             });
+            //         }
+            //         window.location.href="/index.html";
+            //         return Promise.reject(data.detailMessage);
+            //     }
+            //     return {
+            //         isSuccessful: false,
+            //         status: resp.status
+            //     }
+            // }
         }
     } catch (error) {
         console.log(error);
@@ -318,39 +167,27 @@ function createNavBar(context) {
                 
             }
             else{
-                localStorage.setItem("loggedIn", null);
+                localStorage.setItem("loggedIn", false);
                 console.log("Logged in status set to null" + localStorage.getItem("loggedIn"));
 
             }
-            // clear local storage
-
-            // console.log("Name: "+Name);
-            // console.log(document.getElementById("navb").innerHTML);
-            // document.getElementById("navb").innerHTML= Name;
-            // //remove cursor events
+           
            
 
             document.getElementById("navb").style.pointerEvents = "none";
             
             if (context == "admin") {
-                document.getElementById("sm-nav").remove();
-                document.getElementById("passenger-nav").remove();
+        
+                document.getElementById("nav-home").querySelector('a').setAttribute("href", "/html/admin/admin.html") ;
+               
                 
-                document.getElementById("nav-about").remove();
-                document.getElementById("nav-contact").remove();
-                document.getElementById("nav-services").innerHTML = "Admin Services";
             }
             else if (context == "sm") {
-                document.getElementById("admin-nav").remove();
-                document.getElementById("passenger-nav").remove();
-
-                document.getElementById("nav-about").remove();
-                document.getElementById("nav-contact").remove();
-                document.getElementById("nav-services").innerHTML = "SM Services";
+                document.getElementById("nav-home").querySelector('a').setAttribute("href", "/html/sm/sm.html") ;
             }
             else if (context == "passenger") {
-                document.getElementById("admin-nav").remove();
-                document.getElementById("sm-nav").remove();
+                 
+                document.getElementById("nav-home").querySelector('a').setAttribute("href", "/html/passenger/home.html") ;
             }
         });
 }
@@ -366,36 +203,146 @@ function createSideBar(context) {
          document.getElementById("name").innerHTML=Name;
             if (context == "admin") {
                 document.getElementById("sm-sidebar").remove();
-                // document.getElementById("passenger-sidebar").remove();
-
+                document.getElementById("passenger-sidebar").remove();
+                document.getElementById("anns").querySelector('a').setAttribute("href", "/html/admin/announcement.html") ;
+                document.getElementById("profile").querySelector('a').setAttribute("href", "/html/admin/admin-profile.html") ;
+                document.getElementById("dashboard").querySelector('a').setAttribute("href", "/html/admin/admin.html") ;
+               
                 // document.getElementById("nav-about").remove();
                 // document.getElementById("nav-contact").remove();
                 document.getElementById("sidebar-services-text-span").innerHTML = "Admin Services";
             }
             else if (context == "sm") {
                 // console.log("CONTEXT IDENTIFIED AS SM");
+                document.getElementById("reports").remove();
                 document.getElementById("admin-sidebar").remove();
-                // document.getElementById("passenger-sidebar").remove();
-                console.log("LINE 300");
-                // document.getElementById("nav-about").remove();
-                // document.getElementById("nav-contact").remove();
-                // change p class="title" to Station Master
-                // console.log(document.getElementById("name").innerHTML);
-                // console.log(document.getElementById("title").innerHTML);
+                document.getElementById("passenger-sidebar").remove();
+                
                 document.getElementById("title").innerHTML = "Station Master";
+                document.getElementById("profile").querySelector('a').setAttribute("href", "/html/sm/sm-profile.html") ;
+                document.getElementById("dashboard").querySelector('a').setAttribute("href", "/html/sm/sm.html") ;
                 
                 document.getElementById("sidebar-services-text-span").innerHTML = "Station Master Services";
             }
             else if (context == "passenger") {
-                document.getElementById("admin-nav").remove();
-                document.getElementById("sm-nav").remove();
+
+                document.getElementById("reports").remove();
+                document.getElementById("sm-sidebar").remove();
+                document.getElementById("admin-sidebar").remove();
+                document.getElementById("title").innerHTML = "Passenger";
+                document.getElementById("dashboard").querySelector('a').setAttribute("href", "/html/passenger/home.html") ;
+                document.getElementById("anns").querySelector('a').setAttribute("href", "/html/passenger/viewAnnouncement.html") ;
+                document.getElementById("profile").querySelector('a').setAttribute("href", "/html/passenger/profile.html") ;
+               
+                
+                document.getElementById("sidebar-services-text-span").innerHTML = "Services";
             }
         });
 }
 
 
+function signout() {
+    Swal.fire({
+        title: 'Are you sure you want to log out?',
+        text: 'You will be redirected to the login page.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, log out'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            localStorage.clear();
+            // localStorage.setItem("loggedIn", false);
+            var currentPort = window.location.port; 
+            window.location.replace("/html/signin.html");; // Construct the URL
+        }
+    });
+}
+
+function signoutAfterDelete(){
+    localStorage.clear();
+    window.location.replace("/html/signin.html");
+}
+function togglePW() {
+    const passwordField = document.getElementById("password");
+    const eyeIcon = document.getElementById("password-toggle");
+
+    
+
+    // Toggle password visibility
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+    } else {
+        passwordField.type = 'password';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+    }
+}
+
+function toggleEye() {
+    const passwordField = document.getElementById("password");
+    const eyeIcon = document.getElementById("password-toggle");
+
+    // Toggle eye icon visibility based on the input field value
+    if (passwordField.value.length > 0) {
+        eyeIcon.style.display = 'inline-block';
+    } else {
+        eyeIcon.style.display = 'none';
+    }
+}
+
+function toggleCPW() {
+    const passwordField = document.getElementById("cpassword");
+    const eyeIcon = document.getElementById("cpassword-toggle");
+
+    
+
+    // Toggle password visibility
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+    } else {
+        passwordField.type = 'password';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+    }
+}
+
+function CtoggleEye() {
+    const passwordField = document.getElementById("cpassword");
+    const eyeIcon = document.getElementById("cpassword-toggle");
+
+    // Toggle eye icon visibility based on the input field value
+    if (passwordField.value.length > 0) {
+        eyeIcon.style.display = 'inline-block';
+    } else {
+        eyeIcon.style.display = 'none';
+    }
+}
+function closeDialog() {
+    const openDialogs = document.querySelectorAll('dialog[open]');
+    openDialogs.forEach(dialog => {
+        dialog.close();
+        // Clear the form fields
+        
+    });
+}
+
+
+
+
+
+
+
 function popupAddPage(classname) {
     let dialog = document.querySelector(classname);
+    
+    // clear the form fields
+
 
     dialog.showModal();
 
@@ -417,11 +364,22 @@ function popupAddPage(classname) {
 
 
 function seatReserve() {
-    var userResponse = confirm("Now you'll be redirected to the official website for seat reservations of Sri Lanka Railways.");
-    if (userResponse) {
-        window.location.href = "https://seatreservation.railway.gov.lk/"; 
-    }
+    Swal.fire({
+        title: 'Redirect to Seat Reservation',
+        text: "You'll be redirected to the official website for seat reservations of Sri Lanka Railways.",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, proceed!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "https://seatreservation.railway.gov.lk/"; 
+        }
+    });
 }
+
 
 
 function confirmCall() {
@@ -489,8 +447,10 @@ function validateStrPassword() {
     return true;
 }
 function toggleNotify() {
+    console.log("Toggle notification bar");
     var dropdown = document.getElementById("notification-bar");
     if (dropdown.style.display === "none") {
+        console.log("Displaying notification bar");
       dropdown.style.display = "block";
     } else {
       dropdown.style.display = "none";
@@ -498,13 +458,81 @@ function toggleNotify() {
     
   }
   
-  window.onclick = function(event){
-    if (!event.target.matches('.dropbtn')){
-        var dropdown = document.getElementById("drop");
-        dropdown.style.display = "none";
-    }
-  }
+//   window.onclick = function(event){
+//     if (!event.target.matches('.dropbtn')){
+//         var dropdown = document.getElementById("drop");
+//         dropdown.style.display = "none";
+//     }
+//   }
   
+document.addEventListener('DOMContentLoaded', function() {
+    const totalPriceInput = document.getElementById('total-price');
+    const totalPriceText = document.getElementById('total-price-text');
+
+    totalPriceInput.addEventListener('input', function() {
+        const totalPrice = totalPriceInput.value;
+        totalPriceText.textContent = 'Total Price of the Season: ' + totalPrice;
+    });
+});
+
+
+  async function customFetch1(endpoint, options, sendJWT) {
+    let url = "http://localhost:8080/railboost_backend_war_exploded/";
+
+    if (endpoint !== "login" && sendJWT !== false) {
+        options.headers = {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`
+        };
+    }
+
+    url = url + endpoint;
+
+    try {
+        let resp = await fetch(url, options);
+        if (resp.ok) {
+            if (resp.headers.get('content-type').includes('image')) {
+                return await resp.blob();
+            }else if(resp.headers.get('content-type').includes('application/pdf')){
+                return await resp.blob();
+            }else if (resp.headers.get('content-type').includes('application/vnd.ms-excel') ||
+                resp.headers.get('content-type').includes('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) {
+                return await resp.blob();
+            } else {
+                try {
+                    return await resp.json();
+                } catch (e) {
+                    return {status: resp.status};
+                }
+            }
+        } else {
+            console.log("Invalid response");
+            console.log(resp);
+            if (resp.status === 401) {
+                let msg = await resp.text();
+                if (msg === "expired") {
+                    window.alert("Session expired. Please login again.");
+                    window.location.href = "/html/signin.html";
+                    return Promise.reject("login-redirected");
+                }
+            } else if (resp.status === 400) {
+                let data = await resp.json();
+                let error_msg = data.detailMessage;
+                if (error_msg === "signup-expired") {
+                    window.alert("Your signup session has expired. Please contact the administrator and sign up again.");
+                }
+                window.location.href = "/index.html";
+                return Promise.reject(data.detailMessage);
+            }
+            return {
+                isSuccessful: false,
+                status: resp.status
+            };
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const chart=document.querySelector(".chart");
 console.log(chart);
 
@@ -546,3 +574,16 @@ const charts=new Chart(chart,{
         
     }
 })
+
+// Get the width of the dialog modal
+const dialogWidth = document.querySelector('.dialog-modal').offsetWidth;
+
+// Get the width of the table header
+const headerWidth = document.querySelector('.table_header').offsetWidth;
+
+// Calculate the left margin to center the header
+const leftMargin = (dialogWidth - headerWidth) / 2;
+
+// Apply the calculated left margin to the table header
+document.querySelector('.table_header').style.marginLeft = leftMargin + 'px';
+

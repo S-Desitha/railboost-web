@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/auth.js"></script>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/table.css">
+	<link rel="stylesheet" href="/css/buttons.css">
+    <link rel="stylesheet" href="/css/pagination.css">
+    <link rel="stylesheet" href="/css/ticketRate.css">
+
+    <!-- axios -->
+	 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+	 <!-- sweet alert -->
+	 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+	 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
+ 
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.11.0/dist/chart.min.mjs"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script src="/js/jquery3.7.1.js"></script>
+    <script src="/js/script.js"></script>
+    <!-- <script src="/js/stations.js"></script> -->
+    <script src="/js/manageStations.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Railway Stations Management</title>
+    
+</head>
+<body>
+    <div id="preloader">
+        <img src="/Images/train.gif" alt="Loading...">
+    </div>
+    
+    
+    <nav class="navbar">
+        <script>createNavBar("admin")</script>
+    </nav>
+    <div class="container">
+        <div class="sidebar active">
+            <script>createSideBar("admin")</script>
+
+        </div>
+
+        <div class="service-view">
+            <div class="service-container">
+                <button class="add-new-btn" onclick="popupAddPage('.dialog-modal')" >Add New</button>
+
+                <div class="table-container">
+                    <section class="table_header">
+                        <h1>Station Details</h1>
+                        <div class="input-group " >
+                            <input type="search"style="margin:0" placeholder="Search Station...">
+                            <img src="/Images/search.png" alt="">
+                        </div>
+                    </section>
+
+                    <script>
+						const searchInput = document.querySelector('.table_header input[type="search"]');
+						searchInput.addEventListener('input', filterTable);
+
+						function filterTable() {
+							const searchTerm = searchInput.value.toLowerCase();
+							const tableRows = document.querySelectorAll('#station_table tr');
+
+							tableRows.forEach(row => {
+								let rowVisible = false;
+
+								for (let i = 0; i < row.cells.length; i++) {
+									const cellText = row.cells[i].textContent.toLowerCase();
+									if (cellText.includes(searchTerm)) {
+										rowVisible = true;
+										break;
+									}
+								}
+
+								if (rowVisible) {
+									row.style.display = 'table-row';
+								} else {
+									row.style.display = 'none';
+								}
+							});
+						}
+					</script>
+
+                    <section class="table_body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Station Code</th>
+                                    <th>Station Name</th>
+                                    <!-- <th>Address</th> -->
+                                    <th>Line</th>
+                                    <th>Previous Station</th>
+                                    <th>Next Station</th>
+                                    <th>Contact Number</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="station_table">
+                                <!-- Populate table body as needed -->
+                            </tbody>
+                        </table>
+                        <div class="pagination">
+                            <button id="prev-btn" onclick="goToPrevPage()" disabled>Prev</button>
+                            <span id="pageNo">- <span id="current-page">1</span> -</span>
+                            <button id="next-btn" onclick="goToNextPage()" >Next</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <dialog class="dialog-modal">
+        <div class="adding-form">
+            <button class="close-button" onclick="closeDialog()"><i class="fas fa-times"></i></button>
+            <form onsubmit="return false" id="station-form">
+                <div class="table_header">
+                <h1 class="add-heading" id="add-station-heading">Add a new Station </h2>
+                </div>
+                
+                
+                <label for="stationCode"></label>
+                <input type="text" id="stationId" placeholder="Station Code:" name="trainId" oninput="validateStationCode()" required><br>
+                <span id="stcode-error"></span>
+                
+                <label for="station-name"></label>
+                <input type="text" id="stationName" name="stationName" placeholder="Station Name" required><br>
+
+                <label for="Address"></label>
+                <input type="text" id="address" placeholder="Address" name="address" required><br>
+                <label for="Line"></label>
+                <!-- select lines are Coastal,Main,Nothern,Batticalo,Kelani Valley,Mannar,Mathale,Puttalam and Trincomalee -->
+
+                <select id="selectLine" name="selectLine"required>
+                    <option value="" disabled selected>Line</option>
+                    
+
+                    <!-- <option value="addNewLine">Add New Line</option> -->
+                </select>
+                
+                <label for="Previous Station"></label>
+                
+                <!-- <input type="text"id="PrevStation" placeholder="Previous Station"> -->
+                <div class="wrapper" font-size="1px" id="PrevStation">
+					<div class="select-btn">
+						<span>Previous Station:</span> 
+						<i font-size="3px" class="fa fa-angle-down"></i>
+					</div>
+					<div class="content">
+						<div class="search">
+							
+							<input spellcheck="false" type="text" placeholder="Search">
+							<!-- <i class="fas fa-search"></i> -->
+						</div>
+						<ul onclick="validateSameStation();" class="options"></ul>
+					</div>
+				</div>
+                
+
+                <label for="Next Station"></label>
+                <!-- <input type="text" id="NextStation" placeholder="Next Station"> -->
+                <div class="wrapper" font-size="1px" id="NextStation">
+					<div class="select-btn">
+						<span>Next Station:</span> 
+						<i font-size="3px" class="fa fa-angle-down"></i>
+					</div>
+					<div class="content">
+						<div class="search">
+							
+							<input spellcheck="false" type="text" placeholder="Search">
+							<!-- <i class="fas fa-search"></i> -->
+						</div>
+						<ul onclick="validateSameStation();" class="options"></ul>
+					</div>
+				</div>
+                <span id="sameStation-error"></span>
+
+                <label for="contactNumber"></label>
+                <input type="text" id="contactNumber" name="contactNumber" placeholder="Contact Number" onkeyup="validatePhoneNo();" required>
+                <span id="contactNumberError"></span>
+
+                <!-- <div id="option1Elements" class="hidden">
+                    <label for="addNewLine"></label>
+                    <input type="text" id="addNewLine" name="addNewLine" placeholder="Add New Line">
+                </div> -->
+
+                <button class="form-button" id="add-station-button" style="width: 100%;"onclick="addNewStation()">Add A New Station </button>
+            </form>
+        </div>
+    </dialog>
+
+
+<!-- 
+    <script>
+        var selectLine = document.getElementById("selectLine");
+        var option1Elements = document.getElementById("option1Elements");
+
+        // Add an event listener to the select element
+        selectLine.addEventListener("change", function() {
+            // Hide the element first
+            option1Elements.classList.add("hidden");
+
+            // Show the element if the selected option is "addNewLine"
+            if (selectLine.value === "addNewLine") {
+                option1Elements.classList.remove("hidden");
+            }
+        });
+    </script> -->
+</body>
+<script src="/js/stations.js">
+</script>
+</html>

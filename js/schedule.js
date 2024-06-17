@@ -2,6 +2,7 @@
 
 
 const scheduleEndpoint = "trainSchedule";
+const cancelEndpoint = "cancelSchedules";
 
 document.addEventListener("DOMContentLoaded", async function() {
 
@@ -10,8 +11,47 @@ document.addEventListener("DOMContentLoaded", async function() {
     else if (window.location.pathname.includes("trainSch.html")) {
         createSpecificSchPage();
         dynamicDraggableTable();
+
+        const endpoint = "train";
+    const selectElement = document.getElementById("train-id");
+
+    try {
+        // Fetch train IDs from the backend
+        const data = await customFetch(endpoint, {});
+        console.log(data);
+
+        // Clear existing options
+        selectElement.innerHTML = "";
+        const defaultOption = document.createElement("option");
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        defaultOption.textContent = "Select Train ID";
+        selectElement.appendChild(defaultOption);
+
+        // Populate dropdown with fetched train IDs
+        data.forEach(train => {
+            const option = document.createElement("option");
+            option.value = train.trainId;
+            option.textContent = train.trainId;
+            selectElement.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error fetching train IDs:", error);
+    }
     }
 
+    document.getElementById("schedule_button").addEventListener("click", redirectToPage);
+    document.getElementById("actionType").addEventListener("change", cancelOptionChanged);
+    document.getElementById("schedule-cancel-btn").addEventListener("click", cancelSchedules);
+
+    document.getElementById("cancel-start").min = new Date().toISOString().split("T")[0]
+    document.getElementById("cancel-start").valueAsDate = new Date();
+    
+    document.getElementById("cancel-end").valueAsDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+    document.getElementById("cancel-end").min = new Date().toISOString().split("T")[0];
+    
+    document.getElementById("activate-date").min = new Date().toISOString().split("T")[0]
+    document.getElementById("activate-date").valueAsDate = new Date();
 });
 
 
@@ -39,6 +79,7 @@ function addStoppingStation() {
         row.cells[0].innerHTML = station.stationName;
         row.cells[1].innerHTML = station.scheduledArrivalTime;
         row.cells[2].innerHTML = station.scheduledDepartureTime;
+        
 
         row.removeAttribute("tag");
         button.setAttribute("context", "");
@@ -61,13 +102,15 @@ function addStoppingStation() {
 
 
 
+
+
 function addNewSchedule() {
     let schedule = getSchedule();
     let serialSchedule = schedule;
     
     let [startDate, days, endDate] = getDates();
     startDate = startDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
-    endDate = endDate!=null? endDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }) : endDate;
+    endDate = endDate != null ? endDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }) : endDate;
     
     serialSchedule.stations = schedule.stations.toArray();
     serialSchedule.startDate = startDate;
@@ -77,28 +120,32 @@ function addNewSchedule() {
     serialSchedule.startStation = document.getElementById("from").getAttribute("stationCode");
     serialSchedule.endStation = document.getElementById("to").getAttribute("stationCode");
     serialSchedule.scheduleId = document.getElementById("sch-id").value;
-    serialSchedule.trainId = document.getElementById("tr-id").value;
+    serialSchedule.trainId = document.getElementById("train-id").value;
     serialSchedule.speed = document.getElementById("speed").value;
 
-    // serialSchedule.stations.forEach(st => {
-    //     st.scheduleId = serialSchedule.scheduleId;
-    // });    
-
     const params = {
-        headers : {
+        headers: {
             "Content-type": "application/json; charset=UTF-8"
         },
-        body : JSON.stringify(serialSchedule),
-        method : "POST"
+        body: JSON.stringify(serialSchedule),
+        method: "POST"
     };
 
     customFetch(scheduleEndpoint, params)
-        .then(()=> {
-            localStorage.removeItem("schedule");
-            window.location.replace("/html/admin/schedule.html");
+        .then(() => {
+            // Display SweetAlert notification
+            Swal.fire({
+                icon: 'success',
+                title: 'Schedule Added!',
+                text: `New schedule added from ${document.getElementById("from").getAttribute("stationName")} to ${document.getElementById("to").getAttribute("stationName")}.`,
+                confirmButtonText: 'OK'
+            }).then(() => {
+                localStorage.removeItem("NewscheduleCache");
+                window.location.replace("/html/admin/schedule.html");
+            });
         })
         .catch((error) => {
-            if (error=="login-redirected")
+            if (error == "login-redirected")
                 localStorage.setItem("last_url", window.location.pathname);
         });
 }
@@ -123,7 +170,7 @@ function getSchedules() {
                 row.insertCell(2).innerHTML = sch.startStation;
                 row.insertCell(3).innerHTML = sch.endStation;
                 row.insertCell(4).innerHTML = sch.speed;
-                row.insertCell(5).innerHTML = `<a href="/html/admin/trainSch.html?scheduleId=${sch.scheduleId}"><button class="view-button">
+                row.insertCell(5).innerHTML = `<a href="/html/admin/trainSch.html?scheduleId=${sch.scheduleId}"><button class="view-button" >
                                                     View <i class="fa-regular fa-eye"></i></button>
                                                 </a>`;
                 row.insertCell(6).innerHTML = `<a href=""><button class="edit-button"><i class="fas fa-edit"></i> </button></a><a href=""><button class="delete-button"><i class="fas fa-trash"></i> </button></a>`;
@@ -143,12 +190,12 @@ function insertStationToPage(station) {
     let editButton = document.createElement("button");
     editButton.classList.add("edit-button");
     editButton.innerHTML = "<i class='fas fa-edit'></i>";
-    editButton.onclick = editStation;
+    editButton.onclick = editStopStation;
 
     let deleteButton = document.createElement("button");
     deleteButton.classList.add("delete-button");
     deleteButton.innerHTML = "<i class='fas fa-trash'></i>";
-    deleteButton.onclick = deleteStation;
+    deleteButton.onclick = deleteStopStation;
 
     row.insertCell(0).innerHTML = station.stationName;
     row.insertCell(1).innerHTML = station.scheduledArrivalTime;
@@ -159,7 +206,7 @@ function insertStationToPage(station) {
 
 
 
-function editStation() {
+function editStopStation() {
     this.closest("tr").setAttribute("tag", "edit");
     
     let stationCode = this.closest("tr").getAttribute("stationCode");
@@ -169,10 +216,10 @@ function editStation() {
     saveSchedule(schedule);
 
     let button = document.getElementById("add_update-sch_station")
-    button.value = "Update Station";
+    button.value = "Update Station Times";
     button.setAttribute("context", "edit");
     
-    let station = JSON.parse(localStorage.getItem("schedule")).stations
+    let station = JSON.parse(localStorage.getItem("NewscheduleCache")).stations
     .find((elmnt) => elmnt.station==stationCode);
     
     button.setAttribute("stIndex", station.stIndex);
@@ -183,12 +230,12 @@ function editStation() {
     document.getElementById("SAT").value = station.scheduledArrivalTime;
     document.getElementById("SDT").value = station.scheduledDepartureTime; 
 
-    popupAddPage('.add-station-modal')
+    popupAddPage('.dialog-modal')
 }
 
 
 
-function deleteStation() {
+function deleteStopStation() {
     let stationCode = this.closest("tr").getAttribute("stationCode");
     let schedule = getSchedule();
 
@@ -203,13 +250,13 @@ function deleteStation() {
 function viewStations(scheduleId) {
     let schedule = JSON.parse(localStorage.getItem("scheduleList")).find(sch => sch.scheduleId==scheduleId);
     let stations = schedule.stations;
-    let dialog = document.querySelector(".stations-data-modal");
+    let dialog = document.querySelector(".dialog-modal");
 
     document.getElementById("start-from-date").innerHTML = schedule.startDate;
     if (schedule.endDate!=null)
         document.getElementById("ends-on-date").innerHTML = schedule.endDate;
     else
-    document.getElementById("ends-on-date").innerHTML = "--";
+    document.getElementById("ends-on-date").innerHTML = "Continuous";
 
 
     document.querySelectorAll(".cat.day input[type='checkbox']").forEach(checkBox => {
@@ -222,8 +269,9 @@ function viewStations(scheduleId) {
         console.log(prefix);
         document.getElementById(prefix).checked = true;
     })
-    
+    clearTable();
     stations.forEach(station => {
+        
         let row = document.getElementById("schedule_stations").insertRow(-1);
         row.insertCell(0).innerHTML = station.stationName;
         row.insertCell(1).innerHTML = station.scheduledArrivalTime;
@@ -244,7 +292,12 @@ function viewStations(scheduleId) {
         }
     });
 }
-
+function clearTable() {
+    let table = document.getElementById("schedule_stations");
+    while (table.rows.length > 0) { // Remove all rows
+        table.deleteRow(0);
+    }
+}
 
 
 async function createSchedulesPage() {
@@ -290,17 +343,28 @@ async function createSchedulesPage() {
             deleteButton.setAttribute("scheduleId", sch.scheduleId);
             deleteButton.onclick = deleteSchedule;
 
+            let cancelCheckbox = document.createElement("input");
+            cancelCheckbox.setAttribute("type", "checkbox");
+            cancelCheckbox.classList.add("cancel-checkbox");
+            // cancelCheckbox.onchange = function(){checkboxChanged(this, sch.scheduleId);}
+            cancelCheckbox.addEventListener("click", function(){checkboxChanged(this, sch.scheduleId);})
+
             let row = document.getElementById("schedule_table").insertRow(-1);
+            if (sch.isCancelled === true) {
+                row.style.border = "3px solid rgba(255, 0, 0, 0.5)";
+            }
+
             row.insertCell(0).innerHTML = sch.scheduleId;
             row.insertCell(1).innerHTML = sch.trainId;
             row.insertCell(2).innerHTML = sch.startStationName;
             row.insertCell(3).innerHTML = sch.endStationName;
-            row.insertCell(4).innerHTML = sch.trainType;
+            row.insertCell(4).innerHTML = sch.speed;
             // row.insertCell(5).innerHTML = `<a href="/html/admin/trainSch.html?scheduleId=${sch.scheduleId}"><button class="view-button">
             //                                     View <i class="fa-regular fa-eye"></i></button>
             //                                 </a>`;
             // row.insertCell(6).innerHTML = `<a href=""><button class="edit-button"><i class="fas fa-edit"></i> </button></a><a href=""><button class="delete-button"><i class="fas fa-trash"></i> </button></a>`;
             row.insertCell(5).append(infoButton, editButton, deleteButton);
+            row.insertCell(6).append(cancelCheckbox);
         })
     }
     catch(error) {
@@ -311,7 +375,7 @@ async function createSchedulesPage() {
 
 
 
-function createSpecificSchPage() {
+async function createSpecificSchPage() {
     const scheduleId = new URLSearchParams(window.location.search).get('scheduleId');
 
     if (scheduleId!=null) {
@@ -335,14 +399,17 @@ function createSpecificSchPage() {
         // form.setAttribute("onsubmit", "updateSchedule");
         document.getElementById("submit-schedule-btn").value = "Update Schedule"
         document.getElementById("sch-id").value = serialSchedule.scheduleId;
-        document.getElementById("tr-id").value = serialSchedule.trainId;
+        document.getElementById("train-id").value = serialSchedule.trainId;
+
         document.getElementById("from").setAttribute("stationCode", serialSchedule.startStation);
         document.getElementById("to").setAttribute("stationCode", serialSchedule.endStation);
         document.getElementById("speed").value = serialSchedule.speed;
         document.getElementById("sch-id").disabled = true;
 
+        document.getElementById("from").getElementsByTagName("span")[0].innerHTML = serialSchedule.startStationName;
+     document.getElementById("to").getElementsByTagName("span")[0].innerHTML= serialSchedule.endStationName;
 
-        localStorage.setItem("schedule", JSON.stringify(serialSchedule));
+        localStorage.setItem("NewscheduleCache", JSON.stringify(serialSchedule));
     }
     else {
         if (localStorage.getItem("scheduleType")==null)
@@ -350,7 +417,7 @@ function createSpecificSchPage() {
         else
             setAddSchPriority();
 
-        let schedule = localStorage.getItem("schedule");
+        let schedule = localStorage.getItem("NewscheduleCache");
         if (schedule!=null) {
             schedule = JSON.parse(schedule);
             schedule.stations.forEach(station => insertStationToPage(station));
@@ -376,43 +443,57 @@ function editSchedule() {
 
     document.getElementById("add_update-schedule-header").innerHTML = "Update Schedule";
     button.innerHTML = "Update";
-
+    console.log(schedule);
     document.getElementById("scheduleId").value = schedule["scheduleId"];
-    document.getElementById("trainId").value = schedule["trainId"];
-    document.getElementById("start-station").value = schedule["startStation"];
-    document.getElementById("end-station").value = schedule["endStation"];
+    document.getElementById("train-id").value = schedule["trainId"];
+     
+     document.getElementById("from").getElementsByTagName("span")[0].innerHTML = schedule["startStation"];
+     document.getElementById("to").getElementsByTagName("span")[0].innerHTML= schedule["endStation"];
 
     button.onclick = updateSchedule;
 }
 
 
 function deleteSchedule() {
-    console.log("Delete Schedule");
     const scheduleId = JSON.parse(this.getAttribute("scheduleId"));
-    const url_query = scheduleEndpoint+"?scheduleId="+scheduleId;
+    
+    // Show confirmation dialog
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You will not be able to recover this schedule!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // If confirmed, proceed with deletion
+            const url_query = scheduleEndpoint + "?scheduleId=" + scheduleId;
+            const params = {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                },
+                method: "DELETE"
+            };
 
-    const params = {
-        headers : {
-            "Content-type": "application/json; charset=UTF-8"
-        },
-        method : "DELETE"
-    };
-
-    // fetch(url+"?scheduleId="+scheduleId, params)
-    // .then(res => {
-    //     if(res.ok){
-    //         window.location.reload();
-    //     }
-    // });
-
-    customFetch(url_query, params)
-        .then(() => window.location.reload())
-        .catch ((error) => {
-            if (error=="login-redirected")
-                localStorage.setItem("last_url", window.location.pathname);
-        });
+            customFetch(url_query, params)
+                .then(() => {
+                    // Show success message after deletion
+                    Swal.fire('Deleted!', 'The schedule has been deleted.', 'success').then(() => {
+                        window.location.reload();
+                    });
+                })
+                .catch((error) => {
+                    if (error == "login-redirected")
+                        localStorage.setItem("last_url", window.location.pathname);
+                });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            // If canceled, show a message
+            Swal.fire('Cancelled', 'Your schedule is safe :)', 'error');
+        }
+    });
 }
-
 
 
 function updateSchedule() {
@@ -442,7 +523,7 @@ function updateSchedule() {
     updated.startStation = document.getElementById("from").getAttribute("stationCode");
     updated.endStation = document.getElementById("to").getAttribute("stationCode");
     // updated.scheduleId = document.getElementById("sch-id").value;
-    updated.trainId = document.getElementById("tr-id").value;
+    updated.trainId = document.getElementById("train-id").value;
     updated.speed = document.getElementById("speed").value;
 
     const body = [original, updated];
@@ -597,7 +678,7 @@ function popupDatePicker(classname) {
 
 
 function getSchedule() {
-    let schedule = localStorage.getItem("schedule");
+    let schedule = localStorage.getItem("NewscheduleCache");
     if (schedule==null)
         schedule = {nStations: 0, stations: new LinkedList()};
     else {
@@ -613,10 +694,10 @@ function setAddSchPriority() {
     let scheduleType = localStorage.getItem("scheduleType");
 
     if (scheduleType == "edit") {   
-        let schedule = localStorage.getItem("schedule");
+        let schedule = localStorage.getItem("NewscheduleCache");
         let otherSchedule = localStorage.getItem("otherSchedule");
 
-        localStorage.setItem("schedule", otherSchedule);
+        localStorage.setItem("NewscheduleCache", otherSchedule);
         localStorage.setItem("otherSchedule", schedule);
         localStorage.setItem("scheduleType", "add");
     }
@@ -629,10 +710,10 @@ function setEditSchPriority() {
     let scheduleType = localStorage.getItem("scheduleType");
 
     if (scheduleType == "add") {   
-        let schedule = localStorage.getItem("schedule");
+        let schedule = localStorage.getItem("NewscheduleCache");
         let otherSchedule = localStorage.getItem("otherSchedule");
 
-        localStorage.setItem("schedule", otherSchedule);
+        localStorage.setItem("NewscheduleCache", otherSchedule);
         localStorage.setItem("otherSchedule", schedule);
         localStorage.setItem("scheduleType", "edit");
     }
@@ -642,7 +723,7 @@ function setEditSchPriority() {
 function saveSchedule(schedule) {
     let serializedSchedule = schedule;
     serializedSchedule.stations = schedule.stations.toArray();
-    localStorage.setItem("schedule", JSON.stringify(serializedSchedule));
+    localStorage.setItem("NewscheduleCache", JSON.stringify(serializedSchedule));
 }
 
 
@@ -686,6 +767,175 @@ function validateStations() {
 
 }
 
+
+
+class CancelledSchedules {
+    static idList = [];
+    static scheduleList = [];
+
+    static getIdList(){return this.idList;}
+    static setIdList(idList){this.idList=idList;}
+
+    static getScheduleList(){return this.scheduleList;}
+    static setScheduleList(scheduleList) {this.scheduleList=scheduleList;}
+}
+
+
+async function cancelSchedules() {
+    console.log("Cancel the selected Schedules");
+
+    let scheduleList = [];
+    let idList = CancelledSchedules.getIdList();
+    let idStr = "";
+    let fromDate = new Date(document.getElementById("cancel-start").value).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    let toDate = new Date(document.getElementById("cancel-end").value).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+
+    idList.forEach(id =>  {
+        scheduleList.push({
+            scheduleId : id,
+            fromDate : fromDate,
+            toDate : toDate
+        });
+        idStr += `${id}, `;
+    });
+
+    let body = {cancelledScheduleList: scheduleList};
+    const params = {
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify(body),
+        method: "POST"
+    };
+
+    let resp = await customFetch(cancelEndpoint, params);
+
+    closeDialog();
+    if (resp.isSuccessful==true) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Schedules Cancelled',
+            text: `Schedules with the IDs ${idStr} are cancelled from ${fromDate} to ${toDate}`,
+            confirmButtonText: 'OK'
+        }).then(() => window.location.reload());
+        
+    }
+    else if (resp.isSuccessful==false) {
+        console.log(resp);
+        Swal.fire({
+            icon: 'error',
+            title: 'Schedule Cancel Failure',
+            text: resp.error,
+            confirmButtonText: 'OK'
+        });
+    }
+
+}
+
+
+function activateSchedules() {
+    console.log("Activate the schedules");
+}
+
+
+
+function mainCheckboxClick(e) {
+    document.querySelectorAll(".cancel-checkbox").forEach(box => {
+        box.checked = e.checked;
+    })
+}
+
+
+
+function checkboxChanged(e, scheduleId) {
+    if (e.checked==false) {
+        document.getElementById("main-cancel-checkbox").checked = false;
+        let idList = CancelledSchedules.getIdList();
+        let index = idList.indexOf(scheduleId);
+        if (index!==-1){
+            idList.splice(index, 1);
+            CancelledSchedules.setIdList(idList);
+        }
+        if (idList.length==0)
+            updateButton("add");
+    }
+    else if (e.checked==true) {
+        let idList = CancelledSchedules.getIdList();
+        if (idList.indexOf(scheduleId)==-1) {
+            idList.push(scheduleId);
+            CancelledSchedules.setIdList(idList);
+        }
+        updateButton("cancel");
+    }
+}
+
+
+
+// cancel/activate
+function cancelOptionChanged(e) {
+    let el = document.getElementById("actionType");
+    let btn = document.getElementById("schedule-cancel-btn");
+    if(el.value=="activate") {
+        document.getElementById("cancel-dates").style.display = "none";
+        document.getElementById("activate-dates").style.display = "flex";
+        btn.innerHTML = "Activate";
+        btn.style.backgroundColor = "var(--accept-color)"; 
+        btn.removeEventListener("click", cancelSchedules);
+        btn.addEventListener("click", activateSchedules);
+    }
+    if(el.value=="cancel") {
+        document.getElementById("activate-dates").style.display = "none";
+        document.getElementById("cancel-dates").style.display = "flex";
+        btn.innerHTML = "Done";
+        btn.style.backgroundColor = "var(--cancel-color)";
+        btn.removeEventListener("click", activateSchedules);
+        btn.addEventListener("click", cancelSchedules);
+    }
+}
+
+
+// action = add/cancel
+function updateButton(action) {
+    let button = document.getElementById("schedule_button");
+    if (action=="add") {
+        button.innerHTML = "Add New";
+        button.className = "add-new-btn";
+        button.removeEventListener("click", popupCancelDialog);
+        button.addEventListener("click", redirectToPage);
+    }
+    else if (action=="cancel") {
+        button.innerHTML = "Cancel Schedules";
+        button.className = "cancel-btn";
+        button.removeEventListener("click", redirectToPage);
+        button.addEventListener("click", popupCancelDialog);
+    }
+}
+
+
+
+function popupCancelDialog() {
+    console.log("popup dialog");
+    popupAddPage(".schedule-cancel-popup");
+}
+
+
+
+
+// class CancelSchedules {
+//     static mainCheckboxClick(e) {
+//         document.querySelectorAll(".cancel-checkbox").forEach(box => {
+//             box.checked = e.checked;
+//         })
+//     }
+
+//     static checkboxChanged(e, scheduleId) {
+//         if (e.checked==false) {
+//             document.getElementById("main-cancel-checkbox").checked = false;
+//         }
+//         console.log(e);
+//         console.log(scheduleId);
+//     }
+// }
 
 
 
@@ -898,5 +1148,3 @@ function dynamicDraggableTable() {
         firstCell.addEventListener('mousedown', mouseDownHandler);
     });
 }
-
-
